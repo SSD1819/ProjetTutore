@@ -60,3 +60,8 @@ apply(X=dataPropre,MARGIN=2,FUN=TabMod)
 
 #Suppression des variables inutiles hors de ce script
 rm(don1516,don1617,don1718,mathsJetons_2015_2016,mathsJetons_2016_2017,mathsJetons_2017_2018,pos1,NbMod,TabMod)
+
+
+
+
+#Ca j'ai fait sur RSTUDIO

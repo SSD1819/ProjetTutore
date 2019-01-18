@@ -1,6 +1,7 @@
-library(readxl)
-library(dplyr)
-library(stringr)
+#Librairies nécéssaires
+require(readxl)
+require(dplyr)
+require(stringr)
 
 #Moyenne section 2015/2016
 mathsJetons_2015_2016 <- read_excel("MathsJetons_2015-2016.xlsx") %>% data.frame(row.names = 2)

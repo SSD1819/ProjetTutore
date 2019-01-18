@@ -43,4 +43,4 @@ analyse.univ$Pédagogie
 
 
 
-rm(TablesUniv,analyse.univ,analyse.univ.table,count.TOTAL)
+rm(TablesUniv,analyse.univ,analyse.univ.table)

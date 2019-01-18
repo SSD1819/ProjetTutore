@@ -31,3 +31,4 @@ plot.HCPC(res.hcpc,choice = "bar")
 
 
 #j'ai fait ca sur rstudioa
+#deuxieme changement

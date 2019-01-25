@@ -61,3 +61,22 @@ apply(X=dataPropre,MARGIN=2,FUN=TabMod)
 
 #Suppression des variables inutiles hors de ce script
 rm(don1516,don1617,don1718,mathsJetons_2015_2016,mathsJetons_2016_2017,mathsJetons_2017_2018,pos1,NbMod,TabMod)
+
+#Changement des variables en facteurs
+nom<-c("Experimentateur","Pédagogie","Classe","Type.de.classe",
+       "Sexe..F.ou.M.","Langues","Lateralite",
+       "Classe.d.age",
+       "T21.TOTAL","T22.TOTAL","T23.TOTAL","T31TOTAL","T32.TOTAL",
+       "T41a.TOTAL","T41b.TOTAL","T41cTOTAL","T41d.TOTAL","T42a.TOTAL",
+       "T42b.TOTAL","T42c.TOTAL","T42d.TOTAL","T51.TOTAL","T52.TOTAL","T61.TOTAL",
+       "T62TOTAL","T71.TOTAL","T72TOTAL","T81.TOTAL","T82.TOTAL","T83.TOTAL","T84.TOTAL",
+       "T85.TOTAL","T86.TOTAL","T87.TOTAL","T88.TOTAL","T89.TOTAL","T91.Total","T92.Total",
+       "T111.TOTAL","T112.TOTAL","T113.TOTAL","annee.scolaire")
+for (i in 1:ncol(dataPropre)){
+  if (colnames(dataPropre)[i]%in%nom ){
+    dataPropre[,i]<-as.factor(dataPropre[,i])
+  }
+}
+dataPropre$T1.Réponse<-as.numeric(dataPropre$T1.Réponse)
+summary(dataPropre)
+

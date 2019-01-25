@@ -29,6 +29,3 @@ res.hcpc<-HCPC(res.mca,nb.clust = 2)
 res.hcpc$desc.var
 plot.HCPC(res.hcpc,choice = "bar")
 
-
-#j'ai fait ca sur rstudioa
-#deuxieme changement

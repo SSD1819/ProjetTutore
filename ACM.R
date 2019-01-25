@@ -28,4 +28,3 @@ plot.MCA(res.mca,choix = "ind",cex=0.7,invisible = "ind")
 res.hcpc<-HCPC(res.mca,nb.clust = 2)
 res.hcpc$desc.var
 plot.HCPC(res.hcpc,choice = "bar")
-

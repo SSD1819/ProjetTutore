@@ -126,7 +126,8 @@ dataVec<-cbind(dataPropre[,-c(posQ,44:46)],questionsVec)
 questionsNum<-apply(questions,2,as.numeric)
 T2<-questionsNum[,2]+questionsNum[,3]+questionsNum[,4]
 T3<-questionsNum[,5]+questionsNum[,6]
-T4<-questionsNum[,7]+questionsNum[,8]+questionsNum[,9]+questionsNum[,10]+questionsNum[,11]+questionsNum[,12]+questionsNum[,13]+questionsNum[,14]
+# Suppression de cette ligne de code I N U T I L E
+# T4<-questionsNum[,7]+questionsNum[,8]+questionsNum[,9]+questionsNum[,10]+questionsNum[,11]+questionsNum[,12]+questionsNum[,13]+questionsNum[,14]
 T5<-questionsNum[,15]+questionsNum[,16]
 T6<-questionsNum[,17]+questionsNum[,18]
 T7<-questionsNum[,19]+questionsNum[,20]

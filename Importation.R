@@ -73,6 +73,7 @@ nom<-c("Experimentateur","Pédagogie","Classe","Type.de.classe",
        "T85.TOTAL","T86.TOTAL","T87.TOTAL","T88.TOTAL","T89.TOTAL","T91.Total","T92.Total",
        "T111.TOTAL","T112.TOTAL","T113.TOTAL","annee.scolaire")
 
+
 for (i in 1:ncol(dataPropre)){
   if (colnames(dataPropre)[i]%in%nom ){
     dataPropre[,i]<-as.factor(dataPropre[,i])
@@ -80,6 +81,7 @@ for (i in 1:ncol(dataPropre)){
 }
 dataPropre$T1.Réponse<-as.numeric(dataPropre$T1.Réponse)
 summary(dataPropre)
+
 rm(i,nom)
 
 #Vérification qu'il n'y ait pas l'incohérence 0 -> 1 (sauf pour les Q4)

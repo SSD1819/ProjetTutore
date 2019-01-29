@@ -28,5 +28,3 @@ plot(don.tree, uniform=TRUE, branch=0.5, margin=0.1)
 text(don.tree, all=FALSE, use.n=TRUE,cex=0.7)
 
 plotcp(don.tree)
-
-

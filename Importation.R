@@ -84,4 +84,57 @@ summary(dataPropre)
 
 rm(i,nom)
 
+#Remplacement du nom de la variable "Type.de.classe" par "type.de.classe"
+names(dataPropre)[which(names(dataPropre)=="Type.de.classe")]<-"type.de.classe"
+
+#On remplace les na des questions par "0"
+posQ<-which(substr(names(dataPropre),1,1)=="T" & substr(names(dataPropre),1,3)!="T11")
+questions<-dataPropre[,posQ]
+questions[is.na(questions)]<-"0"
+
 #Vérification qu'il n'y ait pas l'incohérence 0 -> 1 (sauf pour les Q4)
+vecAnte<-t(apply(questions[,c(2:30)],1,as.numeric))
+colnames(vecAnte)<-names(questions[,c(2:30)])
+vecPost<-t(apply(questions[,c(3:31)],1,as.numeric))
+colnames(vecPost)<-names(questions[,c(3:31)])
+vecDiff<-vecPost-vecAnte
+
+#Il existe des incohérences, on les recherche
+#On enlève d'abord les questions qui ne peuvent pas avoir d'incohérence
+incoher<-vecDiff[,which(as.numeric(substr(names(questions[,3:31]),3,3))>1 & as.numeric(substr(names(questions[,3:31]),2,2))!=4 & as.numeric(substr(names(questions[,3:31]),2,2))!=8)]
+
+#On récupère ensuite les lignes et colonnes comprtant 1 à la diff entre post et ante
+incoher2<-incoher[which(apply(incoher,1,max)==1),which(apply(incoher,2,max)==1)]
+
+#Remplacement des questions avec NA par questions avec 0 dans datapropre
+dataPropre[,posQ]<-questions
+
+#Création du jeu de données où les résultats des questions sont des vecteurs
+T2<-paste(questions[,2],questions[,3],questions[,4])
+T3<-paste(questions[,5],questions[,6])
+T4<-paste(questions[,7],questions[,8],questions[,9],questions[,10],questions[,11],questions[,12],questions[,13],questions[,14])
+T5<-paste(questions[,15],questions[,16])
+T6<-paste(questions[,17],questions[,18])
+T7<-paste(questions[,19],questions[,20])
+T9<-paste(questions[,30],questions[,31])
+T11<-paste(dataPropre[,44],dataPropre[,45],dataPropre[,46])
+questionsVec<-cbind(questions[,1],T2,T3,T4,T5,T6,T7,questions[,21:29],T9,T11)
+names(questionsVec)[1]<-"T1"
+dataVec<-cbind(dataPropre[,-c(posQ,44:46)],questionsVec)
+
+#Création du jeu de données où les résultats des question sont des sommes
+questionsNum<-apply(questions,2,as.numeric)
+T2<-questionsNum[,2]+questionsNum[,3]+questionsNum[,4]
+T3<-questionsNum[,5]+questionsNum[,6]
+T4<-questionsNum[,7]+questionsNum[,8]+questionsNum[,9]+questionsNum[,10]+questionsNum[,11]+questionsNum[,12]+questionsNum[,13]+questionsNum[,14]
+T5<-questionsNum[,15]+questionsNum[,16]
+T6<-questionsNum[,17]+questionsNum[,18]
+T7<-questionsNum[,19]+questionsNum[,20]
+T9<-questionsNum[,30]+questionsNum[,31]
+T11<-as.numeric(dataPropre[,44])+as.numeric(dataPropre[,45])+as.numeric(dataPropre[,46])
+questionsSum<-cbind(questionsNum[,1],T2,T3,T4,T5,T6,T7,questionsNum[,21:29],T9,T11)
+colnames(questionsSum)[1]<-"T1"
+dataSum<-cbind(dataPropre[,-c(posQ,44:46)],questionsSum)
+
+#Supression des variables qui ne servent à rien
+rm(dataMoySec,dataQuestions,incoher,questions,questionsNum,questionsSum,questionsVec,vecAnte,vecDiff,vecPost,posQ,T2,T3,T4,T5,T6,T7,T9,T11,Quali)

@@ -110,14 +110,14 @@ incoher2<-incoher[which(apply(incoher,1,max)==1),which(apply(incoher,2,max)==1)]
 dataPropre[,posQ]<-questions
 
 #Création du jeu de données où les résultats des questions sont des vecteurs
-T2<-paste(questions[,2],questions[,3],questions[,4])
-T3<-paste(questions[,5],questions[,6])
-T4<-paste(questions[,7],questions[,8],questions[,9],questions[,10],questions[,11],questions[,12],questions[,13],questions[,14])
-T5<-paste(questions[,15],questions[,16])
-T6<-paste(questions[,17],questions[,18])
-T7<-paste(questions[,19],questions[,20])
-T9<-paste(questions[,30],questions[,31])
-T11<-paste(dataPropre[,44],dataPropre[,45],dataPropre[,46])
+T2<-paste(questions[,2],questions[,3],questions[,4],sep="")
+T3<-paste(questions[,5],questions[,6],sep="")
+T4<-paste(questions[,7],questions[,8],questions[,9],questions[,10],questions[,11],questions[,12],questions[,13],questions[,14],sep="")
+T5<-paste(questions[,15],questions[,16],sep="")
+T6<-paste(questions[,17],questions[,18],sep="")
+T7<-paste(questions[,19],questions[,20],sep="")
+T9<-paste(questions[,30],questions[,31],sep="")
+T11<-paste(dataPropre[,44],dataPropre[,45],dataPropre[,46],sep="")
 questionsVec<-cbind(questions[,1],T2,T3,T4,T5,T6,T7,questions[,21:29],T9,T11)
 names(questionsVec)[1]<-"T1"
 dataVec<-cbind(dataPropre[,-c(posQ,44:46)],questionsVec)

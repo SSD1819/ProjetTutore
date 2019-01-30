@@ -133,14 +133,14 @@ T6<-questionsNum[,17]+questionsNum[,18]
 T7<-questionsNum[,19]+questionsNum[,20]
 T9<-questionsNum[,30]+questionsNum[,31]
 T11<-as.numeric(dataPropre[,44])+as.numeric(dataPropre[,45])+as.numeric(dataPropre[,46])
-questionsSum<-cbind(questionsNum[,1],T2,T3,T4,T5,T6,T7,questionsNum[,21:29],T9,T11)
-colnames(questionsSum)[1]<-"T1"
+questionsSum<-data.frame(questionsNum[,1],T2,T3,T4,T5,T6,T7,questionsNum[,21:29],T9,T11)
+names(questionsSum)[1]<-"T1"
 dataSum<-cbind(dataPropre[,-c(posQ,44:46)],questionsSum)
 
-#Supression des variables qui ne servent à rien
-rm(dataMoySec,dataQuestions,incoher,questions,questionsNum,questionsSum,questionsVec,vecAnte,vecDiff,vecPost,posQ,T2,T3,T4,T5,T6,T7,T9,T11,Quali)
-
 #Changement du nom de colonne sur le sexe qui est très sale !
-colnames(dataSum)[5]<-"Sexe"
-colnames(dataPropre)[5]<-"Sexe"
-colnames(dataVec)[5]<-"Sexe"
+names(dataSum)[5]<-"Sexe"
+names(dataPropre)[5]<-"Sexe"
+names(dataVec)[5]<-"Sexe"
+
+#Supression des variables qui ne servent à rien
+rm(dataMoySec,incoher,questions,questionsNum,questionsSum,questionsVec,vecAnte,vecDiff,vecPost,posQ,T2,T3,T4,T5,T6,T7,T9,T11)

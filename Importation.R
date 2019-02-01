@@ -175,10 +175,13 @@ names(dataSum)[c(2,4,5,8,9:13)]<-c(
 )
 
 #Suppression ". TOTAL"
-names(dataPropre)<-sub(".TOTAL","",names(dataPropre))
-names(dataPropre)<-sub(".Total","",names(dataPropre))
-names(dataVec)<-sub(".TOTAL","",names(dataVec))
-names(dataSum)<-sub(".TOTAL","",names(dataSum))
+names(dataPropre)<-sub(".","",names(dataPropre),fixed=TRUE)
+names(dataPropre)<-sub("TOTAL","",names(dataPropre),fixed=TRUE)
+names(dataPropre)<-sub("Total","",names(dataPropre),fixed=TRUE)
+names(dataVec)<-sub(".","",names(dataVec),fixed=TRUE)
+names(dataVec)<-sub("TOTAL","",names(dataVec),fixed=TRUE)
+names(dataSum)<-sub(".","",names(dataSum),fixed=TRUE)
+names(dataSum)<-sub("TOTAL","",names(dataSum),fixed=TRUE)
 
 #Supression des variables qui ne servent à rien
 rm(dataMoySec,incoher,questions,questionsNum,questionsSum,questionsVec,vecAnte,vecDiff,vecPost,posQ,T1,T2,T3,T41,T42,T5,T6,T7,T9,don1516,don1617,don1718,mathsJetons_2015_2016,mathsJetons_2016_2017,mathsJetons_2017_2018,pos1,NbMod,TabMod,i,nom)

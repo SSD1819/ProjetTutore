@@ -37,10 +37,4 @@ pie(analyse.univ.table$Pédagogie)
 analyse.univ$Pédagogie
 #Majorité de P1
 
-
-
-
-
-
-
 rm(TablesUniv,analyse.univ,analyse.univ.table)

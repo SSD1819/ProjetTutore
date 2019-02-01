@@ -175,6 +175,7 @@ names(dataSum)[c(2,4,5,8,9:13)]<-c(
 )
 
 #Suppression ". TOTAL"
+names(dataPropre)<-sub("cTOTAL","c",names(dataPropre))
 names(dataPropre)<-sub(".TOTAL","",names(dataPropre))
 names(dataPropre)<-sub(".Total","",names(dataPropre))
 names(dataVec)<-sub(".TOTAL","",names(dataVec))

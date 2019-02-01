@@ -59,9 +59,6 @@ dataPropre$T113.TOTAL[which(dataPropre$T113.TOTAL=="NA")]<-NA
 
 apply(X=dataPropre,MARGIN=2,FUN=TabMod)
 
-#Suppression des variables inutiles hors de ce script
-rm(don1516,don1617,don1718,mathsJetons_2015_2016,mathsJetons_2016_2017,mathsJetons_2017_2018,pos1,NbMod,TabMod)
-
 #Changement des variables en facteurs
 nom<-c("Experimentateur","Pédagogie","Classe","Type.de.classe",
        "Sexe..F.ou.M.","Langues","Lateralite",
@@ -79,10 +76,9 @@ for (i in 1:ncol(dataPropre)){
     dataPropre[,i]<-as.factor(dataPropre[,i])
   }
 }
+
 dataPropre$T1.Réponse<-as.numeric(dataPropre$T1.Réponse)
 summary(dataPropre)
-
-rm(i,nom)
 
 #Remplacement du nom de la variable "Type.de.classe" par "type.de.classe"
 names(dataPropre)[which(names(dataPropre)=="Type.de.classe")]<-"type.de.classe"
@@ -109,38 +105,80 @@ incoher2<-incoher[which(apply(incoher,1,max)==1),which(apply(incoher,2,max)==1)]
 #Remplacement des questions avec NA par questions avec 0 dans datapropre
 dataPropre[,posQ]<-questions
 
+#Suppression de T11 dans datapropre
+dataPropre<-dataPropre[,-c(44:46)]
+
 #Création du jeu de données où les résultats des questions sont des vecteurs
+T1<-questions[,1]
 T2<-paste(questions[,2],questions[,3],questions[,4],sep="")
 T3<-paste(questions[,5],questions[,6],sep="")
-T4<-paste(questions[,7],questions[,8],questions[,9],questions[,10],questions[,11],questions[,12],questions[,13],questions[,14],sep="")
+T41<-paste(questions[,7],questions[,8],questions[,9],questions[,10],sep="")
+T42<-paste(questions[,11],questions[,12],questions[,13],questions[,14],sep="")
 T5<-paste(questions[,15],questions[,16],sep="")
 T6<-paste(questions[,17],questions[,18],sep="")
 T7<-paste(questions[,19],questions[,20],sep="")
 T9<-paste(questions[,30],questions[,31],sep="")
-T11<-paste(dataPropre[,44],dataPropre[,45],dataPropre[,46],sep="")
-questionsVec<-cbind(questions[,1],T2,T3,T4,T5,T6,T7,questions[,21:29],T9,T11)
-names(questionsVec)[1]<-"T1"
-dataVec<-cbind(dataPropre[,-c(posQ,44:46)],questionsVec)
+questionsVec<-cbind(T1,T2,T3,T41,T42,T5,T6,T7,questions[,21:29],T9)
+dataVec<-cbind(dataPropre[,-posQ],questionsVec)
 
 #Création du jeu de données où les résultats des question sont des sommes
 questionsNum<-apply(questions,2,as.numeric)
+T1<-questionsNum[,1]
 T2<-questionsNum[,2]+questionsNum[,3]+questionsNum[,4]
 T3<-questionsNum[,5]+questionsNum[,6]
-# Suppression de cette ligne de code I N U T I L E
-# T4<-questionsNum[,7]+questionsNum[,8]+questionsNum[,9]+questionsNum[,10]+questionsNum[,11]+questionsNum[,12]+questionsNum[,13]+questionsNum[,14]
+T41<-paste(questions[,7],questions[,8],questions[,9],questions[,10],sep="")
+T42<-paste(questions[,11],questions[,12],questions[,13],questions[,14],sep="")
 T5<-questionsNum[,15]+questionsNum[,16]
 T6<-questionsNum[,17]+questionsNum[,18]
 T7<-questionsNum[,19]+questionsNum[,20]
 T9<-questionsNum[,30]+questionsNum[,31]
-T11<-as.numeric(dataPropre[,44])+as.numeric(dataPropre[,45])+as.numeric(dataPropre[,46])
-questionsSum<-data.frame(questionsNum[,1],T2,T3,T4,T5,T6,T7,questionsNum[,21:29],T9,T11)
-names(questionsSum)[1]<-"T1"
-dataSum<-cbind(dataPropre[,-c(posQ,44:46)],questionsSum)
+questionsSum<-data.frame(T1,T2,T3,T41,T42,T5,T6,T7,questionsNum[,21:29],T9)
+dataSum<-cbind(dataPropre[,-posQ],questionsSum)
 
-#Changement du nom de colonne sur le sexe qui est très sale !
-names(dataSum)[5]<-"Sexe"
-names(dataPropre)[5]<-"Sexe"
-names(dataVec)[5]<-"Sexe"
+#####Changement du nom des colonnes qui ne sont pas très propres
+
+names(dataPropre)[c(2,4,5,8,9:13,44)]<-c(
+  "Pedagogie",
+  "TypeClasse",
+  "Sexe",
+  "DateNaissance",
+  "DateEval",
+  "AgeChar",
+  "AgeNum",
+  "AgeInt",
+  "T1",
+  "AnneeScolaire"
+)
+
+names(dataVec)[c(2,4,5,8,9:13)]<-c(
+  "Pedagogie",
+  "TypeClasse",
+  "Sexe",
+  "DateNaissance",
+  "DateEval",
+  "AgeChar",
+  "AgeNum",
+  "AgeInt",
+  "AnneeScolaire"
+)
+
+names(dataSum)[c(2,4,5,8,9:13)]<-c(
+  "Pedagogie",
+  "TypeClasse",
+  "Sexe",
+  "DateNaissance",
+  "DateEval",
+  "AgeChar",
+  "AgeNum",
+  "AgeInt",
+  "AnneeScolaire"
+)
+
+#Suppression ". TOTAL"
+names(dataPropre)<-sub(".TOTAL","",names(dataPropre))
+names(dataPropre)<-sub(".Total","",names(dataPropre))
+names(dataVec)<-sub(".TOTAL","",names(dataVec))
+names(dataSum)<-sub(".TOTAL","",names(dataSum))
 
 #Supression des variables qui ne servent à rien
-rm(dataMoySec,incoher,questions,questionsNum,questionsSum,questionsVec,vecAnte,vecDiff,vecPost,posQ,T2,T3,T4,T5,T6,T7,T9,T11)
+rm(dataMoySec,incoher,questions,questionsNum,questionsSum,questionsVec,vecAnte,vecDiff,vecPost,posQ,T1,T2,T3,T41,T42,T5,T6,T7,T9,don1516,don1617,don1718,mathsJetons_2015_2016,mathsJetons_2016_2017,mathsJetons_2017_2018,pos1,NbMod,TabMod,i,nom)

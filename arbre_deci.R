@@ -13,7 +13,7 @@ quest<-c("Sexe","Classe.d.age","T1","T2","T3",
          "T4","T5","T6","T7",             
          "T81.TOTAL","T82.TOTAL","T83.TOTAL","T84.TOTAL",
          "T85.TOTAL","T86.TOTAL","T87.TOTAL","T88.TOTAL",
-         "T89.TOTAL","T9","T11" )
+         "T89.TOTAL")
 don.reg<-dataVec[,c("Pédagogie",quest)]
 don.tree <- rpart(Pédagogie~.,data=don.reg,method= "class", control=rpart.control(minsplit=1,cp=0))
 #Affichage du résultat
@@ -32,9 +32,9 @@ summary(dataSum)#Aucun score en quantitatif ? et encore des NA dans la T11
 colnames(dataSum)
 quest<-c("Sexe","Classe.d.age","T1","T2","T3",
          "T4","T5","T6","T7",             
-         "T81.TOTAL","T82.TOTAL","T83.TOTAL","T84.TOTAL",
-         "T85.TOTAL","T86.TOTAL","T87.TOTAL","T88.TOTAL",
-         "T89.TOTAL","T9","T11" )
+         "T81","T82","T83","T84",
+         "T85","T86","T87","T88",
+         "T89")
 don.reg<-dataSum[,c("Pédagogie",quest)]
 don.tree <- rpart(Pédagogie~.,data=don.reg,method= "class", control=rpart.control(minsplit=1,cp=0))
 #Affichage du résultat

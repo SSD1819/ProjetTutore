@@ -26,7 +26,7 @@ summary(dataPropre)
 don.reg<-dataPropre[,c("Pedagogie",quest)]
 
 #essaie de passer par la reg logistique pour une cp normale
-reg<-glm(Pedagogie~T1+T41+T89,data=don.reg,family = binomial)
+reg<-glm(Pedagogie~T22+T42c+T71+T81+T41+T89,data=don.reg,family = binomial)
 reg<-glm(Pedagogie~.,data=don.reg,family = binomial)
 summary(reg)
 plotcp(rpart(reg))
@@ -39,7 +39,7 @@ text(don.tree, all=FALSE, use.n=TRUE,cex=0.7)
 plotcp(don.tree)
 
 tree.opt<-prune(don.tree,cp=0.01)#
-prp(tree.opt,extra = 1)
+prp(tree.opt,type=4,extra = 1)
 
 ######
 #SUR SCORE

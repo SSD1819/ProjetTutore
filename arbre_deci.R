@@ -16,7 +16,7 @@ require(rpart)# Pour l’arbre de décision
 require(rpart.plot) # Pour la représentation de l’arbre de décision
 
 colnames(dataVec)
-quest<-c("Sexe","AgeInt","T1", "T21","T22","T23","T3","T32",
+quest<-c("Sexe","AgeInt","T1", "T21","T22","T23","T31","T32",
          "T41","T41d","T42a","T42b","T42c","T42d",
          "T51","T52","T61","T6","T71","T7" ,             
          "T81","T82","T83","T84",

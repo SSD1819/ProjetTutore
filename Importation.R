@@ -128,7 +128,7 @@ T41<-paste(questions[,7],questions[,8],questions[,9],questions[,10],sep="")
 T42<-paste(questions[,11],questions[,12],questions[,13],questions[,14],sep="")
 T5<-questionsNum[,15]+questionsNum[,16]
 questionsSum<-data.frame(T1,T2,T3,T41,T42,T5,questionsNum[,17:29])
-dataSum<-cbind(dataPropre[,-posQ],questionsNum)
+dataSum<-cbind(dataPropre[,-posQ],questionsSum)
 
 
 #####Changement du nom des colonnes qui ne sont pas très propres

@@ -16,7 +16,7 @@ require(rpart)# Pour l’arbre de décision
 require(rpart.plot) # Pour la représentation de l’arbre de décision
 
 colnames(dataPropre)
-quest<-c("Sexe","AgeInt","T1", "T21","T22","T23","T31","T32",
+quest<-c("AgeInt","T1", "T21","T22","T23","T31","T32",
          "T41c","T41b","T41a","T41d","T42a","T42b","T42c","T42d",
          "T51","T52","T61","T62","T71","T72" ,             
          "T81","T82","T83","T84",
@@ -31,6 +31,11 @@ reg<-glm(Pedagogie~T41c+T89,data=don.reg,family = binomial(link = "logit"))#T42c
 # reg<-glm(Pedagogie~.,data=don.reg,family = binomial)
 summary(reg)
 
+reg<-glm(formula = Pedagogie ~ T22 + T23 + T41c + T41b + T42a + T42b + 
+           T42c + T61 + T72 + T81 + T83 + T88 + T89, family = binomial, 
+         data = don.reg)
+#rajouter des interaction + step + courbe roc
+#refaire avec score en quali
 exp(-0.6028+-0.7822*0+1.0380)/(1+exp(-0.6028+-0.7822*0+1.0380))
 
 plotcp(rpart(reg))

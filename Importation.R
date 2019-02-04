@@ -52,11 +52,10 @@ dataPropre$Type.de.classe<-sub("grand","grands",dataPropre$Type.de.classe)
 dataPropre$Langues<-str_to_lower(dataPropre$Langues)
 dataPropre$Langues<-sub("/","et",dataPropre$Langues)
 
-#Transformation des "NA" en vrais NA
-dataPropre$T111.TOTAL[which(dataPropre$T111.TOTAL=="NA")]<-NA
-dataPropre$T112.TOTAL[which(dataPropre$T112.TOTAL=="NA")]<-NA
-dataPropre$T113.TOTAL[which(dataPropre$T113.TOTAL=="NA")]<-NA
+#Suppression des variables T11 et T9
+dataPropre<-dataPropre[,-c(42:46)]
 
+#Stats univariées sur le jeu de données (table)
 apply(X=dataPropre,MARGIN=2,FUN=TabMod)
 
 #Changement des variables en facteurs
@@ -67,8 +66,7 @@ nom<-c("Experimentateur","Pédagogie","Classe","Type.de.classe",
        "T41a.TOTAL","T41b.TOTAL","T41cTOTAL","T41d.TOTAL","T42a.TOTAL",
        "T42b.TOTAL","T42c.TOTAL","T42d.TOTAL","T51.TOTAL","T52.TOTAL","T61.TOTAL",
        "T62TOTAL","T71.TOTAL","T72TOTAL","T81.TOTAL","T82.TOTAL","T83.TOTAL","T84.TOTAL",
-       "T85.TOTAL","T86.TOTAL","T87.TOTAL","T88.TOTAL","T89.TOTAL","T91.Total","T92.Total",
-       "T111.TOTAL","T112.TOTAL","T113.TOTAL","annee.scolaire")
+       "T85.TOTAL","T86.TOTAL","T87.TOTAL","T88.TOTAL","T89.TOTAL","annee.scolaire")
 
 
 for (i in 1:ncol(dataPropre)){
@@ -77,27 +75,30 @@ for (i in 1:ncol(dataPropre)){
   }
 }
 
+#Question 1 comme variable numérique
 dataPropre$T1.Réponse<-as.numeric(dataPropre$T1.Réponse)
+
+#Re-stats univariées sur datapropre
 summary(dataPropre)
 
 #Remplacement du nom de la variable "Type.de.classe" par "type.de.classe"
 names(dataPropre)[which(names(dataPropre)=="Type.de.classe")]<-"type.de.classe"
 
 #On remplace les na des questions par "0"
-posQ<-which(substr(names(dataPropre),1,1)=="T" & substr(names(dataPropre),1,3)!="T11")
+posQ<-which(substr(names(dataPropre),1,1)=="T")
 questions<-dataPropre[,posQ]
 questions[is.na(questions)]<-"0"
 
 #Vérification qu'il n'y ait pas l'incohérence 0 -> 1 (sauf pour les Q4)
-vecAnte<-t(apply(questions[,c(2:30)],1,as.numeric))
-colnames(vecAnte)<-names(questions[,c(2:30)])
-vecPost<-t(apply(questions[,c(3:31)],1,as.numeric))
-colnames(vecPost)<-names(questions[,c(3:31)])
+vecAnte<-t(apply(questions[,c(2:28)],1,as.numeric))
+colnames(vecAnte)<-names(questions[,c(2:28)])
+vecPost<-t(apply(questions[,c(3:29)],1,as.numeric))
+colnames(vecPost)<-names(questions[,c(3:29)])
 vecDiff<-vecPost-vecAnte
 
 #Il existe des incohérences, on les recherche
 #On enlève d'abord les questions qui ne peuvent pas avoir d'incohérence
-incoher<-vecDiff[,which(as.numeric(substr(names(questions[,3:31]),3,3))>1 & as.numeric(substr(names(questions[,3:31]),2,2))!=4 & as.numeric(substr(names(questions[,3:31]),2,2))!=8)]
+incoher<-vecDiff[,which(as.numeric(substr(names(questions[,3:29]),3,3))>1 & as.numeric(substr(names(questions[,3:29]),2,2))!=4 & as.numeric(substr(names(questions[,3:29]),2,2))!=8)]
 
 #On récupère ensuite les lignes et colonnes comprtant 1 à la diff entre post et ante
 incoher2<-incoher[which(apply(incoher,1,max)==1),which(apply(incoher,2,max)==1)]
@@ -105,8 +106,8 @@ incoher2<-incoher[which(apply(incoher,1,max)==1),which(apply(incoher,2,max)==1)]
 #Remplacement des questions avec NA par questions avec 0 dans datapropre
 dataPropre[,posQ]<-questions
 
-#Suppression de T11 dans datapropre
-dataPropre<-dataPropre[,-c(44:46)]
+#Correction de la question 2 (enfants 0->1 devient 1->1)
+dataPropre$T21.TOTAL[which(dataPropre$T21.TOTAL=="0" & dataPropre$T22.TOTAL=="1")]<-"1"
 
 #Création du jeu de données où les résultats des questions sont des vecteurs
 T1<-questions[,1]
@@ -115,10 +116,7 @@ T3<-paste(questions[,5],questions[,6],sep="")
 T41<-paste(questions[,7],questions[,8],questions[,9],questions[,10],sep="")
 T42<-paste(questions[,11],questions[,12],questions[,13],questions[,14],sep="")
 T5<-paste(questions[,15],questions[,16],sep="")
-T6<-paste(questions[,17],questions[,18],sep="")
-T7<-paste(questions[,19],questions[,20],sep="")
-T9<-paste(questions[,30],questions[,31],sep="")
-questionsVec<-cbind(T1,T2,T3,T41,T42,T5,T6,T7,questions[,21:29],T9)
+questionsVec<-cbind(T1,T2,T3,T41,T42,T5,questions[,17:29])
 dataVec<-cbind(dataPropre[,-posQ],questionsVec)
 
 #Création du jeu de données où les résultats des question sont des sommes
@@ -129,15 +127,13 @@ T3<-questionsNum[,5]+questionsNum[,6]
 T41<-paste(questions[,7],questions[,8],questions[,9],questions[,10],sep="")
 T42<-paste(questions[,11],questions[,12],questions[,13],questions[,14],sep="")
 T5<-questionsNum[,15]+questionsNum[,16]
-T6<-questionsNum[,17]+questionsNum[,18]
-T7<-questionsNum[,19]+questionsNum[,20]
-T9<-questionsNum[,30]+questionsNum[,31]
-questionsSum<-data.frame(T1,T2,T3,T41,T42,T5,T6,T7,questionsNum[,21:29],T9)
-dataSum<-cbind(dataPropre[,-posQ],questionsSum)
+questionsSum<-data.frame(T1,T2,T3,T41,T42,T5,questionsNum[,17:29])
+dataSum<-cbind(dataPropre[,-posQ],questionsNum)
+
 
 #####Changement du nom des colonnes qui ne sont pas très propres
 
-names(dataPropre)[c(2,4,5,8,9:13,44)]<-c(
+names(dataPropre)[c(2,4,5,8,9:13,42)]<-c(
   "Pedagogie",
   "TypeClasse",
   "Sexe",
@@ -184,4 +180,4 @@ names(dataSum)<-sub(".","",names(dataSum),fixed=TRUE)
 names(dataSum)<-sub("TOTAL","",names(dataSum),fixed=TRUE)
 
 #Supression des variables qui ne servent à rien
-rm(dataMoySec,incoher,questions,questionsNum,questionsSum,questionsVec,vecAnte,vecDiff,vecPost,posQ,T1,T2,T3,T41,T42,T5,T6,T7,T9,don1516,don1617,don1718,mathsJetons_2015_2016,mathsJetons_2016_2017,mathsJetons_2017_2018,pos1,NbMod,TabMod,i,nom)
+rm(dataMoySec,incoher,incoher2,questions,questionsNum,questionsSum,questionsVec,vecAnte,vecDiff,vecPost,posQ,T1,T2,T3,T41,T42,T5,don1516,don1617,don1718,mathsJetons_2015_2016,mathsJetons_2016_2017,mathsJetons_2017_2018,pos1,NbMod,TabMod,i,nom)

@@ -1,4 +1,4 @@
-#Librairies necessaires
+#Librairies nécéssaires
 require(readxl)
 require(dplyr)
 require(stringr)

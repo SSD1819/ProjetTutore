@@ -13,6 +13,8 @@ p2[which(dataPropre$Pedagogie=="P2")]<-"1"
 #On ajoute p1 et p2
 datAssos<-cbind(p1,p2,dataPropre[,14:41])
 
-apriori(datAssos)
-
+rules <- apriori(datAssos, parameter = list(supp = 0.5, conf = 0.9, target = "rules"))
+summary(rules)
+rules_conf <- sort (rules, by="confidence", decreasing=TRUE) # 'high-confidence' rules.
+inspect(head(rules_conf,150))
 rm(datAssos,p1,p2)

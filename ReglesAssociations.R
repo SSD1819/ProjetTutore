@@ -8,7 +8,7 @@ p1<-rep(0,length(dataPropre$Pedagogie))
 p2<-rep(0,length(dataPropre$Pedagogie))
 p1[which(dataPropre$Pedagogie=="P1")]<-"1"
 p2[which(dataPropre$Pedagogie=="P2")]<-"1"
-
+l
 #On ne récupère que les questions (sauf la 1)
 #On ajoute p1 et p2
 datAssos<-cbind(p1,p2,dataPropre[,14:41])

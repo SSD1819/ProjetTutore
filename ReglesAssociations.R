@@ -1,4 +1,4 @@
-######Mise en forme d'un jeu de donnees#####
+######Mise en forme d'un jeu de donnees######
 ######pour pouvoir faire des règles d'associations (que des 0 et des 1)
 
 require(arules)

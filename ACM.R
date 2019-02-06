@@ -1,6 +1,6 @@
 colnames(dataPropre)
 
-nom<-colnames(dataPropre[,c(2,13,11,14:41)])
+nom<-colnames(dataPropre[,c(2,13,14:41)])
 valquali<-dataPropre[,nom]
 
 summary(valquali)
@@ -8,7 +8,16 @@ require(FactoMineR)
 require(factoextra)
 valquali$T1<- as.factor(valquali$T1)
 
-res.mca<-MCA(valquali,quali.sup = 1:2,quanti.sup = 3)
+#ajout ind fictif pour l'aide à l'interprétation
+valquali[nrow(valquali)+1,]<-c("P1",0,rep(0,28))
+rownames(valquali)[nrow(valquali)]<-"ind_0"
+valquali[nrow(valquali)+1,]<-c("P1",0,rep(1,28))
+rownames(valquali)[nrow(valquali)]<-"ind_1"
+summary(valquali)
+table(valquali$T1)
+
+
+res.mca<-MCA(valquali,quali.sup = 1:2,ind.sup = 157:158)
 dimdesc(res.mca)
 summary(res.mca)
 plot.MCA(res.mca,invisible = "ind",cex=0.7,selectMod =  "contrib 15")

@@ -1,14 +1,6 @@
 ######
 #SUR VECTEUR
 ######
-summary(dataVec)
-
-#Plusieurs prob : reg logistique que sur variables binaire / quanti : donc inutile de passer en vect
-#ne comprend pas le std error
-#ne comprend pas pk l'erreur augmente quand la complexité de l'arbre augmente et qu'elle est aléatoire (pas logique) (et que le modele est satisfaisant)
-#
-
-
 
 # install.packages("rpart")
 # install.packages("rpart.plot")
@@ -36,9 +28,9 @@ reg<-glm(formula = Pedagogie ~ T22 + T23 + T41c + T41b + T42a + T42b +
          data = don.reg)
 #rajouter des interaction + step + courbe roc
 #refaire avec score en quali
-exp(-0.6028+-0.7822*0+1.0380)/(1+exp(-0.6028+-0.7822*0+1.0380))
 
-plotcp(rpart(reg))
+
+plotcp(rpart(reg,method = "class"))
 
 don.tree <- rpart(reg)
 #Affichage du résultat
@@ -50,5 +42,35 @@ plotcp(don.tree)
 tree.opt<-prune(don.tree,cp=0.01)#
 prp(tree.opt,type=4,extra = 1)
 
-rm(don.tree,reg,don.reg,tree.opt)
+
+#####
+#####
+#COURBE ROC
+#####
+#####
+
+simple_roc <- function(labels, scores){
+  labels <- labels[order(scores, decreasing=TRUE)]
+  data.frame(TPR=cumsum(labels)/sum(labels), FPR=cumsum(!labels)/sum(!labels), labels)
+}
+
+
+# install.packages("pROC")
+library(pROC)
+
+#prediction des données grâce à la regression sur le meme échantillon
+reg.pred<-predict.glm(reg,type = "response")
+tt<-as.factor(ifelse(reg.pred<0.5,"P1","P2"))
+sum(tt==dataPropre$Pedagogie)/nrow(dataPropre)#71% de bonne prédiction
+
+reg.link<-predict(reg, type="link")
+
+reg.roc<-roc(response = dataPropre$Pedagogie, predictor = reg.pred, direction="<",auc = TRUE)
+#AUC = 77%
+
+plot.roc(reg.roc,col="yellow", lwd=3)
+glm_simple_roc <- simple_roc(dataPropre$Pedagogie=="P2", reg.link)
+with(glm_simple_roc, points(1 - FPR, TPR, col=1 + labels, cex = 0.7))
+
+rm(don.tree,reg,don.reg,tree.opt,glm_simple_roc)
 

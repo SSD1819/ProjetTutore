@@ -7,7 +7,6 @@
 require(rpart)# Pour l’arbre de décision
 require(rpart.plot) # Pour la représentation de l’arbre de décision
 
-colnames(dataPropre)
 quest<-c("AgeInt","T1", "T21","T22","T23","T31","T32",
          "T41c","T41b","T41a","T41d","T42a","T42b","T42c","T42d",
          "T51","T52","T61","T62","T71","T72" ,             

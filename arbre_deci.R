@@ -71,5 +71,5 @@ plot.roc(reg.roc,col="yellow", lwd=3)
 glm_simple_roc <- simple_roc(dataPropre$Pedagogie=="P2", reg.link)
 with(glm_simple_roc, points(1 - FPR, TPR, col=1 + labels, cex = 0.7))
 
-rm(don.tree,reg,don.reg,tree.opt,glm_simple_roc)
+rm(don.tree,reg,don.reg,tree.opt,glm_simple_roc,quest,reg.link,reg.pred,tt,simple_roc)
 

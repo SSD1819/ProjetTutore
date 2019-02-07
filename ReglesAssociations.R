@@ -1,6 +1,7 @@
 ######Mise en forme d'un jeu de donnees######
 ######pour pouvoir faire des règles d'associations (que des 0 et des 1)
 
+#### Test avec arules ####
 require(arules)
 
 #On met en forme P1 et P2
@@ -16,12 +17,17 @@ datAssos<-cbind(p1,p2,dataPropre[,14:41])
 #Transformation de datassos en tableau de variables numériques
 datAssos<-apply(datAssos,2,as.numeric)
 
-#### Règles d'associations avec fonction Apriori() ####
-rules <- apriori(datAssos, parameter = list(supp = 0.5, conf = 0.9, target = "rules"))
+#### Règles d'associations avec fonction apriori() ####
+rules <- apriori(datAssos, parameter = list(supp = 0.7, conf = 0.9, minlen = 2, maxlen = 10, target = "rules"))
 summary(rules)
-rules_conf <- sort (rules, by="confidence", decreasing=TRUE) # 'high-confidence' rules.
-inspect(head(rules_conf,150))
+rules_lift <- sort (rules, by="lift", decreasing=TRUE) # 'high-lift' rules.
+inspect(head(rules_lift,200))
 
+#### Règles d'associations sans la question 8 ####
+rulesWO8 <- apriori(datAssos[,-c(22:30)], parameter = list(supp = 0.5, conf = 0.9, minlen = 2, maxlen = 10, target = "rules"))
+summary(rulesWO8)
+rules_lift <- sort (rulesWO8, by="lift", decreasing=TRUE) # 'high-lift' rules.
+inspect(head(rules_lift,200))
 
 #### Test avec la méthode du TP3 Applied proba ####
 
@@ -60,4 +66,4 @@ jSignif<-ceiling(posSignif/length(reglesMat[,1]))
 regles<-paste(rownames(reglesMat[iSignif,jSignif]),"=>",colnames(reglesMat[iSignif,jSignif]),sep=" ")
 regles
 
-rm(datAssos,p1,p2,support1,support2,confidence,lift,suppMin,confMin,liftMin,reglesMat,posSignif,iSignif,jSignif,regles, rules, rules_conf)
+rm(datAssos,p1,p2,support1,support2,confidence,lift,suppMin,confMin,liftMin,reglesMat,posSignif,iSignif,jSignif,regles, rules, rules_lift, rulesWO8)

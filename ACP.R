@@ -41,3 +41,11 @@ summary(res.pca1)
 
 rm(res.pca,res.pca1,valquanti)
 
+
+# library(corrplot)
+# summary(dataPropre)
+# m.cor<-cor(sapply(dataPropre[,13:ncol(dataPropre)],as.numeric))#matrice des corrélations pour les questions 8
+# corrplot(m.cor,method = "circle")
+
+
+

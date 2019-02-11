@@ -1,0 +1,104 @@
+---
+title: "ACP"
+author: "Matthieu Lucas Etienne Azat"
+date: "11 février 2019"
+output: pdf_document
+---
+
+```{r}
+load(".RData")
+```
+
+#Analyse des Composantes principales
+Réalisation de 3 ACP : 
+1 sur le jeu de données avec les scores sans les q4 (car non numériques)
+1 sur le jeu de données avec seulement deux q8 (car corrélées)
+1 sur le jeu de données avec l'essentiel des q4 et des q8
+
+##JDD 1
+```{r}
+require(FactoMineR)
+require(factoextra)
+# summary(dataSum)
+
+#soit acp sur tout sauf la Q4 car vectorielle
+#soit afm
+# colnames(dataSum)
+noms<-c("Pedagogie", "T1","T2","T3",
+        "T5","T61","T62","T71","T72","T81",
+        "T82","T83","T84","T85","T86","T87",
+        "T88","T89")
+valquanti<-dataSum[,noms]
+valquanti[,2:length(valquanti)]<-scale(valquanti[,2:length(valquanti)])
+res.pca<-PCA(valquanti,quali.sup = 1,graph = FALSE)
+plot.PCA(res.pca,choix = "var",select = "contrib 8")
+
+```
+Les questions 8 ressortent le plus (puis la 3), comme dans les précédentes analyses : cela nous pousse à voir la matrice des corrélations
+Seulement 60% de l'info sur les 4 premières dimensions
+```{r}
+plot.PCA(res.pca,choix = "var",select = "contrib 8",axes = c(3,4)) #Dim 3 > T_72
+# summary(res.pca)
+```
+Dimension 3 expliquée par la T72.
+
+##Matrice des corrélations
+```{r}
+# install.packages("corrplot")
+library(corrplot)
+summary(dataPropre)
+m.cor<-cor(sapply(dataPropre[,13:ncol(dataPropre)],as.numeric))#matrice des corrélations pour les questions 8
+corrplot(m.cor,method = "circle")
+```
+Grosse corrélation entre les 8* : donc ACP biaisée (et légère sur les q4 mais suffisante pour biaiser l'analyse)
+Etonnemment la T1 ne ressort pas comme grosse contrib
+
+##JDD 2
+```{r}
+##Nouvelle PCA sans les T8 super correlées entre elles (que T81 et T82 car ce sont les moins correlées)
+valquanti1<-valquanti[,-c(12:18)]
+summary(valquanti1)
+res.pca1<-PCA(valquanti1,quali.sup = 1,graph = FALSE)
+plot.PCA(res.pca1,axes = c(1,2),choix = "ind")
+
+```
+Aucune démarcation entre P1 et P2 sur la première dimension.
+
+```{r}
+plot.PCA(res.pca1,axes = c(1,2),choix = "var",select = "cos2 5")
+```
+T2 / T3 sont proches et ont un cos2 élevé : un gros score en T2 implique un gros score en T3
+La dimension 1 porte sur les T2 et T3
+La deuxième dimension porte sur la T62
+
+```{r}
+plot.PCA(res.pca1,axes = c(3,4),choix = "var")
+```
+La dimension 3 porte sur la T72
+La dimension 4 porte sur la T5
+En conséquent nous avons quasi 1 variable / axe l'utilité de l'acp peut être remise en question
+
+##JDD 2
+```{r}
+#Ajout d'une acp avec les q4 de datapropre (seulement celles les plus corrélées aux autres)
+valquanti2<-cbind(valquanti1,
+                  apply(dataPropre[,c("T41a","T41c","T41d")],2,as.numeric))
+res.pca1<-PCA(valquanti2,quali.sup = 1,graph = FALSE)
+plot.PCA(res.pca1,axes = c(1,2),choix = "ind")
+```
+A nouveau aucune démarcation entre P1 et P2
+
+```{r}
+plot.PCA(res.pca1,axes = c(1,2),choix = "var",select = "cos2 5")
+```
+La dimension 1 porte sur les questions T2 et 3
+La dimension 2 porte sur les questions T41c/d (très corrélé alors qu'on ne le voit pas dans le cor) et T61
+
+```{r}
+plot.PCA(res.pca1,axes = c(3,4),choix = "var",select = "cos2 5")
+```
+Les dimensions 3 et 4 portent sur la question T72
+
+
+L'ACP permet donc dans les 3 cas d'observer des différences au sein de la population, mais qui n'est pas significative avec la pédagogie suivit par les individus.
+

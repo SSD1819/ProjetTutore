@@ -25,7 +25,7 @@ plot.PCA(res.pca,choix = "var",select = "contrib 8",axes = c(3,4)) #Dim 3 > T_72
 summary(res.pca)
 
 ##Nouvelle PCA sans les T8 super correlées entre elles (que T81 car non correlée)
-valquanti1<-valquanti[,-c(11:18)]
+valquanti1<-valquanti[,-c(12:18)]
 summary(valquanti1)
 res.pca1<-PCA(valquanti1,quali.sup = 1)
 plot.PCA(res.pca1,axes = c(1,2),choix = "ind")#aucune démarcation entre P1 et P2
@@ -39,7 +39,7 @@ plot.PCA(res.pca1,axes = c(3,4),choix = "var")
 
 summary(res.pca1)
 
-rm(res.pca,res.pca1,valquanti)
+rm(res.pca,res.pca1,valquanti,valquanti1)
 
 
 # library(corrplot)

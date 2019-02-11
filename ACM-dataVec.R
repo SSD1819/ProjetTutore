@@ -45,7 +45,5 @@ res.hcpc$desc.var
 plot.HCPC(res.hcpc,choice = "bar")
 
 
-# rm(res.hcpc, res.mca, valqualis, noms, dataVec1)
-
-
+rm(i,res.hcpc, res.mca, valqualis, noms, dataVec1)
 

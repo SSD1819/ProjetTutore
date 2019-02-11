@@ -39,32 +39,32 @@ rect.hclust(cahG,12)
 
 ### Donnees generales avec P1
 cahG.P1<-hclustvar(X.quanti=dataQg.P1[,2],X.quali=dataQg.P1[,-c(1,2)])
-plot(cahG.P1, main="Donnees generales avec P1")
+plot(cahG.P1, main="Dendogramme des donnees generales \n avec P1")
 rect.hclust(cahG.P1,12)
 
 ###Donnees generales avec P2
 cahG.P2<-hclustvar(X.quanti=dataQg.P2[,2],X.quali=dataQg.P2[,-c(1,2)])
-plot(cahG.P2, main="Donnees generales avec P2")
+plot(cahG.P2, main="Dendogramme des donnees generales\n avec P2")
 rect.hclust(cahG.P2,12)
 
 ###Pour les données vec avec P1
 cahVec.P1<-hclustvar(X.quanti=dataQVec.P1[,2],X.quali=dataQVec.P1[,-c(1,2)])
-plot(cahVec.P1, main="Clust des données vec avec P1")
+plot(cahVec.P1, main="Dendogramme des données vec\n avec P1")
 rect.hclust(cahVec.P1,6)
 
 ###Pour les données vec avec P2
 cahVec.P2<-hclustvar(X.quanti=dataQVec.P2[,2],X.quali=dataQVec.P2[,-c(1,2)])
-plot(cahVec.P2, main="Clust des données vec avec P2")
+plot(cahVec.P2, main="Dendogramme des données vec\n avec P2")
 rect.hclust(cahVec.P2,6)
 
 ###Pour les données somme avec P1
 cahSum.P1<-hclustvar(X.quanti=dataQSum.P1[,-c(1,5,6)],X.quali=dataQSum.P1[,c(5,6)])
-plot(cahSum.P1, main="Clust des données somme avec P1")
+plot(cahSum.P1, main="Dendogramme des données somme\n avec P1")
 rect.hclust(cahSum.P1,6)
 
 ###Pour les données somme avec P2
 cahSum.P2<-hclustvar(X.quanti=dataQSum.P2[,-c(1,5,6)],X.quali=dataQSum.P2[,c(5,6)])
-plot(cahSum.P2, main="Clust des données somme avec P2")
+plot(cahSum.P2, main="Dendogramme des données somme\n avec P2")
 rect.hclust(cahSum.P2,6)
 
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")))

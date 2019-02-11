@@ -19,12 +19,13 @@ don.reg<-dataPropre[,c("Pedagogie",quest)]
 #essaie de passer par la reg logistique pour une cp normale
 reg<-glm(Pedagogie~T22+T41c+T42c+T71+T81+T89,data=don.reg,family = binomial(link = "logit"))
 reg<-glm(Pedagogie~T41c+T89,data=don.reg,family = binomial(link = "logit"))#T42c limite
-# reg<-glm(Pedagogie~.,data=don.reg,family = binomial)
-summary(reg)
+reg<-glm(Pedagogie~.,data=don.reg,family = binomial)
+step(reg)
 
 reg<-glm(formula = Pedagogie ~ T22 + T23 + T41c + T41b + T42a + T42b + 
            T42c + T61 + T72 + T81 + T83 + T88 + T89, family = binomial, 
          data = don.reg)
+summary(reg)
 #rajouter des interaction + step + courbe roc
 #refaire avec score en quali
 

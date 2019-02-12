@@ -2,7 +2,7 @@
 
 colnames(dataVec)
 
-noms<-colnames(dataVec[,c(2,14,11,15:32)]) #removed T83 et T85+
+noms<-colnames(dataVec[,c(2,14,11,15:32)])
 valqualis<-dataVec[,noms]
 summary(valqualis)
 

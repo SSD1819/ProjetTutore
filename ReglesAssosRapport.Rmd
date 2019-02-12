@@ -2,7 +2,9 @@
 title: "Règles d'associations"
 author: "Azat Aleksanyan, Lucas Chabeau, Matthieu François et Etienne Hamard"
 date: "11 février 2019"
-output: html_document
+output:
+  pdf_document:
+    toc: true
 ---
 ```{r,echo=FALSE}
 load(".RData")

@@ -1,10 +1,8 @@
 ---
 title: "Classfication par pedagogie"
-date: "11/02/2019"
 output:
-  pdf_document: default
-  html_document:
-    df_print: paged
+  pdf_document:
+    toc: true
 ---
 
 
@@ -58,31 +56,31 @@ dataQVec8.P2<-dataQVec8.P[which(dataQVec8.P["Pedagogie"]=="P2"),]
 #Affichage des dendogrammes
 
 # Avec T1 
-##Pour les donnees generales avec P1
+##Pour les données generales avec P1
 ```{r, echo=FALSE}
 cahG.P1<-hclustvar(X.quanti=dataQg.P1[,2],X.quali=dataQg.P1[,-c(1,2)])
 plot(cahG.P1, main="Dendogramme des donnees generales \n de la pedagogie P1")
 rect.hclust(cahG.P1,12)
 ```
 
-##Pour les donnees generales avec P2
+##Pour les données generales avec P2
 ```{r, echo=FALSE}
 cahG.P2<-hclustvar(X.quanti=dataQg.P2[,2],X.quali=dataQg.P2[,-c(1,2)])
 plot(cahG.P2, main="Dendogramme des donnees generales\n de la pedagogie P2")
 rect.hclust(cahG.P2,12)
 ```
 
-##Pour les données vectorielles avec P1
+##Pour les données avec les vecteurs avec P1
 ```{r, echo=FALSE}
 cahVec.P1<-hclustvar(X.quanti=dataQVec.P1[,2],X.quali=dataQVec.P1[,-c(1,2)])
 plot(cahVec.P1, main="Dendogramme des données avec les vecteurs\n de la pedagogie P1")
 rect.hclust(cahVec.P1,6)
 ```
 
-##Pour les données avec vecteur avec P2
+##Pour les données avec les vecteurs avec P2
 ```{r, echo=FALSE}
 cahVec.P2<-hclustvar(X.quanti=dataQVec.P2[,2],X.quali=dataQVec.P2[,-c(1,2)])
-plot(cahVec.P2, main="Dendogramme des données avec les vectuers\n de la pedagogie P2")
+plot(cahVec.P2, main="Dendogramme des données avec les vecteurs\n de la pedagogie P2")
 rect.hclust(cahVec.P2,6)
 ```
 
@@ -106,7 +104,7 @@ rect.hclust(cahVec8,6)
 
 
 
-##Pour les données sommées avec P1
+##Pour les données avec les sommes avec P1
 
 ```{r, echo=FALSE}
 cahSum.P1<-hclustvar(X.quanti=dataQSum.P1[,-c(1,5,6)],X.quali=dataQSum.P1[,c(5,6)])
@@ -114,7 +112,7 @@ plot(cahSum.P1, main="Dendogramme des données somme \n de la pedagogie P1")
 rect.hclust(cahSum.P1,6)
 ```
 
-##Pour les données somme avec P2
+##Pour les données avec les sommes avec P2
 ```{r, echo=FALSE}
 cahSum.P2<-hclustvar(X.quanti=dataQSum.P2[,-c(1,5,6)],X.quali=dataQSum.P2[,c(5,6)])
 plot(cahSum.P2, main="Dendogramme des données avec somme\n de la pedagogie P2")
@@ -138,31 +136,31 @@ rect.hclust(cahSum8,6)
 ```
 
 #Sans T1
-##Pour les donnees generales avec P1
+##Pour les données generales avec P1
 ```{r, echo=FALSE}
 cahG.P1<-hclustvar(X.quali=dataQg.P1[,-c(1,2)])
 plot(cahG.P1, main="Dendogramme des donnees generales \n de la pedagogie P1")
 rect.hclust(cahG.P1,12)
 ```
 
-##Pour les donnees generales avec P2
+##Pour les données generales avec P2
 ```{r, echo=FALSE}
 cahG.P2<-hclustvar(X.quali=dataQg.P2[,-c(1,2)])
 plot(cahG.P2, main="Dendogramme des donnees generales\n de la pedagogie P2")
 rect.hclust(cahG.P2,12)
 ```
 
-##Pour les données vectorielles avec P1
+##Pour les données avec les vecteurs avec P1
 ```{r, echo=FALSE}
 cahVec.P1<-hclustvar(X.quali=dataQVec.P1[,-c(1,2)])
 plot(cahVec.P1, main="Dendogramme des données avec les vecteurs\n de la pedagogie P1")
 rect.hclust(cahVec.P1,6)
 ```
 
-##Pour les données avec vecteur avec P2
+##Pour les données avec les vecteurs avec P2
 ```{r, echo=FALSE}
 cahVec.P2<-hclustvar(X.quali=dataQVec.P2[,-c(1,2)])
-plot(cahVec.P2, main="Dendogramme des données avec les vectuers\n de la pedagogie P2")
+plot(cahVec.P2, main="Dendogramme des données avec les vecteurs\n de la pedagogie P2")
 rect.hclust(cahVec.P2,6)
 ```
 
@@ -173,10 +171,12 @@ plot(cahVec8, main="Dendogramme des données avec les vecteurs \n de la pedagogi
 rect.hclust(cahVec8,6)
 
 ```
+
 ##Q8 regroupée avec P2
+
 ```{r, echo=FALSE}
 cahVec8<-hclustvar(X.quali=dataQVec8.P2[,-c(1,2)])
-plot(cahVec8, main="Dendogramme des données avec vecteurs \n de la pedagogieP2 et Q8 regroupée")
+plot(cahVec8, main="Dendogramme des données avec vecteurs \n de la pedagogie P2 et Q8 regroupée")
 rect.hclust(cahVec8,6)
 
 ```
@@ -184,25 +184,25 @@ rect.hclust(cahVec8,6)
 
 
 
-##Pour les données sommées avec P1
+##Pour les données avec les sommes avec P1
 
 ```{r, echo=FALSE}
 cahSum.P1<-hclustvar(X.quanti=dataQSum.P1[,-c(1,2,5,6)],X.quali=dataQSum.P1[,c(5,6)])
-plot(cahSum.P1, main="Dendogramme des données somme \n de la pedagogie P1")
+plot(cahSum.P1, main="Dendogramme des données avec sommes \n de la pedagogie P1")
 rect.hclust(cahSum.P1,6)
 ```
 
-##Pour les données somme avec P2
+##Pour les données avec les sommes avec P2
 ```{r, echo=FALSE}
 cahSum.P2<-hclustvar(X.quanti=dataQSum.P2[,-c(1,2,5,6)],X.quali=dataQSum.P2[,c(5,6)])
-plot(cahSum.P2, main="Dendogramme des données avec somme\n de la pedagogie P2")
+plot(cahSum.P2, main="Dendogramme des données avec sommes\n de la pedagogie P2")
 rect.hclust(cahSum.P2,6)
 ```
 
 ##Q8 regroupée avec P1
 ```{r, echo=FALSE}
 cahSum8<-hclustvar(X.quanti=dataQSum8.P1[,-c(1,2,5,6)],X.quali=dataQSum8.P1[,c(5,6)])
-plot(cahSum8, main="Dendogramme des données avec sommes \n de la pedagogie P1 et Q8 regroupée")
+plot(cahSum8, main="Dendogramme des données avec sommes\n de la pedagogie P1 et Q8 regroupée")
 rect.hclust(cahSum8,6)
 
 ```
@@ -210,7 +210,7 @@ rect.hclust(cahSum8,6)
 ##Q8 regroupée avec P2
 ```{r, echo=FALSE}
 cahSum8<-hclustvar(X.quanti=dataQSum8.P2[,-c(1,2,5,6)],X.quali=dataQSum8.P2[,c(5,6)])
-plot(cahSum8, main="Dendogramme des données avec sommes \n de la pedagogie P2 et Q8 regroupée")
+plot(cahSum8, main="Dendogramme des données avec sommes\n de la pedagogie P2 et Q8 regroupée")
 rect.hclust(cahSum8,6)
 
 ```

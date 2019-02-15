@@ -192,7 +192,7 @@ dataVec <- dataVec[,!(names(dataVec) %in% c(cols.123,cols.456789 )) ]
 #Regroupement des quesions T8.123 et T8.456789 dans le jeu dataSum
 T8.123<-dataSum[,"T81"]+dataSum[,"T82"]+dataSum[,"T83"]
 T8.456789<-dataSum[,"T84"]+dataSum[,"T85"]+dataSum[,"T86"]+dataSum[,"T87"]+dataSum[,"T88"]+dataSum[,"T89"]
-dataSum<-cbind(dataSum, T8.123, "T8.456789"=T8.56789)
+dataSum<-cbind(dataSum, T8.123, "T8.456789"=T8.456789)
 dataSum<-dataSum[,!(names(dataSum) %in% c(cols.123,cols.456789 )) ]
 
 

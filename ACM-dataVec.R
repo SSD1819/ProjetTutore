@@ -1,81 +1,21 @@
 ### ACM sur data vectorielle
+if (!require("FactoMineR")) install.packages("FactoMineR")
+require(FactoMineR)
+if (!require("factoextra")) install.packages("factoextra")
+require(factoextra)
 
 colnames(dataVec)
 
-noms<-colnames(dataVec[,c(2,14,11,15:32)])
+noms<-colnames(dataVec[,c(2,14,11,15:25)])
 valqualis<-dataVec[,noms]
 summary(valqualis)
 
 valqualis$T1<- as.factor(valqualis$T1)
 valqualis$AgeNum<- as.factor(valqualis$AgeNum)
 
-require(FactoMineR)
-require(factoextra)
+res.mca<-MCA(valqualis,quali.sup = 1:3)
 
-res.mca<-MCA(valqualis,quali.sup = 1:2)
-
-#6.1% information
-
-### To find correlation between only T8 questions
-
-dataVec->dataVec1
-for( i in 24:32){
-  dataVec1[,i]<-as.numeric(dataVec1[,i])
-}
-str(dataVec1)
-cor(dataVec1[,24:32])
-
-#install.packages("corrplot")
-require(corrplot)
-corrplot(cor(dataVec1[,24:32]))
-
-#removing T82+
-
-noms<-colnames(dataVec[,c(2,14,11,15:25)]) #removed T82+
-valqualis<-dataVec[,noms]
-summary(valqualis)
-
-valqualis$T1<- as.factor(valqualis$T1)
-valqualis$AgeNum<- as.factor(valqualis$AgeNum)
-
-res.mca<-MCA(valqualis,quali.sup = 1:2)
-
-#Here we have 4.37% informations. Trying to reduce variables.
-
-#Again correlations
-
-valqualis->valqualis1
-for( i in 1:14){
-  valqualis1[,i]<-as.numeric(valqualis1[,i])
-}
-str(valqualis1)
-cor00<-cor(valqualis1)
-
-#install.packages("corrplot")
-#require(corrplot)
-corrplot(cor(cor00))
-
-#T2 and T3 are correlated, as well as T41 and T42, so dropping T3 and T42
-
-valqualis<-valqualis[,-c(5,7)]
-
-###rechecking correlations
-valqualis->valqualis1
-for( i in 1:12){
-  valqualis1[,i]<-as.numeric(valqualis1[,i])
-}
-str(valqualis1)
-cor000<-cor(valqualis1)
-
-#install.packages("corrplot")
-#require(corrplot)
-corrplot(cor(cor000))
-
-### Continue ACM
-
-res.mca<-MCA(valqualis,quali.sup = 1:2)
-
-###Here he have only 3.98% information kept! Which is terribly low!
+#9.2% information
 
 dimdesc(res.mca)
 summary(res.mca)
@@ -87,5 +27,17 @@ res.hcpc<-HCPC(res.mca,nb.clust = 3)
 res.hcpc$desc.var
 plot.HCPC(res.hcpc,choice = "bar")
 
+library(dplyr)    
+valqualisP1<-filter(valqualis, Pedagogie == "P1")
+valqualisP1<-valqualisP1[,-1]
+
+valqualisP2<-filter(valqualis, Pedagogie == "P2")
+valqualisP2<-valqualisP1[,-1]
+
+par(mfrow=c(1,2))
+res.mca1<-MCA(valqualisP1,quali.sup = 1:2)
+res.mca2<-MCA(valqualisP2,quali.sup = 1:2)
+
 #Removing temporary variables
-rm(i,res.hcpc, res.mca, valqualis, noms, dataVec1, cor00, cor000, valqualis1)
+rm(res.hcpc, res.mca, valqualis, noms, 
+   res.mca1,res.mca2, valqualisP1,valqualisP2)

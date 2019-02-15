@@ -179,15 +179,21 @@ names(dataVec)<-sub("TOTAL","",names(dataVec),fixed=TRUE)
 names(dataSum)<-sub(".","",names(dataSum),fixed=TRUE)
 names(dataSum)<-sub("TOTAL","",names(dataSum),fixed=TRUE)
 
-#Creation d'un jeu de données avec T8.123 et T8.456789
+#Regroupement des quesions T8.123 et T8.456789 dans le jeu dataVec
 dataGroupeT8<-dataVec
 cols.123<-c(names(dataGroupeT8[24:26]))
 cols.456789<-c(names(dataGroupeT8[27:32]))
 dataGroupeT8$T8.123<-apply(dataGroupeT8[,cols.123],1, paste , collapse = " " )
 dataGroupeT8$T8.456789<-apply(dataGroupeT8[,cols.456789],1, paste , collapse = " " )
 dataGroupeT8 <- dataGroupeT8[,!(names(dataGroupeT8) %in% c(cols.123,cols.456789 )) ]
+dataVec<-dataGroupeT8
 
-
+#Regroupement des quesions T8.123 et T8.456789 dans le jeu dataSum
+dataGroupeT8<-dataSum
+dataGroupeT8$T8.123<-dataGroupeT8["T81"]+dataGroupeT8["T82"]+dataGroupeT8["T83"]
+dataGroupeT8$T8456789<-dataGroupeT8["T84"]+dataGroupeT8["T85"]+dataGroupeT8["T86"]+dataGroupeT8["T87"]+dataGroupeT8["T88"]+dataGroupeT8["T89"]
+dataGroupeT8 <- dataGroupeT8[,!(names(dataGroupeT8) %in% c(cols.123,cols.456789 )) ]
+dataSum<-dataGroupeT8
 
 #Supression des variables qui ne servent à rien
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec","dataGroupeT8")))
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")))

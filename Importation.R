@@ -179,5 +179,15 @@ names(dataVec)<-sub("TOTAL","",names(dataVec),fixed=TRUE)
 names(dataSum)<-sub(".","",names(dataSum),fixed=TRUE)
 names(dataSum)<-sub("TOTAL","",names(dataSum),fixed=TRUE)
 
+#Creation d'un jeu de données avec T8.123 et T8.456789
+dataGroupeT8<-dataVec
+cols.123<-c(names(dataGroupeT8[24:26]))
+cols.456789<-c(names(dataGroupeT8[27:32]))
+dataGroupeT8$T8.123<-apply(dataGroupeT8[,cols.123],1, paste , collapse = " " )
+dataGroupeT8$T8.456789<-apply(dataGroupeT8[,cols.456789],1, paste , collapse = " " )
+dataGroupeT8 <- dataGroupeT8[,!(names(dataGroupeT8) %in% c(cols.123,cols.456789 )) ]
+
+
+
 #Supression des variables qui ne servent à rien
-rm(dataMoySec,incoher,incoher2,questions,questionsNum,questionsSum,questionsVec,vecAnte,vecDiff,vecPost,posQ,T1,T2,T3,T41,T42,T5,don1516,don1617,don1718,mathsJetons_2015_2016,mathsJetons_2016_2017,mathsJetons_2017_2018,pos1,NbMod,TabMod,i,nom)
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec","dataGroupeT8")))

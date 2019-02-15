@@ -191,8 +191,8 @@ dataVec<-dataGroupeT8
 #Regroupement des quesions T8.123 et T8.456789 dans le jeu dataSum
 dataGroupeT8<-dataSum
 dataGroupeT8$T8.123<-dataGroupeT8["T81"]+dataGroupeT8["T82"]+dataGroupeT8["T83"]
-dataGroupeT8$T8456789<-dataGroupeT8["T84"]+dataGroupeT8["T85"]+dataGroupeT8["T86"]+dataGroupeT8["T87"]+dataGroupeT8["T88"]+dataGroupeT8["T89"]
-dataGroupeT8 <- dataGroupeT8[,!(names(dataGroupeT8) %in% c(cols.123,cols.456789 )) ]
+dataGroupeT8$T8.456789<-dataGroupeT8["T84"]+dataGroupeT8["T85"]+dataGroupeT8["T86"]+dataGroupeT8["T87"]+dataGroupeT8["T88"]+dataGroupeT8["T89"]
+dataGroupeT8<-dataGroupeT8[,!(names(dataGroupeT8) %in% c(cols.123,cols.456789 )) ]
 dataSum<-dataGroupeT8
 
 #Supression des variables qui ne servent à rien

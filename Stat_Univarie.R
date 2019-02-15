@@ -6,10 +6,10 @@ TablesUniv<-function(x){
 }
 
 #prop de toutes les colonnes
-analyse.univ<-apply(X=dataMoySec,MARGIN=2,FUN=TablesUniv)
+analyse.univ<-apply(X=dataPropre,MARGIN=2,FUN=TablesUniv)
 
 #effectif de toutes les colonnes
-analyse.univ.table<-apply(X=dataMoySec,MARGIN=2,FUN=table)
+analyse.univ.table<-apply(X=dataPropre,MARGIN=2,FUN=table)
 
 #Representation des types de classe
 pie(analyse.univ$Type.de.classe, labels = rownames(analyse.univ$Type.de.classe) )
@@ -29,12 +29,15 @@ analyse.univ.table$T1.Réponse
 
 #Comptes des résultats
 
-apply(X=dataMoySec[,16:48],MARGIN=1,FUN=plyr::count)
+apply(X=dataPropre[,16:48],MARGIN=1,FUN=plyr::count)
 
-names(dataMoySec)
+names(dataPropre)
 #Represantation des differents types de pédagogies au sein de l'ecole
 pie(analyse.univ.table$Pédagogie)
 analyse.univ$Pédagogie
 #Majorité de P1
 
-rm(TablesUniv,analyse.univ,analyse.univ.table)
+
+
+
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")))

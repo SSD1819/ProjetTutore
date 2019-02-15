@@ -38,6 +38,6 @@ par(mfrow=c(1,2))
 res.mca1<-MCA(valqualisP1,quali.sup = 1:2)
 res.mca2<-MCA(valqualisP2,quali.sup = 1:2)
 
-#Removing temporary variables
-rm(res.hcpc, res.mca, valqualis, noms, 
-   res.mca1,res.mca2, valqualisP1,valqualisP2)
+#Removing temporary variables and layouts
+par(mfrow=c(1,1))
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")))

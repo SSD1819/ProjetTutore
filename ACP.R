@@ -12,15 +12,15 @@ valquanti<-dataSum[,noms]
 valquanti[,2:length(valquanti)]<-scale(valquanti[,2:length(valquanti)])
 res.pca<-PCA(valquanti,quali.sup = 1)
 plot.PCA(res.pca,choix = "var",select = "contrib 4") # à nouveau les questions 8 ressortent le plus (puis la 3)
-plot.PCA(res.pca,choix = "ind",cex=0.7)
+plot.PCA(res.pca,choix = "ind",cex=0.7,col.ind = as.numeric(valquanti$Pedagogie))
 outlier<-head(rownames(res.pca$ind$coord[order(res.pca$ind$coord[,2], res.pca$ind$coord[,1]),]))
 
 
 #sans les individus athypiques
 don.indsup<-valquanti[!rownames(valquanti)%in%outlier,]
 don.indsup<-rbind(don.indsup,valquanti[outlier,])
-res.don<-PCA(don.indsup,quali.sup = 1,ind.sup = (nrow(don.indsup)-6):nrow(don.indsup))
-plot.PCA(res.don,choix = "ind",cex=0.7,axes = c(3,4))
+res.don<-PCA(don.indsup,quali.sup = 1,ind.sup = (nrow(don.indsup)-6):nrow(don.indsup),graph = FALSE)
+plot.PCA(res.don,choix = "ind",cex=0.7,axes = c(1,2),col.ind = as.numeric(valquanti$Pedagogie))
 plot.PCA(res.don,choix = "var",select = "contrib 6")
 summary(res.don)
 

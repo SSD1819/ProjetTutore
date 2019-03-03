@@ -1,7 +1,12 @@
-#Resultats univarie en comparant les 2 pedagogies
+# P1-P2 Questions differences: tests and visualisation
+
+# Creation of dataframes containing only respectively P1 and P2 
 
 dataPropreP1<-subset(dataPropre, Pedagogie == "P1")
 dataPropreP2<-subset(dataPropre, Pedagogie == "P2")
+
+
+#### for each question ####
 
 # T1
 boxplot(dataPropre$T1~dataPropre$Pedagogie,main="T1 Reponses (P1)")
@@ -65,6 +70,10 @@ barplot(T52, beside = T, col = c("blue", "green"), main="T52 reponses",
 chi2<-chisq.test(table(dataPropreP1$T52),table(dataPropreP2$T52))
 chi2
 
+
+
+#### testing prop.test ####
+
 # T21
 prop.test(table(dataPropreP1$T21), alternative = "two.sided")
 prop.test(table(dataPropreP2$T21), alternative = "two.sided")
@@ -94,4 +103,6 @@ prop.test(table(dataPropreP1$T52), alternative = "two.sided")
 prop.test(table(dataPropreP2$T52), alternative = "two.sided")
 
 
+
+# keeping initial environment
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")))

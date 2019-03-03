@@ -1,0 +1,72 @@
+---
+title: "Règles d'associations"
+author: "Azat Aleksanyan, Lucas Chabeau, Matthieu François et Etienne Hamard"
+date: "11 février 2019"
+output:
+  pdf_document:
+    toc: true
+---
+```{r,echo=FALSE}
+load(".RData")
+```
+
+#Objectif
+L'objectif est ici de trouver de voir au travers des règles d'associations si des réponses à une question ou une pédagogie implique (avec assez de confiance) la réponse à une autre question (ou l'appartenance à une pédagogie). Ainsi nous avons un autre moyen de rechercher de l'information dans nos données.
+
+#Fonctionnement des règles d'associations
+Nous présenterons les règles sous la forme suivante : "A => B" ce qui signifie "A implique B".
+Par exemple prenons la règle : {T22,T61} => {T21} : ça implique qu'un élève qui a bien répondu aux questions T22 et T61 aura tendance a avoir bien répondu à la question T21 (normal puisque 100% des élèves qui ont bien répondu à la question T22 ont répondu correctement à la question T21).
+Nous présenterons trois indicateurs pour quantifier la qualité et la force d'une règle d'association :
+- Le support
+- La confiance
+- Le lift
+
+##Support
+Le support est la proportion d'apparition de la règle sur l'ensemble de nos individus. (Par exemple, la règle {T22,T61} => {T21} a un support de 0.5192, c'est à dire que 51.92% des élèves interrogés ont réussi les questions T22 et T61 puis ont réussi la question T21).
+
+##Confiance (confidence)
+La confiance est un indicateur de fiabilité de la règle. Elle est la proportion des cas où la règle est observée parmis les individus qui suivent les antécédants de la règle.
+Pour expliquer de manière plus claire, revoyons la règle sous la forme A => B ou A est l'antécédant et B la conséquence de la règle. La confiance de la règle sera la proportion des individu pour qui la règle A => B parmis ceux qui comportent les caractéristiques de l'ensemble A.
+(Par exemple, la règle {T22,T61} => {T21} a une confiance de 1, c'est à dire que 100% des élèves ayant réussi les questions T22 et T61 ont réussi la question T21).
+
+##Lift
+Le lift indique lui la force de la règle d'association. C'est le résultat du rapport entre le support de la règle et le produit des supports de l'antécédant et de la conséque de la règle. Autrement dit, c'est le rapport entre la probabilité que la règle soit vraie si les antécédents sont respectés et la probabilité d'observer la règle sans forcément suivre la règle ($lift=\frac{\mathbb{P}(A\cap{}B)}{\mathbb{P}(A)*\mathbb{P}(B)}$)
+(Par exemple, la règle {T22,T61} => {T21} a un lift de 1.155, c'est à dire que si on demande à un élève qui a réussi à répondre aux questions T22 et T61, on a 15% de chances en plus qu'il ait réussi à répondre à la question T21 qui si nous avions demandé à n'importe quel élève de la classe).
+
+#Règles d'associations que nous avons trouvées
+```{r, echo=FALSE, warning=FALSE}
+require(arules)
+
+#On met en forme P1 et P2
+p1<-rep(0,length(dataPropre$Pedagogie))
+p2<-rep(0,length(dataPropre$Pedagogie))
+p1[which(dataPropre$Pedagogie=="P1")]<-"1"
+p2[which(dataPropre$Pedagogie=="P2")]<-"1"
+
+#On ne récupère que les questions (sauf la 1)
+#On ajoute p1 et p2
+datAssos<-cbind(p1,p2,dataPropre[,14:41])
+
+#Transformation de datassos en tableau de variables numériques
+datAssos<-apply(datAssos,2,as.numeric)
+```
+Certaines règles qui vont apparaître peuvent paraître triviales (du genre T22 => T21) mais en faisant abstraction de ces "règles" qui ne nous servent à rien, nous pouvons trouver quelques règles qui pourraient peut-être vous intéresser.
+
+##Avec toutes les questions
+Voici toutes les règles que nous avons trouvées (avec un support minimum de 0.7 et une confiance minimum de 0.9)
+```{r, echo=FALSE, warning=FALSE}
+#### Règles d'associations avec fonction apriori() ####
+rules <- apriori(datAssos, parameter = list(supp = 0.7, conf = 0.9, minlen = 2, maxlen = 10, target = "rules"))
+rules_lift <- sort (rules, by="lift", decreasing=TRUE) # 'high-lift' rules.
+inspect(head(rules_lift,200))
+```
+
+##Sans les questions 8
+Comme nous avons beaucoup de règles qui impliquent la question 8, nous avons choisi de l'écarter pour voir les autres règles. Le règles restent les mêmes, ça nous permet juste d'afficher les autres règles avec un support moindre (sans avoir trop de règles, pour que ça reste lisible.) Nous avons maintenant un support minimum de 0.5 et une confiance minimum de 0.9
+```{r, echo=FALSE, warning=FALSE}
+#### Règles d'associations sans la question 8 ####
+rulesWO8 <- apriori(datAssos[,-c(22:30)], parameter = list(supp = 0.5, conf = 0.9, minlen = 2, maxlen = 10, target = "rules"))
+rules_lift <- sort (rulesWO8, by="lift", decreasing=TRUE) # 'high-lift' rules.
+inspect(head(rules_lift,200))
+rm(datAssos,p1,p2, rules, rules_lift, rulesWO8)
+```

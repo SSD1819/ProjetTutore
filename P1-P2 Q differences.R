@@ -75,32 +75,33 @@ chi2
 #### testing prop.test ####
 
 # T21
-prop.test(table(dataPropreP1$T21), alternative = "two.sided")
-prop.test(table(dataPropreP2$T21), alternative = "two.sided")
+mat<-cbind(matrix(table(dataPropreP1$T21)), matrix(table(dataPropreP2$T21)))
+prop.test(mat, correct = FALSE)
+
 
 # T22
-prop.test(table(dataPropreP1$T22), alternative = "two.sided")
-prop.test(table(dataPropreP2$T22), alternative = "two.sided")
+mat<-cbind(matrix(table(dataPropreP1$T22)), matrix(table(dataPropreP2$T22)))
+prop.test(mat, correct = FALSE)
 
 # T23
-prop.test(table(dataPropreP1$T23), alternative = "two.sided")
-prop.test(table(dataPropreP2$T23), alternative = "two.sided")
+mat<-cbind(matrix(table(dataPropreP1$T23)), matrix(table(dataPropreP2$T23)))
+prop.test(mat, correct = FALSE)
 
 # T31
-prop.test(table(dataPropreP1$T31), alternative = "two.sided")
-prop.test(table(dataPropreP2$T31), alternative = "two.sided")
+mat<-cbind(matrix(table(dataPropreP1$T31)), matrix(table(dataPropreP2$T31)))
+prop.test(mat, correct = FALSE)
 
 # T32
-prop.test(table(dataPropreP1$T32), alternative = "two.sided")
-prop.test(table(dataPropreP2$T32), alternative = "two.sided")
+mat<-cbind(matrix(table(dataPropreP1$T32)), matrix(table(dataPropreP2$T32)))
+prop.test(mat, correct = FALSE)
 
 # T51
-prop.test(table(dataPropreP1$T51), alternative = "two.sided")
-prop.test(table(dataPropreP2$T51), alternative = "two.sided")
+mat<-cbind(matrix(table(dataPropreP1$T51)), matrix(table(dataPropreP2$T51)))
+prop.test(mat, correct = FALSE)
 
 # T52
-prop.test(table(dataPropreP1$T52), alternative = "two.sided")
-prop.test(table(dataPropreP2$T52), alternative = "two.sided")
+mat<-cbind(matrix(table(dataPropreP1$T52)), matrix(table(dataPropreP2$T52)))
+prop.test(mat, correct = FALSE)
 
 
 

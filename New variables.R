@@ -14,3 +14,5 @@ objet<-rowSums(apply(dataPropre[,noms],2,as.numeric))
 #var pédagogie à comparer avec ces groupes
 #voir si une cah montre les mêmes groupes
 #faire le chi2 entre les vars du groupe audela 2 à 2
+
+##test

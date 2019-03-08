@@ -29,6 +29,15 @@ summary(rulesWO8)
 rules_lift <- sort (rulesWO8, by="lift", decreasing=TRUE) # 'high-lift' rules.
 inspect(head(rules_lift,200))
 
+rulesP1 <- apriori(datAssos[which(p1==1 & T51==1),-c(1,2,22:30)], parameter = list(supp = 0.5, conf = 0.9, minlen = 2, maxlen = 10, target = "rules"))
+summary(rulesP1)
+rules_liftP1 <- sort (rulesP1, by="lift", decreasing=TRUE) # 'high-lift' rules.
+inspect(head(rules_liftP1,200))
+
+rulesP2 <- apriori(datAssos[which(p1==0 & datAssos[,16]==1),-c(1,2,22:30)], parameter = list(supp = 0.5, conf = 0.9, minlen = 2, maxlen = 10, target = "rules"))
+summary(rulesP2)
+rules_liftP2 <- sort (rulesP2, by="lift", decreasing=TRUE) # 'high-lift' rules.
+inspect(head(rules_liftP2,200))
 #### Test avec la méthode du TP3 Applied proba ####
 
 #1-item support
@@ -65,5 +74,7 @@ iSignif<-posSignif%%length(reglesMat[,1])
 jSignif<-ceiling(posSignif/length(reglesMat[,1]))
 regles<-paste(rownames(reglesMat[iSignif,jSignif]),"=>",colnames(reglesMat[iSignif,jSignif]),sep=" ")
 regles
+
+
 
 rm(datAssos,p1,p2,support1,support2,confidence,lift,suppMin,confMin,liftMin,reglesMat,posSignif,iSignif,jSignif,regles, rules, rules_lift, rulesWO8)

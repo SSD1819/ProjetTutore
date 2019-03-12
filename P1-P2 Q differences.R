@@ -122,29 +122,7 @@ T89 <- rbind(prop.table(table(dataPropreP1$T89)),prop.table(table(dataPropreP2$T
 barplot(T89, beside = T, col = c("blue", "green"), main="T89 reponses (two.sided)",
         legend.text =c("P1","P2"),args.legend = list(x = "top"))
 
-# Visualisation of significat difference data
-
-# T72
-T72 <- rbind(prop.table(table(dataPropreP1$T72)),prop.table(table(dataPropreP2$T72)))
-barplot(T72, beside = T, col = c("blue", "green"), main="T72 reponses (two.sided)",
-        legend.text =c("P1","P2"),args.legend = list(x = "topright"))
-
-# T87
-T87 <- rbind(prop.table(table(dataPropreP1$T87)),prop.table(table(dataPropreP2$T87)))
-barplot(T87, beside = T, col = c("blue", "green"), main="T87 reponses (two.sided)",
-        legend.text =c("P1","P2"),args.legend = list(x = "top"))
-
-# T88
-T88 <- rbind(prop.table(table(dataPropreP1$T88)),prop.table(table(dataPropreP2$T88)))
-barplot(T88, beside = T, col = c("blue", "green"), main="T88 reponses (two.sided)",
-        legend.text =c("P1","P2"),args.legend = list(x = "top"))
-
-# T89
-T89 <- rbind(prop.table(table(dataPropreP1$T89)),prop.table(table(dataPropreP2$T89)))
-barplot(T89, beside = T, col = c("blue", "green"), main="T89 reponses (two.sided)",
-        legend.text =c("P1","P2"),args.legend = list(x = "top"))
-
-# T87
+# T81
 T81 <- rbind(prop.table(table(dataPropreP1$T81)),prop.table(table(dataPropreP2$T81)))
 barplot(T81, beside = T, col = c("blue", "green"), main="T81 reponses (greater)",
         legend.text =c("P1","P2"),args.legend = list(x = "top"))

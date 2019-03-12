@@ -5,6 +5,7 @@ output: pdf_document
 
 
 ```{r}
+require(knitr)
 colnames(dataPropre)
 noms<-c("T23","T31","T52","T62","T86","T87","T88","T89","T42a","T42b","T42c","T42d")
 audela<-rowSums(apply(dataPropre[,noms],2,as.numeric))#somme de chaque question concerné par la var audela
@@ -30,7 +31,7 @@ for (i in 1:length(noms)){
   }
   
 }
-kabble(ifelse(res.chi2>10**-5,"0","1"))
+kable(ifelse(res.chi2>10**-5,"0","1"))
 
 ```
 Un "1" et mis dans les cases qui sont significatives afin que le tableau soit plus facilement lisible.

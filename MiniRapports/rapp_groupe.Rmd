@@ -5,17 +5,18 @@ output: pdf_document
 
 
 ```{r}
+load("../Rdata")
 require(knitr)
 colnames(dataPropre)
 noms<-c("T23","T31","T52","T62","T86","T87","T88","T89","T42a","T42b","T42c","T42d")
 audela<-rowSums(apply(dataPropre[,noms],2,as.numeric))#somme de chaque question concerné par la var audela
 audela<-audela+ifelse(dataPropre$T1>7,1,0)#ajout de la t1 si ils savent compter au dela de 7
 
-noms<-c("T41a","T41b","T41c","T41d","T51","T61")
+noms<-c("T41a","T41b","T41c","T41d","T42a","T42b","T42c","T42d","T51","T52","T62","T61")
 outils<-rowSums(apply(dataPropre[,noms],2,as.numeric))
 
-noms<-c("T21","T22","T32","T81","T82","T83",
-       "T84","T85")
+noms<-c("T21","T22","T23","T31","T32","T81","T82","T83",
+       "T84","T85","T86","T87","T88","T89")
 objet<-rowSums(apply(dataPropre[,noms],2,as.numeric))
 ```
 
@@ -40,15 +41,44 @@ T21 T22, T22 T32, T84 T22, T84 T21, T83 T22, T85 T32, et toutes les T8 entre ell
 
 ##Création des groupes sur la Q1
 ```{r}
-Classe_T1<-cut(dataPropre$T1,breaks = c(-1,3,7,11,16,29,100))
-levels(Classe_T1)<-c("0-3","4-7","8-11","12-16","17-29",">29")
-Classe_T1
+Classe_T1<-cut(dataPropre$T1,breaks = c(-1,3,7,11,16,100))
+levels(Classe_T1)<-c(1/3,2/3,1,4/3,5/3)
+Classe_T1<-as.numeric(Classe_T1)
 don.groupe<-data.frame(Pedagogie=dataPropre$Pedagogie,Classe_T1,audela,outils,objet)
 ```
 
 ##Regression sur les nouveaux groupes
 ```{r}
+# reg<-glm(Pedagogie~.,data = don.groupe,family = binomial)
+# step(reg) ##on ne garde que la regression avec le regroupement "au dela" les autres ne sont pas significative
 reg<-glm(Pedagogie~audela,data = don.groupe,family = binomial)
 summary(reg)##audela significatif avec la pédagogie
 ```
 Seule la variable audela est significative, afin de prédire la pédagogie. On peut donc dire que les question de type "audela" peuvent définir un élève classique d'un élève montessorien.
+
+La partie suivante consiste à créer un échantillon sur lequel refaire le même modèle, pour ensuite prédire la pédagogie sur le reste du jeu de données. Cependant un problème est rencontré : le modèle n'est plus adéquate, la variable n'est pas significative..
+
+
+```{r}
+# install.packages("ResourceSelection")
+require(ResourceSelection)
+hoslem.test(don.groupe$Pedagogie,fitted(reg))
+```
+Le test de hosmer-Lemeshow nous donne une pvalue significative, il y a donc une différence entre le modèle et les données observées, le modèle ne serait donc pas adéquate...
+
+##Réalisation du modèle sur un échantillon :
+```{r}
+train.id<-sample(seq_len(nrow(don.groupe)),size = 109)
+don.train<-don.groupe[train.id,]
+don.test<-don.groupe[-train.id,]
+```
+
+###Réalisation du modèle :
+```{r}
+reg<-glm(Pedagogie~Classe_T1,data = don.train,family = binomial)
+summary(reg)
+
+
+```
+
+

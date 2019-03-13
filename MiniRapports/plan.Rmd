@@ -1,0 +1,37 @@
+---
+title: "Projet Cogmont"
+author: "Azat, Lucas, Matthieu, Etienne"
+date: "March 13, 2019"
+output:
+  pdf_document:
+    toc: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Introduction
+# Contexte / Sujet
+# Méthodologie
+## Analyse factorielle
+## Regression
+## Arbre de regression ?
+# Traitement des données
+## Présentation des données de départ
+## Nettoyage des données 
+###	Présence de NAs ...
+## Ajustement des variables
+# Analyse exploratoire
+##	Univariée
+##	Multivariée
+##	Recherche de regroupement de variables (cah sur les variables)
+# Recherche de différence significative entre p1 et p2
+##	Regression logistique 
+##	Tests sur les différentes réponses
+##	Arbre de regression ?
+# Conclusion
+	
+	
+
+

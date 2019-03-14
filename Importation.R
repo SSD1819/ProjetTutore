@@ -197,4 +197,4 @@ dataSum<-dataSum[,!(names(dataSum) %in% c(cols.123,cols.456789 )) ]
 
 
 #Supression des variables qui ne servent à rien
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")))
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))

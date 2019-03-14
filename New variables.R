@@ -58,5 +58,5 @@ summary(reg)#modèle non significatif
 
 
 
-rm(reg,noms,outils,audela,res.chi2,i,don.test,don.train,train.id)
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
 

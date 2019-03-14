@@ -22,7 +22,7 @@ objet<-rowSums(apply(dataPropre[,noms],2,as.numeric))
 
 ##Etude du chi2 de chaque variable du groupe au dela chacune entre elles
 ```{r warning=FALSE}
-noms<-c("T23","T31","T52","T62","T86","T87","T88","T89","T42a","T42b","T42c","T42d")
+noms<-c("T23","T31","T42a","T42b","T42c","T42d","T52","T62","T86","T87","T88","T89")
 res.chi2<-matrix(nrow = length(noms),ncol = length(noms))
 colnames(res.chi2)<-noms
 row.names(res.chi2)<-noms

@@ -12,13 +12,57 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
+
 # Contexte / Sujet
+Ce projet nous à été proposé par l'Institut des sciences cognitives - Marc Jeannerod spécialisé dans la neurosciencea. L’UMR 5304 créée en 2007 est un des deux laboratoires de l’Institut des Sciences Cognitives – Marc Jeannerod. L'UMR 5304 est un laboratoire interdisciplinaire qui intègre l'expertise de chercheur des Sciences de la Vie (psychologie cognitive, neurosciences) et de médecine (pédo-psychiatrie, neuro-pediatrie) avec celle de chercheur des Sciences Humaines et Sociales (linguistique computationelle et théorique et philosophie) pour étudier la nature et la spécificité de l'esprit humain.
+
+## Les besoins d'un changement éducatif
+
+ Le député et mathématicien Cédric Villani a publié un rapport pour renforcer l'apprentissage des mathématiques à l'école. Les élèves français sont aujourd'hui plus que médiocres dans cette discipline. Pourtant, jusqu'en 1985, l'enseignement des maths en France était reconnu comme l'un des meilleurs. Or, en décembre 2016, dernière édition de classement Pisa (Programme for international student assessment) la France a fini 24ème sur 72, en recule par rapport à la dernière édition. Pour mettre un terme à cette tendance inquiétante de la dégradation du niveau des élèves français en mathématiques, le gouvernement est à la recherche de nouvel pédagogie d'enseignement des mathématiques.
+
+## Les  
+
+\begin{description}
+	\item[Pédagogie Montessori:] 
+
+La pédagogie Montessori est une méthode d'éducation créée en 1907 par Maria Montessori.\newline
+	La pédagogie se base sur trois principe:\newline
+	-l’autodiscipline: les enfants sont libres de choisir l’activité qu’ils souhaitent faire parmi celles qui leur sont proposées.\newline
+	-L’action en périphérique: Selon Maria Montessori, il est plus profitable d’agir sur son environnement plutôt que sur l’enfant lui-même (comme des classes multi-âge).
+
+\item[Pédagogie "Traditionelle":]
+
+La pédagogie traditionnelle est celle du modèle transmissif. Selon le triangle pédagogique de Jean Houssaye, cette pédagogie privilégie la relation entre l'enseignant et le savoir. Autrement dit, l'enseignant expose un savoir sous forme de cours magistral, généralement suivi d'exercices ou/et de leçons à apprendre. L'élève doit intégrer et appliquer le savoir exposé par l'enseignant.
+
+
+\end{description}
+
 # Méthodologie
 ## Analyse factorielle
-## Regression
-## Arbre de regression ?
+## Regression Logistique
+
+La régression logistique a permis d'exprimer la pédagogie en fonction de deux variable, la 4.1 et la 8.9. Ce sont donc ces deux questions qui permettraient de départager les élèves des écoles Montessoriennes des écoles classiques.
+
+## Classification Ascendante Hiérachique
+
+## Arbre de regression 
+
+L'arbre de regression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).
+Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction d'un maximum de variables explicative, puis d'élaguer l'arbre afin de minimiser l'erreur, soit l'écart entre la valeur prédite et la valeur réelle. Cela revient donc à faire une régression logistique sur les données, puis d'appliquer l'algorithme de construction d'arbre à partir des résultats.
+
 # Traitement des données
 ## Présentation des données de départ
+\section{Importation des données}
+Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les résultats de chaque promotion au test cognitif européen.
+    \begin{description}
+    \item[MathsJetons\_2015-2016.xlsx :] Pour l'année 2015/2016.
+    \item[MathsJetons\_2015-2016.xlsx :] Pour l'année 2016/2017.
+    \item[MathsJetons\_2016-2017.xlsx :] Pour l'année 2017/2018.
+    \end{description}
+    Chaque jeu de données représente les résultats questions par questions (en comptant les sous-questions) des élèves  ainsi que leurs catégories pédagogiques et des informations telles que l'encadrant, le niveau scolaire, la langue natale, l'âge, le type de classe (mélangé entre plusieurs section ou pas), l'année de passage du test et leur école.
+    Il y à 10 questions divisées en sous questions, ce qui fait un total de 34 réponses. Chaque question est indépendante et pour répondre à la sous question suivante il faut une bonne réponse à la sous-question précédente, sauf pour la question 4, toutes ses sous-questions sont indépendantes. Une bonne réponse correspond à un 1 et une mauvaise réponse à un 0, sauf pour la réponse à la question 1 qui est la valeur de comptage maximale de l'enfant.
+    Ici les élèves viennent tous de l'école Ambroise Croizat à Vault-en-Velin. 
+    
 ## Nettoyage des données 
 ###	Présence de NAs ...
 ## Ajustement des variables

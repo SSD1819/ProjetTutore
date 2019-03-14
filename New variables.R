@@ -43,5 +43,5 @@ summary(don.groupe)
 reg<-glm(Pedagogie~audela,data = don.groupe,family = binomial)
 summary(reg)##audela significatif avec la pédagogie
 
-
+rm()
 

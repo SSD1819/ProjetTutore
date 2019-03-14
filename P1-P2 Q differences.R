@@ -53,7 +53,7 @@ colnames(d)<-c("p-values of prop.test")
 d[29,]=t.test(dataPropreP1$T1, dataPropreP2$T1)$p.value
 rownames(d)[29]<-"T1"
 
-### Final result of p-values ###
+### Final result of p-values (two.sided) ###
 
 print(d)
 subset(d, d[,1] < 0.05) #show the rows p-value is smaller than 0.05
@@ -73,7 +73,7 @@ colnames(d)<-c("p-values of prop.test")
 d[29,]=t.test(dataPropreP1$T1, dataPropreP2$T1)$p.value
 rownames(d)[29]<-"T1"
 
-### Final result of p-values ###
+### Final result of p-values (less) ###
 
 print(d)
 subset(d, d[,1] < 0.05) 
@@ -95,14 +95,14 @@ colnames(d)<-c("p-values of prop.test")
 d[29,]=t.test(dataPropreP1$T1, dataPropreP2$T1)$p.value
 rownames(d)[29]<-"T1"
 
-### Final result of p-values ###
+### Final result of p-values (greater) ###
 
 print(d)
 subset(d, d[,1] < 0.05) 
 
 ### Here we have ONLY T81 added ###
 
-# Visualisation of significat difference data
+# Visualisation of significantly different data
 
 # T72
 T72 <- rbind(prop.table(table(dataPropreP1$T72)),prop.table(table(dataPropreP2$T72)))
@@ -130,16 +130,19 @@ barplot(T81, beside = T, col = c("blue", "green"), main="T81 reponses (greater)"
         legend.text =c("P1","P2"),args.legend = list(x = "top"))
 
 
-### Testing with new variable s###
+
+##############################################
+### Testing with new variables (two.sided) ###
 
 don.groupeP1<-subset(don.groupe, Pedagogie == "P1")
 don.groupeP2<-subset(don.groupe, Pedagogie == "P2")
 
+
 # Class T1
 
-mat.i<-cbind(matrix(table(don.groupeP1[,2])), matrix(table(don.groupeP2[,2])))
-prop.i<-prop.test(mat.i, alternative = "two.sided", correct = FALSE)
-d2 = prop.i$p.value
+mmm<-cbind(matrix(table(don.groupeP1[,2])), matrix(table(don.groupeP2[,2])))
+ppp<-prop.test(mmm, alternative = "two.sided", correct = FALSE)
+d2 = ppp$p.value
 
 # audela
 
@@ -148,9 +151,9 @@ tempP2["5"]=0
 tempP2<-matrix(tempP2[order(names(tempP2))])
 tempP1<-matrix(table(don.groupeP1[,3])[order(names(table(don.groupeP1[,3])))])
 
-mat.i<-cbind(tempP1, tempP2)
-prop.i<-prop.test(mat.i, alternative = "two.sided", correct = FALSE)
-d3 = prop.i$p.value
+mmm<-cbind(tempP1, tempP2)
+ppp<-prop.test(mmm, alternative = "two.sided", correct = FALSE)
+d3 = ppp$p.value
 
 # outils
 
@@ -158,15 +161,15 @@ tempP2<-table(don.groupeP2[,4])
 tempP2["0"]=0
 tempP2<-matrix(tempP2[order(names(tempP2))])
 
-mat.i<-cbind(matrix(table(don.groupeP1[,4])), tempP2)
-prop.i<-prop.test(mat.i, alternative = "two.sided", correct = FALSE)
-d4 = prop.i$p.value
+mmm<-cbind(matrix(table(don.groupeP1[,4])), tempP2)
+ppp<-prop.test(mmm, alternative = "two.sided", correct = FALSE)
+d4 = ppp$p.value
 
 # objet
 
-mat.i<-cbind(matrix(table(don.groupeP1[,5])), matrix(table(don.groupeP2[,5])))
-prop.i<-prop.test(mat.i, alternative = "two.sided", correct = FALSE)
-d5 = prop.i$p.value
+mmm<-cbind(matrix(table(don.groupeP1[,5])), matrix(table(don.groupeP2[,5])))
+ppp<-prop.test(mmm, alternative = "two.sided", correct = FALSE)
+d5 = ppp$p.value
 
 cc=data.frame(prop.i=rep(0,4))
 cc[1,]=d2
@@ -178,8 +181,9 @@ colnames(cc)<-c("p-values/prop.test - New Variables")
 row.names(cc)<-colnames(don.groupe[,2:5])
 cc
 
+### Even with alternative = "greater" and "less" we have the same results.
+### NO Significant Difference whithin new variables
 
-### NO NEW RESULTS ###
 
 
 # keeping initial environment

@@ -37,11 +37,26 @@ Classe_T1
 don.groupe<-data.frame(Pedagogie=dataPropre$Pedagogie,Classe_T1,audela,outils,objet)
 summary(don.groupe)
 
-###
-###regression sur les nvx groupes
-###
+
+###regression sur les nvx groupes###
+# reg<-glm(Pedagogie~.,data = don.groupe,family = binomial)
+# step(reg) ##on ne garde que la regression avec le regroupement "au dela" les autres ne sont pas significative
 reg<-glm(Pedagogie~audela,data = don.groupe,family = binomial)
 summary(reg)##audela significatif avec la pédagogie
 
-rm()
+##validation de notre regression
+# install.packages("ResourceSelection")
+require(ResourceSelection)
+hoslem.test(don.groupe$Pedagogie,fitted(reg))#pvalue significative : modèle non adequate
+
+#réalisation du modèle sur un échantillon
+train.id<-sample(seq_len(nrow(don.groupe)),size = 109)
+don.train<-don.groupe[train.id,]
+don.test<-don.groupe[-train.id,]
+reg<-glm(Pedagogie~Classe_T1,data = don.train,family = binomial)
+summary(reg)#modèle non significatif 
+
+
+
+rm(reg,noms,outils,audela,res.chi2,i,don.test,don.train,train.id)
 

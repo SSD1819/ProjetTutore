@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 # Introduction
 
 # Contexte / Sujet
-Ce projet nous à été proposé par l'Institut des sciences cognitives - Marc Jeannerod spécialisé dans la neurosciencea. L’UMR 5304 créée en 2007 est un des deux laboratoires de l’Institut des Sciences Cognitives – Marc Jeannerod. L'UMR 5304 est un laboratoire interdisciplinaire qui intègre l'expertise de chercheur des Sciences de la Vie (psychologie cognitive, neurosciences) et de médecine (pédo-psychiatrie, neuro-pediatrie) avec celle de chercheur des Sciences Humaines et Sociales (linguistique computationelle et théorique et philosophie) pour étudier la nature et la spécificité de l'esprit humain.
+Ce projet nous à été proposé par l'Institut des sciences cognitives - Marc Jeannerod spécialisé dans la neuroscience. L’UMR 5304 créée en 2007 est un des deux laboratoires de l’Institut des Sciences Cognitives – Marc Jeannerod. L'UMR 5304 est un laboratoire interdisciplinaire qui intègre l'expertise de chercheur des Sciences de la Vie (psychologie cognitive, neurosciences) et de médecine (pédo-psychiatrie, neuro-pédiatrie) avec celle de chercheur des Sciences Humaines et Sociales (linguistique computationelle et théorique et philosophie) pour étudier la nature et la spécificité de l'esprit humain.
 
 ## Les besoins d'un changement éducatif
 
@@ -30,7 +30,7 @@ La pédagogie Montessori est une méthode d'éducation créée en 1907 par Maria
 	-l’autodiscipline: les enfants sont libres de choisir l’activité qu’ils souhaitent faire parmi celles qui leur sont proposées.\newline
 	-L’action en périphérique: Selon Maria Montessori, il est plus profitable d’agir sur son environnement plutôt que sur l’enfant lui-même (comme des classes multi-âge).
 
-\item[Pédagogie "Traditionelle":]
+\item[Pédagogie "Traditionnelle":]
 
 La pédagogie traditionnelle est celle du modèle transmissif. Selon le triangle pédagogique de Jean Houssaye, cette pédagogie privilégie la relation entre l'enseignant et le savoir. Autrement dit, l'enseignant expose un savoir sous forme de cours magistral, généralement suivi d'exercices ou/et de leçons à apprendre. L'élève doit intégrer et appliquer le savoir exposé par l'enseignant.
 
@@ -47,7 +47,7 @@ La régression logistique a permis d'exprimer la pédagogie en fonction de deux 
 
 ## Arbre de regression 
 
-L'arbre de regression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).
+L'arbre de régression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).
 Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction d'un maximum de variables explicative, puis d'élaguer l'arbre afin de minimiser l'erreur, soit l'écart entre la valeur prédite et la valeur réelle. Cela revient donc à faire une régression logistique sur les données, puis d'appliquer l'algorithme de construction d'arbre à partir des résultats.
 
 # Traitement des données

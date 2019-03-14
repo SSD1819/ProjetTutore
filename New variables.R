@@ -45,7 +45,7 @@ reg<-glm(Pedagogie~audela,data = don.groupe,family = binomial)
 summary(reg)##audela significatif avec la pédagogie
 
 ##validation de notre regression
-# install.packages("ResourceSelection")
+if (!require("ResourceSelection")) install.packages("ResourceSelection")
 require(ResourceSelection)
 hoslem.test(don.groupe$Pedagogie,fitted(reg))#pvalue significative : modèle non adequate
 

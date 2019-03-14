@@ -64,7 +64,7 @@ La partie suivante consiste à créer un échantillon sur lequel refaire le mêm
 
 
 ```{r}
-# install.packages("ResourceSelection")
+if (!require("ResourceSelection")) install.packages("ResourceSelection")
 require(ResourceSelection)
 hoslem.test(don.groupe$Pedagogie,fitted(reg))
 ```

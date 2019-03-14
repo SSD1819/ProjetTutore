@@ -60,6 +60,7 @@ subset(d, d[,1] < 0.05) #show the rows p-value is smaller than 0.05
 
 ### Trying with less option ###
 
+d=data.frame(prop.i=rep(0,27))
 for (i in 14:41){
   mat.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
   prop.i<-prop.test(mat.i, alternative = "less", correct = FALSE)
@@ -81,6 +82,7 @@ subset(d, d[,1] < 0.05)
 
 ### Trying with greater option ###
 
+d=data.frame(prop.i=rep(0,27))
 for (i in 14:41){
   mat.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
   prop.i<-prop.test(mat.i, alternative = "greater", correct = FALSE)
@@ -128,5 +130,57 @@ barplot(T81, beside = T, col = c("blue", "green"), main="T81 reponses (greater)"
         legend.text =c("P1","P2"),args.legend = list(x = "top"))
 
 
+### Testing with new variable s###
+
+don.groupeP1<-subset(don.groupe, Pedagogie == "P1")
+don.groupeP2<-subset(don.groupe, Pedagogie == "P2")
+
+# Class T1
+
+mat.i<-cbind(matrix(table(don.groupeP1[,2])), matrix(table(don.groupeP2[,2])))
+prop.i<-prop.test(mat.i, alternative = "two.sided", correct = FALSE)
+d2 = prop.i$p.value
+
+# audela
+
+tempP2<-table(don.groupeP2[,3])
+tempP2["5"]=0
+tempP2<-matrix(tempP2[order(names(tempP2))])
+tempP1<-matrix(table(don.groupeP1[,3])[order(names(table(don.groupeP1[,3])))])
+
+mat.i<-cbind(tempP1, tempP2)
+prop.i<-prop.test(mat.i, alternative = "two.sided", correct = FALSE)
+d3 = prop.i$p.value
+
+# outils
+
+tempP2<-table(don.groupeP2[,4])
+tempP2["0"]=0
+tempP2<-matrix(tempP2[order(names(tempP2))])
+
+mat.i<-cbind(matrix(table(don.groupeP1[,4])), tempP2)
+prop.i<-prop.test(mat.i, alternative = "two.sided", correct = FALSE)
+d4 = prop.i$p.value
+
+# objet
+
+mat.i<-cbind(matrix(table(don.groupeP1[,5])), matrix(table(don.groupeP2[,5])))
+prop.i<-prop.test(mat.i, alternative = "two.sided", correct = FALSE)
+d5 = prop.i$p.value
+
+cc=data.frame(prop.i=rep(0,4))
+cc[1,]=d2
+cc[2,]=d3
+cc[3,]=d4
+cc[4,]=d5
+
+colnames(cc)<-c("p-values/prop.test - New Variables")
+row.names(cc)<-colnames(don.groupe[,2:5])
+cc
+
+
+### NO NEW RESULTS ###
+
+
 # keeping initial environment
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")))
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))

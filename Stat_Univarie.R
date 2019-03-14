@@ -34,5 +34,5 @@ analyse.univ$Pédagogie
 
 #Majorité de P1
 
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")))
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
 

@@ -3,6 +3,8 @@ if (!require("FactoMineR")) install.packages("FactoMineR")
 require(FactoMineR)
 if (!require("factoextra")) install.packages("factoextra")
 require(factoextra)
+if (!require("dplyr")) install.packages("dplyr")
+require(dplyr) 
 
 colnames(dataVec)
 
@@ -27,7 +29,6 @@ res.hcpc<-HCPC(res.mca,nb.clust = 3)
 res.hcpc$desc.var
 plot.HCPC(res.hcpc,choice = "bar")
 
-library(dplyr)    
 valqualisP1<-filter(valqualis, Pedagogie == "P1")
 valqualisP1<-valqualisP1[,-1]
 
@@ -40,4 +41,4 @@ res.mca2<-MCA(valqualisP2,quali.sup = 1:2)
 
 #Removing temporary variables and layouts
 par(mfrow=c(1,1))
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")))
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))

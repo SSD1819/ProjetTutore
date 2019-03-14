@@ -81,5 +81,5 @@ cahSum8WO1<-hclustvar(X.quanti=dataQSum8[,-c(1,4,5)],X.quali=dataQSum8[,4:5])
 plot(cahSum8WO1, main = "Clust des données somme sans T1 avec Q8 regroupée")
 rect.hclust(cahSum8WO1,6)
 
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")))
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
 

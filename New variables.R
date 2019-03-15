@@ -49,6 +49,21 @@ if (!require("ResourceSelection")) install.packages("ResourceSelection")
 require(ResourceSelection)
 hoslem.test(don.groupe$Pedagogie,fitted(reg))#pvalue significative : modèle non adequate
 
+if (!require("pROC")) install.packages("pROC")
+library(pROC)
+
+#prediction des données grâce à la regression sur le meme échantillon
+reg.pred<-predict.glm(reg,type = "response")
+tt<-as.factor(ifelse(reg.pred<0.5,"P1","P2"))
+sum(tt==dataPropre$Pedagogie)/nrow(dataPropre)#71% de bonne prédiction
+
+reg.link<-predict(reg, type="link")
+
+reg.roc<-roc(response = dataPropre$Pedagogie, predictor = reg.pred, direction="<",auc = TRUE)
+#AUC = 77%
+
+plot.roc(reg.roc,col="blue", lwd=3)
+
 #réalisation du modèle sur un échantillon
 train.id<-sample(seq_len(nrow(don.groupe)),size = 109)
 don.train<-don.groupe[train.id,]

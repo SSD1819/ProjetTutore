@@ -2,9 +2,9 @@
 #SUR VECTEUR
 ######
 
-# install.packages("rpart")
-# install.packages("rpart.plot")
-require(rpart)# Pour l’arbre de décision
+if (!require(rpart)) install.packages("rpart")
+if (!require(rpart.plot)) install.packages("rpart.plot")
+
 require(rpart.plot) # Pour la représentation de l’arbre de décision
 
 quest<-c("AgeInt","T1", "T21","T22","T23","T31","T32",
@@ -29,6 +29,9 @@ summary(reg)
 #rajouter des interaction + step + courbe roc
 #refaire avec score en quali
 
+##test de hosmer lemershow ##
+if (!require("ResourceSelection")) install.packages("ResourceSelection")
+hoslem.test(don.reg$Pedagogie,fitted(reg))
 
 plotcp(rpart(reg,method = "class"))
 
@@ -55,9 +58,7 @@ simple_roc <- function(labels, scores){
 }
 
 
-# install.packages("pROC")
-library(pROC)
-
+if (!require(pROC)) install.packages("pROC")
 #prediction des données grâce à la regression sur le meme échantillon
 reg.pred<-predict.glm(reg,type = "response")
 tt<-as.factor(ifelse(reg.pred<0.5,"P1","P2"))
@@ -72,5 +73,4 @@ plot.roc(reg.roc,col="yellow", lwd=3)
 glm_simple_roc <- simple_roc(dataPropre$Pedagogie=="P2", reg.link)
 with(glm_simple_roc, points(1 - FPR, TPR, col=1 + labels, cex = 0.7))
 
-rm(don.tree,reg,don.reg,tree.opt,glm_simple_roc,quest,reg.link,reg.pred,tt,simple_roc)
-
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))

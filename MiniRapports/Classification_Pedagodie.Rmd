@@ -138,5 +138,5 @@ rect.hclust(cahSum.P2,6)
 
 ```{r, echo=FALSE}
 
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")))
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
 ```

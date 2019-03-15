@@ -71,7 +71,7 @@ don.test<-don.groupe[-train.id,]
 reg<-glm(Pedagogie~Classe_T1,data = don.train,family = binomial)
 summary(reg)#modèle non significatif 
 
-
+##
 
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
 

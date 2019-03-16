@@ -38,10 +38,18 @@ La pédagogie traditionnelle est celle du modèle transmissif. Selon le triangle
 \end{description}
 
 # Méthodologie
+<!-- On parle au passé ? "nous avons vu ..." ou au futur ? "par la suite nous verrons ..."  -->
+Afin de répondre au mieux à notre problématique nous avons fait le choix d'utiliser plusieurs méthodes statistiques différentes pour analyser nos données. Pour cela nous avons dans un premier temps utilisé une méthode qui permet de résumer l'information globale du jeu de données : l'analyse factorielle, et la classification ascendante hiérarchique (pour faire des regroupement de variables). Puis dans un but prédictif nous avons utilisé la regression logistique et les arbres de regressions. Plusieurs tests ont été fait en parallèles, comme celui du chi2, de student.. 
+
 ## Analyse factorielle
+
+La méthode d'analyse factorielle que nous avons utilisé ici est l'analyse des correspondances multiples (ACM), qui est une méthode de synthétisations du nombre de dimensions pour les données qualitative. Cela nous permet d'appréhender plus rapidement le jeu de donnée, et avoir une première idée de ce qui diffèrent les individus entre eux (ou ce qui les rapproche).
+L'ACM permet dans un nuage à N dimension, en cherchant les plans orthogonaux qui maximisent la variance entre les individus, à résumer celles ci en 4 voir 5 dimensions. 
+l'ACM a été réalisée sur les réponses aux questions en variables actives (celles qui définissent le placement des individus sur le graphe) avec les variables portant sur la pédagogie, la question 1, et l'âge en illustratives (ajoutée après le placement des individus sur le graphe).
+
 ## Regression Logistique
 
-La régression logistique a permis d'exprimer la pédagogie en fonction de deux variable, la 4.1 et la 8.9. Ce sont donc ces deux questions qui permettraient de départager les élèves des écoles Montessoriennes des écoles classiques.
+Notre problématique étant de voir s'il existe un lien entre la façon d'enseigner et les réponses au test, nous avons voulu essayer de prédire la méthode d'enseignement à l'aide des réponses des élèves avec la regression logistique. Cette méthode permet de modéliser une classification, à l'aide notamment de l'odds ratio <!-- partie à verifier --> 
 
 ## Classification Ascendante Hiérachique
 

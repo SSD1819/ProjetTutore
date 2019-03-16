@@ -1,0 +1,8 @@
+p.adjust : by
+différence significative avec le ttest less entre p1p2
+
+essayer de supprimer des variables des groupes audela objet... pour améliorer le modele.
+envoyer le groupe de variable de la regression ! + préciser le coef associé à chaque var
+
+rajouter présentation des données dans le contexte !
++ expliquerle choix de chaque methodo utilisée

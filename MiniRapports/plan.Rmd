@@ -53,6 +53,8 @@ Notre problématique étant de voir s'il existe un lien entre la façon d'enseig
 
 ## Classification Ascendante Hiérachique
 
+N'ayant aucune information au préalable sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appellent aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables.
+
 ## Arbre de regression 
 
 L'arbre de régression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).

@@ -21,14 +21,6 @@ T8<-dataQSum[,11]+dataQSum[,12]+dataQSum[,13]+dataQSum[,14]+dataQSum[,15]+dataQS
 dataQSum8<-cbind(dataQSum[,1:10],T8)
 
 
-####Exportation jeux de données pour l'app Shiny####
-write.csv2(dataQg, file = "export/dataQg.csv", row.names=FALSE)
-write.csv2(dataQSum, file = "export/dataQSum.csv", row.names=FALSE)
-write.csv2(dataQVec, file = "export/dataQVec.csv", row.names=FALSE)
-write.csv2(dataQSum8, file = "export/dataQSum8.csv", row.names=FALSE)
-write.csv2(dataQVec8, file = "export/dataQVec8.csv", row.names=FALSE)
-
-
 ####Classification (T1 Quanti)####
 require(ClustOfVar)
 
@@ -36,7 +28,6 @@ require(ClustOfVar)
 cahG<-hclustvar(X.quanti=dataQg[,1],X.quali=dataQg[,-1])
 plot(cahG, main="Clust des données générales")
 rect.hclust(cahG,12)
-
 
 ###Pour les données vec###
 cahVec<-hclustvar(X.quanti=dataQVec[,1],X.quali=dataQVec[,-1])
@@ -89,5 +80,10 @@ cahSum8WO1<-hclustvar(X.quanti=dataQSum8[,-c(1,4,5)],X.quali=dataQSum8[,4:5])
 plot(cahSum8WO1, main = "Clust des données somme sans T1 avec Q8 regroupée")
 rect.hclust(cahSum8WO1,6)
 
+
+####Exportation des data pour l'app Shiny####
+save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec","T41","T42", "T8")), file = "export/classif_questions.RData")
+
+####Suppression de ce qui ne nous sert plus####
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
 

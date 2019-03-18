@@ -21,6 +21,14 @@ T8<-dataQSum[,11]+dataQSum[,12]+dataQSum[,13]+dataQSum[,14]+dataQSum[,15]+dataQS
 dataQSum8<-cbind(dataQSum[,1:10],T8)
 
 
+####Exportation jeux de données pour l'app Shiny####
+write.csv2(dataQg, file = "export/dataQg.csv", row.names=FALSE)
+write.csv2(dataQSum, file = "export/dataQSum.csv", row.names=FALSE)
+write.csv2(dataQVec, file = "export/dataQVec.csv", row.names=FALSE)
+write.csv2(dataQSum8, file = "export/dataQSum8.csv", row.names=FALSE)
+write.csv2(dataQVec8, file = "export/dataQVec8.csv", row.names=FALSE)
+
+
 ####Classification (T1 Quanti)####
 require(ClustOfVar)
 

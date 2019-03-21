@@ -83,6 +83,8 @@ require(readxl)
 require(dplyr)
 require(stringr)
 
+load("../.RData") #to be deleted after the new variables sheet copy
+
 #Moyenne section 2015/2016
 mathsJetons_2015_2016 <- read_excel("../MathsJetons_2015-2016.xlsx") %>% data.frame(row.names = 2)
 don1516 <- mathsJetons_2015_2016[mathsJetons_2015_2016$Niveau == "MSM",]
@@ -398,7 +400,6 @@ ONLY T81 added
 Testing with new variables (two.sided)
 
 ```{r}
-load("../.RData") #to be deleted after the new variables sheet copy
 don.groupeP1<-subset(don.groupe, Pedagogie == "P1")
 don.groupeP2<-subset(don.groupe, Pedagogie == "P2")
 

@@ -8,7 +8,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, warning = FALSE)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, include = FALSE)
 ```
 
 # Introduction
@@ -37,30 +37,6 @@ La pédagogie traditionnelle est celle du modèle transmissif. Selon le triangle
 
 \end{description}
 
-# Méthodologie
-<!-- On parle au passé ? "nous avons vu ..." ou au futur ? "par la suite nous verrons ..."  -->
-Afin de répondre au mieux à notre problématique nous avons fait le choix d'utiliser plusieurs méthodes statistiques différentes pour analyser nos données. Pour cela nous avons dans un premier temps utilisé une méthode qui permet de résumer l'information globale du jeu de données : l'analyse factorielle, et la classification ascendante hiérarchique (pour faire des regroupement de variables). Puis dans un but prédictif nous avons utilisé la regression logistique et les arbres de regressions. Plusieurs tests ont été fait en parallèles, comme celui du chi2, de student.. 
-
-## Analyse factorielle
-
-La méthode d'analyse factorielle que nous avons utilisé ici est l'analyse des correspondances multiples (ACM), qui est une méthode de synthétisations du nombre de dimensions pour les données qualitative. Cela nous permet d'appréhender plus rapidement le jeu de donnée, et avoir une première idée de ce qui diffèrent les individus entre eux (ou ce qui les rapproche).
-L'ACM permet dans un nuage à N dimension, en cherchant les plans orthogonaux qui maximisent la variance entre les individus, à résumer celles ci en 4 voir 5 dimensions. 
-l'ACM a été réalisée sur les réponses aux questions en variables actives (celles qui définissent le placement des individus sur le graphe) avec les variables portant sur la pédagogie, la question 1, et l'âge en illustratives (ajoutée après le placement des individus sur le graphe).
-
-## Regression Logistique
-
-Notre problématique étant de voir s'il existe un lien entre la façon d'enseigner et les réponses au test, nous avons voulu essayer de prédire la méthode d'enseignement à l'aide des réponses des élèves avec la regression logistique. Cette méthode permet de modéliser une classification, à l'aide notamment de l'odds ratio <!-- partie à verifier --> 
-
-## Classification Ascendante Hiérachique
-
-N'ayant aucune information au préalable sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appellent aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables.
-
-## Arbre de regression 
-
-L'arbre de régression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).
-Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction d'un maximum de variables explicative, puis d'élaguer l'arbre afin de minimiser l'erreur, soit l'écart entre la valeur prédite et la valeur réelle. Cela revient donc à faire une régression logistique sur les données, puis d'appliquer l'algorithme de construction d'arbre à partir des résultats.
-
-# Traitement des données
 ## Présentation des données de départ
 \section{Importation des données}
 Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les résultats de chaque promotion au test cognitif européen.
@@ -72,9 +48,12 @@ Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les ré
     Chaque jeu de données représente les résultats questions par questions (en comptant les sous-questions) des élèves  ainsi que leurs catégories pédagogiques et des informations telles que l'encadrant, le niveau scolaire, la langue natale, l'âge, le type de classe (mélangé entre plusieurs section ou pas), l'année de passage du test et leur école.
     Il y à 10 questions divisées en sous questions, ce qui fait un total de 34 réponses. Chaque question est indépendante et pour répondre à la sous question suivante il faut une bonne réponse à la sous-question précédente, sauf pour la question 4, toutes ses sous-questions sont indépendantes. Une bonne réponse correspond à un 1 et une mauvaise réponse à un 0, sauf pour la réponse à la question 1 qui est la valeur de comptage maximale de l'enfant.
     Ici les élèves viennent tous de l'école Ambroise Croizat à Vault-en-Velin. 
-    
+
 ## Nettoyage des données 
 
+Les données ayant déjà été travaillées l'année dernière le travail nécessaire en datamanagement n'a pas été excessif. Il nous a fallut tout de même renommer certaines variables pour les rendre plus lisibles, supprimer certaines questions car elles n'avaient été posées qu'à certaines classes... 
+Les questions étant posées de manière à ce qu'au sein d'une même tache, il faille réussir les questions dans l'ordre pour passer à celles plus dures nous avions beaucoup de NA dès qu'une question est dûre. Nous avons donc décidé de changer ces NA et les considérer comme une question que l'élève n'aurait pas réussit. Et pour ne pas passer à coté de l'information : "n'a pu aller plus loin", nous avons crée deux jeux de données : un vectoriel, un composé de scores correspondant à la somme des questions au sein d'une même tache.
+<!--
 Importation des données
 
 ```{r}
@@ -312,10 +291,33 @@ dataSum<-cbind(dataSum, T8.123, "T8.456789"=T8.456789)
 dataSum<-dataSum[,!(names(dataSum) %in% c(cols.123,cols.456789 )) ]
 
 ```
+-->
+## Recodage des variables
 
 
-###	Présence de NAs ...
-## Ajustement des variables
+# Méthodologie
+<!-- On parle au passé ? "nous avons vu ..." ou au futur ? "par la suite nous verrons ..."  -->
+Afin de répondre au mieux à notre problématique nous avons fait le choix d'utiliser plusieurs méthodes statistiques différentes pour analyser nos données. Pour cela nous avons dans un premier temps utilisé une méthode qui permet de résumer l'information globale du jeu de données : l'analyse factorielle, et la classification ascendante hiérarchique (pour faire des regroupement de variables). Puis dans un but prédictif nous avons utilisé la regression logistique et les arbres de regressions. Plusieurs tests ont été fait en parallèles, comme celui du chi2, de student.. 
+
+## Analyse factorielle
+
+La méthode d'analyse factorielle que nous avons utilisé ici est l'analyse des correspondances multiples (ACM), qui est une méthode de synthétisations du nombre de dimensions pour les données qualitative. Cela nous permet d'appréhender plus rapidement le jeu de donnée, et avoir une première idée de ce qui diffèrent les individus entre eux (ou ce qui les rapproche).
+L'ACM permet dans un nuage à N dimension, en cherchant les plans orthogonaux qui maximisent la variance entre les individus, à résumer celles ci en 4 voir 5 dimensions. 
+l'ACM a été réalisée sur les réponses aux questions en variables actives (celles qui définissent le placement des individus sur le graphe) avec les variables portant sur la pédagogie, la question 1, et l'âge en illustratives (ajoutée après le placement des individus sur le graphe).
+
+## Regression Logistique
+
+Notre problématique étant de voir s'il existe un lien entre la façon d'enseigner et les réponses au test, nous avons voulu essayer de prédire la méthode d'enseignement à l'aide des réponses des élèves avec la regression logistique. Cette méthode permet de modéliser une classification, à l'aide notamment de l'odds ratio <!-- partie à verifier --> 
+
+## Classification Ascendante Hiérachique
+
+N'ayant aucune information au préalable sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appellent aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables.
+
+## Arbre de regression 
+
+L'arbre de régression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).
+Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction d'un maximum de variables explicative, puis d'élaguer l'arbre afin de minimiser l'erreur, soit l'écart entre la valeur prédite et la valeur réelle. Cela revient donc à faire une régression logistique sur les données, puis d'appliquer l'algorithme de construction d'arbre à partir des résultats.
+
 # Analyse exploratoire
 ##	Univariée
 ##	Multivariée
@@ -323,7 +325,7 @@ dataSum<-dataSum[,!(names(dataSum) %in% c(cols.123,cols.456789 )) ]
 # Recherche de différence significative entre p1 et p2
 ##	Regression logistique 
 ##	Tests sur les différentes réponses
-
+<!--
 Creation of dataframes containing only respectively P1 and P2 
 ```{r}
 dataPropreP1<-subset(dataPropre, Pedagogie == "P1")
@@ -505,11 +507,8 @@ audela <- rbind(prop.table(table(don.groupeP1$audela)),prop.table(table(don.grou
 barplot(audela, beside = T, col = c("blue", "green"), main="audela: P1<P2",
         legend.text =c("P1","P2"),args.legend = list(x = "topright"))
 ```
-
-
-
-
-##	Arbre de regression ?
+-->
+##	Arbre de regression
 # Conclusion
 	
 	

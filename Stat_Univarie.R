@@ -29,8 +29,9 @@ apply(X=dataPropre[,16:42],MARGIN=1,FUN=plyr::count)
 names(dataPropre)
 
 #Represantation des differents types de pédagogies au sein de l'ecole
-pie(analyse.univ.table$Pedagogie)
-analyse.univ$Pédagogie
+barplot(analyse.univ.table$Pedagogie, col = c("blue", "green"), ylab = "Nombre des eleves",
+        xlab = "Pedagogies")
+analyse.univ$Pedagogie
 
 #Majorité de P1
 

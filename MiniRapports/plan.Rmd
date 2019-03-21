@@ -7,7 +7,7 @@ output:
     toc: true
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE, warning=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
@@ -83,6 +83,192 @@ Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les ré
 # Recherche de différence significative entre p1 et p2
 ##	Regression logistique 
 ##	Tests sur les différentes réponses
+
+Creation of dataframes containing only respectively P1 and P2 
+```{r}
+dataPropreP1<-subset(dataPropre, Pedagogie == "P1")
+dataPropreP2<-subset(dataPropre, Pedagogie == "P2")
+```
+
+```{r}
+# T1 t-test
+tt<-t.test(dataPropreP1$T1, dataPropreP2$T1)
+
+# the rest - proportion tests
+d=data.frame(x=rep(0,27))
+for (i in 14:41){
+  mat.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
+  prop.i<-prop.test(mat.i, alternative = "two.sided", correct = FALSE)
+  d[i,] = prop.i$p.value
+}
+
+d<-data.frame(d[-c(1:13),])
+row.names(d)<-colnames(dataPropre[,14:41])
+colnames(d)<-c("p-values of prop.test")
+d[29,]=tt$p.value
+rownames(d)[29]<-"T1"
+
+### Final result of p-values (two.sided) ###
+print(d)
+
+# rows where p-value is smaller than 0.05
+subset(d, d[,1] < 0.05)
+```
+
+Trying with less option
+```{r}
+d=data.frame(x=rep(0,27))
+for (i in 14:41){
+  mat.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
+  prop.i<-prop.test(mat.i, alternative = "less", correct = FALSE)
+  d[i,] = prop.i$p.value
+}
+
+d<-data.frame(d[-c(1:13),])
+row.names(d)<-colnames(dataPropre[,14:41])
+colnames(d)<-c("p-values of prop.test")
+d[29,]=t.test(dataPropreP1$T1, dataPropreP2$T1)$p.value
+rownames(d)[29]<-"T1"
+
+### Final result of p-values (less) ###
+subset(d, d[,1] < 0.05) 
+```
+
+No new results
+
+Trying with greater option
+
+```{r}
+d=data.frame(x=rep(0,27))
+for (i in 14:41){
+  mat.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
+  prop.i<-prop.test(mat.i, alternative = "greater", correct = FALSE)
+  d[i,] = prop.i$p.value
+}
+
+d<-data.frame(d[-c(1:13),])
+row.names(d)<-colnames(dataPropre[,14:41])
+colnames(d)<-c("p-values of prop.test")
+d[29,]=t.test(dataPropreP1$T1, dataPropreP2$T1)$p.value
+rownames(d)[29]<-"T1"
+
+### Final result of p-values (greater) ###
+subset(d, d[,1] < 0.05) 
+```
+ONLY T81 added
+
+Testing with new variables (two.sided)
+
+```{r}
+don.groupeP1<-subset(don.groupe, Pedagogie == "P1")
+don.groupeP2<-subset(don.groupe, Pedagogie == "P2")
+
+m<-cbind(matrix(table(don.groupeP1[,2])), matrix(table(don.groupeP2[,2])))
+pt<-prop.test(m, alternative = "two.sided", correct = FALSE)
+df1 = pt$p.value
+tt<-t.test(don.groupeP1$audela, don.groupeP2$audela)
+df2  = tt$p.value
+tt<-t.test(don.groupeP1$outils, don.groupeP2$outils)
+df3 = tt$p.value
+tt<-t.test(don.groupeP1$objet, don.groupeP2$objet)
+df4  = tt$p.value
+
+df=data.frame(x=rep(0,4))
+df[1,]=df1
+df[2,]=df2
+df[3,]=df3
+df[4,]=df4
+
+colnames(df)<-c("p-values/prop.test - New Variables")
+row.names(df)<-colnames(don.groupe[,2:5])
+df
+```
+
+Testing with greater option
+
+```{r}
+m<-cbind(matrix(table(don.groupeP1[,2])), matrix(table(don.groupeP2[,2])))
+pt<-prop.test(m, alternative = "greater", correct = FALSE)
+df1 = pt$p.value
+tt<-t.test(don.groupeP1$audela, don.groupeP2$audela, alternative = "greater")
+df2  = tt$p.value
+tt<-t.test(don.groupeP1$outils, don.groupeP2$outils, alternative = "greater")
+df3 = tt$p.value
+tt<-t.test(don.groupeP1$objet, don.groupeP2$objet, alternative = "greater")
+df4  = tt$p.value
+
+df=data.frame(prop.i=rep(0,4))
+df[1,]=df1
+df[2,]=df2
+df[3,]=df3
+df[4,]=df4
+
+colnames(df)<-c("p-values/prop.test - New Variables")
+row.names(df)<-colnames(don.groupe[,2:5])
+df
+```
+
+Testing with less option
+
+```{r}
+m<-cbind(matrix(table(don.groupeP1[,2])), matrix(table(don.groupeP2[,2])))
+pt<-prop.test(m, alternative = "less", correct = FALSE)
+df1 = pt$p.value
+tt<-t.test(don.groupeP1$audela, don.groupeP2$audela, alternative = "less")
+df2  = tt$p.value
+tt<-t.test(don.groupeP1$outils, don.groupeP2$outils, alternative = "less")
+df3 = tt$p.value
+tt<-t.test(don.groupeP1$objet, don.groupeP2$objet, alternative = "less")
+df4  = tt$p.value
+
+df=data.frame(prop.i=rep(0,4))
+df[1,]=df1
+df[2,]=df2
+df[3,]=df3
+df[4,]=df4
+
+colnames(df)<-c("p-values/prop.test - New Variables")
+row.names(df)<-colnames(don.groupe[,2:5])
+df
+```
+
+Visualisation of significantly different data
+
+```{r}
+# T72
+T72 <- rbind(prop.table(table(dataPropreP1$T72)),prop.table(table(dataPropreP2$T72)))
+barplot(T72, beside = T, col = c("blue", "green"), main="T72 reponses: P1>P2",
+        legend.text =c("P1","P2"),args.legend = list(x = "topright"))
+
+# T81
+T81 <- rbind(prop.table(table(dataPropreP1$T81)),prop.table(table(dataPropreP2$T81)))
+barplot(T81, beside = T, col = c("blue", "green"), main="T81 reponses: P1<P2",
+        legend.text =c("P1","P2"),args.legend = list(x = "top"))
+
+# T87
+T87 <- rbind(prop.table(table(dataPropreP1$T87)),prop.table(table(dataPropreP2$T87)))
+barplot(T87, beside = T, col = c("blue", "green"), main="T87 reponses: P1<P2",
+        legend.text =c("P1","P2"),args.legend = list(x = "top"))
+
+# T88
+T88 <- rbind(prop.table(table(dataPropreP1$T88)),prop.table(table(dataPropreP2$T88)))
+barplot(T88, beside = T, col = c("blue", "green"), main="T88 reponses: P1<P2",
+        legend.text =c("P1","P2"),args.legend = list(x = "top"))
+
+# T89
+T89 <- rbind(prop.table(table(dataPropreP1$T89)),prop.table(table(dataPropreP2$T89)))
+barplot(T89, beside = T, col = c("blue", "green"), main="T89 reponses: P1<P2",
+        legend.text =c("P1","P2"),args.legend = list(x = "top"))
+
+# audela
+audela <- rbind(prop.table(table(don.groupeP1$audela)),prop.table(table(don.groupeP2$audela)))
+barplot(audela, beside = T, col = c("blue", "green"), main="audela: P1<P2",
+        legend.text =c("P1","P2"),args.legend = list(x = "topright"))
+```
+
+
+
+
 ##	Arbre de regression ?
 # Conclusion
 	

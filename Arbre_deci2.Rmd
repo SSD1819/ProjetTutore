@@ -1,0 +1,38 @@
+---
+title: "test_arbre_reg"
+author: "HAMARD Etienne"
+date: "18/03/2019"
+output: pdf_document
+---
+
+```{r}
+dt<-rpart(Pedagogie~., data=don.groupe)
+prp(dt, extra = 1+100,type = 2, under=TRUE, yesno=2)
+text(dt, use.n = TRUE)
+plotcp(dt)
+```
+
+
+
+
+
+
+
+
+```{r}
+datadt2<-dataPropre[,14:41]
+dt2<-rpart(dataPropre$Pedagogie~ .,datadt3,control=rpart.control(minsplit=5,cp=0))
+prp(dt2, extra = 1+100,type = 2, under=TRUE, yesno=2)
+text(dt2, use.n = TRUE)
+plotcp(dt2)
+
+
+```
+
+
+
+
+
+
+
+

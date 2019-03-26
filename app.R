@@ -12,43 +12,83 @@ load("export/classif_questions.RData")
 
 
 ############ Interface utilisateur ############
-ui <- fluidPage(
+ui<-navbarPage(
   
-  #Titre de l'application
-  titlePanel("Application Shiny projet Cogmont"),
+  #Titre de la barre de navigation
+  "Navigation",
   
-  #Définition du layout de l'appli
-  sidebarLayout(
+  #### Onglet de la cah ####
+  tabPanel(
+    "Classifactions ascendantes hiérarchiques des variables",
     
-    #Composants de la région gauche de l'application
-    sidebarPanel(
+    #Layout de l'onglet
+    sidebarLayout(
       
-      #Menu déroulant pour choisir le jeu de données
-      selectInput(
-        inputId = "choix_cah",
-        label = "Veuillez choisir une classification",
-        choices = ls()[which(substr(ls(),1,3)=="cah")]
+      #Partie gauche de la page
+      sidebarPanel(
+        
+        #Menu déroulant pour séléctionner le jeu de données
+        selectInput(
+          inputId = "choix_cah",
+          label = "Séléction de la classification",
+          choices = ls()[which(substr(ls(),1,3)=="cah")]
+        ),
+        
+        #Choix du nombre de classes
+        sliderInput(
+          inputId = "nb_class",
+          label = "Nombre de classes",
+          min = 2,
+          max = 20,
+          value = 7
+        )
       ),
       
-      #Choix du nombre de classes
-      sliderInput(
-        inputId = "nb_class",
-        label = "Nombre de classes",
-        min = 2,
-        max = 20,
-        value = 7
+      #Partie centrale de la page
+      mainPanel(
+        
+        #Graphique qui sera affiché
+        plotOutput("cah")
       )
-    ),
+    )
+  ),
+  
+  #### Onglet de la cah ####
+  tabPanel(
+    "Classifactions ascendantes hiérarchiques des variables",
     
-    #Composants dans la fenêtre principale (au milieu)
-    mainPanel(
+    #Layout de l'onglet
+    sidebarLayout(
       
-      #Un graphique  
-      plotOutput("cah")
+      #Partie gauche de la page
+      sidebarPanel(
+        
+        #Menu déroulant pour séléctionner le jeu de données
+        selectInput(
+          inputId = "choix_cah",
+          label = "Séléction de la classification",
+          choices = ls()[which(substr(ls(),1,3)=="cah")]
+        ),
+        
+        #Choix du nombre de classes
+        sliderInput(
+          inputId = "nb_class",
+          label = "Nombre de classes",
+          min = 2,
+          max = 20,
+          value = 7
+        )
+      ),
+      
+      #Partie centrale de la page
+      mainPanel(
+        
+        #Graphique qui sera affiché
+        #plotOutput("cah")
+      )
     )
   )
 )
-
 
 #---------------------------------------------------------------------------------------------------------------------------------------#
 

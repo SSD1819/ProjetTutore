@@ -35,8 +35,7 @@ dataPropreP2<-subset(dataPropre, Pedagogie == "P2")
 
 # T1 t-test
 
-boxplot(dataPropre$T1~dataPropre$Pedagogie,main="T1 Reponses (P1)")
-tt<-t.test(dataPropreP1$T1, dataPropreP2$T1)
+tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "two.sided")
 
 # the rest - proportion tests
 
@@ -60,6 +59,8 @@ subset(d, d[,1] < 0.05) #show the rows p-value is smaller than 0.05
 
 ### Trying with less option ###
 
+tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "less")
+
 d=data.frame(x=rep(0,27))
 for (i in 14:41){
   mat.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
@@ -70,7 +71,7 @@ for (i in 14:41){
 d<-data.frame(d[-c(1:13),])
 row.names(d)<-colnames(dataPropre[,14:41])
 colnames(d)<-c("p-values of prop.test")
-d[29,]=t.test(dataPropreP1$T1, dataPropreP2$T1)$p.value
+d[29,]=tt$p.value
 rownames(d)[29]<-"T1"
 
 ### Final result of p-values (less) ###
@@ -82,6 +83,11 @@ subset(d, d[,1] < 0.05)
 
 ### Trying with greater option ###
 
+# T1 t-test
+
+tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "greater")
+
+
 d=data.frame(x=rep(0,27))
 for (i in 14:41){
   mat.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
@@ -92,7 +98,7 @@ for (i in 14:41){
 d<-data.frame(d[-c(1:13),])
 row.names(d)<-colnames(dataPropre[,14:41])
 colnames(d)<-c("p-values of prop.test")
-d[29,]=t.test(dataPropreP1$T1, dataPropreP2$T1)$p.value
+d[29,]=tt$p.value
 rownames(d)[29]<-"T1"
 
 ### Final result of p-values (greater) ###
@@ -178,32 +184,41 @@ df
 # Visualisation of significantly different data
 
 # T72
-T72 <- rbind(prop.table(table(dataPropreP1$T72)),prop.table(table(dataPropreP2$T72)))
+T72 <- rbind(table(dataPropreP1$T72),table(dataPropreP2$T72))
 barplot(T72, beside = T, col = c("blue", "green"), main="T72 reponses: P1>P2",
         legend.text =c("P1","P2"),args.legend = list(x = "topright"))
 
 # T81
-T81 <- rbind(prop.table(table(dataPropreP1$T81)),prop.table(table(dataPropreP2$T81)))
+T81 <- rbind(table(dataPropreP1$T81),table(dataPropreP2$T81))
 barplot(T81, beside = T, col = c("blue", "green"), main="T81 reponses: P1<P2",
         legend.text =c("P1","P2"),args.legend = list(x = "top"))
 
 # T87
-T87 <- rbind(prop.table(table(dataPropreP1$T87)),prop.table(table(dataPropreP2$T87)))
+T87 <- rbind(table(dataPropreP1$T87),table(dataPropreP2$T87))
 barplot(T87, beside = T, col = c("blue", "green"), main="T87 reponses: P1<P2",
         legend.text =c("P1","P2"),args.legend = list(x = "top"))
 
 # T88
-T88 <- rbind(prop.table(table(dataPropreP1$T88)),prop.table(table(dataPropreP2$T88)))
+T88 <- rbind(table(dataPropreP1$T88),table(dataPropreP2$T88))
 barplot(T88, beside = T, col = c("blue", "green"), main="T88 reponses: P1<P2",
         legend.text =c("P1","P2"),args.legend = list(x = "top"))
 
 # T89
-T89 <- rbind(prop.table(table(dataPropreP1$T89)),prop.table(table(dataPropreP2$T89)))
+T89 <- rbind(table(dataPropreP1$T89),table(dataPropreP2$T89))
 barplot(T89, beside = T, col = c("blue", "green"), main="T89 reponses: P1<P2",
         legend.text =c("P1","P2"),args.legend = list(x = "top"))
 
 # audela
-audela <- rbind(prop.table(table(don.groupeP1$audela)),prop.table(table(don.groupeP2$audela)))
+tt<-table(don.groupeP2$audela)
+tt["5"]=0
+tt1=tt
+for (i in 6:12){
+  tt1[6]=tt[13]
+  tt1[i+1]=tt[i]
+}
+names(tt1)<-c(0:12)
+
+audela <- rbind(table(don.groupeP1$audela),tt1)
 barplot(audela, beside = T, col = c("blue", "green"), main="audela: P1<P2",
         legend.text =c("P1","P2"),args.legend = list(x = "topright"))
 

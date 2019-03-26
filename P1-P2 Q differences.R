@@ -178,32 +178,41 @@ df
 # Visualisation of significantly different data
 
 # T72
-T72 <- rbind(prop.table(table(dataPropreP1$T72)),prop.table(table(dataPropreP2$T72)))
+T72 <- rbind(table(dataPropreP1$T72),table(dataPropreP2$T72))
 barplot(T72, beside = T, col = c("blue", "green"), main="T72 reponses: P1>P2",
         legend.text =c("P1","P2"),args.legend = list(x = "topright"))
 
 # T81
-T81 <- rbind(prop.table(table(dataPropreP1$T81)),prop.table(table(dataPropreP2$T81)))
+T81 <- rbind(table(dataPropreP1$T81),table(dataPropreP2$T81))
 barplot(T81, beside = T, col = c("blue", "green"), main="T81 reponses: P1<P2",
         legend.text =c("P1","P2"),args.legend = list(x = "top"))
 
 # T87
-T87 <- rbind(prop.table(table(dataPropreP1$T87)),prop.table(table(dataPropreP2$T87)))
+T87 <- rbind(table(dataPropreP1$T87),table(dataPropreP2$T87))
 barplot(T87, beside = T, col = c("blue", "green"), main="T87 reponses: P1<P2",
         legend.text =c("P1","P2"),args.legend = list(x = "top"))
 
 # T88
-T88 <- rbind(prop.table(table(dataPropreP1$T88)),prop.table(table(dataPropreP2$T88)))
+T88 <- rbind(table(dataPropreP1$T88),table(dataPropreP2$T88))
 barplot(T88, beside = T, col = c("blue", "green"), main="T88 reponses: P1<P2",
         legend.text =c("P1","P2"),args.legend = list(x = "top"))
 
 # T89
-T89 <- rbind(prop.table(table(dataPropreP1$T89)),prop.table(table(dataPropreP2$T89)))
+T89 <- rbind(table(dataPropreP1$T89),table(dataPropreP2$T89))
 barplot(T89, beside = T, col = c("blue", "green"), main="T89 reponses: P1<P2",
         legend.text =c("P1","P2"),args.legend = list(x = "top"))
 
 # audela
-audela <- rbind(prop.table(table(don.groupeP1$audela)),prop.table(table(don.groupeP2$audela)))
+tt<-table(don.groupeP2$audela)
+tt["5"]=0
+tt1=tt
+for (i in 6:12){
+  tt1[6]=tt[13]
+  tt1[i+1]=tt[i]
+}
+names(tt1)<-c(0:12)
+
+audela <- rbind(table(don.groupeP1$audela),tt1)
 barplot(audela, beside = T, col = c("blue", "green"), main="audela: P1<P2",
         legend.text =c("P1","P2"),args.legend = list(x = "topright"))
 

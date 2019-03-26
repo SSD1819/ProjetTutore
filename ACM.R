@@ -1,5 +1,3 @@
-colnames(dataPropre)
-
 nom<-colnames(dataPropre[,c(2,13,14:41)])#suppression de la variable quanti sur l'age (qui ne ressortait pas de toute façon) car problème lors d'ajout d'individus supplémentaire
 
 valquali<-dataPropre[,nom]
@@ -44,7 +42,11 @@ res.hcpc<-HCPC(res.mca,nb.clust = 10)
 table(res.hcpc$data.clust$T1,res.hcpc$data.clust$clust)
 #semble y avoir sur T1 les groupes suivants : 3 - 4 - 5 - 10 - 16 - 20
 
-#rm(res.hcpc, res.mca, valquali, nom)
+####Exportation des data pour l'app Shiny####
+save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")), file = "export/ACM.RData")
+
+####Suppression de ce qui ne nous sert plus####
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
 
 
 

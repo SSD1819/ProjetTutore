@@ -1,5 +1,5 @@
 #Librairies nécéssaires
-require(readxl)
+require(readxl) 
 require(dplyr)
 require(stringr)
 

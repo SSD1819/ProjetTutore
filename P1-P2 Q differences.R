@@ -35,8 +35,7 @@ dataPropreP2<-subset(dataPropre, Pedagogie == "P2")
 
 # T1 t-test
 
-boxplot(dataPropre$T1~dataPropre$Pedagogie,main="T1 Reponses (P1)")
-tt<-t.test(dataPropreP1$T1, dataPropreP2$T1)
+tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "two.sided")
 
 # the rest - proportion tests
 
@@ -60,6 +59,8 @@ subset(d, d[,1] < 0.05) #show the rows p-value is smaller than 0.05
 
 ### Trying with less option ###
 
+tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "less")
+
 d=data.frame(x=rep(0,27))
 for (i in 14:41){
   mat.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
@@ -70,7 +71,7 @@ for (i in 14:41){
 d<-data.frame(d[-c(1:13),])
 row.names(d)<-colnames(dataPropre[,14:41])
 colnames(d)<-c("p-values of prop.test")
-d[29,]=t.test(dataPropreP1$T1, dataPropreP2$T1)$p.value
+d[29,]=tt$p.value
 rownames(d)[29]<-"T1"
 
 ### Final result of p-values (less) ###
@@ -82,6 +83,11 @@ subset(d, d[,1] < 0.05)
 
 ### Trying with greater option ###
 
+# T1 t-test
+
+tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "greater")
+
+
 d=data.frame(x=rep(0,27))
 for (i in 14:41){
   mat.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
@@ -92,7 +98,7 @@ for (i in 14:41){
 d<-data.frame(d[-c(1:13),])
 row.names(d)<-colnames(dataPropre[,14:41])
 colnames(d)<-c("p-values of prop.test")
-d[29,]=t.test(dataPropreP1$T1, dataPropreP2$T1)$p.value
+d[29,]=tt$p.value
 rownames(d)[29]<-"T1"
 
 ### Final result of p-values (greater) ###

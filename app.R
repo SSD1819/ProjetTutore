@@ -44,7 +44,7 @@ ui <- fluidPage(
     mainPanel(
       
       #Un graphique  
-      plotOutput("distPlot")
+      plotOutput("cah")
     )
   )
 )
@@ -57,7 +57,7 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   #l'élément displot que nous avons créé dans ui
-  output$distPlot <- renderPlot({
+  output$cah <- renderPlot({
     
     #Affichage du dendogramme
     plot(get(input$choix_cah))

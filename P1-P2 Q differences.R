@@ -238,7 +238,7 @@ T87 <- rbind(table(dataPropreP1$T87),table(dataPropreP2$T87))
 barplot(T87, beside = T, col = c("blue", "green"), main="T87 : P1>P2")
 
 par(xpd=TRUE)
-legend(2.8,-22.1,c("P1", "P2"), fill =  c("blue", "green") )
+legend(4.12,-22.1,c("P1", "P2"), fill =  c("blue", "green") )
 
 # T88
 T88 <- rbind(table(dataPropreP1$T88),table(dataPropreP2$T88))
@@ -261,7 +261,7 @@ names(tt1)<-c(0:12)
 audela <- rbind(table(don.groupeP1$audela),tt1)
 barplot(audela, beside = T, col = c("blue", "green"), main="audela : P1<P2")
 
-mtext("Visualisation of significantly different data", side = 3, line = -14, outer = TRUE)
+mtext("Visualisation de données significativement différentes", side = 3, line = -14, outer = TRUE)
 
 # keeping initial environment
 par(mfrow=c(1,1))

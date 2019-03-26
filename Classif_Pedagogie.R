@@ -1,8 +1,8 @@
 
 ######Jeux de données pour les clusters avec Pedagogie ######
 dataQg.P<-dataPropre[,c(2,13:41)]
-dataQSum.P<-dataSum[,c(2,14:32)]
-dataQVec.P<-dataVec[,c(2,14:32)]
+dataQSum.P<-dataSum[,c(2,14:25)]
+dataQVec.P<-dataVec[,c(2,14:25)]
 
 
 T41<-dataQSum.P[,5]

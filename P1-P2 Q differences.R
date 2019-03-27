@@ -138,11 +138,11 @@ m<-cbind(matrix(table(don.groupeP1[,2])), matrix(table(don.groupeP2[,2])))
 pt<-prop.test(m, alternative = "greater", correct = FALSE)
 df1 = pt$p.value
 tt<-t.test(don.groupeP1$audela, don.groupeP2$audela, alternative = "greater")
-df2  = tt$p.value
+df2 = tt$p.value
 tt<-t.test(don.groupeP1$outils, don.groupeP2$outils, alternative = "greater")
 df3 = tt$p.value
 tt<-t.test(don.groupeP1$objet, don.groupeP2$objet, alternative = "greater")
-df4  = tt$p.value
+df4 = tt$p.value
 
 df=data.frame(prop.i=rep(0,4))
 df[1,]=df1

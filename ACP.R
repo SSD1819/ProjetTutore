@@ -1,5 +1,4 @@
 require(FactoMineR)
-require(factoextra)
 summary(dataSum)
 
 #soit acp sur tout sauf la Q4 car vectorielle
@@ -7,7 +6,7 @@ summary(dataSum)
 colnames(dataSum)
 noms<-c("Pedagogie", "T1","T2","T3",
         "T5","T61","T62","T71","T72",
-        "T8.123","T8456789")
+        "T8.123","T8.456789")
 valquanti<-dataSum[,noms]
 valquanti[,2:length(valquanti)]<-scale(valquanti[,2:length(valquanti)])
 res.pca<-PCA(valquanti,quali.sup = 1)
@@ -62,8 +61,11 @@ plot.PCA(res.pca1,axes = c(3,4),choix = "var",select = "cos2 5")
 # D3|4 : T72
 
 
+####Exportation des data pour l'app Shiny####
+save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/ACP.RData")
 
-rm(res.pca,res.pca1,valquanti,valquanti1)
+####Suppression de ce qui ne nous sert plus####
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))
 
 
 

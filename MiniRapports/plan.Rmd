@@ -272,6 +272,11 @@ names(dataSum)<-sub(".","",names(dataSum),fixed=TRUE)
 names(dataSum)<-sub("TOTAL","",names(dataSum),fixed=TRUE)
 ```
 
+```{r}
+#Sauvegarde de dataSum et dataVec avant le regroupement de T8.123 et T8.456789
+dataSumOld <- dataSum
+dataVecOld <- dataVec
+```
 
 Regroupement des quesions
 
@@ -321,13 +326,69 @@ Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction 
 
 # Analyse exploratoire
 ##	Univariée
+<!--
+```{r}
+#############################################
+# Creation environement pour stat. univarie #
+#############################################
+if (!require("plyr")) install.packages("plyr")
+library(plyr)
+
+#fonction prop.table(table)
+TablesUniv<-function(x){
+  return(prop.table(table(x)))
+}
+
+#prop de toutes les colonnes
+analyse.univ<-apply(X=dataPropre,MARGIN=2,FUN=TablesUniv)
+
+#effectif de toutes les colonnes
+analyse.univ.table<-apply(X=dataPropre,MARGIN=2,FUN=table)
+```
+
+Representation des Droitiers et Gauchers
+
+```{r}
+pie(analyse.univ$Lateralite, labels = c("Utilise les deux pour dessiner","Droitier", "Gaucher"))
+```
+
+Representation des langues parlées par les élèves
+
+```{r}
+pie(analyse.univ.table$Langues, labels1 = names(analyse.univ.table$Langues))
+```
+
+Analyse Question T1 "Vous savez compter jusqu'à combien?"
+
+```{r}
+plot(analyse.univ.table$T1[order(analyse.univ.table$T1)],type="h", 
+     xlab="Limite de comptage", ylab="Nombre d'élèves", main="Histogramme ")
+# analyse.univ.table$T1
+```
+
+
+```{r}
+# #Comptes des résultats
+# apply(X=dataPropre[,16:42],MARGIN=1,FUN=plyr::count)
+
+# names(dataPropre)
+```
+
+Represantation des differents types de pédagogies au sein de l'ecole
+
+```{r}
+barplot(analyse.univ.table$Pedagogie, col = c("blue", "green"), ylab = "Nombre des eleves",
+        xlab = "Pedagogies")
+# analyse.univ$Pedagogie
+```
+
+-->
 
 ##	Multivariée
 Afin de traiter l'information présente dans le jeu de données de la meilleure façon, nous avons procédé à 2 analyses multivariées : 1 sur le jeu de données qualitatif sous forme de vecteurs, et 1 sur le jeu de données quantitatif sous forme de scores.
 ###ACM
 
 ```{r}
-load
 ### ACM sur data vectorielle
 if (!require("FactoMineR")) install.packages("FactoMineR")
 require(FactoMineR)

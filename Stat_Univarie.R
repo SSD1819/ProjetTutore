@@ -1,3 +1,4 @@
+if (!require("plyr")) install.packages("plyr")
 library(plyr)
 
 #fonction prop.table(table)
@@ -14,7 +15,7 @@ analyse.univ.table<-apply(X=dataPropre,MARGIN=2,FUN=table)
 #Representation des Droitiers et Gauchers
 pie(analyse.univ$Lateralite, labels = c("Utilise les deux pour dessiner","Droitier", "Gaucher"))
 
-#Representation des langues parlées pr les élèves
+#Representation des langues parlées par les élèves
 pie(analyse.univ.table$Langues, labels1 = names(analyse.univ.table$Langues))
 
 #Analyse Question T1 "Vous savez compter jusqu'à combien?"

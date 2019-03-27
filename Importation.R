@@ -179,6 +179,9 @@ names(dataVec)<-sub("TOTAL","",names(dataVec),fixed=TRUE)
 names(dataSum)<-sub(".","",names(dataSum),fixed=TRUE)
 names(dataSum)<-sub("TOTAL","",names(dataSum),fixed=TRUE)
 
+#Sauvegarde de dataSum et dataVec avant le regroupement de T8.123 et T8.456789
+dataSumOld <- dataSum
+dataVecOld <- dataVec
 
 #Regroupement des quesions T8.123 et T8.456789 dans le jeu dataVec
 cols.123<-c(names(dataVec[,24:26]))
@@ -197,4 +200,4 @@ dataSum<-dataSum[,!(names(dataSum) %in% c(cols.123,cols.456789 )) ]
 
 
 #Supression des variables qui ne servent à rien
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))

@@ -53,7 +53,7 @@ ui<-navbarPage(
     )
   ),
   
-  #### Onglet de la cah ####
+  #### Onglet de l'ACP ####
   tabPanel(
     "Classifactions ascendantes hiérarchiques des variables",
     

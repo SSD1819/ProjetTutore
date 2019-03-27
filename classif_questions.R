@@ -2,8 +2,8 @@
 
 #On enlève tout ce qui n'a pas de rapport avec les questions
 dataQg<-dataPropre[,13:41]
-dataQSum<-dataSum[,14:32]
-dataQVec<-dataVec[,14:32]
+dataQSum<-dataSumOld[,14:32]
+dataQVec<-dataVecOld[,14:32]
 
 #Regroupement Q41 et Q42 (a b c d)
 T41<-dataQSum[,4]
@@ -82,8 +82,8 @@ rect.hclust(cahSum8WO1,6)
 
 
 ####Exportation des data pour l'app Shiny####
-save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec","T41","T42", "T8")), file = "export/classif_questions.RData")
+save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld","T41","T42", "T8")), file = "export/classif_questions.RData")
 
 ####Suppression de ce qui ne nous sert plus####
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))
 

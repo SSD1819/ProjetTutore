@@ -327,6 +327,7 @@ Afin de traiter l'information présente dans le jeu de données de la meilleure 
 ###ACM
 
 ```{r}
+load
 ### ACM sur data vectorielle
 if (!require("FactoMineR")) install.packages("FactoMineR")
 require(FactoMineR)
@@ -389,7 +390,7 @@ noms<-c("Pedagogie", "T1","T2","T3",
         "T5","T61","T62","T71","T72","T81",
         "T82","T83","T84","T85","T86","T87",
         "T88","T89")
-valquanti<-dataSum[,noms]
+valquanti<-dataSumOld[,noms]
 valquanti[,2:length(valquanti)]<-scale(valquanti[,2:length(valquanti)])
 res.pca<-PCA(valquanti,quali.sup = 1,graph = FALSE)
 plot.PCA(res.pca,choix = "var",select = "contrib 8")
@@ -464,7 +465,6 @@ Les dimensions 3 et 4 portent sur la question T72
 L'ACP permet donc dans les 3 cas d'observer des différences au sein de la population, mais qui n'est pas significative avec la pédagogie suivit par les individus.
 
 
-
 ##	Recherche de regroupement de variables (cah sur les variables)
 # Recherche de différence significative entre p1 et p2
 ##	Regression logistique 
@@ -506,7 +506,7 @@ print(d)
 subset(d, d[,1] < 0.05) 
 ```
 
-Doce, les tests montrent que dans les réponses à certaines questions `r subset(d, d[,1] < 0.05)`, il existe des différences significatives entre deux pédagogies. Maintenant, il faut préciser à quelle pédagogie est favorable la différence.
+Donc, les tests montrent que dans les réponses à certaines questions `r rownames(subset(d, d[,1] < 0.05))`, il existe des différences significatives entre deux pédagogies. Maintenant, il faut préciser à quelle pédagogie est favorable la différence.
 
 ```{r}
 ### Option "less" ###

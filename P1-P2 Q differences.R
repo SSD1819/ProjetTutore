@@ -262,4 +262,4 @@ mtext("Visualisation de données significativement différentes", side = 3, line
 
 # keeping initial environment
 par(mfrow=c(1,1))
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))

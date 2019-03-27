@@ -470,23 +470,21 @@ L'ACP permet donc dans les 3 cas d'observer des différences au sein de la popul
 ##	Regression logistique 
 ##	Tests sur les différentes réponses
 
-
 ```{r}
-# Creation of dataframes containing only respectively P1 and P2 
+# Création de dataframes contenant uniquement les resulatats P1 et P2 respectivement
 
-dataPropreP1<-subset(dataPropre, Pedagogie == "P1")
-dataPropreP2<-subset(dataPropre, Pedagogie == "P2")
+dataPropreP1 <- subset(dataPropre, Pedagogie == "P1")
+dataPropreP2 <- subset(dataPropre, Pedagogie == "P2")
 ```
-
 
 ### Tests
 
 ```{r}
-# T1 t-test
+# T1 - t-test
 
 tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "two.sided")
 
-# the rest - proportion tests
+# Les autres - tests de proportions
 
 d=data.frame(x=rep(0,27))
 for (i in 14:41){
@@ -501,14 +499,17 @@ colnames(d)<-c("p-values of prop.test")
 d[29,]=tt$p.value
 rownames(d)[29]<-"T1"
 
-### Final result of p-values (two.sided) ###
-
+# Résultat final des p-valeurs (two.sided)
 print(d)
-subset(d, d[,1] < 0.05) #show the rows p-value is smaller than 0.05
+
+# les p-valeurs inférieure à 0,05
+subset(d, d[,1] < 0.05) 
 ```
 
+Doce, les tests montrent que dans les réponses à certaines questions `r subset(d, d[,1] < 0.05)`, il existe des différences significatives entre deux pédagogies. Maintenant, il faut préciser à quelle pédagogie est favorable la différence.
+
 ```{r}
-### Trying with less option ###
+### Option "less" ###
 
 tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "less")
 
@@ -525,18 +526,17 @@ colnames(d)<-c("p-values of prop.test")
 d[29,]=tt$p.value
 rownames(d)[29]<-"T1"
 
-### Final result of p-values (less) ###
-
+# Résultat final des p-valeurs ("less")
 print(d)
-subset(d, d[,1] < 0.05) 
 
-### NO NEW RESULTS ###
+# les p-valeurs inférieure à 0,05
+subset(d, d[,1] < 0.05) 
 ```
 
-```{r}
-### Trying with greater option ###
+Ainsi, le test nous montre que pour une des questions trouvées lors du premier test - T72 les résultats de P2 sont meilleurs que ceux de P1.
 
-# T1 t-test
+```{r}
+### Option "greater"  ###
 
 tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "greater")
 
@@ -553,13 +553,14 @@ colnames(d)<-c("p-values of prop.test")
 d[29,]=tt$p.value
 rownames(d)[29]<-"T1"
 
-### Final result of p-values (greater) ###
-
+# Résultat final des p-valeurs ("greater")
 print(d)
-subset(d, d[,1] < 0.05) 
 
-### Here we have ONLY T81 added ###
+# les p-valeurs inférieure à 0,05
+subset(d, d[,1] < 0.05) 
 ```
+
+Dans le test "greater"(supérieur), en plus des 3 autres questions restent, nous avons ajouté T81. Le test montre que, pour les questions sélectionnés, les résultats de P1 sont meilleurs que ceux de P2.
 
 ### Tests avec nouvelles variables
 
@@ -588,8 +589,10 @@ row.names(df)<-colnames(don.groupe[,2:5])
 df
 ```
 
+En ce qui concerne les tests sur les nouvelles variables: le test de la différence générale ("two.sided") montre que les résultats de la variable audela pour P1 et P2 sont significativement différents. Donc, nous devrions aller plus loin pour trouver la meilleure pédagogie pour cela.
+
 ```{r}
-### Testing with greater ###
+### Option "greater" ###
 
 m<-cbind(matrix(table(don.groupeP1[,2])), matrix(table(don.groupeP2[,2])))
 pt<-prop.test(m, alternative = "greater", correct = FALSE)
@@ -607,13 +610,13 @@ df[2,]=df2
 df[3,]=df3
 df[4,]=df4
 
-colnames(df)<-c("p-values/prop.test - New Variables")
+colnames(df)<-c("p-valeurs/less - Nouvelles Variables")
 row.names(df)<-colnames(don.groupe[,2:5])
 df
 ```
 
 ```{r}
-### Testing with less ###
+### Option "less" ###
 
 m<-cbind(matrix(table(don.groupeP1[,2])), matrix(table(don.groupeP2[,2])))
 pt<-prop.test(m, alternative = "less", correct = FALSE)
@@ -631,10 +634,12 @@ df[2,]=df2
 df[3,]=df3
 df[4,]=df4
 
-colnames(df)<-c("p-values/prop.test - New Variables")
+colnames(df)<-c("p-valeurs/less - Nouvelles Variables")
 row.names(df)<-colnames(don.groupe[,2:5])
 df
 ```
+
+Les tests "less" and "greater" n'ont pas ajouté de nouvelles informations concernant la différence significative. Ils ont juste précisé que les résultats de la pédagogie P2 étaient meilleurs dans la variable audela.
 
 ### Visualisation de données significativement différentes
 

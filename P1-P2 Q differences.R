@@ -83,10 +83,7 @@ subset(d, d[,1] < 0.05)
 
 ### Trying with greater option ###
 
-# T1 t-test
-
 tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "greater")
-
 
 d=data.frame(x=rep(0,27))
 for (i in 14:41){

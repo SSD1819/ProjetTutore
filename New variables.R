@@ -73,5 +73,28 @@ summary(reg)#modèle non significatif
 
 ##
 
+#essaie de passer par la reg logistique pour une cp normale
+
+
+
+###Affinage de la variable "audela"
+
+reg<-glm(Pedagogie~T41a+T41b+T41c+T41d+T51+T61, data=dataPropre,family = binomial)
+step(reg)
+
+
+###
+
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))
+
+
+
+
+
+
+
+
+
+
+
 

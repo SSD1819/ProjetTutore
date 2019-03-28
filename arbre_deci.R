@@ -73,4 +73,8 @@ plot.roc(reg.roc,col="yellow", lwd=3)
 glm_simple_roc <- simple_roc(dataPropre$Pedagogie=="P2", reg.link)
 with(glm_simple_roc, points(1 - FPR, TPR, col=1 + labels, cex = 0.7))
 
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
+####Exportation des data pour l'app Shiny####
+save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/arbre_deci.RData")
+
+
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))

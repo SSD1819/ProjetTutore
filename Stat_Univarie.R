@@ -34,7 +34,13 @@ barplot(analyse.univ.table$Pedagogie, col = c("blue", "green"), ylab = "Nombre d
         xlab = "Pedagogies")
 analyse.univ$Pedagogie
 
-#Majorité de P1
+
+
+
+
+
+####Exportation des data pour l'app Shiny####
+save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/Stat_Univarie.RData")
+
 
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))
-

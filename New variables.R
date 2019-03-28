@@ -89,6 +89,28 @@ reg<-glm(formula = Pedagogie ~ T41b + T41c, family = binomial, data = dataPropre
 summary(reg)
 
 
+simple_roc <- function(labels, scores){
+  labels <- labels[order(scores, decreasing=TRUE)]
+  data.frame(TPR=cumsum(labels)/sum(labels), FPR=cumsum(!labels)/sum(!labels), labels)
+}
+
+
+if (!require(pROC)) install.packages("pROC")
+#prediction des données grâce à la regression sur le meme échantillon
+reg.pred<-predict.glm(reg,type = "response")
+tt<-as.factor(ifelse(reg.pred<0.5,"P1","P2"))
+sum(tt==dataPropre$Pedagogie)/nrow(dataPropre)#71% de bonne prédiction
+
+reg.link<-predict(reg, type="link")
+
+reg.roc<-roc(response = dataPropre$Pedagogie, predictor = reg.pred, direction="<",auc = TRUE)
+#AUC = 77%
+
+plot.roc(reg.roc,col="yellow", lwd=3)
+glm_simple_roc <- simple_roc(dataPropre$Pedagogie=="P2", reg.link)
+with(glm_simple_roc, points(1 - FPR, TPR, col=1 + labels, cex = 0.7))
+
+
 
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))
 

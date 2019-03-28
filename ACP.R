@@ -25,8 +25,12 @@ summary(res.don)
 
 # install.packages("corrplot")
 library(corrplot)
-summary(dataPropre)
-m.cor<-cor(valquanti[,-1])#matrice des corrélations pour les questions 8
+colnames(dataSumOld)
+nomcol<-c("T1","T2","T3",
+          "T5","T61","T62","T71","T72","T81",
+          "T82","T83","T84","T85","T86","T87",
+          "T88","T89")
+m.cor<-cor(dataSumOld[,nomcol])#matrice des corrélations pour les questions 8
 corrplot(m.cor,method = "circle")
 #grosse corrélation entre les 8* : donc ACP biaisée (et légère sur les q4 mais suffisante pour biaiser l'analyse)
 #Etonnemment la T1 ne ressort pas comme grosse contrib

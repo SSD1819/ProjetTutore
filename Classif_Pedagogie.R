@@ -36,7 +36,7 @@ dataQVec.P2<-dataQVec.P[which(dataQVec.P["Pedagogie"]=="P2"),]
 
 ### Pour les donnees générales ###
 cahG<-hclustvar(X.quanti=dataQg.P[,2],X.quali=dataQg.P[,-2])
-plot(cahG)
+plot(cahG, main="Pour les données générales avec P1 et P2")
 rect.hclust(cahG,12)
 
 ### Donnees generales avec P1

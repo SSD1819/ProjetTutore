@@ -38,7 +38,6 @@ La pédagogie traditionnelle est celle du modèle transmissif. Selon le triangle
 \end{description}
 
 ## Présentation des données de départ
-\section{Importation des données}
 Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les résultats de chaque promotion au test cognitif européen.
     \begin{description}
     \item[MathsJetons\_2015-2016.xlsx :] Pour l'année 2015/2016.

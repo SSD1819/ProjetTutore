@@ -85,6 +85,11 @@ step(reg)
 
 ###
 
+reg<-glm(formula = Pedagogie ~ T41b + T41c, family = binomial, data = dataPropre)
+summary(reg)
+
+
+
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))
 
 

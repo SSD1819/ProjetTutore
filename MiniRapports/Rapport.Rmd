@@ -109,6 +109,13 @@ Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction 
 Afin de traiter l'information présente dans le jeu de données de la meilleure façon, nous avons procédé à 2 analyses multivariées : 1 sur le jeu de données qualitatif sous forme de vecteurs, et 1 sur le jeu de données quantitatif sous forme de scores.
 ###ACM
 
+La réalisation d'une ACM comme première approche sur le jeu de données permetta de comprendre mieux ce qui différencie les individus dans notre jeu de données et à la fois d'avoir un premier résultats sur la différence entre les deux pédagogies celon cette méthode.
+
+
+```{r include=TRUE}
+plot.MCA(res.mca.globale,invisible = "ind",cex=0.7,selectMod =  "contrib 15")
+```
+
 
 ###ACP
 

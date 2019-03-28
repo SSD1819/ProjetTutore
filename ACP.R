@@ -14,7 +14,6 @@ plot.PCA(res.pca,choix = "var",select = "contrib 4") # à nouveau les questions 
 plot.PCA(res.pca,choix = "ind",cex=0.7,col.ind = as.numeric(valquanti$Pedagogie))
 outlier<-head(rownames(res.pca$ind$coord[order(res.pca$ind$coord[,2], res.pca$ind$coord[,1]),]))
 
-
 #sans les individus athypiques
 don.indsup<-valquanti[!rownames(valquanti)%in%outlier,]
 don.indsup<-rbind(don.indsup,valquanti[outlier,])

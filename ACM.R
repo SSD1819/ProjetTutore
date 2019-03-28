@@ -4,7 +4,6 @@ valquali<-dataPropre[,nom]
 
 summary(valquali)
 require(FactoMineR)
-require(factoextra)
 valquali$T1<- as.factor(valquali$T1)
 
 #ajout ind fictif pour l'aide à l'interprétation

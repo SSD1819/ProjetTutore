@@ -1,8 +1,6 @@
 ### ACM sur data vectorielle
 if (!require("FactoMineR")) install.packages("FactoMineR")
 require(FactoMineR)
-if (!require("factoextra")) install.packages("factoextra")
-require(factoextra)
 if (!require("dplyr")) install.packages("dplyr")
 require(dplyr) 
 

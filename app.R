@@ -64,10 +64,15 @@ ui<-navbarPage(
     ###Ligne du dessus
     fluidRow(
       
-      #Zone choix des axes à afficher
+      #Zone choix jeu de données (ACP avec ou sans outlier)
       column(4,
-        numericInput("axe1", "Axe1", 1, min = 1, max = 100),
-        numericInput("axe2", "Axe2", 2, min = 1, max = 100)
+             
+             #Menu déroulant pour séléctionner le jeu de données
+             selectInput(
+               inputId = "choix_acp",
+               label = "Séléction des données sur lesquelles faire l'ACP",
+               choices = ls()[which(substr(ls(),1,3)=="res")]
+             )
       ),
       
       #Zone inertie par axe
@@ -84,16 +89,11 @@ ui<-navbarPage(
     
     ###Ligne du dessous
     fluidRow(
-      
-      #Zone choix jeu de données (ACP avec ou sans outlier)
+
+      #Zone choix des axes à afficher
       column(4,
-             
-        #Menu déroulant pour séléctionner le jeu de données
-        selectInput(
-        inputId = "choix_acp",
-        label = "Séléction des données sur lesquelles faire l'ACP",
-        choices = ls()[which(substr(ls(),1,3)=="res")]
-        )
+             numericInput("axe1", "Axe1", 1, min = 1, max = 100),
+             numericInput("axe2", "Axe2", 2, min = 1, max = 100)
       ),
              
       #Zone graphique des individus

@@ -27,12 +27,10 @@ plotcp(dt)
 
 ```{r}
 datadt2<-dataPropre[,14:41]
-dt2<-rpart(dataPropre$Pedagogie~ .,datadt3,control=rpart.control(minsplit=5,cp=0))
+dt2<-rpart(dataPropre$Pedagogie~ .,datadt2,control=rpart.control(minsplit=5,cp=0), method = 'class')
 prp(dt2, extra = 1+100,type = 2, under=TRUE, yesno=2)
 plotcp(dt2)
 ```
-
-
 
 
 

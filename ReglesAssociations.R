@@ -38,43 +38,9 @@ rulesP2 <- apriori(datAssos[which(p1==0 & datAssos[,"T51"]==1),-c(1,2,22:30)], p
 summary(rulesP2)
 rules_liftP2 <- sort (rulesP2, by="lift", decreasing=TRUE) # 'high-lift' rules.
 inspect(head(rules_liftP2,200))
-#### Test avec la méthode du TP3 Applied proba ####
 
-#1-item support
-support1<-apply(X=datAssos,MARGIN=2,FUN=mean)
-support1
+####Exportation des data pour l'app Shiny####
+save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/ReglesAssociations.RData")
 
-#2-item support
-support2<-t(datAssos)%*%datAssos
-support2<-support2/length(datAssos[,1])
-support2
-
-#Confidence
-confidence<-support2/support1
-confidence
-
-#lift
-lift<-support2/(support1%*%t(support1))
-lift
-
-###Règles
-suppMin<-0.5
-confMin<-0.5
-liftMin<-1.1
-
-#Matrice des règles d'associations
-reglesMat<-(support2>=suppMin)*(confidence>=confMin)*(lift>=liftMin)
-
-#Suppression des associations inutiles du type A=>A
-diag(reglesMat)<-0
-
-#Règles écrites (et non en matrice)
-posSignif<-which(reglesMat==1)
-iSignif<-posSignif%%length(reglesMat[,1])
-jSignif<-ceiling(posSignif/length(reglesMat[,1]))
-regles<-paste(rownames(reglesMat[iSignif,jSignif]),"=>",colnames(reglesMat[iSignif,jSignif]),sep=" ")
-regles
-
-
-
-rm(datAssos,p1,p2,support1,support2,confidence,lift,suppMin,confMin,liftMin,reglesMat,posSignif,iSignif,jSignif,regles, rules, rules_lift, rulesWO8)
+####Suppression de ce qui ne nous sert plus####
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))

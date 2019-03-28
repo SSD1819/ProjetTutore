@@ -140,11 +140,19 @@ server <- function(input, output) {
     plot.PCA(get(input$choix_acp),axes=c(input$axe1, input$axe2),choix = "ind",cex=0.7,col.ind = as.numeric(valquanti$Pedagogie))
   }) 
 
-  #le graphique des variances expliquées
-  datagraph<-as.data.frame(cbind(names(res.pca$eig[,2]),round(res.pca$eig[,2],2)))
-  datagraph$V2<-round(res.pca$eig[,2],2)
+  ##le graphique des variances expliquées
+  
+  
+  #dataframe pour le graphique
+  datagraph <- reactive({
+    datagraph <- as.data.frame(cbind(names(get(input$choix_acp)$eig[,2]),round(get(input$choix_acp)$eig[,2],2)))
+    datagraph$V2<-round(get(input$choix_acp)$eig[,2],2)
+    datagraph
+  })
+  
+  #graphique
   output$inertie <- renderPlot({
-    ggplot(data=datagraph, aes(x=reorder(V1, -V2),y=V2))+
+    ggplot(data=datagraph(), aes(x=reorder(V1, -V2),y=V2))+
       geom_bar(stat="identity", fill="steelblue")+
       geom_text(aes(label=V2), vjust=1.6, color="white", size=3.5)+
       xlab("Axe")+

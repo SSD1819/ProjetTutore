@@ -1,8 +1,10 @@
+###Package
+require(ClustOfVar)
 
 ######Jeux de données pour les clusters avec Pedagogie ######
 dataQg.P<-dataPropre[,c(2,13:41)]
-dataQSum.P<-dataSum[,c(2,14:25)]
-dataQVec.P<-dataVec[,c(2,14:25)]
+dataQSum.P<-dataSumOld[,c(2,14:25)]
+dataQVec.P<-dataVecOld[,c(2,14:25)]
 
 
 T41<-dataQSum.P[,5]
@@ -34,7 +36,7 @@ dataQVec.P2<-dataQVec.P[which(dataQVec.P["Pedagogie"]=="P2"),]
 
 ### Pour les donnees générales ###
 cahG<-hclustvar(X.quanti=dataQg.P[,2],X.quali=dataQg.P[,-2])
-plot(cahG)
+plot(cahG, main="Pour les données générales avec P1 et P2")
 rect.hclust(cahG,12)
 
 ### Donnees generales avec P1
@@ -67,4 +69,9 @@ cahSum.P2<-hclustvar(X.quanti=dataQSum.P2[,-c(1,5,6)],X.quali=dataQSum.P2[,c(5,6
 plot(cahSum.P2, main="Dendogramme des données somme\n avec P2")
 rect.hclust(cahSum.P2,6)
 
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
+
+####Exportation des data pour l'app Shiny####
+save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/Classif_Pedagogie.RData")
+
+
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))

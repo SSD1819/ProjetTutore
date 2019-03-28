@@ -260,6 +260,9 @@ barplot(audela, beside = T, col = c("blue", "green"), main="audela : P1<P2")
 
 mtext("Visualisation de données significativement différentes", side = 3, line = -14, outer = TRUE)
 
+#save the data for report
+save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/teststat.RData")
+
 # keeping initial environment
 par(mfrow=c(1,1))
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))

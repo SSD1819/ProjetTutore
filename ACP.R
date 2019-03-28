@@ -32,24 +32,10 @@ corrplot(m.cor,method = "circle")
 #Etonnemment la T1 ne ressort pas comme grosse contrib
 #seulement 60% de l'info sur les 4 premières dimensions
 
-##Nouvelle PCA sans les T8 super correlées entre elles (que T81 car non correlée)
-valquanti1<-valquanti[,-c(12:18)]
-summary(valquanti1)
-res.pca1<-PCA(valquanti1,quali.sup = 1)
-plot.PCA(res.pca1,axes = c(1,2),choix = "ind")#aucune démarcation entre P1 et P2
-plot.PCA(res.pca1,axes = c(1,2),choix = "var",select = "cos2 5")#T2 / T3 proche : gros score en T2 > gros score en T3
-#D1 : T2 | T3
-#D2 : T62 
-plot.PCA(res.pca1,axes = c(3,4),choix = "var")
-#D3 : T72
-#D4 : T5
-#quasi 1 variable / axe > peu utile 
-
-summary(res.pca1)
 
 colnames(dataPropre)
 #Ajout d'une acp avec les q4 de datapropre (seulement celles les plus corrélées aux autres)
-valquanti2<-cbind(valquanti1,
+valquanti2<-cbind(valquanti,
                   apply(dataPropre[,c("T41a","T41c","T41d")],2,as.numeric))
 summary(valquanti2)
 res.pca1<-PCA(valquanti2,quali.sup = 1)

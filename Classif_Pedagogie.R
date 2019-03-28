@@ -67,4 +67,4 @@ cahSum.P2<-hclustvar(X.quanti=dataQSum.P2[,-c(1,5,6)],X.quali=dataQSum.P2[,c(5,6
 plot(cahSum.P2, main="Dendogramme des données somme\n avec P2")
 rect.hclust(cahSum.P2,6)
 
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe")))
+rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))

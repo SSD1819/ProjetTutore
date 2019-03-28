@@ -29,12 +29,12 @@ summary(rulesWO8)
 rules_lift <- sort (rulesWO8, by="lift", decreasing=TRUE) # 'high-lift' rules.
 inspect(head(rules_lift,200))
 
-rulesP1 <- apriori(datAssos[which(p1==1 & T51==1),-c(1,2,22:30)], parameter = list(supp = 0.5, conf = 0.9, minlen = 2, maxlen = 10, target = "rules"))
+rulesP1 <- apriori(datAssos[which(p1==1 & datAssos[,"T51"]==1),-c(1,2,22:30)], parameter = list(supp = 0.5, conf = 0.9, minlen = 2, maxlen = 10, target = "rules"))
 summary(rulesP1)
 rules_liftP1 <- sort (rulesP1, by="lift", decreasing=TRUE) # 'high-lift' rules.
 inspect(head(rules_liftP1,200))
 
-rulesP2 <- apriori(datAssos[which(p1==0 & datAssos[,16]==1),-c(1,2,22:30)], parameter = list(supp = 0.5, conf = 0.9, minlen = 2, maxlen = 10, target = "rules"))
+rulesP2 <- apriori(datAssos[which(p1==0 & datAssos[,"T51"]==1),-c(1,2,22:30)], parameter = list(supp = 0.5, conf = 0.9, minlen = 2, maxlen = 10, target = "rules"))
 summary(rulesP2)
 rules_liftP2 <- sort (rulesP2, by="lift", decreasing=TRUE) # 'high-lift' rules.
 inspect(head(rules_liftP2,200))

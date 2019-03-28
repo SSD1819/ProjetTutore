@@ -9,18 +9,19 @@ noms<-c("Pedagogie", "T1","T2","T3",
         "T8.123","T8.456789")
 valquanti<-dataSum[,noms]
 valquanti[,2:length(valquanti)]<-scale(valquanti[,2:length(valquanti)])
-res.pca<-PCA(valquanti,quali.sup = 1)
-plot.PCA(res.pca,choix = "var",select = "contrib 4") # à nouveau les questions 8 ressortent le plus (puis la 3)
-plot.PCA(res.pca,choix = "ind",cex=0.7,col.ind = as.numeric(valquanti$Pedagogie))
-outlier<-head(rownames(res.pca$ind$coord[order(res.pca$ind$coord[,2], res.pca$ind$coord[,1]),]))
+res.pca.groupe<-PCA(valquanti,quali.sup = 1)
+plot.PCA(res.pca.groupe,choix = "var",select = "contrib 4") # à nouveau les questions 8 ressortent le plus (puis la 3)
+plot.PCA(res.pca.groupe,choix = "ind",cex=0.7,col.ind = as.numeric(valquanti$Pedagogie))
+outlier<-head(rownames(res.pca.groupe$ind$coord[order(res.pca.groupe$ind$coord[,2], res.pca.groupe$ind$coord[,1]),]))
+
 
 #sans les individus athypiques
 don.indsup<-valquanti[!rownames(valquanti)%in%outlier,]
 don.indsup<-rbind(don.indsup,valquanti[outlier,])
-res.don<-PCA(don.indsup,quali.sup = 1,ind.sup = (nrow(don.indsup)-6):nrow(don.indsup),graph = FALSE)
-plot.PCA(res.don,choix = "ind",cex=0.7,axes = c(1,2),col.ind = as.numeric(valquanti$Pedagogie))
-plot.PCA(res.don,choix = "var",select = "contrib 6")
-summary(res.don)
+res.pca.nonindsup<-PCA(don.indsup,quali.sup = 1,ind.sup = (nrow(don.indsup)-6):nrow(don.indsup),graph = FALSE)
+plot.PCA(res.pca.nonindsup,choix = "ind",cex=0.7,axes = c(1,2),col.ind = as.numeric(valquanti$Pedagogie))
+plot.PCA(res.pca.nonindsup,choix = "var",select = "contrib 6")
+summary(res.pca.nonindsup)
 
 # install.packages("corrplot")
 library(corrplot)
@@ -41,12 +42,12 @@ colnames(dataPropre)
 valquanti2<-cbind(valquanti,
                   apply(dataPropre[,c("T41a","T41c","T41d")],2,as.numeric))
 summary(valquanti2)
-res.pca1<-PCA(valquanti2,quali.sup = 1)
-plot.PCA(res.pca1,axes = c(1,2),choix = "ind")#aucune démarcation entre P1 et P2
-plot.PCA(res.pca1,axes = c(1,2),choix = "var",select = "cos2 5")
+res.pca.addq4<-PCA(valquanti2,quali.sup = 1)
+plot.PCA(res.pca.addq4,axes = c(1,2),choix = "ind")#aucune démarcation entre P1 et P2
+plot.PCA(res.pca.addq4,axes = c(1,2),choix = "var",select = "cos2 5")
 #D1 : T2/3
 #D2 : T41c/d (très corrélé alors qu'on ne le voit pas dans le cor) et T61
-plot.PCA(res.pca1,axes = c(3,4),choix = "var",select = "cos2 5")
+plot.PCA(res.pca.addq4,axes = c(3,4),choix = "var",select = "cos2 5")
 # D3|4 : T72
 
 

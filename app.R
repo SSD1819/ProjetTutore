@@ -1,6 +1,7 @@
 require(shiny)
 require(ggplot2)
 require(corrplot)
+require(FactoMineR)
 
 ############ Préparation des jeux de données dont nous aurons besoin ############
 

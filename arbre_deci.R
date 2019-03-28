@@ -73,6 +73,23 @@ plot.roc(reg.roc,col="yellow", lwd=3)
 glm_simple_roc <- simple_roc(dataPropre$Pedagogie=="P2", reg.link)
 with(glm_simple_roc, points(1 - FPR, TPR, col=1 + labels, cex = 0.7))
 
+require(rpart)
+require(rpart.plot)
+
+###arbre_deci2
+dt.don.groupe<-rpart(Pedagogie~., data=don.groupe)
+prp(dt.don.groupe, extra = 1+100,type = 2, under=TRUE, yesno=2)
+plotcp(dt.don.groupe)
+
+dt.audela<-rpart(Pedagogie~audela, data=don.groupe)
+prp(dt.audela, extra = 1+100,type = 2, under=TRUE, yesno=2)
+plotcp(dt.audela)
+
+datadt2<-dataPropre[,14:41]
+dt2<-rpart(dataPropre$Pedagogie~ .,datadt2,control=rpart.control(minsplit=5,cp=0), method = 'class')
+prp(dt2, extra = 1+100,type = 2, under=TRUE, yesno=2)
+plotcp(dt2)
+
 ####Exportation des data pour l'app Shiny####
 save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/arbre_deci.RData")
 

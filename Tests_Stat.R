@@ -59,49 +59,49 @@ subset(d, d[,1] < 0.05) #show the rows p-value is smaller than 0.05
 
 ### Trying with less option ###
 
-tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "less")
+tt1<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "less")
 
-d=data.frame(x=rep(0,27))
+d1=data.frame(x=rep(0,27))
 for (i in 14:41){
-  mat.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
-  prop.i<-prop.test(mat.i, alternative = "less", correct = FALSE)
-  d[i,] = prop.i$p.value
+  mat1.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
+  prop1.i<-prop.test(mat1.i, alternative = "less", correct = FALSE)
+  d1[i,] = prop1.i$p.value
 }
 
-d<-data.frame(d[-c(1:13),])
-row.names(d)<-colnames(dataPropre[,14:41])
-colnames(d)<-c("p-values of prop.test")
-d[29,]=tt$p.value
-rownames(d)[29]<-"T1"
+d1<-data.frame(d1[-c(1:13),])
+row.names(d1)<-colnames(dataPropre[,14:41])
+colnames(d1)<-c("p-values of prop.test")
+d1[29,]=tt1$p.value
+rownames(d1)[29]<-"T1"
 
 ### Final result of p-values (less) ###
 
-print(d)
-subset(d, d[,1] < 0.05) 
+print(d1)
+subset(d1, d1[,1] < 0.05) 
 
 ### NO NEW RESULTS ###
 
 ### Trying with greater option ###
 
-tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "greater")
+tt2<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "greater")
 
-d=data.frame(x=rep(0,27))
+d2=data.frame(x=rep(0,27))
 for (i in 14:41){
-  mat.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
-  prop.i<-prop.test(mat.i, alternative = "greater", correct = FALSE)
-  d[i,] = prop.i$p.value
+  mat2.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
+  prop2.i<-prop.test(mat2.i, alternative = "greater", correct = FALSE)
+  d2[i,] = prop2.i$p.value
 }
 
-d<-data.frame(d[-c(1:13),])
-row.names(d)<-colnames(dataPropre[,14:41])
-colnames(d)<-c("p-values of prop.test")
-d[29,]=tt$p.value
-rownames(d)[29]<-"T1"
+d2<-data.frame(d2[-c(1:13),])
+row.names(d2)<-colnames(dataPropre[,14:41])
+colnames(d2)<-c("p-values of prop.test")
+d2[29,]=tt2$p.value
+rownames(d2)[29]<-"T1"
 
 ### Final result of p-values (greater) ###
 
-print(d)
-subset(d, d[,1] < 0.05) 
+print(d2)
+subset(d2, d2[,1] < 0.05) 
 
 ### Here we have ONLY T81 added ###
 
@@ -235,7 +235,7 @@ T87 <- rbind(table(dataPropreP1$T87),table(dataPropreP2$T87))
 barplot(T87, beside = T, col = c("blue", "green"), main="T87 : P1>P2")
 
 par(xpd=TRUE)
-legend(4.12,-22.1,c("P1", "P2"), fill =  c("blue", "green") )
+legend(2.5,-15,c("P1", "P2"), fill =  c("blue", "green"), box.lwd = 1)
 
 # T88
 T88 <- rbind(table(dataPropreP1$T88),table(dataPropreP2$T88))
@@ -258,7 +258,9 @@ names(tt1)<-c(0:12)
 audela <- rbind(table(don.groupeP1$audela),tt1)
 barplot(audela, beside = T, col = c("blue", "green"), main="audela : P1<P2")
 
-mtext("Visualisation de données significativement différentes", side = 3, line = -14, outer = TRUE)
+mtext("Visualisation de données significativement différentes", 
+      side = 3, line = -16.5, outer = TRUE)
+
 
 #save the data for report
 save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/teststat.RData")

@@ -2,6 +2,7 @@ require(shiny)
 require(ggplot2)
 require(corrplot)
 require(FactoMineR)
+require(arules)
 
 ############ Préparation des jeux de données dont nous aurons besoin ############
 
@@ -11,6 +12,9 @@ load("export/classif_questions.RData")
 #### ACP ------------------------------#
 load("export/ACP.RData")
 
+#### Règles d'association ------------------------------#
+load("export/ReglesAssociations.RData")
+rules <- apriori(datAssos, parameter = list(supp = 0.7, conf = 0.7, minlen = 2, maxlen = 10, target = "rules"))
 
 #---------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -21,7 +25,7 @@ ui<-navbarPage(
   #Titre de la barre de navigation
   "Navigation",
   
-  #### Onglet de la cah ####
+  #### Onglet de la cah ####-------------------------------------------------------#
   tabPanel(
     "Classifactions ascendantes hiérarchiques des variables",
     
@@ -57,7 +61,7 @@ ui<-navbarPage(
     )
   ),
   
-  #### Onglet de l'ACP ####
+  #### Onglet de l'ACP ####-------------------------------------------------------#
   tabPanel(
     "Analyse en composantes principale",
     
@@ -106,6 +110,36 @@ ui<-navbarPage(
         plotOutput("pcaVar")
       )
     )
+  ),
+
+  #### Onglet des règles d'association ####-------------------------------------------------------#
+  tabPanel(
+    "Règles d'association",
+    
+    #Layout de l'onglet
+    sidebarLayout(
+      
+      #Partie gauche de la page
+      sidebarPanel(
+        
+        #Paramètres des règles d'associations
+        numericInput("conf", "Confidence", 0.5, min = 0, max = 1),
+        numericInput("lift", "Lift", 1.15, min = 1, max = 100),
+        numericInput("minlen", "Longueur minimum règle", 1, min = 1, max = 5),
+        numericInput("maxlen", "Longueur maximum règle", 2, min = 1, max = 5),
+        
+        #Variables à exclure
+        checkboxGroupInput("exclu","Variables à exclure",colnames(datAssos))
+        
+      ),
+      
+      #Partie centrale de la page
+      mainPanel(
+        
+        #Graphique qui sera affiché
+        dataTableOutput("rules")
+      )
+    )
   )
 )
 
@@ -115,7 +149,7 @@ ui<-navbarPage(
 ############ Partie server ############
 server <- function(input, output) {
   
-  #### CAH ####
+  #### CAH ####-------------------------------------------------------#
   #l'élément displot que nous avons créé dans ui
   output$cah <- renderPlot({
     
@@ -124,7 +158,7 @@ server <- function(input, output) {
     rect.hclust(get(input$choix_cah),input$nb_class)
   })
   
-  #### ACP ####
+  #### ACP ####-------------------------------------------------------#
   #le corrplot
   output$correlations <- renderPlot({
     corrplot(m.cor,method = "circle")
@@ -158,6 +192,20 @@ server <- function(input, output) {
       xlab("Axe")+
       ylab("% Variance expliquée")
   })   
+  
+  #### Règles d'associations ####-------------------------------------------------------#
+  #preparation des règles
+
+  
+  #rules_loft <- sort (rules, by="lift", decreasing=TRUE)
+
+  
+  #les règles
+  output$rules <- renderDataTable({
+    
+    #Affichage des règles
+    inspect(rules)
+  })
   
   
 }

@@ -1,5 +1,8 @@
-nom<-colnames(dataPropre[,c(2,13,14:41)])#suppression de la variable quanti sur l'age (qui ne ressortait pas de toute façon) car problème lors d'ajout d'individus supplémentaire
-
+nom<-c("Pedagogie", "T1","AgeNum","T21","T22","T23","T31",
+       "T32","T41a","T41b","T41c","T41d","T42a",
+       "T42b","T42c","T42d","T51","T52","T61",
+       "T62","T71","T72","T81","T82","T83",
+       "T84","T85","T86","T87","T88","T89")
 valquali<-dataPropre[,nom]
 
 summary(valquali)

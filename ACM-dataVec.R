@@ -12,10 +12,12 @@ noms<-colnames(dataVec[,c(2,14,11,15:25)])
 valqualis<-dataVec[,noms]
 summary(valqualis)
 
-valqualis$T1<- as.factor(valqualis$T1)
-valqualis$AgeNum<- as.factor(valqualis$AgeNum)
+# valqualis$T1<- as.factor(valqualis$T1)
+# valqualis$AgeNum<- as.factor(valqualis$AgeNum)
 
-res.mca.vec<-MCA(valqualis,quali.sup = 1:3)
+valqualis<-rbind(valqualis[!rownames(valqualis)%in%"4-2012-049",],valqualis["4-2012-049",])
+valqualis<-valqualis[!rownames(valqualis)%in%"4-2012-049",]
+res.mca.vec<-MCA(valqualis,quali.sup = 1,quanti.sup = 2:3)
 
 #9.2% information
 

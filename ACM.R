@@ -30,7 +30,7 @@ plot.MCA(res.mca.globale,choix = "ind",cex=0.7,axes = c(1,2),invisible = c("ind"
 #faible séparation entre P1 et P2 selon la dim1, 0 sur dim2 : pas de diff concrête
 
 res.hcpcmca<-HCPC(res.mca.globale,nb.clust = 3)
-res.hcpmcac$desc.var
+res.hcpcmca$desc.var
 plot.HCPC(res.hcpcmca,choice = "bar")
 # C1 : Echec aux q84 85 87 89 88 ... 
 # C2 : Réussite aux q84 82 85 .. 22 mais echec aux q42a-d-c-b-a

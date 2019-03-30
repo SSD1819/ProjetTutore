@@ -19,6 +19,7 @@ require(pROC)
 require(ClustOfVar)
 require(rpart)
 require(rpart.plot)
+require(corrplot)
 ```
 
 ```{r}
@@ -74,14 +75,14 @@ Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les ré
 ##1.4 Nettoyage des données 
 
 Les données ayant déjà été travaillées l'année dernière le travail nécessaire en datamanagement n'a pas été excessif. Il nous a fallut tout de même renommer certaines variables pour les rendre plus lisibles, supprimer certaines questions car elles n'avaient été posées qu'à certaines classes... 
-Les questions étant posées de manière à ce qu'au sein d'une même tache, il faille réussir les questions dans l'ordre pour passer à celles plus dures nous avions beaucoup de NA dès qu'une question est dûre. Nous avons donc décidé de changer ces NA et les considérer comme une question que l'élève n'aurait pas réussit. Et pour ne pas passer à coté de l'information : "n'a pu aller plus loin", nous avons crée deux jeux de données : un vectoriel, un composé de scores correspondant à la somme des questions au sein d'une même tache.
+Les questions étant posées de manière à ce qu'au sein d'une même tache, il faille réussir les questions dans l'ordre pour passer à celles plus dures nous avions beaucoup de NA dès qu'une question est dure. Nous avons donc décidé de changer ces NA et les considérer comme une question que l'élève n'aurait pas réussit. Et pour ne pas passer à coté de l'information : "n'a pu aller plus loin", nous avons crée deux jeux de données : un vectoriel, un composé de scores correspondant à la somme des questions au sein d'une même tache.
 
 ## Recodage des variables
 
 
 #2. Méthodologie
 <!-- On parle au passé ? "nous avons vu ..." ou au futur ? "par la suite nous verrons ..."  -->
-Afin de répondre au mieux à notre problématique nous avons fait le choix d'utiliser plusieurs méthodes statistiques différentes pour analyser nos données. Pour cela nous avons dans un premier temps utilisé une méthode qui permet de résumer l'information globale du jeu de données : l'analyse factorielle, et la classification ascendante hiérarchique (pour faire des regroupement de variables). Puis dans un but prédictif nous avons utilisé la regression logistique et les arbres de regressions. Plusieurs tests ont été fait en parallèles, comme celui du chi2, de student.. 
+Afin de répondre au mieux à notre problématique nous avons fait le choix d'utiliser plusieurs méthodes statistiques différentes pour analyser nos données. Pour cela nous avons dans un premier temps utilisé une méthode qui permet de résumer l'information globale du jeu de données : l'analyse factorielle, et la classification ascendante hiérarchique (pour faire des regroupement de variables). Puis dans un but prédictif nous avons utilisé la régression logistique et les arbres de régressions. Plusieurs tests ont été fait en parallèles, comme celui du chi2, de student.. 
 
 ##2.1 Analyse factorielle
 
@@ -90,15 +91,17 @@ L'ACM permet dans un nuage à N dimension, en cherchant les plans orthogonaux qu
 l'ACM a été réalisée sur les données vectorisées, celles ci ont été prises comme variables actives (celles qui définissent le placement des individus sur le graphe) et les variables portant sur la pédagogie, la question 1, et l'âge en illustratives (ajoutée après le placement des individus sur le graphe).
 Le principe était le même pour l'ACP qui a été faite ensuite.
 
-##2.2 Regression Logistique
+##2.2 Classification Ascendante Hiérachique
 
-Notre problématique étant de voir s'il existe un lien entre la façon d'enseigner et les réponses au test, nous avons voulu essayer de prédire la méthode d'enseignement à l'aide des réponses des élèves avec la regression logistique. Cette méthode permet de modéliser une classification, à l'aide notamment de l'odds ratio <!-- partie à verifier --> 
+N'ayant aucune information au préalable sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appellent aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables. Nous avons aussi utilisé la CAH classique qui consiste à regrouper les individus selon leur points communs cela en partant d'une inertie interclasse maximale, pour arriver à une inertie interclasse de 0. Nous avons utilisé la CAH classique afin de partitionner nos individus dans un but descriptif.
 
-##2.3 Classification Ascendante Hiérachique
+##2.3 Tests statistiques
 
-N'ayant aucune information au préalable sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appellent aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables.
+##2.4 Regression Logistique
 
-##2.4 Arbre de regression 
+Notre problématique étant de voir s'il existe un lien entre la façon d'enseigner et les réponses au test, nous avons voulu essayer de prédire la méthode d'enseignement à l'aide des réponses des élèves avec la régression logistique. Cette méthode permet de modéliser une classification, à l'aide notamment de l'odds ratio <!-- partie à verifier --> 
+
+##2.5 Arbre de regression 
 
 L'arbre de régression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).
 Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction d'un maximum de variables explicative, puis d'élaguer l'arbre afin de minimiser l'erreur, soit l'écart entre la valeur prédite et la valeur réelle. Cela revient donc à faire une régression logistique sur les données, puis d'appliquer l'algorithme de construction d'arbre à partir des résultats.
@@ -113,14 +116,14 @@ Afin de traiter l'information présente dans le jeu de données de la meilleure 
 
 ###3.2.1 Analyse des Correspondances Multiples
 
-La réalisation d'une ACM comme première approche sur le jeu de données permetta de comprendre mieux ce qui différencie les individus dans notre jeu de données et à la fois d'avoir un premier résultats sur la différence entre les deux pédagogies celon cette méthode.
+La réalisation d'une ACM comme première approche sur le jeu de données permis de comprendre mieux ce qui différencie les individus dans notre jeu de données et à la fois d'avoir un premier résultats sur la différence entre les deux pédagogies selon cette méthode.
 
 ```{r include=TRUE}
 plot.MCA(res.mca.globale,invisible = "ind",cex=0.7,selectMod =  "contrib 15", title = "Graphe des modalités sur le plan principal")
 ```
 Le graphe précédent représente les 15 modalités qui contribuent le plus au placement des individus sur le plan principal. On peut donc voir que la dimension 1 oppose des modalités qui concernent la réussite à une question (avec un "_1" à la fin), à droite, à des modalité qui concernent l'échec d'une question (avec un "_0"), à gauche. Plus un élève réussira le questionnaire, plus il se trouvera à droite sur le graphe des individus. Cette interprétation est confirmée par l'ajout de deux individus fictifs : ind_1 et ind_0, qui comporte respectivement des succès à toutes les questions et des échecs à toutes les questions. L'individus ayant réussi en totalité le questionnaire se trouve à droite alors que l'individus ayant raté en totalité le questionnaire se trouve à gauche.
-De plus nous pouvons voir que les questions qui descriminent le plus la réussite ou non de l'examen sont les questions 4 et 8 (de part leur forte contribution).
-Toutefois cette première analyse n'aurat pas permis de différencier les deux pédagogies, la variable projetée en supplémentaire sur le plan principal n'est pas significativement liée à celui ci.
+De plus nous pouvons voir que les questions qui discriminent le plus la réussite ou non de l'examen sont les questions 4 et 8 (de part leur forte contribution).
+Toutefois cette première analyse n’aura pas permis de différencier les deux pédagogies, la variable projetée en supplémentaire sur le plan principal n'est pas significativement liée à celui ci.
 
 Dans un second temps nous avons refait une ACM mais cette fois ci sur les données vectorielles. Cela afin de prendre en compte la succession de certaines questions qui se regroupe en "compétences". 
 ```{r include=TRUE}
@@ -128,27 +131,119 @@ plot.MCA(res.mca.vec,invisible = "ind",cex=0.7,selectMod =  "contrib 15", title 
 ```
 A nouveau la première dimension oppose les individus ayant réussit les totalités (ou la majorité pour certaines) des question à droite à ceux qui n'en ont réussi aucune à gauche. Nous ne pouvons pas non plus observer de différence significative entre les 2 pédagogies. On peut voir cette fois ci avec plus de précision les questions qui discriminent la réussite au questionnaire. Ce sont Les question 4, 3, 8 et 5.
 
-Dans ces deux cas nous avons pu aussi observer un lien significatif entre les variables qualitatives, portant sur les réponses à la question 1 et l'age de l'élève, et le placement des indidivus sur la première dimension. En conséquent on peut dire qu'il existe un lien entre la réussite à l'examen et le fait qu'un enfant sache compter "loin" et dans une moindre meusure, qu'il soit agé.
+Dans ces deux cas nous avons pu aussi observer un lien significatif entre les variables qualitatives, portant sur les réponses à la question 1 et l'age de l'élève, et le placement des individus sur la première dimension. En conséquent on peut dire qu'il existe un lien entre la réussite à l'examen et le fait qu'un enfant sache compter "loin" et dans une moindre mesure, qu'il soit âgé.
 
+Enfin nous avons voulu voir si en classifiant les individus suite à l'ACM nous obtenions des groupes d'individus propre à une pédagogie ou non. Pour cela nous avons utilisé la classification ascendante hiérarchique (CAH).
 
+```{r include=TRUE}
+plot.HCPC(res.hcpcmca,choice = "bar",title = "Diagramme des gains d'inertie")
+```
+
+Nous pouvons observer un "saut" à la troisième classe, donc nous faisons le choix de retenir trois classes pour la CAH. Mais leur composition ne montre aucune sureprésentation d'une pédagogie plus que l'autre. Le test de chi2 entre la variable concernant la pédagogie et celle concernant la classe n'est pas significatif. Une fois de plus cela ne permet donc pas de montrer une liaison entre la pédagogie et ce qui discrimine nos classe. Au final nous obtenions une classe d'individus qui a une majorité d'échecs, une d'individus qui échouent sur les questions 4.2, et une qui d'individus qui réussissent globalement.
 
 ###3.2.2 Analyse en Composantes Principales
 
 La réalisation d'une ACP faisant suite à l'ACM a pour but d'étudier le jeu de données différemment. En effet nous avons étudié cette fois ci le jeu de données concernant les scores. Soit un jeu de données quantitatif. 
+Afin de ne pas perdre d'informations nous avons dans un premier temps observé la matrice des corrélations entre les variables de notre jeu de données. Car plus les variables seront corrélées entre elles, plus l'ACP ne montrera que celles ci.
 
-Réalisation de 3 ACP : 
-1 sur le jeu de données avec les scores sans les q4 (car non numériques)
-1 sur le jeu de données avec seulement deux q8 (car corrélées)
-1 sur le jeu de données avec l'essentiel des q4 et des q8
+```{r include=TRUE}
+corrplot(m.cor,method = "circle",title = "Matrice des corrélations")
+```
+
+Nous avons donc fait le choix de regrouper les questions 8 en 2 groupes, aux vues des résultats. Un groupe comprenant les questions 8.1, 8.2 et 8.3, et un comportant les autres questions 8.
+
+```{r include=TRUE}
+plot.PCA(res.pca.nonindsup,choix = "var",select = "contrib 6",title = "Cercle des corrélations du plan principal")
+```
+La réalisation de l'ACP nous permet donc de voir que les individus se diffèrent sur la première dimension selon les question 2,3, et 8. Alors que la dimension 2 les différents selon les question 7.2 et 6.2. 
+A nouveau nous n'observons pas de lien significatif entre la pédagogie enseignée et le placement des individus sur les axes factoriels.
+
+##3.3 Classification Ascendante Hiérarchique des variables
+
+N'ayant aucune information au préalable sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appellent aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables. La CAH est une méthode de classification qui permet de regrouper des individus sein d’une même classe et qu'ils soient le plus semblables possibles tandis que les classes soient elles ,le plus dissemblables possibles.
 
 
-##3.3 Tests
+Nous allons appliquer cette méthode sur les jeux de données en isolant les pédagogies pour comparer les regroupements.
 
-Une autre méthode permettant de comparer deux pédagogies consiste donc en des tests de signification ou des tests statistiques. Ici, en fonction du type de données, des **tests de proportion** ont été utilisés pour comparer les succès et le **t-test de Student**. Les hypothèses nuls concernent le fait que les réponses à chaque question pour les deux pédagogies sont assez similaires. Donc, si notre hypothèse est rejetée, nous pouvons supposer que les réponses à la question "X"" sont significativement différentes selon le type de pédagogie.
+
+
+```{r, include=TRUE}
+plot(cahG.P1, main="Dendogramme des donnees generales \n de la pedagogie P1")
+rect.hclust(cahG.P1,6)
+```
+
+
+Nous avons d'abord regroupé les résultats du test venant des élèves de la pédagogie 1. Les question T2, T3, T4 et T5 sont regroupées par sous questions. Les deux sous-questions de la T6, T61 et T62 sont très éloignées, de même pour la T71 et T72. On remarque la question T81 n'est pas regroupée avec les autres questions T8 et que T71 est associée aux autres questions T8. 
+
+
+
+
+```{r, include=TRUE}
+plot(cahG.P2, main="Dendogramme des donnees generales \n de la pedagogie P2")
+rect.hclust(cahG.P2,6)
+```
+Pour les résultats du test venant des élèves de la pédagogie 2, Les questions T82 à T89 sont regroupées, la question T81 est regroupée avec T72. Les questions T31, T32 sont regroupées avec les questions T41 et T42 ainsi qu'avec la question T71 et X.quanti. T61 et T62 sont regroupées avec T21, T22 et T23 sont regroupées entre elles et T51 et T52 sont aussi regroupées entre elles.
+On peut d'abord remarquer les similarités avec les regroupements de la première pédagogie, nous avons toujours le couple T51, T52 et le groupe de X.quanti est constitué de de T31, T32, T41, T42 mais cette fois-ci T71 est présent dans le groupe et plus T22 et T23. Cette foi-ci seule la question T81 n'est pas regroupées avec les autres T8 et c'est la question T72 qui scinde le groupe des T8 et plus T71.
+
+
+Maintenant nous allons faire le même type de classification avec les jeux de données de vecteurs et de sommes.
+
+
+```{r, include=TRUE}
+plot(cahVec.P1, main="Dendogramme des données avec les vecteurs\n de la pedagogie P1")
+rect.hclust(cahVec.P1,6)
+```
+
+Pour les résultats du test venant des élèves de la pédagogie 1 avec les données sous forme de vecteurs nous obtenons des regroupement similaires aux précédents. T84, T85, T86, T87, T88, T89 sont regroupées avec T71 comme pour le regroupement des données générales de la pédagogie P1. T82 et T83 sont ensemble mais plus regroupées avec T81 qui est elle regroupée avec T61. T62 et T72 ne sont plus ensembles et semblent même assez éloignées. Les questions T2, T3, le couple (T41,T42) et X.quanti sont regroupées et cette fois-ci la question T5 est aussi regroupée avec.
+
+
+
+```{r include=TRUE}
+plot(cahVec.P2, main="Dendogramme des données avec les vecteurs\n de la pedagogie P2")
+rect.hclust(cahVec.P2,6)
+```
+
+Pour les résultats du test venant des élèves de la pédagogie 2 avec les données sous forme de vecteurs nous avons aussi quelques similarités avec les regroupements des données générales de la pédagogie 2. Les questions T82 à T89 sont regroupées ensemble. T72 et T81 sont seules à définir leur groupe mais elles sont tout de même proche sur le dendrogramme. T61 et T62 sont ensemble, T2 est maintenant regroupée avec X.quanti, T5 et T3. T71 est regroupée avec T41 et T42, ces questions étaient déjà proches sur le dendrogramme des données générales.
+
+
+Maintenant faisons de même avec les données avec sommes.
+
+```{r include=TRUE}
+plot(cahSum.P1, main="Dendogramme des données avec sommes \n de la pedagogie P1")
+rect.hclust(cahSum.P1,6)
+```
+
+Pour les résultats du test venant des élèves de la pédagogie 1 avec les données sous forme de sommes nous retrouvons des regroupements déjà observés comme le groupe des question T84 à T89. T82 et T83 forment un autre groupe mais cette fois T81 est regroupée avec T61 et T62. T1, T2 T3 et T5 sont regroupées ensemble et la T72 forme une classe à elle seule.
+
+
+
+
+```{r include=TRUE}
+
+plot(cahSum.P2, main="Dendogramme des données avec sommes \n de la pedagogie P2")
+rect.hclust(cahSum.P2,6)
+```
+
+Pour les résultats du test venant des élèves de la pédagogie 2 avec les données sous forme de sommes nous retrouvons un dendrogramme identique à celui des données avec vecteurs de la pédagogie 2. 
+On peut en tirer les mêmes conclusions. 
+
+
+On remarque au final quelques différence mineures entre les dendrogrammes obtenues grâce aux données générales et ceux obtenus grâce aux données avec vecteurs mais on dénote surtout plusieurs groupe de variables qui on tendance à ressortir pour chaque type de pédagogie. 
+
+Pour la pédagogie 1 on s'aperçoit que les questions T84 à T89 sont apparemment liées, et que dans certains cas on peut aussi y lier la question T71. Les questions T82 et T83 forment aussi toujours un couple et la T81 semble liée à la T61.
+T1, T2, et T3 sont aussi liées. 
+
+Pour la pédagogie 2 nous observons un groupe constitué des questions T82 à T89. La question T81 semble être liée à la T72. La question T71 semble être liée aux questions T41 et T42. Les questions T1, T2, T3 et T5 semblent aussi être liées.
+
+#4. Résultats
+
+##4.1 Tests statistiques
+
+Une autre méthode permettant de comparer deux pédagogies consiste en des tests de signification ou des tests statistiques. Ici, en fonction du type de données, des **tests de proportion** ont été utilisés permettant de mettre en avant s'il existe un lien significatif entre le succès à une question et la pédagogie enseignée. Et le **t-test de Student** pour permettre de mettre en avant les liens mais cette fois ci entre les regroupements de variables et la pédagogie enseignée. Les hypothèses nuls concernent le fait que les réponses à chaque question pour les deux pédagogies soient assez similaires. Donc, si notre hypothèse est rejetée, nous pouvons supposer que les réponses à la question "X" sont significativement différentes selon le type de pédagogie.
 
 Les premiers tests ont été effectués sur les données originales et ont montré que seule les réponses aux questions *T72, T81, T87, T88, T89* était significativement différente pour chaque pédagogie. Ensuite, les tests ont été effectués sur de nouvelles variables, ce qui ne nous a donné que la variable *audela* comme étant significativement différente.
 
-Après, on peut trouver la visualisation des données mentionnées ci-dessus, c'est-à-dire la visualisation de données significativement différentes. De plus, on voit ici le "gagnant".
+De plus, nous pouvons trouver la visualisation des données mentionnées ci-dessus, c'est-à-dire la visualisation de données significativement différentes. On voit donc nettement la pédagogie qui prime sur une autre ou non. Globalement il semblerait donc que la pédagogie 1 prime sur la pédagogie 2 en matière de réussite.
 
 ```{r include=TRUE}
 # Visualisation of significantly different data
@@ -194,8 +289,9 @@ mtext("Visualisation de données significativement différentes",
 
 ```
 
+##4.2 Régression logistique
 
-##3.4 Arbre de regression
+##4.3 Arbre de regression
 # Conclusion
 	
 	

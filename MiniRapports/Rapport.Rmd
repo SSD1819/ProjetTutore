@@ -125,6 +125,59 @@ Réalisation de 3 ACP :
 1 sur le jeu de données avec l'essentiel des q4 et des q8
 
 
+## Tests
+
+Une autre méthode permettant de comparer deux pédagogies consiste donc en des tests de signification ou des tests statistiques. Ici, en fonction du type de données, des **tests de proportion** ont été utilisés pour comparer les succès et le **t-test de Student**. Les hypothèses nuls concernent le fait que les réponses à chaque question pour les deux pédagogies sont assez similaires. Donc, si notre hypothèse est rejetée, nous pouvons supposer que les réponses à la question "X"" sont significativement différentes selon le type de pédagogie.
+
+Les premiers tests ont été effectués sur les données originales et ont montré que seule les réponses aux questions *T72, T81, T87, T88, T89* était significativement différente pour chaque pédagogie. Ensuite, les tests ont été effectués sur de nouvelles variables, ce qui ne nous a donné que la variable *audela* comme étant significativement différente.
+
+Après, on peut trouver la visualisation des données mentionnées ci-dessus, c'est-à-dire la visualisation de données significativement différentes. De plus, on voit ici le "gagnant".
+
+```{r include=TRUE}
+# Visualisation of significantly different data
+par(mfrow=c(2,3))
+# T72
+T72 <- rbind(table(dataPropreP1$T72),table(dataPropreP2$T72))
+barplot(T72, beside = T, col = c("blue", "green"), main="T72 : P1<P2")
+
+# T81
+T81 <- rbind(table(dataPropreP1$T81),table(dataPropreP2$T81))
+barplot(T81, beside = T, col = c("blue", "green"), main="T81 : P1>P2")
+
+# T87
+T87 <- rbind(table(dataPropreP1$T87),table(dataPropreP2$T87))
+barplot(T87, beside = T, col = c("blue", "green"), main="T87 : P1>P2")
+
+par(xpd=TRUE)
+legend(2.5,-15,c("P1", "P2"), fill =  c("blue", "green"), box.lwd = 1)
+
+# T88
+T88 <- rbind(table(dataPropreP1$T88),table(dataPropreP2$T88))
+barplot(T88, beside = T, col = c("blue", "green"), main="T88 : P1>P2")
+
+# T89
+T89 <- rbind(table(dataPropreP1$T89),table(dataPropreP2$T89))
+barplot(T89, beside = T, col = c("blue", "green"), main="T89 : P1>P2")
+
+# audela
+tt<-table(don.groupeP2$audela)
+tt["5"]=0
+tt1=tt
+for (i in 6:12){
+  tt1[6]=tt[13]
+  tt1[i+1]=tt[i]
+}
+names(tt1)<-c(0:12)
+
+audela <- rbind(table(don.groupeP1$audela),tt1)
+barplot(audela, beside = T, col = c("blue", "green"), main="audela : P1<P2")
+
+mtext("Visualisation de données significativement différentes", 
+      side = 3, line = -16.5, outer = TRUE)
+
+```
+
+
 ##	Arbre de regression
 # Conclusion
 	

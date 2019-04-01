@@ -5,6 +5,8 @@ date: "March 13, 2019"
 output:
   pdf_document:
     toc: true
+    fig_caption: yes
+    fig_crop: false
 ---
 
 ```{r setup, include=FALSE}
@@ -118,25 +120,28 @@ Afin de traiter l'information présente dans le jeu de données de la meilleure 
 
 La réalisation d'une ACM comme première approche sur le jeu de données permis de comprendre mieux ce qui différencie les individus dans notre jeu de données et à la fois d'avoir un premier résultats sur la différence entre les deux pédagogies selon cette méthode.
 
-```{r include=TRUE}
-plot.MCA(res.mca.globale,invisible = "ind",cex=0.7,selectMod =  "contrib 15", title = "Graphe des modalités sur le plan principal")
+```{r include=TRUE, fig.cap="Graphe des modalités sur le plan principal"}
+plot.MCA(res.mca.globale,invisible = "ind",cex=0.7,selectMod =  "contrib 15")
 ```
+
 Le graphe précédent représente les 15 modalités qui contribuent le plus au placement des individus sur le plan principal. On peut donc voir que la dimension 1 oppose des modalités qui concernent la réussite à une question (avec un "_1" à la fin), à droite, à des modalité qui concernent l'échec d'une question (avec un "_0"), à gauche. Plus un élève réussira le questionnaire, plus il se trouvera à droite sur le graphe des individus. Cette interprétation est confirmée par l'ajout de deux individus fictifs : ind_1 et ind_0, qui comporte respectivement des succès à toutes les questions et des échecs à toutes les questions. L'individus ayant réussi en totalité le questionnaire se trouve à droite alors que l'individus ayant raté en totalité le questionnaire se trouve à gauche.
 De plus nous pouvons voir que les questions qui discriminent le plus la réussite ou non de l'examen sont les questions 4 et 8 (de part leur forte contribution).
 Toutefois cette première analyse n’aura pas permis de différencier les deux pédagogies, la variable projetée en supplémentaire sur le plan principal n'est pas significativement liée à celui ci.
 
 Dans un second temps nous avons refait une ACM mais cette fois ci sur les données vectorielles. Cela afin de prendre en compte la succession de certaines questions qui se regroupe en "compétences". 
-```{r include=TRUE}
-plot.MCA(res.mca.vec,invisible = "ind",cex=0.7,selectMod =  "contrib 15", title = "Graphe des modalités sur le plan principal")
+
+```{r include=TRUE, fig.cap = "Graphe des modalités sur le plan principal"}
+plot.MCA(res.mca.vec,invisible = "ind",cex=0.7,selectMod =  "contrib 15")
 ```
+
 A nouveau la première dimension oppose les individus ayant réussit les totalités (ou la majorité pour certaines) des question à droite à ceux qui n'en ont réussi aucune à gauche. Nous ne pouvons pas non plus observer de différence significative entre les 2 pédagogies. On peut voir cette fois ci avec plus de précision les questions qui discriminent la réussite au questionnaire. Ce sont Les question 4, 3, 8 et 5.
 
 Dans ces deux cas nous avons pu aussi observer un lien significatif entre les variables qualitatives, portant sur les réponses à la question 1 et l'age de l'élève, et le placement des individus sur la première dimension. En conséquent on peut dire qu'il existe un lien entre la réussite à l'examen et le fait qu'un enfant sache compter "loin" et dans une moindre mesure, qu'il soit âgé.
 
 Enfin nous avons voulu voir si en classifiant les individus suite à l'ACM nous obtenions des groupes d'individus propre à une pédagogie ou non. Pour cela nous avons utilisé la classification ascendante hiérarchique (CAH).
 
-```{r include=TRUE}
-plot.HCPC(res.hcpcmca,choice = "bar",title = "Diagramme des gains d'inertie")
+```{r include=TRUE,fig.cap = "Diagramme des gains d'inertie"}
+plot.HCPC(res.hcpcmca,choice = "bar")
 ```
 
 Nous pouvons observer un "saut" à la troisième classe, donc nous faisons le choix de retenir trois classes pour la CAH. Mais leur composition ne montre aucune sureprésentation d'une pédagogie plus que l'autre. Le test de chi2 entre la variable concernant la pédagogie et celle concernant la classe n'est pas significatif. Une fois de plus cela ne permet donc pas de montrer une liaison entre la pédagogie et ce qui discrimine nos classe. Au final nous obtenions une classe d'individus qui a une majorité d'échecs, une d'individus qui échouent sur les questions 4.2, et une qui d'individus qui réussissent globalement.
@@ -146,15 +151,16 @@ Nous pouvons observer un "saut" à la troisième classe, donc nous faisons le ch
 La réalisation d'une ACP faisant suite à l'ACM a pour but d'étudier le jeu de données différemment. En effet nous avons étudié cette fois ci le jeu de données concernant les scores. Soit un jeu de données quantitatif. 
 Afin de ne pas perdre d'informations nous avons dans un premier temps observé la matrice des corrélations entre les variables de notre jeu de données. Car plus les variables seront corrélées entre elles, plus l'ACP ne montrera que celles ci.
 
-```{r include=TRUE}
-corrplot(m.cor,method = "circle",title = "Matrice des corrélations")
+```{r include=TRUE,fig.cap = "Matrice des corrélations"}
+corrplot(m.cor,method = "circle")
 ```
 
 Nous avons donc fait le choix de regrouper les questions 8 en 2 groupes, aux vues des résultats. Un groupe comprenant les questions 8.1, 8.2 et 8.3, et un comportant les autres questions 8.
 
-```{r include=TRUE}
-plot.PCA(res.pca.nonindsup,choix = "var",select = "contrib 6",title = "Cercle des corrélations du plan principal")
+```{r include=TRUE, fig.cap = "Cercle des corrélations du plan principal"}
+plot.PCA(res.pca.nonindsup,choix = "var",select = "contrib 6")
 ```
+
 La réalisation de l'ACP nous permet donc de voir que les individus se diffèrent sur la première dimension selon les question 2,3, et 8. Alors que la dimension 2 les différents selon les question 7.2 et 6.2. 
 A nouveau nous n'observons pas de lien significatif entre la pédagogie enseignée et le placement des individus sur les axes factoriels.
 

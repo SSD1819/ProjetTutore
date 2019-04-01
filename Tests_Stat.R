@@ -246,17 +246,8 @@ T89 <- rbind(table(dataPropreP1$T89),table(dataPropreP2$T89))
 barplot(T89, beside = T, col = c("blue", "green"), main="T89 : P1>P2")
 
 # audela
-tt<-table(don.groupeP2$audela)
-tt["5"]=0
-tt1=tt
-for (i in 6:12){
-  tt1[6]=tt[13]
-  tt1[i+1]=tt[i]
-}
-names(tt1)<-c(0:12)
-
-audela <- rbind(table(don.groupeP1$audela),tt1)
-barplot(audela, beside = T, col = c("blue", "green"), main="audela : P1<P2")
+boxplot( audela ~ Pedagogie, data=don.groupe, col = c("blue", "green"), 
+         main="audela : P1<P2")
 
 mtext("Visualisation de données significativement différentes", 
       side = 3, line = -16.5, outer = TRUE)

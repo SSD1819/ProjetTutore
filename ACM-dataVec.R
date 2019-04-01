@@ -32,18 +32,18 @@ plot.MCA(res.mca.vec,invisible = "ind",cex=0.7)
 # res.hcpc$desc.var
 # plot.HCPC(res.hcpc,choice = "bar")
 # 
-# valqualisP1<-filter(valqualis, Pedagogie == "P1")
-# valqualisP1<-valqualisP1[,-1]
-# 
-# valqualisP2<-filter(valqualis, Pedagogie == "P2")
-# valqualisP2<-valqualisP1[,-1]
-# 
-# par(mfrow=c(1,2))
-# res.mca1<-MCA(valqualisP1,quali.sup = 1:2)
-# plot.MCA(res.mca1,choix="ind",invisible = c("ind","quali.sup"))
-# dimdesc(res.mca1)
-# res.mca2<-MCA(valqualisP2,quali.sup = 1:2)
-# plot.MCA(res.mca2,choix="ind",invisible = c("ind","quali.sup"))
+valqualisP1<-filter(valqualis, Pedagogie == "P1")
+valqualisP1<-valqualisP1[,-1]
+
+valqualisP2<-filter(valqualis, Pedagogie == "P2")
+valqualisP2<-valqualisP1[,-1]
+
+par(mfrow=c(1,2))
+res.mca1<-MCA(valqualisP1,quanti.sup = 1:2)
+plot.MCA(res.mca1,choix="ind",invisible = c("ind","quali.sup"))
+dimdesc(res.mca1)
+res.mca2<-MCA(valqualisP2,quanti.sup =  1)
+plot.MCA(res.mca2,choix="ind",invisible = c("ind","quali.sup"))
 #Removing temporary variables and layouts
 # par(mfrow=c(1,1))
 

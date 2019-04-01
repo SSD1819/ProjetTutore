@@ -74,14 +74,14 @@ summary(reg)#modèle non significatif
 
 
 ###Affinage de la variable "audela"
-
-reg<-glm(Pedagogie~T41a+T41b+T41c+T41d+T51+T61, data=dataPropre,family = binomial)
+T1bin<-ifelse(dataPropre$T1>7,1,0)
+reg<-glm(Pedagogie~T23+T31+T52+T62+T86+T87+T88+T89+T42a+T42b+T42c+T42d, data=dataPropre,family = binomial)
 step(reg)
 
 
 ###
 
-reg<-glm(formula = Pedagogie ~ T41b + T41c, family = binomial, data = dataPropre)
+reg<-glm(formula = Pedagogie ~ T41b + T41c + T1bin, family = binomial, data = dataPropre)
 summary(reg)
 
 

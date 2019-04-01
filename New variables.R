@@ -1,21 +1,3 @@
-noms<-c("T23","T31","T52","T62","T86","T87","T88","T89","T42a","T42b","T42c","T42d")
-audela<-rowSums(apply(dataPropre[,noms],2,as.numeric))#somme de chaque question concerné par la var audela
-audela<-audela+ifelse(dataPropre$T1>7,1,0)#ajout de la t1 si ils savent compter au dela de 7
-
-noms<-c("T41a","T41b","T41c","T41d","T51","T61")
-outils<-rowSums(apply(dataPropre[,noms],2,as.numeric))
-
-noms<-c("T21","T22","T32","T81","T82","T83",
-       "T84","T85")
-objet<-rowSums(apply(dataPropre[,noms],2,as.numeric))
-
-##création de la variable classe sur la t1
-Classe_T1<-cut(dataPropre$T1,breaks = c(-1,3,7,11,16,29,100))
-levels(Classe_T1)<-c("0-3","4-7","8-11","12-16","17-29",">29")
-Classe_T1
-don.groupe<-data.frame(Pedagogie=dataPropre$Pedagogie,Classe_T1,audela,outils,objet)
-summary(don.groupe)
-
 ####
 ####chi2 2 à 2 sur au dela
 ####

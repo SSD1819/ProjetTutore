@@ -29,11 +29,8 @@ colnames(don1819) <- colnames(don1718)
 dataMoySec<-cbind(rbind(don1516,don1617,don1718,don1819),c(rep("15/16",length(don1516[,1])),rep("16/17",length(don1617[,1])),rep("17/18",length(don1718[,1])),rep("18/19",length(don1819[,1]))))
 colnames(dataMoySec)[49]<-"annee.scolaire"
 
-#T1Rep doit être numérique
-dataMoySec$T1.Réponse <- as.numeric(dataMoySec$T1.Réponse)
-
 #Transformation des noms de pédagogie (p1 = Conventionnelle | p2 = Montessori)
-dataMoySec$Pédagogie[which(dataMoySec$Pédagogie=="P1"|dataMoySec$Pédagogie=="P2")]<-"Conventionnelle"
+dataMoySec$Pédagogie[which(dataMoySec$Pédagogie=="P1"|dataMoySec$Pédagogie=="Traditionnelle")]<-"Conventionnelle"
 dataMoySec$Pédagogie[which(dataMoySec$Pédagogie=="P2")]<-"Montessori"
 
 #Recherche des variables à une seule modalité
@@ -66,6 +63,32 @@ dataPropre<-dataPropre[,-c(42:46)]
 #Stats univariées sur le jeu de données (table)
 apply(X=dataPropre,MARGIN=2,FUN=TabMod)
 
+#Remplacement du nom de la variable "Type.de.classe" par "type.de.classe"
+names(dataPropre)[which(names(dataPropre)=="Type.de.classe")]<-"type.de.classe"
+
+#On remplace les na des questions par "0"
+posQ<-which(substr(names(dataPropre),1,1)=="T")
+questions<-dataPropre[,posQ]
+questions<-apply(questions,2,as.numeric)
+questions[is.na(questions)]<-0
+
+#Vérification qu'il n'y ait pas l'incohérence 0 -> 1 (sauf pour les Q4)
+vecAnte<-t(apply(questions[,c(2:28)],1,as.numeric))
+colnames(vecAnte)<-colnames(questions[,c(2:28)])
+vecPost<-t(apply(questions[,c(3:29)],1,as.numeric))
+colnames(vecPost)<-colnames(questions[,c(3:29)])
+vecDiff<-vecPost-vecAnte
+
+#Il existe des incohérences, on les recherche
+#On enlève d'abord les questions qui ne peuvent pas avoir d'incohérence
+incoher<-vecDiff[,which(as.numeric(substr(colnames(questions[,3:29]),3,3))>1 & as.numeric(substr(colnames(questions[,3:29]),2,2))!=4 & as.numeric(substr(colnames(questions[,3:29]),2,2))!=8)]
+
+#On récupère ensuite les lignes et colonnes comprtant 1 à la diff entre post et ante
+incoher2<-incoher[which(apply(incoher,1,max)==1),which(apply(incoher,2,max)==1)]
+
+#Remplacement des questions avec NA par questions avec 0 dans datapropre
+dataPropre[,posQ]<-questions
+
 #Changement des variables en facteurs
 nom<-c("Experimentateur","Pédagogie","Classe","Type.de.classe",
        "Sexe..F.ou.M.","Langues","Lateralite",
@@ -82,37 +105,6 @@ for (i in 1:ncol(dataPropre)){
     dataPropre[,i]<-as.factor(dataPropre[,i])
   }
 }
-
-#Question 1 comme variable numérique
-dataPropre$T1.Réponse<-as.numeric(dataPropre$T1.Réponse)
-
-#Re-stats univariées sur datapropre
-summary(dataPropre)
-
-#Remplacement du nom de la variable "Type.de.classe" par "type.de.classe"
-names(dataPropre)[which(names(dataPropre)=="Type.de.classe")]<-"type.de.classe"
-
-#On remplace les na des questions par "0"
-posQ<-which(substr(names(dataPropre),1,1)=="T")
-questions<-dataPropre[,posQ]
-questions[is.na(questions)]<-"0"
-
-#Vérification qu'il n'y ait pas l'incohérence 0 -> 1 (sauf pour les Q4)
-vecAnte<-t(apply(questions[,c(2:28)],1,as.numeric))
-colnames(vecAnte)<-names(questions[,c(2:28)])
-vecPost<-t(apply(questions[,c(3:29)],1,as.numeric))
-colnames(vecPost)<-names(questions[,c(3:29)])
-vecDiff<-vecPost-vecAnte
-
-#Il existe des incohérences, on les recherche
-#On enlève d'abord les questions qui ne peuvent pas avoir d'incohérence
-incoher<-vecDiff[,which(as.numeric(substr(names(questions[,3:29]),3,3))>1 & as.numeric(substr(names(questions[,3:29]),2,2))!=4 & as.numeric(substr(names(questions[,3:29]),2,2))!=8)]
-
-#On récupère ensuite les lignes et colonnes comprtant 1 à la diff entre post et ante
-incoher2<-incoher[which(apply(incoher,1,max)==1),which(apply(incoher,2,max)==1)]
-
-#Remplacement des questions avec NA par questions avec 0 dans datapropre
-dataPropre[,posQ]<-questions
 
 #Correction de la question 2 (enfants 0->1 devient 1->1)
 dataPropre$T21.TOTAL[which(dataPropre$T21.TOTAL=="0" & dataPropre$T22.TOTAL=="1")]<-"1"
@@ -206,6 +198,23 @@ T8.456789<-dataSum[,"T84"]+dataSum[,"T85"]+dataSum[,"T86"]+dataSum[,"T87"]+dataS
 dataSum<-cbind(dataSum, T8.123, "T8.456789"=T8.456789)
 dataSum<-dataSum[,!(names(dataSum) %in% c(cols.123,cols.456789 )) ]
 
+#### Création des nouvelles variables (au dela, outils, etc...)
+noms<-c("T23","T31","T52","T62","T86","T87","T88","T89","T42a","T42b","T42c","T42d")
+audela<-rowSums(apply(dataPropre[,noms],2,as.numeric))#somme de chaque question concerné par la var audela
+audela<-audela+ifelse(dataPropre$T1>7,1,0)#ajout de la t1 si ils savent compter au dela de 7
+
+noms<-c("T41a","T41b","T41c","T41d","T51","T61")
+outils<-rowSums(apply(dataPropre[,noms],2,as.numeric))
+
+noms<-c("T21","T22","T32","T81","T82","T83","T84","T85")
+objet<-rowSums(apply(dataPropre[,noms],2,as.numeric))
+
+##création de la variable classe sur la t1
+Classe_T1<-cut(dataPropre$T1,breaks = c(-1,3,7,11,16,29,100))
+levels(Classe_T1)<-c("0-3","4-7","8-11","12-16","17-29",">29")
+Classe_T1
+don.groupe<-data.frame(Pedagogie=dataPropre$Pedagogie,Classe_T1,audela,outils,objet)
+summary(don.groupe)
 
 #Supression des variables qui ne servent à rien
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))

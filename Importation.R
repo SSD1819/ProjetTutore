@@ -6,27 +6,35 @@ require(stringr)
 #Moyenne section 2015/2016
 mathsJetons_2015_2016 <- read_excel("MathsJetons_2015-2016.xlsx") %>% data.frame(row.names = 2)
 don1516 <- mathsJetons_2015_2016[mathsJetons_2015_2016$Niveau == "MSM",]
-#don1516<-don1516[,!(colnames(don1516)%in%c("Expérimentateur","Type de classe","Langues","Latéralité"))]
 
 #Moyenne section 2016/2017
 mathsJetons_2016_2017 <- read_excel("MathsJetons_2016-2017.xlsx",sheet = "QualiSsAtyp")
 mathsJetons_2016_2017 <- mathsJetons_2016_2017[is.na(mathsJetons_2016_2017[,2]) == FALSE,] %>% data.frame(row.names = 2)
 don1617 <- mathsJetons_2016_2017[mathsJetons_2016_2017$Niveau == "MSM",]
-#don1617<-don1617[,!(colnames(don1617)%in%c("Expérimentateur","Type de classe","Langues","Latéralité"))]
 
 #Moyenne section 2017/2018
 mathsJetons_2017_2018 <- read_excel("MathsJetons_2017-2018.xlsx") %>% data.frame(row.names = 2)
-don1718<-mathsJetons_2017_2018[mathsJetons_2017_2018$Niveau == "MSM",]
-#don1718<-don1718[,!(colnames(don1718)%in%c("Expérimentateur","Type de classe","Langues","Latéralité"))]
+don1718 <- mathsJetons_2017_2018[mathsJetons_2017_2018$Niveau == "MSM",]
+
+#Moyenne section 2018/2019
+don1819 <- read_excel("Jetons2019.xlsx") %>% data.frame(row.names = 2)
 
 #changement de nom des colonnes (pas identique sur don1516 et les autres)
 colnames(don1516)[c(1,9,13,46,47,48)] <- c("Experimentateur","Lateralite","age","T111.TOTAL","T112.TOTAL","T113.TOTAL")
 colnames(don1617)[c(1,9,13,46,47,48)] <- c("Experimentateur","Lateralite","age","T111.TOTAL","T112.TOTAL","T113.TOTAL")
 colnames(don1718)[c(1,9,13,46,47,48)] <- c("Experimentateur","Lateralite","age","T111.TOTAL","T112.TOTAL","T113.TOTAL")
+colnames(don1819) <- colnames(don1718)
 
-#Ensemble des moyennes sections 2015/2016/2017/2018
-dataMoySec<-cbind(rbind(don1516,don1617,don1718),c(rep("15/16",length(don1516[,1])),rep("16/17",length(don1617[,1])),rep("17/18",length(don1718[,1]))))
+#Ensemble des moyennes sections 2015/2016/2017/2018/2019
+dataMoySec<-cbind(rbind(don1516,don1617,don1718,don1819),c(rep("15/16",length(don1516[,1])),rep("16/17",length(don1617[,1])),rep("17/18",length(don1718[,1])),rep("18/19",length(don1819[,1]))))
 colnames(dataMoySec)[49]<-"annee.scolaire"
+
+#T1Rep doit être numérique
+dataMoySec$T1.Réponse <- as.numeric(dataMoySec$T1.Réponse)
+
+#Transformation des noms de pédagogie (p1 = Conventionnelle | p2 = Montessori)
+dataMoySec$Pédagogie[which(dataMoySec$Pédagogie=="P1"|dataMoySec$Pédagogie=="P2")]<-"Conventionnelle"
+dataMoySec$Pédagogie[which(dataMoySec$Pédagogie=="P2")]<-"Montessori"
 
 #Recherche des variables à une seule modalité
 NbMod<-function(x){
@@ -37,10 +45,10 @@ pos1<-which(apply(X=dataMoySec,MARGIN=2,FUN=NbMod)==1)
 #Suppression des variables qui n'ont qu'une modalité et ne servent à rien ("Ecole" et "Niveau")
 dataPropre<-dataMoySec[,-pos1]
 
+#Stats univariées vite fait
 TabMod<-function(x){
   return(table(x))
 }
-
 apply(X=dataPropre,MARGIN=2,FUN=TabMod)
 
 #Correction des modalités de la variable Type.de.classe

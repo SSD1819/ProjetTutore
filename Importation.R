@@ -217,5 +217,8 @@ Classe_T1
 don.groupe<-data.frame(Pedagogie=dataPropre$Pedagogie,Classe_T1,audela,outils,objet)
 summary(don.groupe)
 
+####Exportation des data pour l'app Shiny####
+save(list = c("dataPropre", "dataSum", "dataVec","dataSumOld","dataVecOld"), file = "export/importation.RData")
+
 #Supression des variables qui ne servent à rien
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))

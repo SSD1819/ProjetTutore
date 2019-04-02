@@ -21,6 +21,7 @@ require(ClustOfVar)
 require(rpart)
 require(rpart.plot)
 require(corrplot)
+require(ggplot2)
 ```
 
 ```{r}
@@ -32,7 +33,8 @@ load("../export/Classif_Pedagogie.RData")
 load("../export/classif_questions.RData")
 load("../export/New_Variables.RData")
 load("../export/Tests_Stat.RData")
-
+load("../export/graphexplo.RData")
+load("../export/importation.RData")
 ```
 
 
@@ -80,7 +82,10 @@ Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les ré
 Les données ayant déjà été travaillées l'année dernière le travail nécessaire en datamanagement n'a pas été excessif. Il nous a fallu tout de même renommer certaines variables pour les rendre plus lisibles, supprimer certaines questions car elles n'avaient été posées qu'à certaines classes... 
 Les questions étant posées de manière à ce qu'au sein d'une même tache, il faille réussir les questions dans l'ordre pour passer à celles plus dures nous avions beaucoup de NA dès qu'une question est dure. Nous avons donc décidé de changer ces NA et les considérer comme une question que l'élève n'aurait pas réussit. Et pour ne pas passer à coté de l'information : "n'a pu aller plus loin", nous avons crée deux jeux de données : un vectoriel, un composé de scores correspondant à la somme des questions au sein d'une même tâche.
 
-## Recodage des variables
+##1.5 Recodage des variables
+
+Afin de ne pas influencer notre jugement sur nos résultats, nous avons dans un premier temps décidé de rendre anonyme le pédagogie enseignée pour chaque classe. Chaque pédagogie fut donc renommée en "P1" et "P2". De ce fait nous n'avons pas pu privilégier une pédagogie plus qu'une autre subjectivement parlant. Aux 3 quarts du projet environ, nous avons reçu les données de nouveaux individus, une cinquantaine, et avons par la même occasion décidé d'enlever cet anonymat. Notre travail étant déjà réalisé, seul l'interprétation sur le jeu de données comportant les nouveaux individus en plus importe.
+Comme dit précédemment les questions sont divisées en sous questions, ces questions sont regroupables en groupe : un groupe qu'on appellera "variable au-dela", un groupe "variable outil" puis un groupe "variable objet". Chacun de ces groupes fait appelle à une tache pédagogique en particulier (le calcul, la mémoire...).
 
 
 #2. Méthodologie
@@ -112,7 +117,13 @@ Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction 
 
 #3. Analyse exploratoire
 
-##3.1	Univariée
+##3.1	Univariée | Bivariée
+
+```{r}
+f <- ggplot(mpg, aes(class, hwy))
+plot(scoretotal~dataPropre$Pedagogie)
+```
+
 
 ##3.2	Multivariée
 

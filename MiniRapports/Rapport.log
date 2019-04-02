@@ -1,15 +1,18 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018) (preloaded format=pdflatex 2019.1.11)  2 APR 2019 15:42
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2019.3.14)  2 APR 2019 17:42
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Rapport.tex
 (./Rapport.tex
-LaTeX2e <2018-04-01> patch level 2
-Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
-(/usr/local/texlive/2018/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+LaTeX2e <2018-12-01>
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article
+.cls
+Document Class: article 2018/09/03 v1.4i Standard LaTeX document class
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.
+clo
+File: size10.clo 2018/09/03 v1.4i Standard LaTeX file (size option)
 )
 \c@part=\count80
 \c@section=\count81
@@ -22,7 +25,9 @@ File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
 \abovecaptionskip=\skip41
 \belowcaptionskip=\skip42
 \bibindent=\dimen102
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/lm/lmodern.sty
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/lmodern.s
+ty
 Package: lmodern 2009/10/30 v1.6 Latin Modern Fonts
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
@@ -56,46 +61,60 @@ LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
 (Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/amssymb.sty
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/ams
+symb.sty
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
-(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/ams
+fonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
 \@emptytoks=\toks14
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-)) (/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2017/09/02 v2.17a AMS math features
+))
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsm
+ath.sty
+Package: amsmath 2018/12/01 v2.17b AMS math features
 \@mathmargin=\skip43
 For additional information on amsmath, use the `?' option.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amstext.sty
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amst
+ext.sty
 Package: amstext 2000/06/29 v2.01 AMS text
-(/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsgen.sty
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsg
+en.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
 \@emptytoks=\toks15
 \ex@=\dimen103
-)) (/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsbsy.sty
+))
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsb
+sy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
 \pmbraise@=\dimen104
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/amsmath/amsopn.sty
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amso
+pn.sty
 Package: amsopn 2016/03/08 v2.02 operator names
 )
 \inf@bad=\count88
-LaTeX Info: Redefining \frac on input line 213.
+LaTeX Info: Redefining \frac on input line 223.
 \uproot@=\count89
 \leftroot@=\count90
-LaTeX Info: Redefining \overline on input line 375.
+LaTeX Info: Redefining \overline on input line 385.
 \classnum@=\count91
 \DOTSCASE@=\count92
-LaTeX Info: Redefining \ldots on input line 472.
-LaTeX Info: Redefining \dots on input line 475.
-LaTeX Info: Redefining \cdots on input line 596.
-\Mathstrutbox@=\box26
-\strutbox@=\box27
+LaTeX Info: Redefining \ldots on input line 482.
+LaTeX Info: Redefining \dots on input line 485.
+LaTeX Info: Redefining \cdots on input line 606.
+\Mathstrutbox@=\box27
+\strutbox@=\box28
 \big@size=\dimen105
-LaTeX Font Info:    Redeclaring font encoding OML on input line 712.
-LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
+LaTeX Font Info:    Redeclaring font encoding OML on input line 729.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 730.
 \macc@depth=\count93
 \c@MaxMatrixCols=\count94
 \dotsspace@=\muskip10
@@ -116,14 +135,20 @@ LaTeX Font Info:    Redeclaring font encoding OMS on input line 713.
 \multlinegap=\skip44
 \multlinetaggap=\skip45
 \mathdisplay@stack=\toks19
-LaTeX Info: Redefining \[ on input line 2817.
-LaTeX Info: Redefining \] on input line 2818.
-) (/usr/local/texlive/2018/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+LaTeX Info: Redefining \[ on input line 2844.
+LaTeX Info: Redefining \] on input line 2845.
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ifxetex/if
+xetex.sty
 Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
-) (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/i
+fluatex.sty
 Package: ifluatex 2016/05/16 v1.4 Provides the ifluatex switch (HO)
 Package ifluatex Info: LuaTeX not detected.
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/base/fixltx2e.sty
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fixltx2
+e.sty
 Package: fixltx2e 2016/12/29 v2.1a fixes to LaTeX (obsolete)
 Applying: [2015/01/01] Old fixltx2e package on input line 46.
 
@@ -132,20 +157,30 @@ Package fixltx2e Warning: fixltx2e is not required with releases after 2015
 (fixltx2e)                See the latexrelease package for details.
 
 Already applied: [0000/00/00] Old fixltx2e package on input line 53.
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/base/fontenc.sty
-Package: fontenc 2017/04/05 v2.0i Standard LaTeX package
-(/usr/local/texlive/2018/texmf-dist/tex/latex/base/t1enc.def
-File: t1enc.def 2017/04/05 v2.0i Standard LaTeX file
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc
+.sty
+Package: fontenc 2018/08/11 v2.0j Standard LaTeX package
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/t1enc.d
+ef
+File: t1enc.def 2018/08/11 v2.0j Standard LaTeX file
 LaTeX Font Info:    Redeclaring font encoding T1 on input line 48.
-)) (/usr/local/texlive/2018/texmf-dist/tex/latex/base/inputenc.sty
-Package: inputenc 2018/04/06 v1.3b Input encoding file
+))
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/inputen
+c.sty
+Package: inputenc 2018/08/11 v1.3c Input encoding file
 \inpenc@prehook=\toks20
 \inpenc@posthook=\toks21
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/upquote/upquote.sty
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/upquote/upqu
+ote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
-(/usr/local/texlive/2018/texmf-dist/tex/latex/base/textcomp.sty
-Package: textcomp 2017/04/05 v2.0i Standard LaTeX package
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textcom
+p.sty
+Package: textcomp 2018/08/11 v2.0j Standard LaTeX package
 Package textcomp Info: Sub-encoding information:
 (textcomp)               5 = only ISO-Adobe without \textcurrency
 (textcomp)               4 = 5 + \texteuro
@@ -158,12 +193,16 @@ Package textcomp Info: Sub-encoding information:
 (textcomp)             Family '?' is the default used for unknown fonts.
 (textcomp)             See the documentation for details.
 Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 79.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/base/ts1enc.def
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1enc.
+def
 File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
 Now handling font encoding TS1 ...
 ... processing UTF-8 mapping file for font encoding TS1
-(/usr/local/texlive/2018/texmf-dist/tex/latex/base/ts1enc.dfu
-File: ts1enc.dfu 2018/04/05 v1.2c UTF-8 support for inputenc
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1enc.
+dfu
+File: ts1enc.dfu 2018/10/05 v1.2f UTF-8 support for inputenc
    defining Unicode char U+00A2 (decimal 162)
    defining Unicode char U+00A3 (decimal 163)
    defining Unicode char U+00A4 (decimal 164)
@@ -298,54 +337,49 @@ Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
 Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
 Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
 Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
-)) (/usr/local/texlive/2018/texmf-dist/tex/latex/microtype/microtype.sty
-Package: microtype 2018/01/14 v2.7a Micro-typographical refinements (RS)
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/keyval.sty
+))
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geo
+metry.sty
+Package: geometry 2018/04/16 v5.8 Page Geometry
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/key
+val.sty
 Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
 \KV@toks@=\toks22
 )
-\MT@toks=\toks23
-\MT@count=\count100
-LaTeX Info: Redefining \textls on input line 793.
-\MT@outer@kern=\dimen112
-LaTeX Info: Redefining \textmicrotypecontext on input line 1339.
-\MT@listname@count=\count101
-(/usr/local/texlive/2018/texmf-dist/tex/latex/microtype/microtype-pdftex.def
-File: microtype-pdftex.def 2018/01/14 v2.7a Definitions specific to pdftex (RS)
-
-LaTeX Info: Redefining \lsstyle on input line 913.
-LaTeX Info: Redefining \lslig on input line 913.
-\MT@outer@space=\skip46
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/i
+fpdf.sty
+Package: ifpdf 2018/09/07 v3.3 Provides the ifpdf switch
 )
-Package microtype Info: Loading configuration file microtype.cfg.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/microtype/microtype.cfg
-File: microtype.cfg 2018/01/14 v2.7a microtype main configuration file (RS)
-)) (/usr/local/texlive/2018/texmf-dist/tex/latex/geometry/geometry.sty
-Package: geometry 2018/03/24 v5.7 Page Geometry
-(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2017/03/15 v3.2 Provides the ifpdf switch
-) (/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/ifvtex.sty
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/i
+fvtex.sty
 Package: ifvtex 2016/05/16 v1.6 Detect VTeX and its facilities (HO)
 Package ifvtex Info: VTeX not detected.
 )
-\Gm@cnth=\count102
-\Gm@cntv=\count103
-\c@Gm@tempcnt=\count104
-\Gm@bindingoffset=\dimen113
-\Gm@wd@mp=\dimen114
-\Gm@odd@mp=\dimen115
-\Gm@even@mp=\dimen116
-\Gm@layoutwidth=\dimen117
-\Gm@layoutheight=\dimen118
-\Gm@layouthoffset=\dimen119
-\Gm@layoutvoffset=\dimen120
-\Gm@dimlist=\toks24
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2018/02/06 v6.86b Hypertext links for LaTeX
-(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+\Gm@cnth=\count100
+\Gm@cntv=\count101
+\c@Gm@tempcnt=\count102
+\Gm@bindingoffset=\dimen112
+\Gm@wd@mp=\dimen113
+\Gm@odd@mp=\dimen114
+\Gm@even@mp=\dimen115
+\Gm@layoutwidth=\dimen116
+\Gm@layoutheight=\dimen117
+\Gm@layouthoffset=\dimen118
+\Gm@layoutvoffset=\dimen119
+\Gm@dimlist=\toks23
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyp
+erref.sty
+Package: hyperref 2018/11/30 v6.88e Hypertext links for LaTeX
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/h
+obsub-hyperref.sty
 Package: hobsub-hyperref 2016/05/16 v1.14 Bundle oberdiek, subset hyperref (HO)
 
-(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/h
+obsub-generic.sty
 Package: hobsub-generic 2016/05/16 v1.14 Bundle oberdiek, subset generic (HO)
 Package: hobsub 2016/05/16 v1.14 Construct package bundles (HO)
 Package: infwarerr 2016/05/16 v1.4 Providing info/warning/error messages (HO)
@@ -361,7 +395,7 @@ Package etexcmds Info: Could not find \expanded.
 (etexcmds)             In the latter case, load this package earlier.
 Package: kvsetkeys 2016/05/16 v1.17 Key value parser (HO)
 Package: kvdefinekeys 2016/05/16 v1.4 Define keys (HO)
-Package: pdftexcmds 2018/01/30 v0.27 Utility functions of pdfTeX for LuaTeX (HO
+Package: pdftexcmds 2018/09/10 v0.29 Utility functions of pdfTeX for LuaTeX (HO
 )
 Package pdftexcmds Info: LuaTeX not detected.
 Package pdftexcmds Info: \pdf@primitive is available.
@@ -382,100 +416,126 @@ Package atveryend Info: \enddocument detected (standard20110627).
 Package: atbegshi 2016/06/09 v1.18 At begin shipout hook (HO)
 Package: refcount 2016/05/16 v3.5 Data extraction from label references (HO)
 Package: hycolor 2016/05/16 v1.8 Color options for hyperref/bookmark (HO)
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/auxhook.sty
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/aux
+hook.sty
 Package: auxhook 2016/05/16 v1.4 Hooks for auxiliary files (HO)
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/kvo
+ptions.sty
 Package: kvoptions 2016/05/16 v3.12 Key value format for package options (HO)
 )
-\@linkdim=\dimen121
-\Hy@linkcounter=\count105
-\Hy@pagecounter=\count106
-(/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2018/02/06 v6.86b Hyperref: PDFDocEncoding definition (HO)
+\@linkdim=\dimen120
+\Hy@linkcounter=\count103
+\Hy@pagecounter=\count104
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1
+enc.def
+File: pd1enc.def 2018/11/30 v6.88e Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
-\Hy@SavedSpaceFactor=\count107
-(/usr/local/texlive/2018/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+\Hy@SavedSpaceFactor=\count105
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/
+hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-Package hyperref Info: Hyper figures OFF on input line 4509.
-Package hyperref Info: Link nesting OFF on input line 4514.
-Package hyperref Info: Hyper index ON on input line 4517.
-Package hyperref Info: Plain pages OFF on input line 4524.
-Package hyperref Info: Backreferencing OFF on input line 4529.
+Package hyperref Info: Hyper figures OFF on input line 4519.
+Package hyperref Info: Link nesting OFF on input line 4524.
+Package hyperref Info: Hyper index ON on input line 4527.
+Package hyperref Info: Plain pages OFF on input line 4534.
+Package hyperref Info: Backreferencing OFF on input line 4539.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4762.
-\c@Hy@tempcnt=\count108
-(/usr/local/texlive/2018/texmf-dist/tex/latex/url/url.sty
+Package hyperref Info: Bookmarks ON on input line 4772.
+\c@Hy@tempcnt=\count106
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip11
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 5115.
-\XeTeXLinkMargin=\dimen122
-\Fld@menulength=\count109
-\Field@Width=\dimen123
-\Fld@charsize=\dimen124
-Package hyperref Info: Hyper figures OFF on input line 6369.
-Package hyperref Info: Link nesting OFF on input line 6374.
-Package hyperref Info: Hyper index ON on input line 6377.
-Package hyperref Info: backreferencing OFF on input line 6384.
-Package hyperref Info: Link coloring OFF on input line 6389.
-Package hyperref Info: Link coloring with OCG OFF on input line 6394.
-Package hyperref Info: PDF/A mode OFF on input line 6399.
-LaTeX Info: Redefining \ref on input line 6439.
-LaTeX Info: Redefining \pageref on input line 6443.
-\Hy@abspage=\count110
-\c@Item=\count111
-\c@Hfootnote=\count112
+LaTeX Info: Redefining \url on input line 5125.
+\XeTeXLinkMargin=\dimen121
+\Fld@menulength=\count107
+\Field@Width=\dimen122
+\Fld@charsize=\dimen123
+Package hyperref Info: Hyper figures OFF on input line 6380.
+Package hyperref Info: Link nesting OFF on input line 6385.
+Package hyperref Info: Hyper index ON on input line 6388.
+Package hyperref Info: backreferencing OFF on input line 6395.
+Package hyperref Info: Link coloring OFF on input line 6400.
+Package hyperref Info: Link coloring with OCG OFF on input line 6405.
+Package hyperref Info: PDF/A mode OFF on input line 6410.
+LaTeX Info: Redefining \ref on input line 6450.
+LaTeX Info: Redefining \pageref on input line 6454.
+\Hy@abspage=\count108
+\c@Item=\count109
+\c@Hfootnote=\count110
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2018/02/06 v6.86b Hyperref driver for pdfTeX
-\Fld@listcount=\count113
-\c@bookmark@seq@number=\count114
-(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hpd
+ftex.def
+File: hpdftex.def 2018/11/30 v6.88e Hyperref driver for pdfTeX
+\Fld@listcount=\count111
+\c@bookmark@seq@number=\count112
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/rer
+unfilecheck.sty
 Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary files (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
-\Hy@SectionHShift=\skip47
+\Hy@SectionHShift=\skip46
 )
 Package hyperref Info: Option `unicode' set `true' on input line 30.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2018/02/06 v6.86b Hyperref: PDF Unicode definition (HO)
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pue
+nc.def
+File: puenc.def 2018/11/30 v6.88e Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
 ... no UTF-8 mapping file for font encoding PU
 )
 Package hyperref Info: Option `breaklinks' set `true' on input line 30.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphicx.sty
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/gra
+phicx.sty
 Package: graphicx 2017/06/01 v1.1a Enhanced LaTeX Graphics (DPC,SPQR)
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/graphics.sty
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/gra
+phics.sty
 Package: graphics 2017/06/25 v1.2c Standard LaTeX Graphics (DPC,SPQR)
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics/trig.sty
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/tri
+g.sty
 Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg
+/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 99.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/graphics-def/pdftex.def
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def
+/pdftex.def
 File: pdftex.def 2018/01/08 v1.0l Graphics/color driver for pdftex
 ))
-\Gin@req@height=\dimen125
-\Gin@req@width=\dimen126
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/grffile.sty
+\Gin@req@height=\dimen124
+\Gin@req@width=\dimen125
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/grf
+file.sty
 Package: grffile 2017/06/30 v1.18 Extended file name support for graphics (HO)
 Package grffile Info: Option `multidot' is set to `true'.
 Package grffile Info: Option `extendedchars' is set to `false'.
 Package grffile Info: Option `space' is set to `true'.
 Package grffile Info: \Gin@ii of package `graphicx' fixed on input line 494.
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/parskip/parskip.sty
-Package: parskip 2001/04/09 non-zero parskip adjustments
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/titling/titling.sty
+)
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/titling/titl
+ing.sty
 Package: titling 2009/09/04 v2.1d maketitle typesetting
-\thanksmarkwidth=\skip48
-\thanksmargin=\skip49
-\droptitle=\skip50
+\thanksmarkwidth=\skip47
+\thanksmargin=\skip48
+\droptitle=\skip49
 ) (./Rapport.aux
 
 LaTeX Warning: Label `regression-logistique' multiply defined.
@@ -497,7 +557,9 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 88.
 LaTeX Font Info:    ... okay on input line 88.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 88.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 88.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/base/ts1cmr.fd
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1cmr.
+fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 88.
@@ -506,22 +568,8 @@ LaTeX Font Info:    ... okay on input line 88.
 LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 88.
 LaTeX Font Info:    ... okay on input line 88.
 LaTeX Font Info:    Try loading font information for T1+lmr on input line 88.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/lm/t1lmr.fd
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-LaTeX Info: Redefining \microtypecontext on input line 88.
-Package microtype Info: Generating PDF output.
-Package microtype Info: Character protrusion enabled (level 2).
-Package microtype Info: Using protrusion set `basicmath'.
-Package microtype Info: Automatic font expansion enabled (level 2),
-(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
-Package microtype Info: Using default expansion set `basictext'.
-Package microtype Info: No adjustment of tracking.
-Package microtype Info: No adjustment of interword spacing.
-Package microtype Info: No adjustment of character kerning.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/microtype/mt-cmr.cfg
-File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
-(RS)
 )
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -557,14 +605,18 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\AtBeginShipoutBox=\box28
+\AtBeginShipoutBox=\box29
 Package hyperref Info: Link coloring OFF on input line 88.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/hyperref/nameref.sty
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nam
+eref.sty
 Package: nameref 2016/05/21 v2.44 Cross-referencing by name of section
-(/usr/local/texlive/2018/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/oberdiek/g
+ettitlestring.sty
 Package: gettitlestring 2016/05/16 v1.5 Cleanup title references (HO)
 )
-\c@section@level=\count115
+\c@section@level=\count113
 )
 LaTeX Info: Redefining \ref on input line 88.
 LaTeX Info: Redefining \pageref on input line 88.
@@ -573,22 +625,13 @@ LaTeX Info: Redefining \nameref on input line 88.
 \@outlinefile=\write3
 \openout3 = `Rapport.out'.
 
-(/usr/local/texlive/2018/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
-[Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count116
-\scratchdimen=\dimen127
-\scratchbox=\box29
-\nofMPsegments=\count117
-\nofMParguments=\count118
-\everyMPshowfont=\toks25
-\MPscratchCnt=\count119
-\MPscratchDim=\dimen128
-\MPnumerator=\count120
-\makeMPintoPDFobject=\count121
-\everyMPtoPDFconversion=\toks26
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/eps
+topdf-base.sty
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
-(/usr/local/texlive/2018/texmf-dist/tex/latex/oberdiek/grfext.sty
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/oberdiek/grf
+ext.sty
 Package: grfext 2016/05/16 v1.2 Manage graphics extensions (HO)
 )
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -597,24 +640,32 @@ Package grfext Info: Graphics extension search list:
 (grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPE
 G,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 456.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/latexconfig/
+epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 )) (./Rapport.toc
 LaTeX Font Info:    Try loading font information for OT1+lmr on input line 3.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/lm/ot1lmr.fd
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Try loading font information for OML+lmm on input line 3.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/lm/omllmm.fd
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Try loading font information for OMS+lmsy on input line 3.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/lm/omslmsy.fd
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omslmsy.f
+d
 File: omslmsy.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Try loading font information for OMX+lmex on input line 3.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/lm/omxlmex.fd
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omxlmex.f
+d
 File: omxlmex.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -624,162 +675,174 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <5> on input line 3.
 LaTeX Font Info:    Try loading font information for U+msa on input line 3.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsa.fd
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/ums
+a.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/microtype/mt-msa.cfg
-File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 3.
-(/usr/local/texlive/2018/texmf-dist/tex/latex/amsfonts/umsb.fd
+
+(c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/ums
+b.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-) (/usr/local/texlive/2018/texmf-dist/tex/latex/microtype/mt-msb.cfg
-File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 ))
 \tf@toc=\write4
 \openout4 = `Rapport.toc'.
 
 [1
 
-{/usr/local/texlive/2018/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3]
-<Rapport_files/figure-latex/unnamed-chunk-3-1.pdf, id=135, 440.64626pt x 286.06
-876pt>
+{c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap
+/pdftex.map}] [2] [3]
+<Rapport_files/figure-latex/unnamed-chunk-3-1.pdf, id=135, 469.755pt x 325.215p
+t>
 File: Rapport_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-3-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-3-1.pdf  used
- on input line 257.
-(pdftex.def)             Requested size: 440.65189pt x 286.07242pt.
-[4 <./Rapport_files/figure-latex/unnamed-chunk-3-1.pdf>]
-<Rapport_files/figure-latex/unnamed-chunk-4-1.pdf, id=152, 440.64626pt x 286.06
-876pt>
+ on input line 272.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[4]
+<Rapport_files/figure-latex/unnamed-chunk-4-1.pdf, id=141, 469.755pt x 325.215p
+t>
 File: Rapport_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-4-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-4-1.pdf  used
- on input line 281.
-(pdftex.def)             Requested size: 440.65189pt x 286.07242pt.
-<Rapport_files/figure-latex/unnamed-chunk-5-1.pdf, id=153, 428.60126pt x 286.06
-876pt>
+ on input line 296.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[5 <./Rapport_files/figure-latex/unnamed-chunk-3-1.pdf>]
+<Rapport_files/figure-latex/unnamed-chunk-5-1.pdf, id=155, 469.755pt x 325.215p
+t>
 File: Rapport_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-5-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-5-1.pdf  used
- on input line 302.
-(pdftex.def)             Requested size: 428.6002pt x 286.06805pt.
-[5 <./Rapport_files/figure-latex/unnamed-chunk-4-1.pdf>]
-<Rapport_files/figure-latex/unnamed-chunk-6-1.pdf, id=168, 359.3425pt x 322.203
-75pt>
+ on input line 317.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[6 <./Rapport_files/figure-latex/unnamed-chunk-4-1.pdf>]
+<Rapport_files/figure-latex/unnamed-chunk-6-1.pdf, id=168, 469.755pt x 325.215p
+t>
 File: Rapport_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-6-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-6-1.pdf  used
- on input line 325.
-(pdftex.def)             Requested size: 359.35806pt x 322.2177pt.
-[6 <./Rapport_files/figure-latex/unnamed-chunk-5-1.pdf>]
-<Rapport_files/figure-latex/unnamed-chunk-7-1.pdf, id=182, 440.64626pt x 286.06
-876pt>
+ on input line 340.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[7 <./Rapport_files/figure-latex/unnamed-chunk-5-1.pdf>]
+<Rapport_files/figure-latex/unnamed-chunk-7-1.pdf, id=181, 469.755pt x 325.215p
+t>
 File: Rapport_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-7-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-7-1.pdf  used
- on input line 331.
-(pdftex.def)             Requested size: 440.65189pt x 286.07242pt.
-[7 <./Rapport_files/figure-latex/unnamed-chunk-6-1.pdf> <./Rapport_files/figure
--latex/unnamed-chunk-7-1.pdf>]
-<Rapport_files/figure-latex/unnamed-chunk-8-1.pdf, id=206, 427.5975pt x 236.885
-pt>
+ on input line 346.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[8 <./Rapport_files/figure-latex/unnamed-chunk-6-1.pdf>]
+<Rapport_files/figure-latex/unnamed-chunk-8-1.pdf, id=191, 469.755pt x 325.215p
+t>
 File: Rapport_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-8-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-8-1.pdf  used
- on input line 354.
-(pdftex.def)             Requested size: 427.59645pt x 236.88441pt.
-<Rapport_files/figure-latex/unnamed-chunk-9-1.pdf, id=207, 427.5975pt x 236.885
-pt>
+ on input line 369.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[9 <./Rapport_files/figure-latex/unnamed-chunk-7-1.pdf>]
+<Rapport_files/figure-latex/unnamed-chunk-9-1.pdf, id=205, 469.755pt x 325.215p
+t>
 File: Rapport_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-9-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-9-1.pdf  used
- on input line 363.
-(pdftex.def)             Requested size: 427.59645pt x 236.88441pt.
-[8 <./Rapport_files/figure-latex/unnamed-chunk-8-1.pdf>]
-<Rapport_files/figure-latex/unnamed-chunk-10-1.pdf, id=220, 428.60126pt x 236.8
-85pt>
+ on input line 378.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 378--391
+[][]
+ []
+
+[10 <./Rapport_files/figure-latex/unnamed-chunk-8-1.pdf>]
+<Rapport_files/figure-latex/unnamed-chunk-10-1.pdf, id=216, 469.755pt x 325.215
+pt>
 File: Rapport_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type pdf)
 
 <use Rapport_files/figure-latex/unnamed-chunk-10-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-10-1.pdf  use
-d on input line 380.
-(pdftex.def)             Requested size: 428.6002pt x 236.88441pt.
-[9 <./Rapport_files/figure-latex/unnamed-chunk-9-1.pdf> <./Rapport_files/figure
--latex/unnamed-chunk-10-1.pdf>]
-<Rapport_files/figure-latex/unnamed-chunk-11-1.pdf, id=241, 428.60126pt x 236.8
-85pt>
+d on input line 395.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[11 <./Rapport_files/figure-latex/unnamed-chunk-9-1.pdf>]
+<Rapport_files/figure-latex/unnamed-chunk-11-1.pdf, id=227, 469.755pt x 325.215
+pt>
 File: Rapport_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (type pdf)
 
 <use Rapport_files/figure-latex/unnamed-chunk-11-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-11-1.pdf  use
-d on input line 392.
-(pdftex.def)             Requested size: 428.6002pt x 236.88441pt.
-<Rapport_files/figure-latex/unnamed-chunk-12-1.pdf, id=242, 428.60126pt x 236.8
-85pt>
+d on input line 407.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[12 <./Rapport_files/figure-latex/unnamed-chunk-10-1.pdf>]
+<Rapport_files/figure-latex/unnamed-chunk-12-1.pdf, id=238, 469.755pt x 325.215
+pt>
 File: Rapport_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type pdf)
 
 <use Rapport_files/figure-latex/unnamed-chunk-12-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-12-1.pdf  use
-d on input line 405.
-(pdftex.def)             Requested size: 428.6002pt x 236.88441pt.
-[10 <./Rapport_files/figure-latex/unnamed-chunk-11-1.pdf> <./Rapport_files/figu
-re-latex/unnamed-chunk-12-1.pdf>]
-<Rapport_files/figure-latex/unnamed-chunk-13-1.pdf, id=263, 428.60126pt x 236.8
-85pt>
+d on input line 420.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[13 <./Rapport_files/figure-latex/unnamed-chunk-11-1.pdf>]
+<Rapport_files/figure-latex/unnamed-chunk-13-1.pdf, id=250, 469.755pt x 325.215
+pt>
 File: Rapport_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type pdf)
 
 <use Rapport_files/figure-latex/unnamed-chunk-13-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-13-1.pdf  use
-d on input line 414.
-(pdftex.def)             Requested size: 428.6002pt x 236.88441pt.
-[11 <./Rapport_files/figure-latex/unnamed-chunk-13-1.pdf>]
-<Rapport_files/figure-latex/unnamed-chunk-14-1.pdf, id=277, 429.605pt x 279.042
-5pt>
+d on input line 429.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+[14 <./Rapport_files/figure-latex/unnamed-chunk-12-1.pdf>] [15 <./Rapport_files
+/figure-latex/unnamed-chunk-13-1.pdf>]
+<Rapport_files/figure-latex/unnamed-chunk-14-1.pdf, id=271, 469.755pt x 325.215
+pt>
 File: Rapport_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type pdf)
 
 <use Rapport_files/figure-latex/unnamed-chunk-14-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-14-1.pdf  use
-d on input line 466.
-(pdftex.def)             Requested size: 429.61049pt x 279.04607pt.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 475.
-[12 <./Rapport_files/figure-latex/unnamed-chunk-14-1.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 475.
+d on input line 481.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 490.
+[16 <./Rapport_files/figure-latex/unnamed-chunk-14-1.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 490.
 (./Rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 475.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 475.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 490.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 490.
 Package rerunfilecheck Info: File `Rapport.out' has not changed.
-(rerunfilecheck)             Checksum: F0F55563DB25E73AD51D83B64ACFC161;3637.
+(rerunfilecheck)             Checksum: 53A2B88D18045EE042FADA7000A08403;3660.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 475.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 490.
  ) 
 Here is how much of TeX's memory you used:
- 12110 strings out of 492649
- 179438 string characters out of 6129622
- 282045 words of memory out of 5000000
- 15714 multiletter control sequences out of 15000+600000
- 50374 words of font info for 87 fonts, out of 8000000 for 9000
- 1141 hyphenation exceptions out of 8191
- 32i,5n,38p,421b,393s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/
-texlive/2018/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2018/t
-exmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2018/texmf-dist/
-fonts/enc/dvips/lm/lm-mathsy.enc}</usr/local/texlive/2018/texmf-dist/fonts/type
-1/public/lm/lmbx10.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/l
-m/lmbx12.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmmi10.p
-fb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmmi5.pfb></usr/lo
-cal/texlive/2018/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive
-/2018/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2018/texmf
--dist/fonts/type1/public/lm/lmr17.pfb></usr/local/texlive/2018/texmf-dist/fonts
-/type1/public/lm/lmr5.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/publi
-c/lm/lmr7.pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmri10.
-pfb></usr/local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/
-local/texlive/2018/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on Rapport.pdf (12 pages, 293833 bytes).
+ 10216 strings out of 494562
+ 148567 string characters out of 6175662
+ 211596 words of memory out of 5000000
+ 13717 multiletter control sequences out of 15000+600000
+ 46177 words of font info for 40 fonts, out of 8000000 for 9000
+ 14 hyphenation exceptions out of 8191
+ 28i,5n,32p,421b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
+{c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/l
+m-ec.enc}{c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvi
+ps/lm/lm-rm.enc}{c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/
+enc/dvips/lm/lm-mathit.enc}{c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-
+dist/fonts/enc/dvips/lm/lm-mathsy.enc}<c:/Users/Utilisateur/AppData/Roaming/Tin
+yTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/Utilisateur/AppData/
+Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/Utilisate
+ur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/User
+s/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pf
+b><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/l
+m/lmmi7.pfb><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type
+1/public/lm/lmr10.pfb><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/
+fonts/type1/public/lm/lmr17.pfb><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/t
+exmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/Utilisateur/AppData/Roaming/
+TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/Utilisateur/AppData
+/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/Utilisat
+eur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Use
+rs/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.
+pfb>
+Output written on Rapport.pdf (16 pages, 290210 bytes).
 PDF statistics:
- 347 PDF objects out of 1000 (max. 8388607)
- 282 compressed objects within 3 object streams
- 37 named destinations out of 1000 (max. 500000)
- 10469 words of extra memory for PDF output out of 12000 (max. 10000000)
+ 340 PDF objects out of 1000 (max. 8388607)
+ 283 compressed objects within 3 object streams
+ 41 named destinations out of 1000 (max. 500000)
+ 229 words of extra memory for PDF output out of 10000 (max. 10000000)
 

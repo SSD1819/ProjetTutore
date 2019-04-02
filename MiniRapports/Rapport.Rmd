@@ -5,8 +5,7 @@ date: "March 13, 2019"
 output:
   pdf_document:
     toc: true
-    fig_caption: yes
-    fig_crop: false
+    fig_caption: no
 ---
 
 ```{r setup, include=FALSE}
@@ -101,7 +100,9 @@ N'ayant aucune information au préalable sur le thème des questions, leur regro
 
 ##2.4 Regression Logistique
 
-Notre problématique étant de voir s'il existe un lien entre la façon d'enseigner et les réponses au test, nous avons voulu essayer de prédire la méthode d'enseignement à l'aide des réponses des élèves avec la régression logistique. Cette méthode permet de modéliser une classification, à l'aide notamment de l'odds ratio <!-- partie à verifier --> 
+Notre problématique étant de voir s'il existe un lien entre la façon d'enseigner et les réponses au test, nous avons voulu essayer de prédire la méthode d'enseignement à l'aide des réponses des élèves avec la régression logistique. Cette méthode permet de modéliser une classification, à l'aide notamment de l'odds ratio. Cela revient à calculer la probabilité : $P(1|X)=\frac{e^{b_0+b_1x_1+...+b_jx_j}}{1+e^{b_0+b_1x_1+...+b_jx_j}}$. 
+avec $b_0=ln\frac{p(1)}{p(0)}+a_0$ et $b_j=a_j$.
+<!-- partie à verifier --> 
 
 ##2.5 Arbre de regression 
 

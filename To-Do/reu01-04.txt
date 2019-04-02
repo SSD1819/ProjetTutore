@@ -2,3 +2,6 @@ Expliquer qu'on a levé l'anonymat à un moment dans le projet
 enlever le nom de l'école dans le contexte -- Mais préciser que c'est une école de rep+ --
 mettre formule pour regression logistique et pour arbre de regression
 legende figures rmarkdown
+expliquer ce à quoi correspondent chaque tache et les nouvelles variables (audela etc..)
+CAH : ne pas nommer les questions par "T.." mais par : "regroupement des taches concernants le calcul, le machin..."
+

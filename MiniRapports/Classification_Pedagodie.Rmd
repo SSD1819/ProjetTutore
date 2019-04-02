@@ -9,8 +9,8 @@ output:
 ```{r, include=FALSE, echo=FALSE}
 load("../.RData")
 dataQg.P<-dataPropre[,c(2,13:41)]
-dataQSum.P<-dataSum[,c(2,14:25)]
-dataQVec.P<-dataVec[,c(2,14:25)]
+dataQSum.P<-dataSumOld[,c(2,14:32)]
+dataQVec.P<-dataVecOld[,c(2,14:32)]
 ```
 
 ```{r, echo=FALSE}
@@ -26,14 +26,14 @@ dataQg.P<-data.frame(dataQg.P[,1:7],T41,T42,dataQg.P[,16:30])
 ```{r, echo=FALSE}
 require(ClustOfVar)
 
-dataQg.P1<-dataQg.P[which(dataQg.P["Pedagogie"]=="P1"),]
-dataQg.P2<-dataQg.P[which(dataQg.P["Pedagogie"]=="P2"),]
+dataQg.P1<-dataQg.P[which(dataQg.P["Pedagogie"]=="Conventionnelle"),]
+dataQg.P2<-dataQg.P[which(dataQg.P["Pedagogie"]=="Montessori"),]
 
-dataQSum.P1<-dataQSum.P[which(dataQSum.P["Pedagogie"]=="P1"),]
-dataQSum.P2<-dataQSum.P[which(dataQSum.P["Pedagogie"]=="P2"),]
+dataQSum.P1<-dataQSum.P[which(dataQSum.P["Pedagogie"]=="Conventionnelle"),]
+dataQSum.P2<-dataQSum.P[which(dataQSum.P["Pedagogie"]=="Montessori"),]
 
-dataQVec.P1<-dataQVec.P[which(dataQVec.P["Pedagogie"]=="P1"),]
-dataQVec.P2<-dataQVec.P[which(dataQVec.P["Pedagogie"]=="P2"),]
+dataQVec.P1<-dataQVec.P[which(dataQVec.P["Pedagogie"]=="Conventionnelle"),]
+dataQVec.P2<-dataQVec.P[which(dataQVec.P["Pedagogie"]=="Montessori"),]
 
 ```
 

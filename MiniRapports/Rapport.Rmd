@@ -40,6 +40,10 @@ load("../export/importation.RData")
 
 # Introduction
 
+Pour finaliser notre 1ère année de master nous devons réaliser un projet en lien avec les statistiques et l'analyse de données. C'est pourquoi nous avons choisi ce sujet, l'analyse de pédagogies éducatives au sein d'une école primaire.
+Mélant sciences cognitives, étude statistique et analyse de données nous avons tout au long du semestre mener à bien ce projet en collaboration avec notre tutrice pédagogique et notre référante client.
+
+
 #1. Contexte 
 Ce projet nous à été proposé par l'Institut des sciences cognitives - Marc Jeannerod spécialisé dans en neurosciences. L’UMR 5304 créée en 2007 est un des deux laboratoires de l’Institut des Sciences Cognitives – Marc Jeannerod. L'UMR 5304 est un laboratoire interdisciplinaire qui intègre l'expertise de chercheur des Sciences de la Vie (psychologie cognitive, neurosciences) et de médecine (pédo-psychiatrie, neuro-pédiatrie) avec celle de chercheur des Sciences Humaines et Sociales (linguistique computationelle et théorique et philosophie) pour étudier la nature et la spécificité de l'esprit humain.
 

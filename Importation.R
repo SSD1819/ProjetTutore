@@ -118,6 +118,7 @@ T42<-paste(questions[,11],questions[,12],questions[,13],questions[,14],sep="")
 T5<-paste(questions[,15],questions[,16],sep="")
 questionsVec<-cbind(T1,T2,T3,T41,T42,T5,questions[,17:29])
 dataVec<-cbind(dataPropre[,-posQ],questionsVec)
+dataVec$T1<-T1
 
 #Création du jeu de données où les résultats des question sont des sommes
 questionsNum<-apply(questions,2,as.numeric)
@@ -187,7 +188,7 @@ dataVecOld <- dataVec
 cols.123<-c(names(dataVec[,24:26]))
 cols.456789<-c(names(dataVec[,27:32]))
 T8.123<-apply(dataVec[,cols.123],1, paste , collapse = "" )
-T8.456789<-apply(dataVec[,cols.456789],1, paste , collapse = " " )
+T8.456789<-apply(dataVec[,cols.456789],1, paste , collapse = "" )
 dataVec<-cbind(dataVec, T8.123, T8.456789)
 dataVec <- dataVec[,!(names(dataVec) %in% c(cols.123,cols.456789 )) ]
 

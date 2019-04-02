@@ -119,9 +119,12 @@ Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction 
 
 ##3.1	Univariée | Bivariée
 
-```{r}
-f <- ggplot(mpg, aes(class, hwy))
-plot(scoretotal~dataPropre$Pedagogie)
+```{r include=TRUE, fig.cap="Score total par année par pédagogie"}
+f <- ggplot(df, aes(x=Annee,y=score,fill=Pedagogie)) + 
+  geom_boxplot() +
+  scale_fill_manual(values=c("#999999", "#E69F00", "#56B4E9"))
+  
+f
 ```
 
 

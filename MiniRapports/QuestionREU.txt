@@ -1,0 +1,3 @@
+ACM/ACP : no diff
+REG générale : var diff
+REG groupe : aucune significativité

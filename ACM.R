@@ -1,4 +1,4 @@
-nom<-c("Pedagogie", "T1","AgeNum","T21","T22","T23","T31",
+nom<-c("Pedagogie", "T1","T21","T22","T23","T31",
        "T32","T41a","T41b","T41c","T41d","T42a",
        "T42b","T42c","T42d","T51","T52","T61",
        "T62","T71","T72","T81","T82","T83",
@@ -11,15 +11,15 @@ require(factoextra)
 valquali$T1<- as.factor(valquali$T1)
 
 #ajout ind fictif pour l'aide à l'interprétation
-valquali[nrow(valquali)+1,]<-c("P1",0,rep(0,28))
+valquali[nrow(valquali)+1,]<-c("Montessori","0",rep(0,28))
 rownames(valquali)[nrow(valquali)]<-"ind_0"
-valquali[nrow(valquali)+1,]<-c("P1",0,rep(1,28))
+valquali[nrow(valquali)+1,]<-c("Montessori","0",rep(1,28))
 rownames(valquali)[nrow(valquali)]<-"ind_1"
 summary(valquali)
 
 
 #ACM
-res.mca.globale<-MCA(valquali,quali.sup = 1:2,ind.sup = 157:158)
+res.mca.globale<-MCA(valquali,quali.sup = 1:2,ind.sup = (nrow(valquali)-1):nrow(valquali))
 dimdesc(res.mca.globale)
 summary(res.mca.globale)
 plot.MCA(res.mca.globale,invisible = "ind",cex=0.7,selectMod =  "contrib 15")

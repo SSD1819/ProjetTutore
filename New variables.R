@@ -20,19 +20,17 @@ ifelse(res.chi2>10**-5,"0","1")
 # reg<-glm(Pedagogie~.,data = don.groupe,family = binomial)
 # step(reg) ##on ne garde que la regression avec le regroupement "au dela" les autres ne sont pas significative
 reg<-glm(Pedagogie~audela,data = don.groupe,family = binomial)
-summary(reg)##audela significatif avec la pédagogie
+summary(reg)##Aucune variable ne ressort de la regression logistique pour la pédagogie
 
 ##validation de notre regression
 if (!require("ResourceSelection")) install.packages("ResourceSelection")
-require(ResourceSelection)
+
 hoslem.test(don.groupe$Pedagogie,fitted(reg))#pvalue significative : modèle non adequate
 
 if (!require("pROC")) install.packages("pROC")
-library(pROC)
-
 #prediction des données grâce à la regression sur le meme échantillon
 reg.pred<-predict.glm(reg,type = "response")
-tt<-as.factor(ifelse(reg.pred<0.5,"P1","P2"))
+tt<-as.factor(ifelse(reg.pred<0.5,"Conventionnelle","Montessori"))
 sum(tt==dataPropre$Pedagogie)/nrow(dataPropre)#71% de bonne prédiction
 
 reg.link<-predict(reg, type="link")

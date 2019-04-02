@@ -5,8 +5,6 @@
 if (!require(rpart)) install.packages("rpart")
 if (!require(rpart.plot)) install.packages("rpart.plot")
 
-require(rpart.plot) # Pour la représentation de l’arbre de décision
-
 quest<-c("AgeInt","T1", "T21","T22","T23","T31","T32",
          "T41c","T41b","T41a","T41d","T42a","T42b","T42c","T42d",
          "T51","T52","T61","T62","T71","T72" ,             
@@ -22,9 +20,8 @@ reg<-glm(Pedagogie~T41c+T89,data=don.reg,family = binomial(link = "logit"))#T42c
 reg<-glm(Pedagogie~.,data=don.reg,family = binomial)
 step(reg)
 
-reg<-glm(formula = Pedagogie ~ T22 + T23 + T41c + T41b + T42a + T42b + 
-           T42c + T61 + T72 + T81 + T83 + T88 + T89, family = binomial, 
-         data = don.reg)
+reg<-glm(formula = Pedagogie ~ T21 + T22 + T31 + T41b + T51 + T81 + 
+           T83 + T89, family = binomial, data = don.reg)
 summary(reg)
 #rajouter des interaction + step + courbe roc
 #refaire avec score en quali
@@ -61,8 +58,8 @@ simple_roc <- function(labels, scores){
 if (!require(pROC)) install.packages("pROC")
 #prediction des données grâce à la regression sur le meme échantillon
 reg.pred<-predict.glm(reg,type = "response")
-tt<-as.factor(ifelse(reg.pred<0.5,"P1","P2"))
-sum(tt==dataPropre$Pedagogie)/nrow(dataPropre)#71% de bonne prédiction
+tt<-as.factor(ifelse(reg.pred<0.5,"Conventionnelle","Montessori"))
+sum(tt==dataPropre$Pedagogie)/nrow(dataPropre)#64% de bonne prédiction
 
 reg.link<-predict(reg, type="link")
 
@@ -70,7 +67,7 @@ reg.roc<-roc(response = dataPropre$Pedagogie, predictor = reg.pred, direction="<
 #AUC = 77%
 
 plot.roc(reg.roc,col="yellow", lwd=3)
-glm_simple_roc <- simple_roc(dataPropre$Pedagogie=="P2", reg.link)
+glm_simple_roc <- simple_roc(dataPropre$Pedagogie=="Montessori", reg.link)
 with(glm_simple_roc, points(1 - FPR, TPR, col=1 + labels, cex = 0.7))
 
 require(rpart)

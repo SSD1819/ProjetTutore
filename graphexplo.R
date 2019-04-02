@@ -19,6 +19,8 @@ plot(scoretotal~dataPropre$AnneeScolaire)
 plot(ttc,type="l",ylim = c(10,20),col="red")
 lines(ttm,col="blue")
 
+df<-data.frame(score=scoretotal,Pedagogie=dataPropre$Pedagogie,Annee=dataPropre$AnneeScolaire)
+
 
 
 

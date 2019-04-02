@@ -27,8 +27,8 @@
                                                                                                                                                                                        
 # Creation of dataframes containing only respectively P1 and P2 
 
-dataPropreP1<-subset(dataPropre, Pedagogie == "P1")
-dataPropreP2<-subset(dataPropre, Pedagogie == "P2")
+dataPropreP1<-subset(dataPropre, Pedagogie == "Conventionnelle")
+dataPropreP2<-subset(dataPropre, Pedagogie == "Montessori")
 
 
 #### Tests ####
@@ -57,6 +57,10 @@ rownames(d)[29]<-"T1"
 print(d)
 subset(d, d[,1] < 0.05) #show the rows p-value is smaller than 0.05
 
+#####################
+### T51, T88, T89 ###
+#####################
+
 ### Trying with less option ###
 
 tt1<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "less")
@@ -79,7 +83,9 @@ rownames(d1)[29]<-"T1"
 print(d1)
 subset(d1, d1[,1] < 0.05) 
 
-### NO NEW RESULTS ###
+################
+### T21, T51 ###
+################
 
 ### Trying with greater option ###
 
@@ -103,14 +109,16 @@ rownames(d2)[29]<-"T1"
 print(d2)
 subset(d2, d2[,1] < 0.05) 
 
-### Here we have ONLY T81 added ###
+##########################
+### T81, T87, T88, T89 ###
+##########################
 
 
 ##############################################
 ### Testing with new variables (two.sided) ###
 
-don.groupeP1<-subset(don.groupe, Pedagogie == "P1")
-don.groupeP2<-subset(don.groupe, Pedagogie == "P2")
+don.groupeP1<-subset(don.groupe, Pedagogie == "Conventionnelle")
+don.groupeP2<-subset(don.groupe, Pedagogie == "Montessori")
 
 m<-cbind(matrix(table(don.groupeP1[,2])), matrix(table(don.groupeP2[,2])))
 pt<-prop.test(m, alternative = "two.sided", correct = FALSE)
@@ -222,9 +230,13 @@ df
 
 # Visualisation of significantly different data
 par(mfrow=c(2,3))
-# T72
-T72 <- rbind(table(dataPropreP1$T72),table(dataPropreP2$T72))
-barplot(T72, beside = T, col = c("blue", "green"), main="T72 : P1<P2")
+# T21
+T21 <- rbind(table(dataPropreP1$T21),table(dataPropreP2$T21))
+barplot(T21, beside = T, col = c("blue", "green"), main="T21 : P1<P2")
+
+# T51
+T51 <- rbind(table(dataPropreP1$T51),table(dataPropreP2$T51))
+barplot(T51, beside = T, col = c("blue", "green"), main="T51 : P1<P2")
 
 # T81
 T81 <- rbind(table(dataPropreP1$T81),table(dataPropreP2$T81))
@@ -245,17 +257,15 @@ barplot(T88, beside = T, col = c("blue", "green"), main="T88 : P1>P2")
 T89 <- rbind(table(dataPropreP1$T89),table(dataPropreP2$T89))
 barplot(T89, beside = T, col = c("blue", "green"), main="T89 : P1>P2")
 
-# audela
-boxplot( audela ~ Pedagogie, data=don.groupe, col = c("blue", "green"), 
-         main="audela : P1<P2")
-
 mtext("Visualisation de données significativement différentes", 
       side = 3, line = -16.5, outer = TRUE)
 
 
 #save the data for report
-save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/teststat.RData")
+save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")),
+     file = "export/Tests_Stat.RData")
 
 # keeping initial environment
 par(mfrow=c(1,1))
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))
+

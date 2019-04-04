@@ -19,33 +19,33 @@ ifelse(res.chi2>10**-5,"0","1")
 ###regression sur les nvx groupes###
 # reg<-glm(Pedagogie~.,data = don.groupe,family = binomial)
 # step(reg) ##on ne garde que la regression avec le regroupement "au dela" les autres ne sont pas significative
-reg<-glm(Pedagogie~audela,data = don.groupe,family = binomial)
-summary(reg)##Aucune variable ne ressort de la regression logistique pour la pédagogie
+reg.nul<-glm(Pedagogie~audela,data = don.groupe,family = binomial)
+summary(reg.nul)##Aucune variable ne ressort de la regression logistique pour la pédagogie
 
 ##validation de notre regression
 if (!require("ResourceSelection")) install.packages("ResourceSelection")
 
-hoslem.test(don.groupe$Pedagogie,fitted(reg))#pvalue significative : modèle non adequate
+hoslem.test(don.groupe$Pedagogie,fitted(reg.nul))#pvalue significative : modèle non adequate
 
 if (!require("pROC")) install.packages("pROC")
 #prediction des données grâce à la regression sur le meme échantillon
-reg.pred<-predict.glm(reg,type = "response")
-tt<-as.factor(ifelse(reg.pred<0.5,"Conventionnelle","Montessori"))
+reg.pred.nul<-predict.glm(reg.nul,type = "response")
+tt<-as.factor(ifelse(reg.pred.nul<0.5,"Conventionnelle","Montessori"))
 sum(tt==dataPropre$Pedagogie)/nrow(dataPropre)#71% de bonne prédiction
 
-reg.link<-predict(reg, type="link")
+reg.link.nul<-predict(reg.nul, type="link")
 
-reg.roc<-roc(response = dataPropre$Pedagogie, predictor = reg.pred, direction="<",auc = TRUE)
+reg.roc.nul<-roc(response = dataPropre$Pedagogie, predictor = reg.pred.nul, direction="<",auc = TRUE)
 #AUC = 77%
 
-plot.roc(reg.roc,col="blue", lwd=3)
+plot.roc(reg.roc.nul,col="blue", lwd=3)
 
 #réalisation du modèle sur un échantillon
 train.id<-sample(seq_len(nrow(don.groupe)),size = 109)
 don.train<-don.groupe[train.id,]
 don.test<-don.groupe[-train.id,]
-reg<-glm(Pedagogie~Classe_T1,data = don.train,family = binomial)
-summary(reg)#modèle non significatif 
+reg.nul<-glm(Pedagogie~Classe_T1,data = don.train,family = binomial)
+summary(reg.nul)#modèle non significatif 
 
 ##
 
@@ -55,14 +55,14 @@ summary(reg)#modèle non significatif
 
 ###Affinage de la variable "audela"
 T1bin<-ifelse(dataPropre$T1>7,1,0)
-reg<-glm(Pedagogie~T23+T31+T52+T62+T86+T87+T88+T89+T42a+T42b+T42c+T42d, data=dataPropre,family = binomial)
-step(reg)
+reg.nul<-glm(Pedagogie~T23+T31+T52+T62+T86+T87+T88+T89+T42a+T42b+T42c+T42d, data=dataPropre,family = binomial)
+step(reg.nul)
 
 
 ###
 
-reg<-glm(formula = Pedagogie ~ T41b + T41c + T1bin, family = binomial, data = dataPropre)
-summary(reg)
+reg.nul<-glm(formula = Pedagogie ~ T41b + T41c + T1bin, family = binomial, data = dataPropre)
+summary(reg.nul)
 
 
 simple_roc <- function(labels, scores){
@@ -73,17 +73,17 @@ simple_roc <- function(labels, scores){
 
 if (!require(pROC)) install.packages("pROC")
 #prediction des données grâce à la regression sur le meme échantillon
-reg.pred<-predict.glm(reg,type = "response")
-tt<-as.factor(ifelse(reg.pred<0.5,"P1","P2"))
+reg.pred.nul<-predict.glm(reg.nul,type = "response")
+tt<-as.factor(ifelse(reg.pred.nul<0.5,"P1","P2"))
 sum(tt==dataPropre$Pedagogie)/nrow(dataPropre)#71% de bonne prédiction
 
-reg.link<-predict(reg, type="link")
+reg.link.nul<-predict(reg, type="link")
 
-reg.roc<-roc(response = dataPropre$Pedagogie, predictor = reg.pred, direction="<",auc = TRUE)
+reg.roc.nul<-roc(response = dataPropre$Pedagogie, predictor = reg.pred.nul, direction="<",auc = TRUE)
 #AUC = 77%
 
-plot.roc(reg.roc,col="yellow", lwd=3)
-glm_simple_roc <- simple_roc(dataPropre$Pedagogie=="P2", reg.link)
+plot.roc(reg.roc.nul,col="yellow", lwd=3)
+glm_simple_roc.nul <- simple_roc(dataPropre$Pedagogie=="P2", reg.link.nul)
 with(glm_simple_roc, points(1 - FPR, TPR, col=1 + labels, cex = 0.7))
 
 

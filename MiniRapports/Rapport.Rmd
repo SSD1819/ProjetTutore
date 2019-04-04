@@ -2,10 +2,13 @@
 title: "Projet Cogmont"
 author: "Azat, Lucas, Matthieu, Etienne"
 date: "March 13, 2019"
+header-includes: #allows you to add in your own Latex packages
+- \usepackage{float} #use the 'float' package
+- \floatplacement{figure}{H} #make every figure with caption = h
 output:
   pdf_document:
     toc: true
-    fig_caption: no
+    fig_caption: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -32,6 +35,7 @@ load("../export/ACM-datavec.RData")
 load("../export/Classif_Pedagogie.RData")
 load("../export/classif_questions.RData")
 load("../export/New_Variables.RData")
+load("../export/arbre_deci.RData")
 load("../export/Tests_Stat.RData")
 load("../export/graphexplo.RData")
 load("../export/importation.RData")
@@ -41,7 +45,8 @@ load("../export/importation.RData")
 # Introduction
 
 Pour finaliser notre 1ère année de master nous devons réaliser un projet en lien avec les statistiques et l'analyse de données. C'est pourquoi nous avons choisi ce sujet, l'analyse de pédagogies éducatives au sein d'une école primaire.
-Mélant sciences cognitives, étude statistique et analyse de données nous avons tout au long du semestre mener à bien ce projet en collaboration avec notre tutrice pédagogique et notre référante client.
+Mêlant sciences cognitives, étude statistique et analyse de données nous avons tout au long du semestre mener à bien ce projet en collaboration avec notre tutrice pédagogique et notre référante client.
+Nous avons reçu les résultats d'élèves d'une école primaire sous forme de tableur que nous avons ensuite trié pour ne garder que les années d'études avec suffisamment de promotion pour pouvoir faire une études transversale. Ensuite nous avons nettoyer les données et commencer l'analyse.
 
 
 #1. Contexte
@@ -120,17 +125,15 @@ L'arbre de régression est une technique d'apprentissage supervisé, qui permet 
 Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction d'un maximum de variables explicatives, puis d'élaguer l'arbre afin de minimiser l'erreur, soit l'écart entre la valeur prédite et la valeur réelle. Cela revient donc à faire une régression logistique sur les données, puis d'appliquer l'algorithme de construction d'arbre à partir des résultats.
 
 #3. Analyse exploratoire
-
+<!--\newpage-->
 ##3.1	Univariée | Bivariée
 
 ```{r include=TRUE, fig.cap="Score total par année par pédagogie"}
-f <- ggplot(df, aes(x=Annee,y=score,fill=Pedagogie)) + 
+ggplot(df, aes(x=Annee,y=score,fill=Pedagogie)) + 
   geom_boxplot() +
   scale_fill_manual(values=c("#999999", "#E69F00", "#56B4E9"))
-  
-f
 ```
-
+En ne regardant que certaines années on peut voir clairement une différence entre la pédagogie montessorienne et la pédagogie conventionnelle vis à vis du nombre de bonnes réponses. Toutefois lorsqu'on regarde la vue d'ensemble, on peut voir que celon les années, une fois la pédagogie montessorienne est supérieur à la conventionnelle, parfois c'est l'inverse. On peut donc s'attendre à ce qu'on ne puisse pas prédire quelle pédagogie permet d'obtenir un meilleur score global.
 
 ##3.2	Multivariée
 
@@ -308,6 +311,20 @@ mtext("Visualisation de données significativement différentes",
 ```
 
 ##4.2 Régression logistique
+
+La réalisation d'une régression logistique permettrait ici idéalement de prédire à quelle pédagogie appartient un élève en fonction de ses réponses au questionnaire. Nous avons donc réalisé la regression sur dans un premier temps sur toutes les variables du jeu de données, pour affiner ensuite et arriver à un modèle correct.
+On obtient au final un modèle composé des questions suivantes : Q21, Q22, Q31, Q41b, Q51, Q81, Q83, Q89. En soit on pourrait donc dire qu'on est capable de différencier les 2 pédagogies en fonction de leurs réponses sur les questions portants sur le dénombrement d’une collection, de la constitution d'une collection d'objets, du surcomptage (plus particulièrement de la capacité à compter 2 + 3), la création d'une collection équipotente et la reconnaissance d'une écriture chiffrée. Cela signifirait donc que chacune de ces "taches" de ce questionnaire a son importance excepté les taches 6 et 7 concernants la comparaison de deux collections et la réunion de deux collections. 
+
+Afin de valider notre modèle nous réalisons une courbe ROC. Méthode permettant de représenter le taux de bonne / fausse prédiction du modèle, plus ce taux est proche de 100% plus le modèle est bon, plus il se rapproche des 50% plus il est aléatoire et donc inutile.
+
+
+```{r include=TRUE,fig.cap = "Courbe ROC"}
+plot.roc(reg.roc,col="yellow", lwd=3)
+glm_simple_roc <- simple_roc(dataPropre$Pedagogie=="Montessori", reg.link)
+with(glm_simple_roc, points(1 - FPR, TPR, col=1 + labels, cex = 0.7))
+
+```
+Nous obtenons finalement un AUC de 70%, ce qui équivaut à un modèle moyen. 
 
 ##4.3 Arbre de regression
 # Conclusion

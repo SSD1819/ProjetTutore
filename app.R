@@ -14,7 +14,6 @@ load("export/ACP.RData")
 
 #### Règles d'association ------------------------------#
 load("export/ReglesAssociations.RData")
-rules <- apriori(datAssos, parameter = list(supp = 0.7, conf = 0.7, minlen = 2, maxlen = 10, target = "rules"))
 
 #---------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -123,13 +122,14 @@ ui<-navbarPage(
       sidebarPanel(
         
         #Paramètres des règles d'associations
-        numericInput("conf", "Confidence", 0.5, min = 0, max = 1),
+        numericInput("supp", "Support", 0.7, min = 0, max = 0.99),
+        numericInput("conf", "Confidence", 0.7, min = 0, max = 0.99),
         numericInput("lift", "Lift", 1.15, min = 1, max = 100),
         numericInput("minlen", "Longueur minimum règle", 1, min = 1, max = 5),
         numericInput("maxlen", "Longueur maximum règle", 2, min = 1, max = 5),
         
         #Variables à exclure
-        checkboxGroupInput("exclu","Variables à exclure",colnames(datAssos))
+        checkboxGroupInput("inclus","Variables prises en compte",colnames(datAssos),selected=colnames(datAssos))
         
       ),
       
@@ -194,17 +194,16 @@ server <- function(input, output) {
   })   
   
   #### Règles d'associations ####-------------------------------------------------------#
+  
   #preparation des règles
-
+  ruls <- reactive({
+    ruls <- apriori(datAssos[,input$inclus], parameter = list(supp = as.numeric(input$supp), conf = as.numeric(input$conf), minlen = as.numeric(input$minlen), maxlen = as.numeric(input$maxlen), target = "rules"))
+    ruls
+  })
   
-  #rules_loft <- sort (rules, by="lift", decreasing=TRUE)
-
-  
-  #les règles
+  #Affichage des règles
   output$rules <- renderDataTable({
-    
-    #Affichage des règles
-    inspect(rules)
+    inspect(ruls())
   })
   
   

@@ -230,36 +230,37 @@ df
 
 # Visualisation of significantly different data
 par(mfrow=c(2,3))
+
 # T21
 T21 <- rbind(table(dataPropreP1$T21),table(dataPropreP2$T21))
-barplot(T21, beside = T, col = c("blue", "green"), main="T21 : P1<P2")
+barplot(T21, beside = T, col = c("blue", "green"), main="T21 : C < M")
+
+mtext("Les différences significatives", 
+      side = 3, line = -16.5, outer = TRUE)
 
 # T51
 T51 <- rbind(table(dataPropreP1$T51),table(dataPropreP2$T51))
-barplot(T51, beside = T, col = c("blue", "green"), main="T51 : P1<P2")
+barplot(T51, beside = T, col = c("blue", "green"), main="T51 : C < M")
 
 # T81
 T81 <- rbind(table(dataPropreP1$T81),table(dataPropreP2$T81))
-barplot(T81, beside = T, col = c("blue", "green"), main="T81 : P1>P2")
+barplot(T81, beside = T, col = c("blue", "green"), main="T81 : C > M")
+
+par(xpd=TRUE)
+temp <- legend(-1, -35.5, c("Conventionnelle", "Montessori"), 
+               fill =  c("blue", "green"), bty = "n")
 
 # T87
 T87 <- rbind(table(dataPropreP1$T87),table(dataPropreP2$T87))
-barplot(T87, beside = T, col = c("blue", "green"), main="T87 : P1>P2")
-
-par(xpd=TRUE)
-legend(2.5,-15,c("P1", "P2"), fill =  c("blue", "green"), box.lwd = 1)
+barplot(T87, beside = T, col = c("blue", "green"), main="T87 : C > M")
 
 # T88
 T88 <- rbind(table(dataPropreP1$T88),table(dataPropreP2$T88))
-barplot(T88, beside = T, col = c("blue", "green"), main="T88 : P1>P2")
+barplot(T88, beside = T, col = c("blue", "green"), main="T88 : C > M")
 
 # T89
 T89 <- rbind(table(dataPropreP1$T89),table(dataPropreP2$T89))
-barplot(T89, beside = T, col = c("blue", "green"), main="T89 : P1>P2")
-
-mtext("Visualisation de données significativement différentes", 
-      side = 3, line = -16.5, outer = TRUE)
-
+barplot(T89, beside = T, col = c("blue", "green"), main="T89 : C > M")
 
 #save the data for report
 save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")),

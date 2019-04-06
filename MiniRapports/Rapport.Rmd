@@ -114,6 +114,11 @@ N'ayant aucune information au préalable sur le thème des questions, leur regro
 
 ##2.3 Tests statistiques
 
+Trois différents types de test statistique ont été effectué pour cette analyse. 
+Premièrement un test du d'indépendance Chi2 qui permet de déterminer l'existence d'une relation de dépendance entre deux variables au sein d'un effectif. Si il  a dépendance il ne peut en aucun cas indiquer le sens de cette relation. Nous l'avons utiliser pour déterminer si il y avait une relation entre chaque question.
+Deuxièmement un test de proportionnalité, qui permet de tester une différence de proportion entre deux effectifs. Nous avons effectuer ce test pour vérifier la proportion de bonne réponse chez les élèves de pédagogie 1 et pédagogie 2.
+Et finalement le test de student qui permet de vérifier si la moyenne de deux échantillons est significativement différente. Nous avons utilisé ce test pour vérifier la moyenne entre les deux pédagogie pour certains regroupements de notes.
+
 ##2.4 Regression Logistique
 
 Notre problématique étant de voir s'il existe un lien entre la façon d'enseigner et les réponses au test, nous avons voulu essayer de prédire la méthode d'enseignement à l'aide des réponses des élèves avec la régression logistique. Cette méthode permet de modéliser une classification, à l'aide notamment de l'odds ratio. Cela revient à calculer la probabilité : $P(1|X)=\frac{e^{b_0+b_1x_1+...+b_jx_j}}{1+e^{b_0+b_1x_1+...+b_jx_j}}$. 
@@ -133,6 +138,7 @@ ggplot(df, aes(x=Annee,y=score,fill=Pedagogie)) +
   geom_boxplot() +
   scale_fill_manual(values=c("#999999", "#E69F00", "#56B4E9"))
 ```
+
 En ne regardant que certaines années on peut voir clairement une différence entre la pédagogie montessorienne et la pédagogie conventionnelle vis à vis du nombre de bonnes réponses. Toutefois lorsqu'on regarde la vue d'ensemble, on peut voir que celon les années, une fois la pédagogie montessorienne est supérieur à la conventionnelle, parfois c'est l'inverse. On peut donc s'attendre à ce qu'on ne puisse pas prédire quelle pédagogie permet d'obtenir un meilleur score global.
 
 ##3.2	Multivariée
@@ -211,6 +217,7 @@ Nous avons d'abord regroupé les résultats du test venant des élèves de la p�
 plot(cahG.P2, main="Dendogramme des donnees generales \n de la pedagogie P2")
 rect.hclust(cahG.P2,6)
 ```
+
 Pour les résultats du test venant des élèves de la pédagogie 2, Les questions T82 à T89 sont regroupées, la question T81 est regroupée avec T72. Les questions T31, T32 sont regroupées avec les questions T41 et T42 ainsi qu'avec la question T71 et X.quanti. T61 et T62 sont regroupées avec T21, T22 et T23 sont regroupées entre elles et T51 et T52 sont aussi regroupées entre elles.
 On peut d'abord remarquer les similarités avec les regroupements de la première pédagogie, nous avons toujours le couple T51, T52 et le groupe de X.quanti est constitué de de T31, T32, T41, T42 mais cette fois-ci T71 est présent dans le groupe et plus T22 et T23. Cette foi-ci seule la question T81 n'est pas regroupées avec les autres T8 et c'est la question T72 qui scinde le groupe des T8 et plus T71.
 
@@ -324,6 +331,7 @@ glm_simple_roc <- simple_roc(dataPropre$Pedagogie=="Montessori", reg.link)
 with(glm_simple_roc, points(1 - FPR, TPR, col=1 + labels, cex = 0.7))
 
 ```
+
 Nous obtenons finalement un AUC de 70%, ce qui équivaut à un modèle moyen. 
 
 ##4.3 Arbre de regression

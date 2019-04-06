@@ -114,15 +114,10 @@ N'ayant aucune information au préalable sur le thème des questions, leur regro
 
 ##2.3 Tests statistiques
 
-<<<<<<< HEAD
-Trois différents types de test statistique ont été effectué pour cette analyse. 
+Un test statistique est une procédure de décision entre deux hypothèses. Il s'agit d'une démarche consistant à rejeter ou à ne pas rejeter une hypothèse statistique, appelée hypothèse nulle, en fonction d'un jeu de données. Pour le projet nous avons utilisé le test paramétrique. Un test paramétrique est un test pour lequel on fait une hypothèse paramétrique sur la distribution des données sous H0. Les hypothèses du test concernent alors les paramètres de cette distribution. En fonction du type de données, nous avons utilisé le t-test de Student et le test de proportion de succès.Trois différents types de test statistique ont été effectué pour cette analyse. 
 Premièrement un test du d'indépendance Chi2 qui permet de déterminer l'existence d'une relation de dépendance entre deux variables au sein d'un effectif. Si il  a dépendance il ne peut en aucun cas indiquer le sens de cette relation. Nous l'avons utiliser pour déterminer si il y avait une relation entre chaque question.
 Deuxièmement un test de proportionnalité, qui permet de tester une différence de proportion entre deux effectifs. Nous avons effectuer ce test pour vérifier la proportion de bonne réponse chez les élèves de pédagogie 1 et pédagogie 2.
 Et finalement le test de student qui permet de vérifier si la moyenne de deux échantillons est significativement différente. Nous avons utilisé ce test pour vérifier la moyenne entre les deux pédagogie pour certains regroupements de notes.
-=======
-Un test statistique est une procédure de décision entre deux hypothèses. Il s'agit d'une démarche consistant à rejeter ou à ne pas rejeter une hypothèse statistique, appelée hypothèse nulle, en fonction d'un jeu de données. 
-Pour le projet nous avons utilisé le test paramétrique. Un test paramétrique est un test pour lequel on fait une hypothèse paramétrique sur la distribution des données sous H0. Les hypothèses du test concernent alors les paramètres de cette distribution. En fonction du type de données, nous avons utilisé le t-test de Student et le test de proportion de succès.
->>>>>>> eef7d15a4e1981cd2ef40cbeca66911f2ce20149
 
 ##2.4 Regression Logistique
 

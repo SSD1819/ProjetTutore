@@ -96,7 +96,7 @@ rect.hclust(cahSum.P2,6)
 # rect.hclust(cahSum.P2,6)
 
 ####Exportation des data pour l'app Shiny####
-save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/Classif_Pedagogie.RData")
+save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld","cahG.P1","cahG.P2","cahVec.P1","cahVec.P2","cahSum.P1","cahSum.P2")), file = "export/Classif_Pedagogie.RData")
 
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))
 

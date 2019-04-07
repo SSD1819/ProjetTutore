@@ -21,6 +21,19 @@ lines(ttm,col="blue")
 
 df<-data.frame(score=scoretotal,Pedagogie=dataPropre$Pedagogie,Annee=dataPropre$AnneeScolaire)
 
+noms<-c("Pedagogie", "T1","T2","T3",
+        "T5","T61","T62","T71","T72",
+        "T8.123","T8.456789")
+score<-dataSum[noms]
+boxplot(score[,-c(1,2)])
+
+###changement de la df pour ggplot2
+# install.packages("reshape")
+library(reshape)
+md.df <- melt(score, id=(c("Pedagogie", "T1")))
+
+ggplot(md.df,aes(variable,value)) + 
+  geom_boxplot()
 
 
 

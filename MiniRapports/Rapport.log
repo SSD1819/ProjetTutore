@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2019.3.14)  6 APR 2019 13:18
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2019.3.14)  7 APR 2019 15:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -701,98 +701,97 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 [1
 
 {c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-var/fonts/map/pdftex/updmap
-/pdftex.map}] [2] [3]
-<Rapport_files/figure-latex/unnamed-chunk-3-1.pdf, id=133, 469.755pt x 325.215p
+/pdftex.map}] [2] [3] [4]
+<Rapport_files/figure-latex/unnamed-chunk-3-1.pdf, id=144, 469.755pt x 325.215p
 t>
 File: Rapport_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-3-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-3-1.pdf  used
- on input line 303.
-(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
-[4]
-<Rapport_files/figure-latex/unnamed-chunk-4-1.pdf, id=145, 469.755pt x 325.215p
-t>
-File: Rapport_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type pdf)
-<use Rapport_files/figure-latex/unnamed-chunk-4-1.pdf>
-Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-4-1.pdf  used
- on input line 332.
+ on input line 311.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [5pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.334 \end{figure}
-                   <./Rapport_files/figure-latex/unnamed-chunk-3-1.pdf>]
-<Rapport_files/figure-latex/unnamed-chunk-5-1.pdf, id=158, 469.755pt x 325.215p
+l.337 
+       <./Rapport_files/figure-latex/unnamed-chunk-3-1.pdf>]
+<Rapport_files/figure-latex/unnamed-chunk-4-1.pdf, id=156, 469.755pt x 325.215p
+t>
+File: Rapport_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-4-1.pdf>
+Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-4-1.pdf  used
+ on input line 340.
+(pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
+<Rapport_files/figure-latex/unnamed-chunk-5-1.pdf, id=157, 469.755pt x 325.215p
 t>
 File: Rapport_files/figure-latex/unnamed-chunk-5-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-5-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-5-1.pdf  used
- on input line 360.
+ on input line 368.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [6pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.363 
+l.371 
        <./Rapport_files/figure-latex/unnamed-chunk-4-1.pdf>]
 <Rapport_files/figure-latex/unnamed-chunk-6-1.pdf, id=172, 469.755pt x 325.215p
 t>
 File: Rapport_files/figure-latex/unnamed-chunk-6-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-6-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-6-1.pdf  used
- on input line 385.
+ on input line 393.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [7pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.388 
+l.396 
        <./Rapport_files/figure-latex/unnamed-chunk-5-1.pdf>]
 <Rapport_files/figure-latex/unnamed-chunk-7-1.pdf, id=187, 469.755pt x 325.215p
 t>
 File: Rapport_files/figure-latex/unnamed-chunk-7-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-7-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-7-1.pdf  used
- on input line 412.
+ on input line 420.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [8pdfTeX warning (ext4): destination with the same identifier (name{figure.4}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.415 
+l.423 
        <./Rapport_files/figure-latex/unnamed-chunk-6-1.pdf>]
 <Rapport_files/figure-latex/unnamed-chunk-8-1.pdf, id=200, 469.755pt x 325.215p
 t>
 File: Rapport_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-8-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-8-1.pdf  used
- on input line 422.
+ on input line 430.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [9pdfTeX warning (ext4): destination with the same identifier (name{figure.5}) 
 has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.425 
+l.433 
        <./Rapport_files/figure-latex/unnamed-chunk-7-1.pdf>]
 <Rapport_files/figure-latex/unnamed-chunk-9-1.pdf, id=211, 469.755pt x 325.215p
 t>
 File: Rapport_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (type pdf)
 <use Rapport_files/figure-latex/unnamed-chunk-9-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-9-1.pdf  used
- on input line 447.
+ on input line 455.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [10pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.449 N
+l.457 N
        ous avons d'abord regroupé les résultats du test venant des élève...
  <./Rapport_files/figure-latex/unnamed-chunk-8-1.pdf>]
 <Rapport_files/figure-latex/unnamed-chunk-10-1.pdf, id=226, 469.755pt x 325.215
@@ -801,7 +800,7 @@ File: Rapport_files/figure-latex/unnamed-chunk-10-1.pdf Graphic file (type pdf)
 
 <use Rapport_files/figure-latex/unnamed-chunk-10-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-10-1.pdf  use
-d on input line 456.
+d on input line 464.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [11 <./Rapport_files/figure-latex/unnamed-chunk-9-1.pdf>]
 <Rapport_files/figure-latex/unnamed-chunk-11-1.pdf, id=237, 469.755pt x 325.215
@@ -810,7 +809,7 @@ File: Rapport_files/figure-latex/unnamed-chunk-11-1.pdf Graphic file (type pdf)
 
 <use Rapport_files/figure-latex/unnamed-chunk-11-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-11-1.pdf  use
-d on input line 474.
+d on input line 482.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [12 <./Rapport_files/figure-latex/unnamed-chunk-10-1.pdf>]
 <Rapport_files/figure-latex/unnamed-chunk-12-1.pdf, id=248, 469.755pt x 325.215
@@ -819,7 +818,7 @@ File: Rapport_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type pdf)
 
 <use Rapport_files/figure-latex/unnamed-chunk-12-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-12-1.pdf  use
-d on input line 486.
+d on input line 494.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [13 <./Rapport_files/figure-latex/unnamed-chunk-11-1.pdf>]
 <Rapport_files/figure-latex/unnamed-chunk-13-1.pdf, id=260, 469.755pt x 325.215
@@ -828,7 +827,7 @@ File: Rapport_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type pdf)
 
 <use Rapport_files/figure-latex/unnamed-chunk-13-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-13-1.pdf  use
-d on input line 499.
+d on input line 507.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [14 <./Rapport_files/figure-latex/unnamed-chunk-12-1.pdf>]
 <Rapport_files/figure-latex/unnamed-chunk-14-1.pdf, id=271, 469.755pt x 325.215
@@ -837,7 +836,7 @@ File: Rapport_files/figure-latex/unnamed-chunk-14-1.pdf Graphic file (type pdf)
 
 <use Rapport_files/figure-latex/unnamed-chunk-14-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-14-1.pdf  use
-d on input line 508.
+d on input line 516.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [15 <./Rapport_files/figure-latex/unnamed-chunk-13-1.pdf>] [16 <./Rapport_files
 /figure-latex/unnamed-chunk-14-1.pdf>]
@@ -847,7 +846,7 @@ File: Rapport_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type pdf)
 
 <use Rapport_files/figure-latex/unnamed-chunk-15-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-15-1.pdf  use
-d on input line 560.
+d on input line 568.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 <Rapport_files/figure-latex/unnamed-chunk-16-1.pdf, id=294, 469.755pt x 325.215
 pt>
@@ -855,27 +854,27 @@ File: Rapport_files/figure-latex/unnamed-chunk-16-1.pdf Graphic file (type pdf)
 
 <use Rapport_files/figure-latex/unnamed-chunk-16-1.pdf>
 Package pdftex.def Info: Rapport_files/figure-latex/unnamed-chunk-16-1.pdf  use
-d on input line 587.
+d on input line 595.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [17 <./Rapport_files/figure-latex/unnamed-chunk-15-1.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 599.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 607.
 [18pdfTeX warning (ext4): destination with the same identifier (name{figure.7})
  has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.599 \end{document}
+l.607 \end{document}
                      <./Rapport_files/figure-latex/unnamed-chunk-16-1.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 599.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 607.
 (./Rapport.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 599.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 599.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 607.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 607.
 Package rerunfilecheck Info: File `Rapport.out' has not changed.
 (rerunfilecheck)             Checksum: 422ECEB053783BD3772D63066F3E2957;3998.
 
 LaTeX Warning: There were multiply-defined labels.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 599.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 607.
  ) 
 Here is how much of TeX's memory you used:
  10294 strings out of 494562
@@ -904,7 +903,7 @@ TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/Utilisateur/AppData
 eur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Use
 rs/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.
 pfb>
-Output written on Rapport.pdf (18 pages, 316590 bytes).
+Output written on Rapport.pdf (18 pages, 316747 bytes).
 PDF statistics:
  375 PDF objects out of 1000 (max. 8388607)
  311 compressed objects within 4 object streams

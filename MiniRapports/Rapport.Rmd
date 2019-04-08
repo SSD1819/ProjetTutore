@@ -18,6 +18,7 @@ knitr::opts_chunk$set(echo = FALSE, warning = FALSE, include = FALSE)
 ```{r}
 ####Require des packages####
 require(FactoMineR)
+require(reshape)
 require(ROCR)
 require(pROC)
 require(ClustOfVar)
@@ -84,7 +85,7 @@ Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les ré
     \end{description}
     Chaque jeu de données représente les résultats questions par questions (en comptant les sous-questions) des élèves  ainsi que leurs catégories pédagogiques et des informations telles que l'encadrant, le niveau scolaire, la langue natale, l'âge, le type de classe (mélangé entre plusieurs section ou pas), l'année de passage du test et leur école.
     Il y à 10 questions divisées en sous questions, ce qui fait un total de 34 réponses. Chaque question est indépendante et pour répondre à la sous question suivante il faut une bonne réponse à la sous-question précédente, sauf pour la question 4, toutes ses sous-questions sont indépendantes. Une bonne réponse correspond à un 1 et une mauvaise réponse à un 0, sauf pour la réponse à la question 1 qui est la valeur de comptage maximale de l'enfant.
-    Ici les élèves viennent tous de l'école de REP+ 5Réseau d'Education Prioritaire). 
+    Ici les élèves viennent tous d'écoles situées en REP+ (Réseau d'Education Prioritaire). 
 
 ##1.4 Nettoyage des données 
 
@@ -129,8 +130,7 @@ avec $b_0=ln\frac{p(1)}{p(0)}+a_0$ et $b_j=a_j$.
 L'arbre de régression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).
 Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction d'un maximum de variables explicatives, puis d'élaguer l'arbre afin de minimiser l'erreur, soit l'écart entre la valeur prédite et la valeur réelle. Cela revient donc à faire une régression logistique sur les données, puis d'appliquer l'algorithme de construction d'arbre à partir des résultats.
 
-#3. Analyse exploratoire
-<!--\newpage-->
+#3. Analyse exploratoire<!--\newpage-->
 ##3.1	Univariée | Bivariée
 
 ```{r include=TRUE, fig.cap="Score total par année par pédagogie"}
@@ -142,7 +142,11 @@ ggplot(df, aes(x=Annee,y=score,fill=Pedagogie)) +
 En ne regardant que certaines années on peut voir clairement une différence entre la pédagogie montessorienne et la pédagogie conventionnelle vis à vis du nombre de bonnes réponses. Toutefois lorsqu'on regarde la vue d'ensemble, on peut voir que celon les années, une fois la pédagogie montessorienne est supérieur à la conventionnelle, parfois c'est l'inverse. On peut donc s'attendre à ce qu'on ne puisse pas prédire quelle pédagogie permet d'obtenir un meilleur score global.
 
 ```{r}
-
+ggplot(md.dfpropre, aes(x = variable, fill = value, col = Pedagogie )) + 
+  geom_bar(position = "fill") +
+  scale_color_manual(values = c("Conventionnelle" = "white"
+                                , "Montessori" = "white")) + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 
 
@@ -200,81 +204,63 @@ A nouveau nous n'observons pas de lien significatif entre la pédagogie enseign�
 
 ##3.3 Classification Ascendante Hiérarchique des variables
 
-N'ayant aucune information au préalable sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appellent aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables. La CAH est une méthode de classification qui permet de regrouper des individus sein d’une même classe et qu'ils soient le plus semblables possibles tandis que les classes soient elles ,le plus dissemblables possibles.
-
+N'ayant au début de notre analyse, aucune information sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appellent aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables. La CAH est une méthode de classification qui permet de regrouper des individus sein d’une même classe et qu'ils soient le plus semblables possibles tandis que les classes soient elles ,le plus dissemblables possibles. 
 
 Nous allons appliquer cette méthode sur les jeux de données en isolant les pédagogies pour comparer les regroupements.
 
-
+Procédons d'abord à l'isolation de la Pédagogie 1.
 
 ```{r, include=TRUE}
+# par(mfrow=c(1,2))
 plot(cahG.P1, main="Dendogramme des donnees generales \n de la pedagogie P1")
 rect.hclust(cahG.P1,6)
-```
 
 
-Nous avons d'abord regroupé les résultats du test venant des élèves de la pédagogie 1. Les question T2, T3, T4 et T5 sont regroupées par sous questions. Les deux sous-questions de la T6, T61 et T62 sont très éloignées, de même pour la T71 et T72. On remarque la question T81 n'est pas regroupée avec les autres questions T8 et que T71 est associée aux autres questions T8. 
-
-
-
-
-```{r, include=TRUE}
-plot(cahG.P2, main="Dendogramme des donnees generales \n de la pedagogie P2")
-rect.hclust(cahG.P2,6)
-```
-
-Pour les résultats du test venant des élèves de la pédagogie 2, Les questions T82 à T89 sont regroupées, la question T81 est regroupée avec T72. Les questions T31, T32 sont regroupées avec les questions T41 et T42 ainsi qu'avec la question T71 et X.quanti. T61 et T62 sont regroupées avec T21, T22 et T23 sont regroupées entre elles et T51 et T52 sont aussi regroupées entre elles.
-On peut d'abord remarquer les similarités avec les regroupements de la première pédagogie, nous avons toujours le couple T51, T52 et le groupe de X.quanti est constitué de de T31, T32, T41, T42 mais cette fois-ci T71 est présent dans le groupe et plus T22 et T23. Cette foi-ci seule la question T81 n'est pas regroupées avec les autres T8 et c'est la question T72 qui scinde le groupe des T8 et plus T71.
-
-
-Maintenant nous allons faire le même type de classification avec les jeux de données de vecteurs et de sommes.
-
-
-```{r, include=TRUE}
 plot(cahVec.P1, main="Dendogramme des données avec les vecteurs\n de la pedagogie P1")
 rect.hclust(cahVec.P1,6)
-```
 
-Pour les résultats du test venant des élèves de la pédagogie 1 avec les données sous forme de vecteurs nous obtenons des regroupement similaires aux précédents. T84, T85, T86, T87, T88, T89 sont regroupées avec T71 comme pour le regroupement des données générales de la pédagogie P1. T82 et T83 sont ensemble mais plus regroupées avec T81 qui est elle regroupée avec T61. T62 et T72 ne sont plus ensembles et semblent même assez éloignées. Les questions T2, T3, le couple (T41,T42) et X.quanti sont regroupées et cette fois-ci la question T5 est aussi regroupée avec.
-
-
-
-```{r include=TRUE}
-plot(cahVec.P2, main="Dendogramme des données avec les vecteurs\n de la pedagogie P2")
-rect.hclust(cahVec.P2,6)
-```
-
-Pour les résultats du test venant des élèves de la pédagogie 2 avec les données sous forme de vecteurs nous avons aussi quelques similarités avec les regroupements des données générales de la pédagogie 2. Les questions T82 à T89 sont regroupées ensemble. T72 et T81 sont seules à définir leur groupe mais elles sont tout de même proche sur le dendrogramme. T61 et T62 sont ensemble, T2 est maintenant regroupée avec X.quanti, T5 et T3. T71 est regroupée avec T41 et T42, ces questions étaient déjà proches sur le dendrogramme des données générales.
-
-
-Maintenant faisons de même avec les données avec sommes.
-
-```{r include=TRUE}
 plot(cahSum.P1, main="Dendogramme des données avec sommes \n de la pedagogie P1")
 rect.hclust(cahSum.P1,6)
 ```
 
-Pour les résultats du test venant des élèves de la pédagogie 1 avec les données sous forme de sommes nous retrouvons des regroupements déjà observés comme le groupe des question T84 à T89. T82 et T83 forment un autre groupe mais cette fois T81 est regroupée avec T61 et T62. T1, T2 T3 et T5 sont regroupées ensemble et la T72 forme une classe à elle seule.
+Ici X.quanti correspond a T1.
+Nous pouvons observer ici plusieurs regroupement redondant. Le regroupement des questions T81, T82 et T83 et celui des questions T84, T85, T86, T87, T88, T89.
+Les question T1, T2 et T3 sont aussi fortement attirées, on retrouve en parti la variable "Objet".
 
 
 
 
-```{r include=TRUE}
+
+
+Comparons maintenant avec les regroupements de la Pédagogie 2.
+
+```{r, include=TRUE}
+plot(cahG.P2, main="Dendogramme des donnees generales \n de la pedagogie P2")
+rect.hclust(cahG.P2,6)
+
+plot(cahVec.P2, main="Dendogramme des données avec les vecteurs\n de la pedagogie P2")
+rect.hclust(cahVec.P2,6)
 
 plot(cahSum.P2, main="Dendogramme des données avec sommes \n de la pedagogie P2")
 rect.hclust(cahSum.P2,6)
 ```
 
-Pour les résultats du test venant des élèves de la pédagogie 2 avec les données sous forme de sommes nous retrouvons un dendrogramme identique à celui des données avec vecteurs de la pédagogie 2. 
-On peut en tirer les mêmes conclusions. 
+<!-- Audela: 2.3, 3.2, 5.2, 6.2, 8.6, 8.7, 8.8, 4.a,b,c,d, -->
+<!-- Outil: 4, 5, 6 -->
+<!-- Objet: 1, 2, 3 et 8 -->
 
 
-On remarque au final quelques différence mineures entre les dendrogrammes obtenues grâce aux données générales et ceux obtenus grâce aux données avec vecteurs mais on dénote surtout plusieurs groupe de variables qui on tendance à ressortir pour chaque type de pédagogie. 
+Nous observons en regroupement des questions T82, T83, T84, T85, T86, T87, T88, T89 dans chaque jeu de données, la T81 étant séparée du reste. On voit aussi apparaitre deux couples de questions, T61 et T62 ainsi que T51 et T52.
+Ici nous ne voyons aucunes variable prédéfinie ressortir véritablement.
 
-Pour la pédagogie 1 on s'aperçoit que les questions T84 à T89 sont apparemment liées, et que dans certains cas on peut aussi y lier la question T71. Les questions T82 et T83 forment aussi toujours un couple et la T81 semble liée à la T61.
-T1, T2, et T3 sont aussi liées. 
 
-Pour la pédagogie 2 nous observons un groupe constitué des questions T82 à T89. La question T81 semble être liée à la T72. La question T71 semble être liée aux questions T41 et T42. Les questions T1, T2, T3 et T5 semblent aussi être liées.
+On retrouve plus de similarités entre les classification de la pédagogie 2 qu'entre celles de la Pédagogie 1. 
+Et on remarque que les regroupement qui sont stables entre les changements de jeu de données sont principalement ceux liés aux sous questions de la T8.
+Pour résumer, les groupes qui ressortent sont pour la Pédagogie 1: (T81, T82 , T83), (T84, T85, T86, T87, T88, T89) et (T1,T2, T3)
+Et pour la Pédagogie 2: (T82, T83, T84, T85, T86, T87, T88, T89), (T61, T62) et (T51, T52).
+
+Seul la variable objet est en parti retrouvée et seulement dans le cas de la Pédagogie 1.
+
 
 #4. Résultats
 

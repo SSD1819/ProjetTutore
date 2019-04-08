@@ -217,6 +217,24 @@ Classe_T1
 don.groupe<-data.frame(Pedagogie=dataPropre$Pedagogie,Classe_T1,audela,outils,objet)
 summary(don.groupe)
 
+###ajout d'une variable classe diff
+rename<-dataPropre
+xx<-1
+rename$new<-0
+for (i in levels(dataPropre$Classe)){
+  for (j in levels(dataPropre$AnneeScolaire)){
+    rename$new[rename$Classe==i & rename$AnneeScolaire==j]<-xx
+    xx<-xx+1
+  }
+}
+rename$new<-factor(rename$new)
+levels(rename$new)<-1:length(levels(rename$new))
+dataPropre$newClasse<-rename$new
+table(dataPropre$newClasse,dataPropre$AnneeScolaire)
+
+
+
+
 ####Exportation des data pour l'app Shiny####
 save(list = c("dataPropre", "dataSum", "dataVec","dataSumOld","dataVecOld"), file = "export/importation.RData")
 

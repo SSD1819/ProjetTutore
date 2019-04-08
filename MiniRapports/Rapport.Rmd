@@ -143,9 +143,9 @@ En ne regardant que certaines années on peut voir clairement une différence en
 
 ```{r}
 ggplot(md.dfpropre, aes(x = variable, fill = value, col = Pedagogie )) + 
-  geom_bar(position = "fill") +
-  scale_color_manual(values = c("Conventionnelle" = "white"
-                                , "Montessori" = "white")) + 
+  geom_bar(position = position_fill(width=0.5)) +
+  scale_color_manual(values = c("Conventionnelle" = "red"
+                                , "Montessori" = "black")) + 
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 ```
 

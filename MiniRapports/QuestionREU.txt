@@ -1,3 +1,4 @@
 ACM/ACP : no diff
-REG générale : var diff
-REG groupe : aucune significativité
+REG g?n?rale : var diff
+REG groupe : aucune significativit?
+les tests sont logiques?

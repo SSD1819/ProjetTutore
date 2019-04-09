@@ -23,6 +23,7 @@ step(reg)
 reg<-glm(formula = Pedagogie ~ T21 + T22 + T31 + T41b + T51 + T81 + 
            T83 + T89, family = binomial, data = don.reg)
 summary(reg)
+
 #rajouter des interaction + step + courbe roc
 #refaire avec score en quali
 

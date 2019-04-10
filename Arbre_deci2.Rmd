@@ -5,12 +5,27 @@ date: "18/03/2019"
 output: pdf_document
 ---
 
+
 ```{r}
+set.seed(124)
 require(rpart)
 require(rpart.plot)
-dt<-rpart(Pedagogie~., data=don.groupe)
+
+
+data1 = sort(sample(nrow(don.groupe), nrow(don.groupe)*.7))
+don.groupe.train<-don.groupe[data1,]
+don.groupe.test<-don.groupe[-data1,]
+
+param<-rpart.control(minsplit = 30, minbucket = 10)
+dt<-rpart(Pedagogie~audela+outils+objet, data=don.groupe, control = param)
 prp(dt, extra = 1+100,type = 2, under=TRUE, yesno=2)
 plotcp(dt)
+
+pred.pedagogie<-predict(dt, newdata=don.groupe.test, type="class")
+print(summary(pred.pedagogie))
+result <- data.frame(Pedagogie.pred=pred.pedagogie, Pedagogie.real=don.groupe.test["Pedagogie"])
+mean(as.numeric(result[,1]==result[,2]))
+
 ```
 
 
@@ -23,17 +38,27 @@ prp(dt, extra = 1+100,type = 2, under=TRUE, yesno=2)
 plotcp(dt)
 ```
 
+   
+
+
 
 
 ```{r}
-datadt2<-dataPropre[,14:41]
-dt2<-rpart(dataPropre$Pedagogie~ .,datadt2,control=rpart.control(minsplit=5,cp=0), method = 'class')
+names(dataVecOld)
+dataArbre<-dataVecOld[,c(2,14:32)]
+data2 = sort(sample(nrow(dataArbre), nrow(dataArbre)*.7))
+dataArbre.train<-dataArbre[data2,]
+dataArbre.test<-dataArbre[-data2,]
+
+param<-rpart.control(minsplit = 30, minbucket = 10)
+dt2<-rpart(Pedagogie~., data=dataArbre, control = param)
 prp(dt2, extra = 1+100,type = 2, under=TRUE, yesno=2)
 plotcp(dt2)
+
+pred.pedagogie2<-predict(dt2, newdata=dataArbre.test, type="class")
+print(summary(pred.pedagogie2))
+result <- data.frame(Pedagogie.pred=pred.pedagogie2, Pedagogie.real=dataArbre.test["Pedagogie"])
+prop.result<-mean(as.numeric(result[,1]==result[,2]))
+print(prop.result)
 ```
-
-
-
-
-
 

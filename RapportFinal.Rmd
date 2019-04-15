@@ -1,0 +1,7 @@
+---
+title: "Projet Cogmont"
+author: "Lucas Chabeau, Matthieu François et Etienne Hamard"
+date: "15 avril 2019"
+output: pdf_document
+---
+

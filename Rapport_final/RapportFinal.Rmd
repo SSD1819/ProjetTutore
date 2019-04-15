@@ -1,7 +1,61 @@
 ---
 title: "Projet Cogmont"
-author: "Lucas Chabeau, Matthieu François et Etienne Hamard"
-date: "15 avril 2019"
-output: pdf_document
+author: "Azat Aleksanyan, Lucas Chabeau, Matthieu François, Etienne Hamard"
+date: "March 13, 2019"
+header-includes: #allows you to add in your own Latex packages
+- \usepackage{float} #use the 'float' package
+- \floatplacement{figure}{H} #make every figure with caption = h
+output:
+  pdf_document:
+    toc: true
+    fig_caption: yes
 ---
+
+<!-- Options générales des chunks -->
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, include = FALSE)
+```
+
+<!-- Activation des packages nécéssaires et importation des données nécéssaires -->
+```{r}
+#### Require des packages ####
+require(FactoMineR)
+require(reshape)
+require(ROCR)
+require(pROC)
+require(ClustOfVar)
+require(rpart)
+require(rpart.plot)
+require(corrplot)
+require(ggplot2)
+
+#### Importation des variables nécessaires ####
+load("../export/ACP.RData")
+load("../export/ACM.RData")
+load("../export/ACM-datavec.RData")
+load("../export/Classif_Pedagogie.RData")
+load("../export/classif_questions.RData")
+load("../export/New_Variables.RData")
+load("../export/arbre_deci.RData")
+load("../export/Tests_Stat.RData")
+load("../export/graphexplo.RData")
+load("../export/importation.RData")
+```
+
+# Introduction
+
+Le programme de notre 1ère année de Master prévoit un projet tutoré faisant appel à nos compétences acquises en statistique et en sciences des données. C'est dans ce contexte que nous avons travaillé en collaboration avec Marie-Caroline Crozet et Adeline Leclercq-Samson sur un sujet mêlant sciences cognitives, statistique et fouille de données.
+
+Depuis 4 ans, une equipe de chercheurs de l'institut des sciences cognitives (ISC) de Lyon ont testé les capacités en mathématiques des élèves d'une école maternelle située dans une zone REP+ (Réseau d'éducation prioritaire) de l'agglomération Lyonnaise. Une partie de ces élèves ont suivi une méthode d'éducation conventionnelle et les autres ont suivi des enseignements suivant la méthode Montessori. Notre objectif est de voir s'il y a ou non une différence entre le niveau en mathématiques des élèves ayant suivi les enseignements conventionnels et ceux ayant suivi les enseignements Montessori.
+
+Nous avons reçu les résultats des tests sous forme de tableurs que nous avons triés pour ne garder que les résultats des élèves de moyenne section. Nous avons ensuite néttoyé nos données et commencé l'étude sur cette population.
+
+#1. Contexte
+
+Ce projet nous à été proposé par l'Institut des sciences cognitives - Marc Jeannerod spécialisé en neurosciences. L’UMR 5304 créée en 2007 est l'un des deux laboratoires de l’Institut des Sciences Cognitives – Marc Jeannerod. L'UMR 5304 est un laboratoire interdisciplinaire qui intègre l'expertise de chercheur des Sciences de la Vie (psychologie cognitive, neurosciences) et de médecine (pédo-psychiatrie, neuro-pédiatrie) avec celle de chercheur des Sciences Humaines et Sociales (linguistique computationelle et théorique et philosophie) pour étudier la nature et la spécificité de l'esprit humain.
+
+##1.1 Les besoins d'un changement éducatif
+
+ Le député et mathématicien Cédric Villani a publié un rapport pour renforcer l'apprentissage des mathématiques à l'école. Les élèves français ont aujourd'hui un niveau insuiétant dans cette discipline. Pourtant, jusqu'en 1985, l'enseignement des maths en France était reconnu comme l'un des meilleurs. L'étude internationale "Trends in International Mathematics and Science Study" (TIMSS) 2015 qui mesure les performances en mathématiques et en sciences des élèves en fin de CM1 classe la France dernière des pays de l'Union européenne. Elle obtient même un score en dessous de la moyenne internationnale. Pour mettre un terme à cette tendance inquiétante de la dégradation du niveau des élèves français en mathématiques, le gouvernement est à la recherche de nouvel pédagogie d'enseignement des mathématiques.
+
 

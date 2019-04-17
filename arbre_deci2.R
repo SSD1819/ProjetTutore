@@ -24,8 +24,8 @@ data2 = sort(sample(nrow(dataArbre2), nrow(dataArbre2)*.7))
 dataArbre2.train<-dataArbre2[data2,]
 dataArbre2.test<-dataArbre2[-data2,]
 
-param2<-rpart.control(minsplit = 30, minbucket = 10)
-dt2<-rpart(Pedagogie~., data=dataArbre2, control = param2)
+param2<-rpart.control(minsplit = 1, minbucket = 1)
+dt2<-rpart(Pedagogie~., data=dataArbre2.train, control = param2)
 prp(dt2, extra = 1+100,type = 2, under=TRUE, yesno=2)
 plotcp(dt2)
 
@@ -33,7 +33,6 @@ pred.pedagogie2<-predict(dt2, newdata=dataArbre2.test, type="class")
 print(summary(pred.pedagogie2))
 result2 <- data.frame(Pedagogie.pred=pred.pedagogie2, Pedagogie.real=dataArbre2.test["Pedagogie"])
 result.pred2<-mean(as.numeric(result2[,1]==result2[,2]))
-
 
 ######Arbre et prediction pour les variables de dataPropre
 dataArbre3<-dataPropre[,c("Pedagogie","T21" , "T22" , "T31" , "T41b", "T51", "T81", "T83",  "T89")]
@@ -70,14 +69,12 @@ summary(dataArbre4.test)
 result4 <- data.frame(Pedagogie.pred=pred.pedagogie4, Pedagogie.real=dataArbre4.test["Pedagogie"])
 result.pred4<-mean(as.numeric(result4[,1]==result4[,2]))
 
-
 print(result.pred1)
 print(result.pred2)
 print(result.pred3)
 print(result.pred4)
 
-save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/arbre_deci.RData")
 
+save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/arbre_deci2.RData")
 
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))
-

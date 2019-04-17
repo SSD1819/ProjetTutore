@@ -48,11 +48,11 @@ Le programme de notre 1ère année de Master prévoit un projet tutoré faisant 
 
 Depuis 4 ans, une equipe de chercheurs de l'institut des sciences cognitives (ISC) de Lyon ont testé les capacités en mathématiques des élèves d'une école maternelle située dans une zone REP+ (Réseau d'éducation prioritaire) de l'agglomération Lyonnaise. Une partie de ces élèves ont suivi une méthode d'éducation conventionnelle et les autres ont suivi des enseignements suivant la méthode Montessori. Notre objectif est de voir s'il y a ou non une différence entre le niveau en mathématiques des élèves ayant suivi les enseignements conventionnels et ceux ayant suivi les enseignements Montessori.
 
-Nous avons reçu les résultats des tests sous forme de tableurs que nous avons triés pour ne garder que les résultats des élèves de moyenne section. Nous avons ensuite néttoyé nos données et commencé l'étude sur cette population.
+Nous avons reçu les résultats des tests sous forme de tableur que nous avons triés pour ne garder que les résultats des élèves de moyenne section. Nous avons ensuite néttoyé nos données et commencé l'étude sur cette population.
 
 #1. Contexte
 
-Ce projet nous à été proposé par l'Institut des sciences cognitives - Marc Jeannerod spécialisé en neurosciences. L’UMR 5304 créée en 2007 est l'un des deux laboratoires de l’Institut des Sciences Cognitives – Marc Jeannerod. L'UMR 5304 est un laboratoire interdisciplinaire qui intègre l'expertise de chercheur des Sciences de la Vie (psychologie cognitive, neurosciences) et de médecine (pédo-psychiatrie, neuro-pédiatrie) avec celle de chercheur des Sciences Humaines et Sociales (linguistique computationelle et théorique et philosophie) pour étudier la nature et la spécificité de l'esprit humain.
+Ce projet nous a été proposé par l'Institut des sciences cognitives - Marc Jeannerod spécialisé en neurosciences. L’UMR 5304 créée en 2007 est l'un des deux laboratoires de l’Institut des Sciences Cognitives – Marc Jeannerod. L'UMR 5304 est un laboratoire interdisciplinaire qui intègre l'expertise de chercheur des Sciences de la Vie (psychologie cognitive, neurosciences) et de médecine (pédo-psychiatrie, neuro-pédiatrie) avec celle de chercheur des Sciences Humaines et Sociales (linguistique computationelle et théorique et philosophie) pour étudier la nature et la spécificité de l'esprit humain.
 
 ##1.1 Les besoins d'un changement éducatif
 

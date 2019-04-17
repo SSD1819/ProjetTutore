@@ -130,7 +130,13 @@ avec $b_0=ln\frac{p(1)}{p(0)}+a_0$ et $b_j=a_j$.
 L'arbre de régression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).
 Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction d'un maximum de variables explicatives, puis d'élaguer l'arbre afin de minimiser l'erreur, soit l'écart entre la valeur prédite et la valeur réelle. Cela revient donc à faire une régression logistique sur les données, puis d'appliquer l'algorithme de construction d'arbre à partir des résultats.
 
-## GLMM 
+##2.6 LME / LMM (to be checked)
+
+La procédure des modèles mixtes linéaires développe le modèle linéaire général pour permettre aux données de présenter des variabilités en corrélation et des variabilités non constantes. Le modèle linéaire mixte offre donc une flexibilité pour modéliser non seulement les moyennes des données, mais également leurs variances et covariances.
+
+Les modèles mixtes linéaires sont une extension des modèles linéaires simples permettant des effets fixes et aléatoires. Ils sont particulièrement utilisés lorsqu'il n'y a pas d'indépendance dans les données, telle qu'elle résulte d'une structure hiérarchique.
+
+##2.7 GLMM (to be checked)
 
 Les GLMM (pour Generalized Linear Mixed Models) sont des modèles linéaires généralisés à effets mixtes. Ils sont employés pour analyser des données de comptages, des réponses binaires (*notre cas*) et lorsque les données ne sont pas indépendantes (ça c’est pour la partie mixte)! En général, un GLMM (Generalized Linear Mixed Model ou modèle linéaire généralisé mixtes) est un GLM avec une fonctionnalité supplémentaire qui lui permet de prendre en considération la non indépendance des données.
 

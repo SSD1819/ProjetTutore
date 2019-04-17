@@ -207,13 +207,20 @@ audela<-audela+ifelse(dataPropre$T1>7,1,0)#ajout de la t1 si ils savent compter 
 noms<-c("T41a","T41b","T41c","T41d","T51","T61")
 outils<-rowSums(apply(dataPropre[,noms],2,as.numeric))
 
+##création de la variable classe sur la t1
+Classe_T1<-cut(dataPropre$T1,breaks = c(-1,3,7,11,16,100))
+levels(Classe_T1)<-c("0-3","4-7","8-11","12-16",">16")
+
+#calcul score t1
+score_T1<-Classe_T1
+levels(score_T1)<-c(0,0.3,0.6,0.9,1.2)
+score_T1<-as.numeric(paste(score_T1))
+
 noms<-c("T21","T22","T32","T81","T82","T83","T84","T85")
 objet<-rowSums(apply(dataPropre[,noms],2,as.numeric))
+##ajout score t1
+objet<-objet+score_T1
 
-##création de la variable classe sur la t1
-Classe_T1<-cut(dataPropre$T1,breaks = c(-1,3,7,11,16,29,100))
-levels(Classe_T1)<-c("0-3","4-7","8-11","12-16","17-29",">29")
-Classe_T1
 don.groupe<-data.frame(Pedagogie=dataPropre$Pedagogie,Classe_T1,audela,outils,objet)
 summary(don.groupe)
 

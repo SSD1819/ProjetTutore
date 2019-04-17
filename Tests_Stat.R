@@ -42,7 +42,7 @@ tt<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "two.sided")
 d=data.frame(x=rep(0,27))
 for (i in 14:41){
   mat.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
-  prop.i<-prop.test(mat.i, alternative = "two.sided", correct = FALSE)
+  prop.i<-prop.test(t(mat.i), alternative = "two.sided", correct = FALSE)
   d[i,] = prop.i$p.value
 }
 
@@ -68,7 +68,7 @@ tt1<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "less")
 d1=data.frame(x=rep(0,27))
 for (i in 14:41){
   mat1.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
-  prop1.i<-prop.test(mat1.i, alternative = "less", correct = FALSE)
+  prop1.i<-prop.test(t(mat1.i), alternative = "less", correct = FALSE)
   d1[i,] = prop1.i$p.value
 }
 
@@ -94,7 +94,7 @@ tt2<-t.test(dataPropreP1$T1, dataPropreP2$T1, alternative = "greater")
 d2=data.frame(x=rep(0,27))
 for (i in 14:41){
   mat2.i<-cbind(matrix(table(dataPropreP1[,i])), matrix(table(dataPropreP2[,i])))
-  prop2.i<-prop.test(mat2.i, alternative = "greater", correct = FALSE)
+  prop2.i<-prop.test(t(mat2.i), alternative = "greater", correct = FALSE)
   d2[i,] = prop2.i$p.value
 }
 
@@ -229,20 +229,49 @@ df
 
 
 # Visualisation of significantly different data
+require(ggplot2)
 par(mfrow=c(2,3))
+par(mfrow=c(1,1))
+
 
 # T21
+mat.i<-cbind(matrix(table(dataPropreP1$T21)), matrix(table(dataPropreP2$T21)))
+prop.test(t(mat.i), alternative = "less", correct = FALSE)
+
 T21 <- rbind(table(dataPropreP1$T21),table(dataPropreP2$T21))
 barplot(T21, beside = T, col = c("blue", "green"), main="T21 : C < M")
 
-mtext("Les différences significatives", 
-      side = 3, line = -16.5, outer = TRUE)
+# T21 <- data.frame(cbind(table(dataPropreP1$T21),table(dataPropreP2$T21)))
+# colnames(T21)<-c("Conventionnelle", "Montessori")
+# names<-c("Conventionnelle", "Montessori")
+# 
+# T21df <- data.frame(T21)
+# c("Conventionnelle", "Montessori")peds<-data.frame(c("Conventionnelle", "Montessori"))
+# colnames(peds)<-c('Pedagogie')
+# 
+# T21fin<-cbind(peds, T21df)
+# 
+# 
+# ggplot(data = T21 , aes(fill=names, y=c("Conventionnelle", "Montessori")))+
+#   geom_bar(stat="identity")
+# barplot(T21, beside = T, col = c("blue", "green"), main="T21 : C < M")
+# 
+# mtext("Les différences significatives", 
+#       side = 3, line = -16.5, outer = TRUE)
 
 # T51
+mat.i<-cbind(matrix(table(dataPropreP1$T51)), matrix(table(dataPropreP2$T51)))
+prop.test(t(mat.i), alternative = "less", correct = FALSE)
+
 T51 <- rbind(table(dataPropreP1$T51),table(dataPropreP2$T51))
 barplot(T51, beside = T, col = c("blue", "green"), main="T51 : C < M")
 
+
+par(mfrow=c(2,2), fig.height)
 # T81
+mat.i<-cbind(matrix(table(dataPropreP1$T81)), matrix(table(dataPropreP2$T81)))
+prop.test(t(mat.i), alternative = "greater", correct = FALSE)
+
 T81 <- rbind(table(dataPropreP1$T81),table(dataPropreP2$T81))
 barplot(T81, beside = T, col = c("blue", "green"), main="T81 : C > M")
 
@@ -251,14 +280,23 @@ temp <- legend(-1, -35.5, c("Conventionnelle", "Montessori"),
                fill =  c("blue", "green"), bty = "n")
 
 # T87
+mat.i<-cbind(matrix(table(dataPropreP1$T87)), matrix(table(dataPropreP2$T87)))
+prop.test(t(mat.i), alternative = "greater", correct = FALSE)
+
 T87 <- rbind(table(dataPropreP1$T87),table(dataPropreP2$T87))
 barplot(T87, beside = T, col = c("blue", "green"), main="T87 : C > M")
 
 # T88
+mat.i<-cbind(matrix(table(dataPropreP1$T88)), matrix(table(dataPropreP2$T88)))
+prop.test(t(mat.i), alternative = "greater", correct = FALSE)
+
 T88 <- rbind(table(dataPropreP1$T88),table(dataPropreP2$T88))
 barplot(T88, beside = T, col = c("blue", "green"), main="T88 : C > M")
 
 # T89
+mat.i<-cbind(matrix(table(dataPropreP1$T89)), matrix(table(dataPropreP2$T89)))
+prop.test(t(mat.i), alternative = "greater", correct = FALSE)
+
 T89 <- rbind(table(dataPropreP1$T89),table(dataPropreP2$T89))
 barplot(T89, beside = T, col = c("blue", "green"), main="T89 : C > M")
 

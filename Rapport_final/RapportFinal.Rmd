@@ -56,6 +56,105 @@ Ce projet nous à été proposé par l'Institut des sciences cognitives - Marc J
 
 ##1.1 Les besoins d'un changement éducatif
 
- Le député et mathématicien Cédric Villani a publié un rapport pour renforcer l'apprentissage des mathématiques à l'école. Les élèves français ont aujourd'hui un niveau insuiétant dans cette discipline. Pourtant, jusqu'en 1985, l'enseignement des maths en France était reconnu comme l'un des meilleurs. L'étude internationale "Trends in International Mathematics and Science Study" (TIMSS) 2015 qui mesure les performances en mathématiques et en sciences des élèves en fin de CM1 classe la France dernière des pays de l'Union européenne. Elle obtient même un score en dessous de la moyenne internationnale. Pour mettre un terme à cette tendance inquiétante de la dégradation du niveau des élèves français en mathématiques, le gouvernement est à la recherche de nouvel pédagogie d'enseignement des mathématiques.
+ Le député et mathématicien Cédric Villani a publié un rapport pour renforcer l'apprentissage des mathématiques à l'école. Les élèves français ont aujourd'hui un niveau insuiétant dans cette discipline. Pourtant, jusqu'en 1985, l'enseignement des mathématiques en France était reconnu comme l'un des meilleurs. L'étude internationale "Trends in International Mathematics and Science Study" (TIMSS) 2015 qui mesure les performances en mathématiques et en sciences des élèves en fin de CM1 classe la France dernière des pays de l'Union européenne. Elle obtient même un score en dessous de la moyenne internationnale. Pour mettre un terme à cette tendance inquiétante de la dégradation du niveau des élèves français en mathématiques, le gouvernement est maintenant ouvert à de nouvelles pédagogie d'enseignement des mathématiques.
+ 
+##1.2 Les pedagogies étudiées
+
+\begin{description}
+	\item[Pédagogie Montessori :] 
+
+La pédagogie Montessori est une méthode d'éducation créée en 1907 par Maria Montessori.\newline
+	La pédagogie se base sur quelques principes :\newline
+	-\textbf{La liberté} :  les enfants sont libres de choisir l’activité qu’ils souhaitent faire parmi celles qui leur sont proposées.\newline
+	-\textbf{L’autodiscipline} : les enfants sont invités à repérer eux-même leurs erreurs.\newline
+	-\textbf{L’action en périphérique} : les professeurs vont préférer agir sur l'environnement de l'enfant plutôt que directement sur lui. Ils vont chercher à inciter l'enfant à faire une activité plutôt que de directement lui demander de faire cette activité.\newline
+	-\textbf{Le respect du rythme de chacun} : Le rythme de l'enfant est respecté tant qu'il est concentré.\newline
+	-\textbf{L’apprentissage par l’expérience} : Favoriser la pratique pour s'approprier un concept.\newline
+	-\textbf{L’activité individuelle} : La plupart des activités se font en individuel.\newline
+	-\textbf{L’éducation, une aide à la vie} : L'éducation est faite pour préparer l'enfant à une vie dans une société harmonieuse basée sur le respect de l'autre.\newline
+
+\item[Pédagogie traditionnelle :]
+
+La pédagogie traditionnelle (celle que nous connaissons aujord'hui dans nos écoles publiques) est celle du modèle transmissif. Selon le triangle pédagogique de Jean Houssaye, cette pédagogie privilégie la relation entre l'enseignant et le savoir. Autrement dit, l'enseignant expose un savoir sous forme de cours magistral, généralement suivi d'exercices ou/et de leçons à apprendre. L'élève doit intégrer et appliquer le savoir exposé par l'enseignant.
+
+
+\end{description}
+
+##1.3 Présentation des données de départ
+Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les résultats de chaque promotion au test cognitif mis en place par l'équipe de recherche l'institut des sciences cognitives. Un quatrième fichier du même acabit pour l'année 2018/2019 nous est parvenu au milieu de l'étude.
+    \begin{description}
+    \item[MathsJetons\_2015-2016.xlsx :] Pour l'année 2015/2016.
+    \item[MathsJetons\_2015-2016.xlsx :] Pour l'année 2016/2017.
+    \item[MathsJetons\_2016-2017.xlsx :] Pour l'année 2017/2018.
+    \item[Jetons2019.xlsx :] Pour l'année 2018/2019.
+    \end{description}
+    Chaque jeu de données représente les résultats questions par questions (en comptant les sous-questions) des élèves  ainsi que leurs catégories pédagogiques et des informations telles que l'encadrant, le niveau scolaire, la langue natale, l'âge, le type de classe (mélangé entre plusieurs section ou pas), l'année de passage du test et leur école.
+    Il y à 10 questions divisées en sous questions, ce qui fait un total de 34 réponses. Chaque question est indépendante et pour répondre à la sous question suivante il faut une bonne réponse à la sous-question précédente, sauf pour la question 4, toutes ses sous-questions sont indépendantes. Une bonne réponse correspond à un 1 et une mauvaise réponse à un 0, sauf pour la réponse à la question 1 qui est la valeur de comptage maximale de l'enfant.
+Ici les élèves viennent tous d'une ecole située en REP+. 
+
+##1.4 Nettoyage des données 
+
+Les données ayant déjà été travaillées lors d'un précédent stage, le travail de nettoyage nécessaire n'a pas été excessif. Il nous a fallu tout de même renommer certaines variables pour les rendre plus lisibles et cohérentes entre elles, supprimer certaines questions car elles n'avaient été posées qu'à certaines classes... 
+Les questions étant posées de manière à ce qu'au sein d'une même tache, il faille réussir les questions dans l'ordre pour passer à celles plus dures nous avions beaucoup de valeurs manquantes dès qu'une question était un peu difficile. Nous avons donc décidé de changer ces valaurs manquantes et les considérer comme une question que l'élève n'aurait pas réussie (donc remplacer NA par 0). Et pour ne pas passer à coté de l'information : "n'a pu aller plus loin", nous avons créé deux jeux de données : un vectoriel (chque question devient le regroupement des résultats au sous questions. ex : Q2.1 = 1; Q2.2 = 0 devient Q2 = 10), un composé de scores correspondant à la somme des questions au sein d'une même tâche (pour le même exemple que le jeu de données "vectoriel" nous aurions Q2 = 1+0 = 1).
+
+##1.5 Recodage des variables
+
+Afin de ne pas influencer notre jugement sur nos résultats, nous avons dans un premier temps décidé de rendre anonyme le pédagogie enseignée pour chaque classe. Chaque pédagogie fut donc renommée en "P1" et "P2". De ce fait nous n'avons pas pu privilégier une pédagogie plus qu'une autre subjectivement parlant. Aux 3 quarts du projet environ, nous avons reçu les données de nouveaux individus, une cinquantaine, et avons par la même occasion décidé d'enlever cet anonymat. Notre travail étant déjà réalisé, seul l'interprétation sur le jeu de données comportant les nouveaux individus en plus importe.
+Comme dit précédemment les questions sont divisées en sous questions, ces questions sont regroupables en groupe : un groupe que nous appellerons "variable au-dela", un groupe "variable outil" puis un groupe "variable objet". Chacun de ces groupes fait appelle à une tache pédagogique en particulier.
+
+\begin{description}
+    \item[variable Au-delà :] est calculée en faisant la somme du nombre de bonnes réponses aux questions 2.3, 3.2, 4.2a, 4.2b, 4.2c, 4.2d, 5.2, 6.2, 8.6, 8.7, 8.8 et 8.9. La première question concernant la capacité à compter loin est prise en compte, les individus sachant compter au-delà de 7 ont un point en plus.\newline
+    \item[variable Outil :] est calculée en faisant la somme du nombre de bonnes réponses aux questions des taches 4, 5 et 6 soit les questions des taches sur le surcomptage, la création d'une collection et la comparaison de deux collections.\newline
+    \item[variable Objet :] est calculée en faisant la somme du nombre de bonnes réponses aux questions des taches 1, 2, 3 et 8 soit les questions des taches sur la capacité à savoir compter, à dénombrer une collection et à constituer une collection d'objets. La question 1 est gérée par paliés. Nous avons séparé les individus en 5 groupes : ceux qui savent compter jusqu'à 3, puis de 4 à 7, de 8 à 10, de 11 à 16, enfin ceux qui savent compter au delà de 16. Respéctivement pour chaque catégorie nous leur avons donnée un score de 0, 0.3, 0.6, 0.9 et 1.2.\newline
+    \item[Jetons2019.xlsx :] Pour l'année 2018/2019.
+\end{description}
+
+
+#2. Méthodologie
+<!-- On parle au passé ? "nous avons vu ..." ou au futur ? "par la suite nous verrons ..."  -->
+Afin de répondre au mieux à notre problématique nous avons fait le choix d'utiliser plusieurs méthodes statistiques différentes pour analyser nos données. Pour cela nous avons dans un premier temps utilisé une méthode qui permet de résumer l'information globale du jeu de données : l'analyse factorielle, et la classification ascendante hiérarchique (pour faire des regroupement de variables). Puis dans un but prédictif nous avons utilisé la régression logistique et les arbres de régressions. Plusieurs tests ont été fait en parallèle, comme celui du chi2, de student.. 
+
+##2.1 Analyse factorielle
+
+Les méthodes d'analyse factorielle que nous avons utilisé ici sont l'analyse des correspondances multiples (ACM) et l'analyse en composantes principales (ACP), qui sont des méthodes de synthétisation du nombre de dimensions pour les données qualitatives et quantitatives. Cela nous permet d'appréhender plus rapidement le jeu de données, et avoir une première idée de ce qui diffère les individus entre eux (ou ce qui les rapproche).
+L'ACM permet dans un nuage à N dimensions, en cherchant les plans orthogonaux qui maximisent la variance entre les individus, à résumer celles ci en 4 voire 5 dimensions. 
+l'ACM a été réalisée sur les données vectorisées, celles ci ont été prises comme variables actives (celles qui définissent le placement des individus sur le graphe) et les variables portant sur la pédagogie, la question 1, et l'âge en illustratives (ajoutée après le placement des individus sur le graphe).
+Le principe était le même pour l'ACP qui a été faite ensuite.
+
+##2.2 Classification Ascendante Hiérachique
+
+N'ayant aucune information au préalable sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appelle aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables. Nous avons aussi utilisé la CAH classique qui consiste à regrouper les individus selon leur points communs cela en partant d'une inertie interclasse maximale, pour arriver à une inertie interclasse de 0. Nous avons utilisé la CAH classique afin de partitionner nos individus dans un but descriptif.
+
+##2.3 Tests statistiques
+
+Un test statistique est une procédure de décision entre deux hypothèses. Il s'agit d'une démarche consistant à rejeter ou à ne pas rejeter une hypothèse statistique, appelée hypothèse nulle, en fonction d'un jeu de données. Pour le projet nous avons utilisé le test paramétrique. Un test paramétrique est un test pour lequel on fait une hypothèse paramétrique sur la distribution des données sous H0. Les hypothèses du test concernent alors les paramètres de cette distribution. En fonction du type de données, nous avons utilisé le t-test de Student et le test de proportion de succès.Trois différents types de test statistique ont été effectué pour cette analyse. 
+Premièrement un test du d'indépendance Chi2 qui permet de déterminer l'existence d'une relation de dépendance entre deux variables au sein d'un effectif. Si il  a dépendance il ne peut en aucun cas indiquer le sens de cette relation. Nous l'avons utiliser pour déterminer si il y avait une relation entre chaque question.
+Deuxièmement un test de proportionnalité, qui permet de tester une différence de proportion entre deux effectifs. Nous avons effectuer ce test pour vérifier la proportion de bonne réponse chez les élèves de pédagogie 1 et pédagogie 2.
+Et finalement le test de student qui permet de vérifier si la moyenne de deux échantillons est significativement différente. Nous avons utilisé ce test pour vérifier la moyenne entre les deux pédagogie pour certains regroupements de notes.
+
+##2.4 Regression Logistique
+
+Notre problématique étant de voir s'il existe un lien entre la façon d'enseigner et les réponses au test, nous avons voulu essayer de prédire la méthode d'enseignement à l'aide des réponses des élèves avec la régression logistique. Cette méthode permet de modéliser une classification, à l'aide notamment de l'odds ratio. Cela revient à calculer la probabilité : $P(1|X)=\frac{e^{b_0+b_1x_1+...+b_jx_j}}{1+e^{b_0+b_1x_1+...+b_jx_j}}$. 
+avec $b_0=ln\frac{p(1)}{p(0)}+a_0$ et $b_j=a_j$.
+
+##2.5 Arbre de regression 
+
+L'arbre de régression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).
+Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction d'un maximum de variables explicatives, puis d'élaguer l'arbre afin de minimiser l'erreur, soit l'écart entre la valeur prédite et la valeur réelle. Cela revient donc à faire une régression logistique sur les données, puis d'appliquer l'algorithme de construction d'arbre à partir des résultats.
+
+##2.6 LME / LMM (to be checked)
+
+La procédure des modèles mixtes linéaires développe le modèle linéaire général pour permettre aux données de présenter des variabilités en corrélation et des variabilités non constantes. Le modèle linéaire mixte offre donc une flexibilité pour modéliser non seulement les moyennes des données, mais également leurs variances et covariances.
+
+Les modèles mixtes linéaires sont une extension des modèles linéaires simples permettant des effets fixes et aléatoires. Ils sont particulièrement utilisés lorsqu'il n'y a pas d'indépendance dans les données, telle qu'elle résulte d'une structure hiérarchique.
+
+##2.7 GLMM (to be checked)
+
+Les GLMM (pour Generalized Linear Mixed Models) sont des modèles linéaires généralisés à effets mixtes. Ils sont employés pour analyser des données de comptages, des réponses binaires (*notre cas*) et lorsque les données ne sont pas indépendantes (ça c’est pour la partie mixte)! En général, un GLMM (Generalized Linear Mixed Model ou modèle linéaire généralisé mixtes) est un GLM avec une fonctionnalité supplémentaire qui lui permet de prendre en considération la non indépendance des données.
+
+Un GLMM est dit “mixte”, car il comporte au moins un effet dit “fixe” (la variable dont on souhaite évaluer l’effet, ici les *Pédagogie*, *Age* et *Année Scolaire*) et au moins un effet dit “aléatoire” (la variable de regroupement, ici *newClasse* ou *Group*). Les effets aléatoires ne sont pas évalués, ils servent seulement à indiquer au modèle que les données ne sont pas indépendantes pour une boite donnée. C’est ce qui permet à la déviance résiduelle d’être bien estimée, et ainsi à l’erreur standard des paramètres de ne pas être biaisée, et aux final d’obtenir des résultats fiables. 
+
+
+
 
 

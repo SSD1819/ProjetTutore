@@ -142,13 +142,13 @@ avec $b_0=ln\frac{p(1)}{p(0)}+a_0$ et $b_j=a_j$.
 L'arbre de régression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).
 Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction d'un maximum de variables explicatives, puis d'élaguer l'arbre afin de minimiser l'erreur, soit l'écart entre la valeur prédite et la valeur réelle. Cela revient donc à faire une régression logistique sur les données, puis d'appliquer l'algorithme de construction d'arbre à partir des résultats.
 
-##2.6 LME / LMM (to be checked)
+##2.6 Modèle linéaire mixte
 
 La procédure des modèles mixtes linéaires développe le modèle linéaire général pour permettre aux données de présenter des variabilités en corrélation et des variabilités non constantes. Le modèle linéaire mixte offre donc une flexibilité pour modéliser non seulement les moyennes des données, mais également leurs variances et covariances.
 
 Les modèles mixtes linéaires sont une extension des modèles linéaires simples permettant des effets fixes et aléatoires. Ils sont particulièrement utilisés lorsqu'il n'y a pas d'indépendance dans les données, telle qu'elle résulte d'une structure hiérarchique.
 
-##2.7 GLMM (to be checked)
+##2.7 Régression logistique avec effet mixte
 
 Les GLMM (pour Generalized Linear Mixed Models) sont des modèles linéaires généralisés à effets mixtes. Ils sont employés pour analyser des données de comptages, des réponses binaires (*notre cas*) et lorsque les données ne sont pas indépendantes (ça c’est pour la partie mixte)! En général, un GLMM (Generalized Linear Mixed Model ou modèle linéaire généralisé mixtes) est un GLM avec une fonctionnalité supplémentaire qui lui permet de prendre en considération la non indépendance des données.
 
@@ -276,9 +276,11 @@ Et pour la Pédagogie 2: (T82, T83, T84, T85, T86, T87, T88, T89), (T61, T62) et
 Seul la variable 'Objet' est en parti retrouvée et seulement dans le cas de la Pédagogie 1.
 
 
-#Modélisation
+#4. Modélisation linéaire des résultats à chaque tâche.
 
-##Regression linéaire mixte
+Nous avons voulu modéliser en fonction des caractéristiques de chaque étudiant chaque question pour voir si la pédagogie a un effet. L'objectif est ici de modéliser tâche par tâche les résultats
+
+##Modélisation des questions à résultat continu par modèle linéaire mixte
 Nous avons choisis dans un premier temps d'essayer de modéliser les regroupements de taches en fonction de la Pédagogie, pour ensuite affiner question par question. Après avoir fait une première regression, nous nous sommes rendus compte qu'il était possible qu'une variable extérieure intervienne sur la variabilité de nos résultats. En effet, comme vu à l'aide de l'analyse exploratoire, les scores des élèves sont répartis différemment selon la classe, à laquelle ils appartiennent, de l'année, et de l'age. 
 Nous avons donc réalisé une regression linéaire mixte en mettant comme variable avec un possible effet aléatoire la variable concernant les groupes, et comme variables avec un effet fixe, les variables sur la Pédagogie, l'age et l'année.
 
@@ -286,15 +288,15 @@ Nous avons donc réalisé une regression linéaire mixte en mettant comme variab
 Pour la modélisation de chaque variable nous obtenons bien la présence d'un effet aléatoire, mais seul la variable age explique notre variable à expliquer.
 
 
-\begin{equation*}
+<!--\begin{equation*}
 Au-delà = -6.19 + 2.493*age + 0.79 (effet groupe)
 \end{equation*}
 \begin{equation*}
 Objet = -2.88 + 1.90*age (pas d'effet aléatoire ici)
 \end{equation*}
 \begin{equation*}
-Outils = -0.594 + 0.741*a ge + 0.16 (effet groupe)
-\end{equation*}
+Outils = -0.594 + 0.741*age + 0.16 (effet groupe)
+\end{equation*}-->
 
 Enfin nous avons rajouté un dernier modèle sur la question concernant la capacité à compter loin. L'effet aléatoire est important, mais est justifié par l'ordre de grandeur de la variable en question.
 
@@ -302,7 +304,7 @@ Q1 = -9.554 + 4.667*age + 1.433 (effet groupe)
 
 En conséquent, nous n'avons pas pu modéliser la réussite à certains regroupements de tâches en fonction de la pédagogie enseignée. Toutefois nous avons pu observer qu'il est possible de les modéliser en fonction de l'age de l'individu si on y inclu l'effet groupe.
 
-##Regression logistique mixte
+##Modélisation des questions à résultat binaire par regression logistique mixte
 N'ayant pas eu de résultats concernant la pédagogie lors de la modélisation linéaire mixte précédente, nous avons affiné notre modélisation en réalisant une regression logistique mixte, question par question.
 Les principaux résultats coïncident en partie avec les résultats précédents. La Pédagogie n'est significativement lié qu'à 2 questions. De plus à nouveau plusieurs variables sont modélisable à partir de l'age de chaque individu (voir annexe chaque modèle). 
 

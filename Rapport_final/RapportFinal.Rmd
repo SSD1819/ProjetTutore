@@ -276,6 +276,39 @@ Et pour la Pédagogie 2: (T82, T83, T84, T85, T86, T87, T88, T89), (T61, T62) et
 Seul la variable 'Objet' est en parti retrouvée et seulement dans le cas de la Pédagogie 1.
 
 
+#Modélisation
+
+##Regression linéaire mixte
+Nous avons choisis dans un premier temps d'essayer de modéliser les regroupements de taches en fonction de la Pédagogie, pour ensuite affiner question par question. Après avoir fait une première regression, nous nous sommes rendus compte qu'il était possible qu'une variable extérieure intervienne sur la variabilité de nos résultats. En effet, comme vu à l'aide de l'analyse exploratoire, les scores des élèves sont répartis différemment selon la classe, à laquelle ils appartiennent, de l'année, et de l'age. 
+Nous avons donc réalisé une regression linéaire mixte en mettant comme variable avec un possible effet aléatoire la variable concernant les groupes, et comme variables avec un effet fixe, les variables sur la Pédagogie, l'age et l'année.
+
+<!-- chercher comment mettre une formule centrée en latex -->
+Pour la modélisation de chaque variable nous obtenons bien la présence d'un effet aléatoire, mais seul la variable age explique notre variable à expliquer.
+
+
+\begin{equation*}
+Au-delà = -6.19 + 2.493*age + 0.79 (effet groupe)
+\end{equation*}
+\begin{equation*}
+Objet = -2.88 + 1.90*age (pas d'effet aléatoire ici)
+\end{equation*}
+\begin{equation*}
+Outils = -0.594 + 0.741*a ge + 0.16 (effet groupe)
+\end{equation*}
+
+Enfin nous avons rajouté un dernier modèle sur la question concernant la capacité à compter loin. L'effet aléatoire est important, mais est justifié par l'ordre de grandeur de la variable en question.
+
+Q1 = -9.554 + 4.667*age + 1.433 (effet groupe)
+
+En conséquent, nous n'avons pas pu modéliser la réussite à certains regroupements de tâches en fonction de la pédagogie enseignée. Toutefois nous avons pu observer qu'il est possible de les modéliser en fonction de l'age de l'individu si on y inclu l'effet groupe.
+
+##Regression logistique mixte
+N'ayant pas eu de résultats concernant la pédagogie lors de la modélisation linéaire mixte précédente, nous avons affiné notre modélisation en réalisant une regression logistique mixte, question par question.
+Les principaux résultats coïncident en partie avec les résultats précédents. La Pédagogie n'est significativement lié qu'à 2 questions. De plus à nouveau plusieurs variables sont modélisable à partir de l'age de chaque individu (voir annexe chaque modèle). 
+
+Nous avions au préalable essayé de modéliser ces variable avec l'age des individus arrondis à l'entier le plus proche, mais la significativité de la variable n'apparaissait pas. Etant donné qu'une fois en décimale c'est le cas, il serait intéressant de recommencer dans le futur cette étude en y incluant le mois de naissance de chaque enfant (qui peut êter à l'origine de cette différence).
+
+
 
 
 

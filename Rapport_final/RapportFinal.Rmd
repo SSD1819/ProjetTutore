@@ -256,7 +256,6 @@ Comparons maintenant avec les regroupements de la Pédagogie 2.
 ```{r, include=TRUE}
 plot(cahG.P2, main="Dendogramme des donnees generales \n de la pedagogie P2")
 rect.hclust(cahG.P2,6)
-
 ```
 
 <!-- Audela: 2.3, 3.2, 5.2, 6.2, 8.6, 8.7, 8.8, 4.a,b,c,d, -->
@@ -279,6 +278,9 @@ Seul la variable 'Objet' est en parti retrouvée et seulement dans le cas de la 
 #4. Modélisation linéaire des résultats à chaque tâche.
 
 Nous avons voulu modéliser en fonction des caractéristiques de chaque étudiant chaque question pour voir si la pédagogie a un effet. L'objectif est ici de modéliser tâche par tâche les résultats
+
+
+
 
 ##Modélisation des questions à résultat continu par modèle linéaire mixte
 Nous avons choisis dans un premier temps d'essayer de modéliser les regroupements de taches en fonction de la Pédagogie, pour ensuite affiner question par question. Après avoir fait une première regression, nous nous sommes rendus compte qu'il était possible qu'une variable extérieure intervienne sur la variabilité de nos résultats. En effet, comme vu à l'aide de l'analyse exploratoire, les scores des élèves sont répartis différemment selon la classe, à laquelle ils appartiennent, de l'année, et de l'age. 

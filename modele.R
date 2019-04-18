@@ -31,17 +31,17 @@ don.groupe$annee<-dataPropre$AnneeScolaire
 
 
 data<-groupedData(audela~Pedagogie|newClasse, data=don.groupe)
-res<-lme(audela~Pedagogie+age, random=~+1|newClasse, data=data)
+res<-lme(audela~age, random=~+1|newClasse, data=data)
 
 summary(res)
 
 data<-groupedData(objet~Pedagogie|newClasse, data=don.groupe)
-res<-lme(objet~Pedagogie+age, random=~+1|newClasse, data=data)
+res<-lme(objet~age, random=~+1|newClasse, data=data)
 
 summary(res)
 
 data<-groupedData(outils~Pedagogie|newClasse, data=don.groupe)
-res<-lme(outils~Pedagogie+age, random=~+1|newClasse, data=data)
+res<-lme(outils~age, random=~+1|newClasse, data=data)
 
 summary(res)
 

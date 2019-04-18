@@ -7,15 +7,46 @@ quest<-c("AgeInt","T1", "T21","T22","T23","T31","T32",
          "T85","T86","T87","T88",
          "T89","AnneeScolaire","newClasse")
 don.reg<-dataPropre[,c("Pedagogie",quest)]
-###regression linéaire
-
-
 
 ###regression logistique
-data<-groupedData(log(Y+0.5)~Condition|N_repl, data=dataPropre)
-res<-lme(log(Y+0.5)~Condition+DIV, random=~1, data=data, na.action=na.omit)
+require(glmm)
+# install.packages("doParallel")
+# require(doParallel)
+# clust<-makeCluster(2)
+
+reg.glmm<-glmm(T21 ~ 0 + Pedagogie + AgeInt + AnneeScolaire,
+               random = list(~ 0 + newClasse),
+               varcomps.names=c("newClasse"),data=don.reg,
+               #the first column reports the number of succeses and the second reports the number of failures
+               family.glmm = binomial.glmm)
+
+# stopCluster(clust)
+summary(reg.glmm)
 
 
-modele logistique à effets aléatoires : package glmm
+###regression linéaire
+don.groupe$newClasse<-dataPropre$newClasse
+don.groupe$age<-dataPropre$AgeNum
+don.groupe$annee<-dataPropre$AnneeScolaire
 
 
+data<-groupedData(audela~Pedagogie|newClasse, data=don.groupe)
+res<-lme(audela~Pedagogie+age, random=~+1|newClasse, data=data)
+
+summary(res)
+
+data<-groupedData(objet~Pedagogie|newClasse, data=don.groupe)
+res<-lme(objet~Pedagogie+age, random=~+1|newClasse, data=data)
+
+summary(res)
+
+data<-groupedData(outils~Pedagogie|newClasse, data=don.groupe)
+res<-lme(outils~Pedagogie+age, random=~+1|newClasse, data=data)
+
+summary(res)
+
+don.groupe$T1<-dataPropre$T1
+data<-groupedData(T1~Pedagogie|newClasse, data=don.groupe)
+res<-lme(T1~age, random=~+1|newClasse, data=data)
+
+summary(res)

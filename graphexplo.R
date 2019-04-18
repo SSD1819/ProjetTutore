@@ -50,17 +50,28 @@ ggplot(md.dfpropre, aes(x = variable, fill = value)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 #soustraire le nombre de 1 pour chaque question entre montessori et conventionnelle
-t<-(table(df$Pedagogie,df$classe))
+tt<-(table(df$Pedagogie,df$classe))
 col<-ifelse(tt[1,]>0,"#999999","#E69F00")
 ggplot(df, aes(x=Pedagogie,y=score,fill=classe)) + 
   geom_boxplot() +
   scale_fill_manual(values=col)
 
-df$ageint<-dataPropre$AgeInt
-##ggplot par age
-ggplot(df, aes(x=Pedagogie,y=score,fill=ageint)) + 
-  geom_boxplot() +
-  scale_fill_manual(values=col)
+# df$ageint<-dataPropre$AgeInt
+# ##ggplot par age
+# ggplot(df, aes(x=Pedagogie,y=score,fill=ageint)) + 
+#   geom_boxplot() +
+#   scale_fill_manual(values=col)
+
+table(sapply(c(dataPropre[dataPropre$Pedagogie=="Conventionnelle",nom[-c(1,2)]]),paste))
+table(sapply(c(dataPropre[dataPropre$Pedagogie=="Montessori",nom[-c(1,2)]]),paste))
+
+dp2<-dataPropre[,c(nom[-2],"AgeNum")]
+dp.age <- melt(dp2, id=(c("Pedagogie", "AgeNum")))
+boxplot(dp.age$AgeNum~dp.age$value)
+ggplot(dp.age, aes(x=Pedagogie,y=AgeNum,fill=value)) + 
+  geom_boxplot()
+  # scale_fill_manual(values=c("#999099","#E69F00"))
+
 
 ####Exportation des data pour l'app Shiny####
 save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")), file = "export/graphexplo.RData")

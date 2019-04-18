@@ -19,9 +19,9 @@ plot(scoretotal~dataPropre$AnneeScolaire)
 plot(ttc,type="l",ylim = c(10,20),col="red")
 lines(ttm,col="blue")
 
-df<-data.frame(score=scoretotal,classe=dataPropre$Classe,Pedagogie=dataPropre$Pedagogie,Annee=dataPropre$AnneeScolaire)
+df<-data.frame(score=scoretotal,classe=dataPropre$newClasse,Pedagogie=dataPropre$Pedagogie,Annee=dataPropre$AnneeScolaire)
 
-noms<-c("Pedagogie","Classe", "T1","T2","T3",
+noms<-c("Pedagogie","T1","T2","T3",
         "T5","T61","T62","T71","T72",
         "T8.123","T8.456789")
 nom<-c("Pedagogie", "T1","T21","T22","T23","T31",
@@ -50,10 +50,17 @@ ggplot(md.dfpropre, aes(x = variable, fill = value)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 #soustraire le nombre de 1 pour chaque question entre montessori et conventionnelle
-ggplot(df, aes(x=classe,y=score)) + 
+t<-(table(df$Pedagogie,df$classe))
+col<-ifelse(tt[1,]>0,"#999999","#E69F00")
+ggplot(df, aes(x=Pedagogie,y=score,fill=classe)) + 
   geom_boxplot() +
-  scale_fill_manual(values=c("#999999", "#E69F00", "#56B4E9"))
+  scale_fill_manual(values=col)
 
+df$ageint<-dataPropre$AgeInt
+##ggplot par age
+ggplot(df, aes(x=Pedagogie,y=score,fill=ageint)) + 
+  geom_boxplot() +
+  scale_fill_manual(values=col)
 
 ####Exportation des data pour l'app Shiny####
 save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec")), file = "export/graphexplo.RData")

@@ -7,7 +7,6 @@ output: pdf_document
 
 
 ```{r}
-set.seed(124)
 require(rpart)
 require(rpart.plot)
 
@@ -44,6 +43,7 @@ plotcp(dt)
 
 
 ```{r}
+set.seed(123)
 names(dataVecOld)
 dataArbre<-dataVecOld[,c(2,14:32)]
 data2 = sort(sample(nrow(dataArbre), nrow(dataArbre)*.7))

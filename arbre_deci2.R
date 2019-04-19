@@ -1,6 +1,6 @@
 require(rpart)
 require(rpart.plot)
-
+set.seed(1)
 ########Arbre et prediction pour les variables de don.groupe
 data1 = sort(sample(nrow(don.groupe), nrow(don.groupe)*.7))
 don.groupe.train<-don.groupe[data1,]
@@ -9,12 +9,22 @@ don.groupe.test<-don.groupe[-data1,]
 param1<-rpart.control(minsplit = 30, minbucket = 10)
 dt1<-rpart(Pedagogie~audela+outils+objet, data=don.groupe.train, control = param1)
 prp(dt1, extra = 1+100,type = 2, under=TRUE, yesno=2)
-plotcp(dt1)
+# plotcp(dt1)
 
 pred.pedagogie1<-predict(dt1, newdata=don.groupe.test, type="class")
 print(summary(pred.pedagogie))
 result1 <- data.frame(Pedagogie.pred=pred.pedagogie, Pedagogie.real=don.groupe.test["Pedagogie"])
 result.pred1<-mean(as.numeric(result1[,1]==result1[,2]))
+
+###########rf pour data1
+library(randomForest)
+
+model.rf1 <- randomForest(Pedagogie ~ ., data = don.groupe.train, ntree = 2000)
+varImpPlot(model.rf1)
+p.rf1 <- predict(model.rf1,newdata = don.groupe.test,type="class")
+head(model.rf1$importance)
+
+# plot(don.groupe.train$Pedagogie ~ don.groupe.train$T1)
 
 
 
@@ -24,15 +34,30 @@ data2 = sort(sample(nrow(dataArbre2), nrow(dataArbre2)*.7))
 dataArbre2.train<-dataArbre2[data2,]
 dataArbre2.test<-dataArbre2[-data2,]
 
-param2<-rpart.control(minsplit = 1, minbucket = 1)
+param2<-rpart.control(minsplit = 30, minbucket = 20)
 dt2<-rpart(Pedagogie~., data=dataArbre2.train, control = param2)
 prp(dt2, extra = 1+100,type = 2, under=TRUE, yesno=2)
-plotcp(dt2)
+# plotcp(dt2)
 
 pred.pedagogie2<-predict(dt2, newdata=dataArbre2.test, type="class")
 print(summary(pred.pedagogie2))
 result2 <- data.frame(Pedagogie.pred=pred.pedagogie2, Pedagogie.real=dataArbre2.test["Pedagogie"])
 result.pred2<-mean(as.numeric(result2[,1]==result2[,2]))
+
+
+################
+###Random Forest
+################
+library(randomForest)
+
+model.rf <- randomForest(Pedagogie ~ ., data = dataArbre2.train, ntree = 2000)
+varImpPlot(model.rf)
+p.rf <- predict(model.rf,newdata = dataArbre2.test,type="class")
+str(dataArbre2.test)
+head(model.rf$importance)
+
+plot(dataArbre2.train$Pedagogie ~ dataArbre2.train$T1)
+
 
 ######Arbre et prediction pour les variables de dataPropre
 dataArbre3<-dataPropre[,c("Pedagogie","T21" , "T22" , "T31" , "T41b", "T51", "T81", "T83",  "T89")]
@@ -49,6 +74,9 @@ pred.pedagogie3<-predict(dt3, newdata=dataArbre3.test, type="class")
 print(summary(pred.pedagogie3))
 result3 <- data.frame(Pedagogie.pred=pred.pedagogie3, Pedagogie.real=dataArbre3.test["Pedagogie"])
 result.pred3<-mean(as.numeric(result3[,1]==result3[,2]))
+
+
+
 
 
 #######Arbre et prediction pour les variables de dataVecOld
@@ -77,4 +105,4 @@ print(result.pred4)
 
 save(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")), file = "export/arbre_deci2.RData")
 
-rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))
+# rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))

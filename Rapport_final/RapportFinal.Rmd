@@ -11,6 +11,14 @@ output:
     fig_caption: yes
 ---
 
+\newpage
+#Remerciements
+
+Nous tenons à remercier particulièrement Madame Adeline Leclercq-Samson et Madame Marie-Caroline Croset pour leur aide, leur disponibilité et leur écoute tout au long du projet.
+Nous remercions aussi le CNRS pour la confiance qu'ils nous ont accordé avec ce projet.
+
+\newpage
+
 <!-- Options générales des chunks -->
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, warning = FALSE, include = FALSE)
@@ -28,6 +36,9 @@ require(rpart)
 require(rpart.plot)
 require(corrplot)
 require(ggplot2)
+require(rpart)
+require(rpart.plot)
+require(randomForest)
 
 #### Importation des variables nécessaires ####
 load("../export/ACP.RData")
@@ -41,15 +52,22 @@ load("../export/Tests_Stat.RData")
 load("../export/graphexplo.RData")
 load("../export/importation.RData")
 load("../export/rocglm.RData")
+load("../export/arbre_deci2.RData")
 ```
 
 # Introduction
 
-Le programme de notre 1ère année de Master prévoit un projet tutoré faisant appel à nos compétences acquises en statistique et en sciences des données. C'est dans ce contexte que nous avons travaillé en collaboration avec Marie-Caroline Crozet et Adeline Leclercq-Samson sur un sujet mêlant sciences cognitives, statistique et fouille de données.
+Le programme de notre 1ère année de Master prévoit un projet tutoré faisant appel à nos compétences acquises en statistique et en sciences des données. C'est dans ce contexte que nous avons travaillé en collaboration avec Marie-Caroline Croset et Adeline Leclercq-Samson sur un sujet mêlant sciences cognitives, statistique et fouille de données.
 
 Depuis 4 ans, une equipe de chercheurs de l'institut des sciences cognitives (ISC) de Lyon ont testé les capacités en mathématiques des élèves d'une école maternelle située dans une zone REP+ (Réseau d'éducation prioritaire) de l'agglomération Lyonnaise. Une partie de ces élèves ont suivi une méthode d'éducation conventionnelle et les autres ont suivi des enseignements suivant la méthode Montessori. Notre objectif est de voir s'il y a ou non une différence entre le niveau en mathématiques des élèves ayant suivi les enseignements conventionnels et ceux ayant suivi les enseignements Montessori.
 
 Nous avons reçu les résultats des tests sous forme de tableur que nous avons triés pour ne garder que les résultats des élèves de moyenne section. Nous avons ensuite néttoyé nos données et commencé l'étude sur cette population.
+
+#Problématique
+
+Nous allons donc chercher s'il existe ou non une différence de niveau en mathématiques entre des élèves d'écoles Montessorienne et des élèves d'écoles Conventionnelle.
+
+\newpage
 
 #1. Contexte
 
@@ -82,6 +100,7 @@ La pédagogie traditionnelle (celle que nous connaissons aujord'hui dans nos éc
 \end{description}
 
 ##1.3 Présentation des données de départ
+
 Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les résultats de chaque promotion au test cognitif mis en place par l'équipe de recherche l'institut des sciences cognitives. Un quatrième fichier du même acabit pour l'année 2018/2019 nous est parvenu au milieu de l'étude.
     \begin{description}
     \item[MathsJetons\_2015-2016.xlsx :] Pour l'année 2015/2016.
@@ -107,28 +126,24 @@ Comme dit précédemment les questions sont divisées en sous questions, ces que
     \item[variable Au-delà :] est calculée en faisant la somme du nombre de bonnes réponses aux questions 2.3, 3.2, 4.2a, 4.2b, 4.2c, 4.2d, 5.2, 6.2, 8.6, 8.7, 8.8 et 8.9. La première question concernant la capacité à compter loin est prise en compte, les individus sachant compter au-delà de 7 ont un point en plus.\newline
     \item[variable Outil :] est calculée en faisant la somme du nombre de bonnes réponses aux questions des taches 4, 5 et 6 soit les questions des taches sur le surcomptage, la création d'une collection et la comparaison de deux collections.\newline
     \item[variable Objet :] est calculée en faisant la somme du nombre de bonnes réponses aux questions des taches 1, 2, 3 et 8 soit les questions des taches sur la capacité à savoir compter, à dénombrer une collection et à constituer une collection d'objets. La question 1 est gérée par paliés. Nous avons séparé les individus en 5 groupes : ceux qui savent compter jusqu'à 3, puis de 4 à 7, de 8 à 10, de 11 à 16, enfin ceux qui savent compter au delà de 16. Respéctivement pour chaque catégorie nous leur avons donnée un score de 0, 0.3, 0.6, 0.9 et 1.2.\newline
-    \item[Jetons2019.xlsx :] Pour l'année 2018/2019.
 \end{description}
 
+\newpage
 
 #2. Méthodologie
-<!-- On parle au passé ? "nous avons vu ..." ou au futur ? "par la suite nous verrons ..."  -->
-Afin de répondre au mieux à notre problématique nous avons fait le choix d'utiliser plusieurs méthodes statistiques différentes pour analyser nos données. Pour cela nous avons dans un premier temps utilisé une méthode qui permet de résumer l'information globale du jeu de données : l'analyse factorielle, et la classification ascendante hiérarchique (pour faire des regroupement de variables). Puis dans un but prédictif nous avons utilisé la régression logistique et les arbres de régressions. Plusieurs tests ont été fait en parallèle, comme celui du chi2, de student.. 
+
+Afin de répondre au mieux à notre problématique nous avons fait le choix d'utiliser plusieurs méthodes statistiques différentes pour analyser nos données. Nous avons dans un premier temps utilisés deux méthodeq qui permettent de résumer l'information globale du jeu de données : l'analyse factorielle, et la classification ascendante hiérarchique (pour faire des regroupements de variables). Puis dans un but prédictif nous avons utilisé la régression logistique mixte, la régréssion linéaire mixte et les forêts aléatoires. Plusieurs tests statistiques ont été réalisés en parallèle.
 
 ##2.1 Analyse factorielle
 
-Les méthodes d'analyse factorielle que nous avons utilisé ici sont l'analyse des correspondances multiples (ACM) et l'analyse en composantes principales (ACP), qui sont des méthodes de synthétisation du nombre de dimensions pour les données qualitatives et quantitatives. Cela nous permet d'appréhender plus rapidement le jeu de données, et avoir une première idée de ce qui diffère les individus entre eux (ou ce qui les rapproche).
-L'ACM permet dans un nuage à N dimensions, en cherchant les plans orthogonaux qui maximisent la variance entre les individus, à résumer celles ci en 4 voire 5 dimensions. 
-l'ACM a été réalisée sur les données vectorisées, celles ci ont été prises comme variables actives (celles qui définissent le placement des individus sur le graphe) et les variables portant sur la pédagogie, la question 1, et l'âge en illustratives (ajoutée après le placement des individus sur le graphe).
+Les méthodes d'analyse factorielle que nous avons utilisées ici sont l'analyse des correspondances multiples (ACM) et l'analyse en composantes principales (ACP), qui sont des méthodes de synthétisation du nombre de dimensions pour les données qualitatives et quantitatives. Cela nous permet d'appréhender plus rapidement le jeu de données, et avoir une première idée de ce qui différencie les individus entre eux (ou ce qui les rapproche).
+L'ACM permet dans un nuage à N dimensions, en cherchant les axes orthogonaux qui maximisent la variance entre les individus, de résumer ces N dimensions en 4 voire 5 dimensions.
+l'ACM a été réalisée sur les données vectorisées (regroupement des réponses aux sous-questions en un vecteur par question, question 1 exclue), celles ci ont été prises comme variables actives (celles qui définissent le placement des individus sur le graphe) et les variables portant sur la pédagogie, la question 1, et l'âge en illustratives (ajoutée après le placement des individus sur le graphe).
 Le principe était le même pour l'ACP qui a été faite ensuite.
 
 ##2.2 Classification Ascendante Hiérachique
 
-N'ayant aucune information au préalable sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appelle aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables. Nous avons aussi utilisé la CAH classique qui consiste à regrouper les individus selon leur points communs cela en partant d'une inertie interclasse maximale, pour arriver à une inertie interclasse de 0. Nous avons utilisé la CAH classique afin de partitionner nos individus dans un but descriptif.
-
-<!-- ##2.4 Regression Logistique -->
-
-<!-- Notre problématique étant de voir s'il existe un lien entre la façon d'enseigner et les réponses au test, nous avons voulu essayer de prédire la méthode d'enseignement à l'aide des réponses des élèves avec la régression logistique. Cette méthode permet de modéliser une classification, à l'aide notamment de l'odds ratio. Cela revient à calculer la probabilité : $P(1|X)=\frac{e^{b_0+b_1x_1+...+b_jx_j}}{1+e^{b_0+b_1x_1+...+b_jx_j}}$.  -->
+N'ayant aucune information au préalable sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appelle aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables. Nous avons aussi utilisé la CAH classique qui consiste à regrouper les individus selon leur points communs cela en partant d'une inertie interclasse maximale (inertie = somme des variances), pour arriver à une inertie interclasse de 0. Nous avons utilisé la CAH classique afin de partitionner nos individus dans un but descriptif.
 
 ##2.3 Arbre de regression 
 
@@ -137,25 +152,23 @@ Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction 
 
 ##2.4 Modèle linéaire mixte
 
-La procédure des modèles mixtes linéaires développe le modèle linéaire général pour permettre aux données de présenter des variabilités en corrélation et des variabilités non constantes. Le modèle linéaire mixte offre donc une flexibilité pour modéliser non seulement les moyennes des données, mais également leurs variances et covariances.
-
 Les modèles mixtes linéaires sont une extension des modèles linéaires simples permettant des effets fixes et aléatoires. Ils sont particulièrement utilisés lorsqu'il n'y a pas d'indépendance dans les données, telle qu'elle résulte d'une structure hiérarchique. 
 
 $y_{kj}=\beta_0+\beta_1x_1+...+\beta_jx_j+\beta_k+\varepsilon_{ij}$ sachant $k:k_{ieme}\ groupe \ de \ l'individu$ ; $j:j_{ieme}\ variable$
 
-
 ##2.5 Régression logistique avec effet mixte
 
-Les GLMM (pour Generalized Linear Mixed Models) sont des modèles linéaires généralisés à effets mixtes. Ils sont employés pour analyser des données de comptages, des réponses binaires (*notre cas*) et lorsque les données ne sont pas indépendantes (ça c’est pour la partie mixte)! En général, un GLMM (Generalized Linear Mixed Model ou modèle linéaire généralisé mixtes) est un GLM avec une fonctionnalité supplémentaire qui lui permet de prendre en considération la non indépendance des données.
-
-Un GLMM est dit “mixte”, car il comporte au moins un effet dit “fixe” (la variable dont on souhaite évaluer l’effet, ici les *Pédagogie*, *Age* et *Année Scolaire*) et au moins un effet dit “aléatoire” (la variable de regroupement, ici *newClasse* ou *Group*). Les effets aléatoires ne sont pas évalués, ils servent seulement à indiquer au modèle que les données ne sont pas indépendantes pour une boite donnée. C’est ce qui permet à la déviance résiduelle d’être bien estimée, et ainsi à l’erreur standard des paramètres de ne pas être biaisée, et aux final d’obtenir des résultats fiables.
+Un GLMM (pour Generalized Linear Mixed Models) est dit “mixte”, car il comporte au moins un effet dit “fixe” (la variable dont on souhaite évaluer l’effet, ici les *Pédagogie*, *Age* et *Année Scolaire*) et au moins un effet dit “aléatoire” (la variable de regroupement, ici *newClasse* ou *Group*). Les effets aléatoires ne sont pas évalués, ils servent seulement à indiquer au modèle que les données ne sont pas indépendantes pour une boite donnée. C’est ce qui permet à la déviance résiduelle d’être bien estimée, et ainsi à l’erreur standard des paramètres de ne pas être biaisée, et aux final d’obtenir des résultats fiables.
 
 $P_k(1|X)=\frac{e^{\beta_0+\beta_1x_1+...+\beta_jx_j+\beta_k}}{1+e^{\beta_0+\beta_1x_1+...+\beta_jx_j+\beta_k}}$ sachant $k:k_{iem}\ groupe \ de \ l'individu$
 
+\newpage
+
 #3. Analyse exploratoire
+
 ##3.1	Analyse Préliminaire
 
-```{r}
+```{r include=TRUE, fig.cap="Réussite à chaque question par pédagogie"}
 ggplot(md.dfpropre, aes(x = variable, fill = value)) + 
   geom_bar(position = "fill") +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
@@ -289,6 +302,7 @@ Et pour la Pédagogie 2: (T82, T83, T84, T85, T86, T87, T88, T89), (T61, T62) et
 
 Seul la variable 'Objet' est en parti retrouvée et seulement dans le cas de la Pédagogie 1.
 
+\newpage
 
 #4. Modélisation linéaire des résultats à chaque question.
 
@@ -337,17 +351,36 @@ $$
 Il y a donc une prédisposition à réussir la question T89 pour chez les élèves ayant suivant la pédagogie Montessorienne.
 Inversement pour la T51 qui est en faveur de la pédagogie Conventionnelle.
 
-Etant limité par les packages disponible de R, nous n'avons pas pu faire les courbe ROC de ces deux régressions logistiques mixtes
+Etant limité par les packages disponible de R, nous n'avons pas pu faire les courbe ROC de ces deux régressions logistiques mixtes.
 
-<!--
-```{r,include=TRUE}
-plot.roc(reg.roc.t89,col="yellow", lwd=3)
-glm_simple_roc<- simple_roc(don.reg$T89==1, pred.t89)
-with(glm_simple_roc, points(1 - FPR, TPR, col=1 + labels, cex = 0.7))
-```
--->
+##4.3 Forêt d'arbres décisionnels 
 
+Les Forêt d'arbres décisionnels sont une méthode d'apprentissage automatique de régression et de classification basée sur la construction d'une multitude d'arbres de décision. Les forêts d'arbres décisionnels utilisent la méthode du bagging. Le bagging consiste à prendre un jeu de données $\mathit{D}$ de taille $n$, et créer $m$ nouveaux jeux de données $\mathit{D_{i}}$ de taille $n'$ en échantillonnant $\mathit{D}$ uniformément et avec remise. Ensuite l'algorithme créer à partir de chaque échantillon $\mathit{D_{i}}$ un arbre de décision pour ensuite agréger ces arbres et obtenir un modèle stable. \newline 
+
+Pour prédire une variable quantitative l'agrégation ce fait par la moyenne : $\mathit{G(x)}=\frac{1}{m}\sum_{i=1}^{m} \mathit{G_{i}(x)}$ .
+
+Et pour prédire une variable qualitative on procède à un agrégation par le vote : $\mathit{G(x)}=$ Vote majoritaire $(\mathit{G_{1}(x)},..., \mathit{G_{m}(x)})$ où $\mathit{G_{1}(x)}$ représente un modèle entrainé sur un ensemble $\mathit{D_{i}}$. 
+
+Nous avons donc appliqué cet algorithme sur deux jeux de données, le jeu de données contenant les variables regroupées et le jeu de données de base contenant toutes les questions une à une.  
+
+Nous avons ici la matrice de confusion. Cette matrice nous donne en ligne les données observées et en colonnes les données prédites. Il y a 64 individus issus de la pédagogie Conventionnelle ayant été bien classés et 32 individus ayant été mal classés et considérés comme des Montessori. Ce qui nous donne un taux de bonne prédiction pour les individus de la pédagogie Conventionnelle de 33%. 
+
+Pour la pédagogie Montessori, 26 ont été bien classés et 41 ont été classé en Convetionnelle à tort. On a donc une minorité de bonne prédiction. Nous ne pouvons pas obtenir de prédiction efficace grâce à ce modèle.  
+
+```{r, include=TRUE} 
+model.rf1$confusion  
+``` 
+
+Maintenant voyons pour le jeu de données avec les questions générales. 
+
+La matrice de confusion nous indique qu'il y a 24% de mauvaise prédiction pour la catégorie Conventionnelle et 76% de mauvaise prédiction pour la catégorie Montessori 
+
+````{r, include=TRUE} 
+model.rf$confusion  
+``` 
 
 #Conclusion
 
+Afin de d'étudier les éventuelles différences ou non en mathématiques entre les élèves suivants une pédagogie Montessoriennes et et ceux suivants Conventionnelle, nous avons commencé par une brève étude exploratoire permettant de comprendre nos données et de repérer les possibles liens entre les variables. Par la suite une analyse prédictive sur les réponses aux questions en fonction de la pédagogie aurait pu permettre de différncier ces deux pédagogies. Toutefois, les résultats de cette analyse sont peu concluants. Seuls 2 modèles différencient les 2 pédagogies : la modélisation des réponses aux questions concernant la création d'une collection équipotente et la reconnaissance d'un chiffre particulier. 
+Il serait intéressant de continuer cette étude avec un nombre d'individus plus important voir si de nouveaux liens apparaissent.
 

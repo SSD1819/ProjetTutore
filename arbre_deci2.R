@@ -12,8 +12,8 @@ prp(dt1, extra = 1+100,type = 2, under=TRUE, yesno=2)
 # plotcp(dt1)
 
 pred.pedagogie1<-predict(dt1, newdata=don.groupe.test, type="class")
-print(summary(pred.pedagogie))
-result1 <- data.frame(Pedagogie.pred=pred.pedagogie, Pedagogie.real=don.groupe.test["Pedagogie"])
+print(summary(pred.pedagogie1))
+result1 <- data.frame(Pedagogie.pred=pred.pedagogie1, Pedagogie.real=don.groupe.test["Pedagogie"])
 result.pred1<-mean(as.numeric(result1[,1]==result1[,2]))
 
 ###########rf pour data1

@@ -68,7 +68,7 @@ table(sapply(c(dataPropre[dataPropre$Pedagogie=="Montessori",nom[-c(1,2)]]),past
 dp2<-dataPropre[,c(nom[-2],"AgeNum")]
 dp.age <- melt(dp2, id=(c("Pedagogie", "AgeNum")))
 boxplot(dp.age$AgeNum~dp.age$value)
-ggplot(dp.age, aes(x=Pedagogie,y=AgeNum,fill=value)) + 
+ggplot(dp.age, aes(x=variable,y=AgeNum,fill=value)) + 
   geom_boxplot()
   # scale_fill_manual(values=c("#999099","#E69F00"))
 

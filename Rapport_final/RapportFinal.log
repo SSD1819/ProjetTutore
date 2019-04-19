@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2019.3.14)  18 APR 2019 22:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.19 (TeX Live 2018/W32TeX) (preloaded format=pdflatex 2019.3.14)  19 APR 2019 11:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -868,52 +868,48 @@ File: RapportFinal_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type
  pdf)
 <use RapportFinal_files/figure-latex/unnamed-chunk-13-1.pdf>
 Package pdftex.def Info: RapportFinal_files/figure-latex/unnamed-chunk-13-1.pdf
-  used on input line 631.
+  used on input line 635.
 (pdftex.def)             Requested size: 469.75386pt x 325.2142pt.
 [16]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 643.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 647.
 [17 <./RapportFinal_files/figure-latex/unnamed-chunk-13-1.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 643.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 647.
 (./RapportFinal.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 643.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 643.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 647.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 647.
 Package rerunfilecheck Info: File `RapportFinal.out' has not changed.
-(rerunfilecheck)             Checksum: 135F5DCDF1025BAEA00D8C537E9BBFEF;4972.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 643.
+(rerunfilecheck)             Checksum: C09746C220F18C15C7ED333FE9315250;4966.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 647.
  ) 
 Here is how much of TeX's memory you used:
  10281 strings out of 494562
- 149775 string characters out of 6175662
- 213505 words of memory out of 5000000
+ 149777 string characters out of 6175662
+ 213502 words of memory out of 5000000
  13770 multiletter control sequences out of 15000+600000
  46177 words of font info for 40 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 28i,7n,32p,619b,398s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 28i,8n,32p,619b,398s stack positions out of 5000i,500n,10000p,200000b,80000s
 {c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvips/lm/l
-m-rm.enc}{c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc/dvi
-ps/lm/lm-mathit.enc}{c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fo
+m-mathit.enc}{c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/enc
+/dvips/lm/lm-rm.enc}{c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fo
 nts/enc/dvips/lm/lm-mathsy.enc}{c:/Users/Utilisateur/AppData/Roaming/TinyTeX/te
 xmf-dist/fonts/enc/dvips/lm/lm-ec.enc}<c:/Users/Utilisateur/AppData/Roaming/Tin
 yTeX/texmf-dist/fonts/type1/public/lm/lmbx10.pfb><c:/Users/Utilisateur/AppData/
 Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmbx12.pfb><c:/Users/Utilisate
 ur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi10.pfb><c:/User
-s/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi5.pf
+s/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmmi7.pf
 b><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/l
-m/lmmi7.pfb><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type
-1/public/lm/lmr10.pfb><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/
-fonts/type1/public/lm/lmr17.pfb><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/t
-exmf-dist/fonts/type1/public/lm/lmr5.pfb><c:/Users/Utilisateur/AppData/Roaming/
-TinyTeX/texmf-dist/fonts/type1/public/lm/lmr7.pfb><c:/Users/Utilisateur/AppData
-/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/Utilisat
-eur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Use
-rs/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.
-pfb><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public
-/lm/lmsy5.pfb><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/ty
-pe1/public/lm/lmsy7.pfb>
-Output written on RapportFinal.pdf (17 pages, 331756 bytes).
+m/lmr10.pfb><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type
+1/public/lm/lmr17.pfb><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/texmf-dist/
+fonts/type1/public/lm/lmr7.pfb><c:/Users/Utilisateur/AppData/Roaming/TinyTeX/te
+xmf-dist/fonts/type1/public/lm/lmri10.pfb><c:/Users/Utilisateur/AppData/Roaming
+/TinyTeX/texmf-dist/fonts/type1/public/lm/lmri12.pfb><c:/Users/Utilisateur/AppD
+ata/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy10.pfb><c:/Users/Utili
+sateur/AppData/Roaming/TinyTeX/texmf-dist/fonts/type1/public/lm/lmsy7.pfb>
+Output written on RapportFinal.pdf (17 pages, 315520 bytes).
 PDF statistics:
- 354 PDF objects out of 1000 (max. 8388607)
- 296 compressed objects within 3 object streams
+ 342 PDF objects out of 1000 (max. 8388607)
+ 287 compressed objects within 3 object streams
  49 named destinations out of 1000 (max. 500000)
  232 words of extra memory for PDF output out of 10000 (max. 10000000)
 

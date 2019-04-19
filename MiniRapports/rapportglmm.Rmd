@@ -9,130 +9,372 @@ output: html_document
 require(glmm)
 load("../.RData")
 ```
+#T21
 
+```{r}
+T21m <- glmm(T21 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T21mm)
+```
+
+```{r}
+T21mm <- glmm(T21 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T21mm)
+```
+age à 0.0898
+
+##T22
+
+```{r}
+T22m <- glmm(T22 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T22m)
+```
+
+```{r}
+T22mm <- glmm(T22 ~ age ,
+                    random = list(~ 0 + newClasse),
+                    varcomps.names=c("newClasse"),data=don.reg,
+                    family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T22mm)
+```
+age significatif
+
+#T23
+```{r}
+T23m <- glmm(T23 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T23m)
+```
+
+```{r}
+T23mm <- glmm(T23 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T23mm)
+```
+age significatif
+
+#T31
+
+```{r}
+T31m <- glmm(T31 ~ Pedagogie + age ,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T31m)
+```
+
+```{r}
+T31mm <- glmm(T31 ~ age,
+                    random = list(~ 0 + newClasse),
+                    varcomps.names=c("newClasse"),data=don.reg,
+                    family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T31mm)
+```
+
+age significatif
+
+#T32
+
+```{r}
+T32m <- glmm(T32 ~ Pedagogie+age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T32m)
+```
+
+```{r}
+T32mm <- glmm(T32 ~ age,
+                    random = list(~ 0 + newClasse),
+                    varcomps.names=c("newClasse"),data=don.reg,
+                    family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T32mm)
+```
+
+Aucune variable n'est significative.
+
+#T41a
+
+```{r}
+T41amm <- glmm(T41a ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+
+summary(T41amm)
+```
+
+```{r}
+T41amm <- glmm(T41a ~ age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+
+summary(T41amm)
+```
+aucune variable significative
+
+#T41b
+
+```{r}
+T41bm <- glmm(T41b ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T41bm)
+```
+
+```{r}
+T41bmm <- glmm(T41b ~ age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T41bmm)
+```
+aucune variable significative
+
+#T41c
+
+```{r}
+T41cm <- glmm(T41c ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T41cm)
+```
+
+```{r}
+T41cmm <- glmm(T41c ~ Pedagogie,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T41cmm)
+```
+aucune variable significative
+
+#T41d
+
+```{r}
+T41dm <- glmm(T41d ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T41dm)
+```
+
+```{r}
+T41dmm <- glmm(T41d ~ age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T41dmm)
+```
+aucune variable significative
+
+#T42a
+
+```{r}
+T42am <- glmm(T42a ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+
+summary(T42am)
+```
+
+```{r}
+T42amm <- glmm(T42a ~ age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+
+summary(T42amm)
+```
+age significatif
+
+#T42b
+
+```{r}
+T42bm <- glmm(T42b ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T42bm)
+```
+
+```{r}
+T42bmm <- glmm(T42b ~ age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T42bmm)
+```
+aucune 
+
+#T42c
+
+```{r}
+T42cm <- glmm(T42c ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+
+summary(T42cm)
+```
+
+```{r}
+T42cmm <- glmm(T42c ~ age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+
+summary(T42cmm)
+```
+aucune
+
+#T42d
+
+```{r}
+T42dm<- glmm(T42d ~ Pedagogie + age ,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T42dm)
+```
+
+```{r}
+T42dmm <- glmm(T42d ~ age ,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T42dmm)
+```
+aucune
+
+#T51
+
+```{r}
+T51m <- glmm(T51 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T51m)
+```
+
+```{r}
+T51mm <- glmm(T51 ~ Pedagogie,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+summary(T51mm)
+```
+Pedagogie
 
 ##T52
 ```{r}
-T52mm<-glmm(T52 ~ Pedagogie + AgeInt + AnneeScolaire,
+T52m<-glmm(T52 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+
+summary(T52m)
+```
+
+```{r}
+T52mm<-glmm(T52 ~ age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
 summary(T52mm)
 ```
-```{r}
-T52mm2<-glmm(T52 ~ Pedagogie + AgeInt,
-            random = list(~ 0 + newClasse),
-            varcomps.names=c("newClasse"),data=don.reg,
-            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
-
-summary(T52mm2)
-```
-```{r}
-T52mm2<-glmm(T52 ~ AgeInt,
-            random = list(~ 0 + newClasse),
-            varcomps.names=c("newClasse"),data=don.reg,
-            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
-
-summary(T52mm2)
-```
 aucune variable significative pour la prédiction de T52
 
 ##T61
 ```{r}
-T61mm<-glmm(T61 ~ Pedagogie + AgeInt + AnneeScolaire,
+T61m<-glmm(T61 ~ Pedagogie + age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
-summary(T61mm)
+summary(T61m)
 ```
 
 ```{r}
-T61mm<-glmm(T61 ~ Pedagogie + AnneeScolaire,
+T61mm<-glmm(T61 ~ Pedagogie,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
 summary(T61mm)
 ```
+aucune
 
 ##T62
 ```{r}
-T62mm<-glmm(T62 ~ Pedagogie + AgeInt + AnneeScolaire,
+T62m<-glmm(T62 ~ Pedagogie + age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
-summary(T62mm)
+summary(T62m)
 ```
 
 ```{r}
-T62mm<-glmm(T62 ~ Pedagogie + AnneeScolaire,
+T62mm<-glmm(T62 ~ age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
 summary(T62mm)
 ```
-
-```{r}
-T62mm<-glmm(T62 ~ AnneeScolaire,
-            random = list(~ 0 + newClasse),
-            varcomps.names=c("newClasse"),data=don.reg,
-            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
-
-summary(T62mm)
-```
+aucune 
 
 ##T71
 ```{r}
-T71mm<-glmm(T71 ~ Pedagogie + AgeInt + AnneeScolaire,
+T71m<-glmm(T71 ~ Pedagogie + age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
-summary(T71mm)
+summary(T71m)
 ```
 
 ```{r}
-T71mm<-glmm(T71 ~ AgeInt + AnneeScolaire,
+T71mm<-glmm(T71 ~ Pedagogie,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
 summary(T71mm)
 ```
+aucune
 
-```{r}
-T71mm<-glmm(T71 ~ AnneeScolaire,
-            random = list(~ 0 + newClasse),
-            varcomps.names=c("newClasse"),data=don.reg,
-            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
-
-summary(T71mm)
-```
 ##T72
+
 ```{r}
-T72mm<-glmm(T72 ~ Pedagogie + AgeInt + AnneeScolaire,
+T72m<-glmm(T72 ~ Pedagogie + age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
-summary(T72mm)
+summary(T72m)
 ```
 
 ```{r}
-T72mm<-glmm(T72 ~ Pedagogie + AgeInt,
-            random = list(~ 0 + newClasse),
-            varcomps.names=c("newClasse"),data=don.reg,
-            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
-
-summary(T72mm)
-```
-
-```{r}
-T72mm<-glmm(T72 ~ AgeInt,
+T72mm<-glmm(T72 ~ age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
@@ -143,7 +385,7 @@ aucune variable significative
 
 ##T81
 ```{r}
-# T81mm<-glmm(T81 ~ Pedagogie + AgeInt + AnneeScolaire,
+# T81mm<-glmm(T81 ~ Pedagogie + age + AnneeScolaire,
 #             random = list(~ 0 + newClasse),
 #             varcomps.names=c("newClasse"),data=don.reg,
 #             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
@@ -153,179 +395,137 @@ aucune variable significative
 
 ##T82
 ```{r}
-T82mm<-glmm(T82 ~ Pedagogie + AgeInt + AnneeScolaire,
+T82m<-glmm(T82 ~ Pedagogie + age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
-summary(T82mm)
+summary(T82m)
 ```
 
 ```{r}
-T82mm<-glmm(T82 ~ Pedagogie + AgeInt,
+T82mm<-glmm(T82 ~ age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
 summary(T82mm)
 ```
-
-```{r}
-T82mm<-glmm(T82 ~ Pedagogie + AgeInt,
-            random = list(~ 0 + newClasse),
-            varcomps.names=c("newClasse"),data=don.reg,
-            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
-
-summary(T82mm)
-```
+age
 
 ##T83
 ```{r}
-T83mm<-glmm(T83 ~ Pedagogie + AgeInt + AnneeScolaire,
+T83m<-glmm(T83 ~ Pedagogie + age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
-summary(T83mm)
+summary(T83m)
 ```
 
 ```{r}
-T83mm<-glmm(T83 ~ AgeInt + AnneeScolaire,
+T83mm<-glmm(T83 ~ age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
 summary(T83mm)
 ```
-
-```{r}
-T83mm<-glmm(T83 ~ AnneeScolaire,
-            random = list(~ 0 + newClasse),
-            varcomps.names=c("newClasse"),data=don.reg,
-            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
-
-summary(T83mm)
-```
+age
 
 ##T84
 ```{r}
-T84mm<-glmm(T84 ~ Pedagogie + AgeInt + AnneeScolaire,
+T84m<-glmm(T84 ~ Pedagogie + age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
-summary(T84mm)
+summary(T84m)
 ```
 
 ```{r}
-T84mm<-glmm(T84 ~ Pedagogie + AgeInt,
+T84mm<-glmm(T84 ~ age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
 summary(T84mm)
 ```
-
-```{r}
-T84mm<-glmm(T84 ~ Pedagogie,
-            random = list(~ 0 + newClasse),
-            varcomps.names=c("newClasse"),data=don.reg,
-            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
-
-summary(T84mm)
-```
-
+age
 
 ##T85
 ```{r}
-T85mm<-glmm(T85 ~ Pedagogie + AgeInt + AnneeScolaire,
+T85m<-glmm(T85 ~ Pedagogie + age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
-summary(T85mm)
+summary(T85m)
 ```
 
 ```{r}
-T85mm<-glmm(T85 ~ Pedagogie + AnneeScolaire,
+T85mm<-glmm(T85 ~ age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
 summary(T85mm)
 ```
-
-année scolaire ?
+age
 
 ##T86
 ```{r}
-T86mm<-glmm(T86 ~ Pedagogie + AgeInt + AnneeScolaire,
+T86m<-glmm(T86 ~ Pedagogie + age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
-summary(T86mm)
+summary(T86m)
 ```
 
 ```{r}
-T86mm<-glmm(T86 ~ Pedagogie + AnneeScolaire,
+T86mm<-glmm(T86 ~ age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
 summary(T86mm)
 ```
-
-```{r}
-T86mm<-glmm(T86 ~ Pedagogie,
-            random = list(~ 0 + newClasse),
-            varcomps.names=c("newClasse"),data=don.reg,
-            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
-
-summary(T86mm)
-```
+age
 
 ##T87
 ```{r}
-T87mm<-glmm(T87 ~ Pedagogie + AgeInt + AnneeScolaire,
+T87m<-glmm(T87 ~ Pedagogie + age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
-summary(T87mm)
+summary(T87m)
 ```
 
 ```{r}
-T87mm<-glmm(T87 ~ Pedagogie + AgeInt,
+T87mm<-glmm(T87 ~ age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
 summary(T87mm)
 ```
-
-```{r}
-T87mm<-glmm(T87 ~ Pedagogie ,
-            random = list(~ 0 + newClasse),
-            varcomps.names=c("newClasse"),data=don.reg,
-            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
-
-summary(T87mm)
-```
+age
 
 ##T88
 ```{r}
-T88mm<-glmm(T88 ~ Pedagogie + AgeInt + AnneeScolaire,
+T88m<-glmm(T88 ~ Pedagogie + age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
 
-summary(T88mm)
+summary(T88m)
 ```
 
 ```{r}
-T88mm<-glmm(T88 ~ Pedagogie + AnneeScolaire,
+T88mm<-glmm(T88 ~ age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
@@ -333,24 +533,16 @@ T88mm<-glmm(T88 ~ Pedagogie + AnneeScolaire,
 
 summary(T88mm)
 ```
-???
+age (age + pedagogie presque)
 
 ##T89
 ```{r}
-T89mm<-glmm(T89 ~ Pedagogie + AgeInt + AnneeScolaire,
+T89m<-glmm(T89 ~ Pedagogie + age,
             random = list(~ 0 + newClasse),
             varcomps.names=c("newClasse"),data=don.reg,
             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
 
-summary(T89mm)
+summary(T89m)
 ```
+ouiiiiiiiiiiiiiiiiiiii
 
-```{r}
-T89mm<-glmm(T89 ~ Pedagogie + AnneeScolaire,
-            random = list(~ 0 + newClasse),
-            varcomps.names=c("newClasse"),data=don.reg,
-            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
-
-summary(T89mm)
-```
-????

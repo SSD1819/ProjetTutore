@@ -40,6 +40,7 @@ load("../export/arbre_deci.RData")
 load("../export/Tests_Stat.RData")
 load("../export/graphexplo.RData")
 load("../export/importation.RData")
+load("../export/rocglm.RData")
 ```
 
 # Introduction
@@ -125,36 +126,228 @@ Le principe était le même pour l'ACP qui a été faite ensuite.
 
 N'ayant aucune information au préalable sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appelle aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables. Nous avons aussi utilisé la CAH classique qui consiste à regrouper les individus selon leur points communs cela en partant d'une inertie interclasse maximale, pour arriver à une inertie interclasse de 0. Nous avons utilisé la CAH classique afin de partitionner nos individus dans un but descriptif.
 
-##2.3 Tests statistiques
+<!-- ##2.4 Regression Logistique -->
 
-Un test statistique est une procédure de décision entre deux hypothèses. Il s'agit d'une démarche consistant à rejeter ou à ne pas rejeter une hypothèse statistique, appelée hypothèse nulle, en fonction d'un jeu de données. Pour le projet nous avons utilisé le test paramétrique. Un test paramétrique est un test pour lequel on fait une hypothèse paramétrique sur la distribution des données sous H0. Les hypothèses du test concernent alors les paramètres de cette distribution. En fonction du type de données, nous avons utilisé le t-test de Student et le test de proportion de succès.Trois différents types de test statistique ont été effectué pour cette analyse. 
-Premièrement un test du d'indépendance Chi2 qui permet de déterminer l'existence d'une relation de dépendance entre deux variables au sein d'un effectif. Si il  a dépendance il ne peut en aucun cas indiquer le sens de cette relation. Nous l'avons utiliser pour déterminer si il y avait une relation entre chaque question.
-Deuxièmement un test de proportionnalité, qui permet de tester une différence de proportion entre deux effectifs. Nous avons effectuer ce test pour vérifier la proportion de bonne réponse chez les élèves de pédagogie 1 et pédagogie 2.
-Et finalement le test de student qui permet de vérifier si la moyenne de deux échantillons est significativement différente. Nous avons utilisé ce test pour vérifier la moyenne entre les deux pédagogie pour certains regroupements de notes.
+<!-- Notre problématique étant de voir s'il existe un lien entre la façon d'enseigner et les réponses au test, nous avons voulu essayer de prédire la méthode d'enseignement à l'aide des réponses des élèves avec la régression logistique. Cette méthode permet de modéliser une classification, à l'aide notamment de l'odds ratio. Cela revient à calculer la probabilité : $P(1|X)=\frac{e^{b_0+b_1x_1+...+b_jx_j}}{1+e^{b_0+b_1x_1+...+b_jx_j}}$.  -->
 
-##2.4 Regression Logistique
-
-Notre problématique étant de voir s'il existe un lien entre la façon d'enseigner et les réponses au test, nous avons voulu essayer de prédire la méthode d'enseignement à l'aide des réponses des élèves avec la régression logistique. Cette méthode permet de modéliser une classification, à l'aide notamment de l'odds ratio. Cela revient à calculer la probabilité : $P(1|X)=\frac{e^{b_0+b_1x_1+...+b_jx_j}}{1+e^{b_0+b_1x_1+...+b_jx_j}}$. 
-avec $b_0=ln\frac{p(1)}{p(0)}+a_0$ et $b_j=a_j$.
-
-##2.5 Arbre de regression 
+##2.3 Arbre de regression 
 
 L'arbre de régression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).
 Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction d'un maximum de variables explicatives, puis d'élaguer l'arbre afin de minimiser l'erreur, soit l'écart entre la valeur prédite et la valeur réelle. Cela revient donc à faire une régression logistique sur les données, puis d'appliquer l'algorithme de construction d'arbre à partir des résultats.
 
-##2.6 LME / LMM (to be checked)
+##2.4 Modèle linéaire mixte
 
 La procédure des modèles mixtes linéaires développe le modèle linéaire général pour permettre aux données de présenter des variabilités en corrélation et des variabilités non constantes. Le modèle linéaire mixte offre donc une flexibilité pour modéliser non seulement les moyennes des données, mais également leurs variances et covariances.
 
-Les modèles mixtes linéaires sont une extension des modèles linéaires simples permettant des effets fixes et aléatoires. Ils sont particulièrement utilisés lorsqu'il n'y a pas d'indépendance dans les données, telle qu'elle résulte d'une structure hiérarchique.
+Les modèles mixtes linéaires sont une extension des modèles linéaires simples permettant des effets fixes et aléatoires. Ils sont particulièrement utilisés lorsqu'il n'y a pas d'indépendance dans les données, telle qu'elle résulte d'une structure hiérarchique. 
 
-##2.7 GLMM (to be checked)
+$y_{kj}=\beta_0+\beta_1x_1+...+\beta_jx_j+\beta_k+\varepsilon_{ij}$ sachant $k:k_{ieme}\ groupe \ de \ l'individu$ ; $j:j_{ieme}\ variable$
+
+
+##2.5 Régression logistique avec effet mixte
 
 Les GLMM (pour Generalized Linear Mixed Models) sont des modèles linéaires généralisés à effets mixtes. Ils sont employés pour analyser des données de comptages, des réponses binaires (*notre cas*) et lorsque les données ne sont pas indépendantes (ça c’est pour la partie mixte)! En général, un GLMM (Generalized Linear Mixed Model ou modèle linéaire généralisé mixtes) est un GLM avec une fonctionnalité supplémentaire qui lui permet de prendre en considération la non indépendance des données.
 
-Un GLMM est dit “mixte”, car il comporte au moins un effet dit “fixe” (la variable dont on souhaite évaluer l’effet, ici les *Pédagogie*, *Age* et *Année Scolaire*) et au moins un effet dit “aléatoire” (la variable de regroupement, ici *newClasse* ou *Group*). Les effets aléatoires ne sont pas évalués, ils servent seulement à indiquer au modèle que les données ne sont pas indépendantes pour une boite donnée. C’est ce qui permet à la déviance résiduelle d’être bien estimée, et ainsi à l’erreur standard des paramètres de ne pas être biaisée, et aux final d’obtenir des résultats fiables. 
+Un GLMM est dit “mixte”, car il comporte au moins un effet dit “fixe” (la variable dont on souhaite évaluer l’effet, ici les *Pédagogie*, *Age* et *Année Scolaire*) et au moins un effet dit “aléatoire” (la variable de regroupement, ici *newClasse* ou *Group*). Les effets aléatoires ne sont pas évalués, ils servent seulement à indiquer au modèle que les données ne sont pas indépendantes pour une boite donnée. C’est ce qui permet à la déviance résiduelle d’être bien estimée, et ainsi à l’erreur standard des paramètres de ne pas être biaisée, et aux final d’obtenir des résultats fiables.
+
+$P_k(1|X)=\frac{e^{\beta_0+\beta_1x_1+...+\beta_jx_j+\beta_k}}{1+e^{\beta_0+\beta_1x_1+...+\beta_jx_j+\beta_k}}$ sachant $k:k_{iem}\ groupe \ de \ l'individu$
+
+#3. Analyse exploratoire
+##3.1	Analyse Préliminaire
+
+```{r}
+ggplot(md.dfpropre, aes(x = variable, fill = value)) + 
+  geom_bar(position = "fill") +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1))
+```
+
+Le graphique précédent montre la proportion de bonnes et de mauvaises réponses par question et par pédagogie. On peut voir que l'ecart entre les deux pédagogies est plus ou moins important celon les questions, mais ce n'étant pas toujours la même pédagogie qui est supérieur à l'autre, cela semble équilibré globalement. Excepté pour les dernières questions, à partir de la question 8.4, la pédagogie Montessorienne est toujours devant la Conventionnelle.
+
+```{r include=TRUE, fig.cap="Score total par année par pédagogie"}
+ggplot(df, aes(x=Annee,y=score,fill=Pedagogie)) + 
+  geom_boxplot() +
+  scale_fill_manual(values=c("#999999", "#E69F00", "#56B4E9"))
+```
+
+En ne regardant que certaines années on peut voir clairement une différence entre la pédagogie montessorienne et la pédagogie conventionnelle vis à vis du nombre de bonnes réponses. Toutefois lorsqu'on regarde la vue d'ensemble, on peut voir que celon les années, une fois la pédagogie montessorienne est supérieur à la conventionnelle, parfois c'est l'inverse. On peut donc s'attendre à ce qu'on ne puisse pas prédire quelle pédagogie permet d'obtenir un meilleur score global.
+
+```{r include=TRUE}
+ggplot(df, aes(x=Pedagogie,y=score,fill=classe)) + 
+  geom_boxplot() +
+  scale_fill_manual(values=col)
+```
+
+De plus il semblerait que la classe dans laquelle se trouve l'individu agisse sur le résultat de l'élève. Comme le montre le graphique précédent, la répartition des résultats totaux varie énormément d'une classe à l'autre.
+Enfin, après réalisation d'un test de Chi2 entre chaque question et la variable concernant le groupe des élèves, on peut observer une dépendance entre leur réussite et le groupe associé.
+
+
+```{r include=TRUE}
+ggplot(dp.age, aes(x=variable,y=AgeNum,fill=value)) + 
+  geom_boxplot()
+```
+Enfin le graphique précédent montre que l'âge semble avoir une influence sur la réussite ou non d'une question, et ce, quelque soit la pédagogie enseignée.
+
+Il faudra donc par la suite tenir compte de ces trois facteurs, comme des variables qui peuvent avoir un effet sur la réussite de l'élève en parallèle de la pédagogie enseignée.
+
+##3.2	Multivariée
+
+Afin de traiter l'information présente dans le jeu de données de la meilleure façon, nous avons procédé à 2 analyses multivariées : 1 sur le jeu de données qualitatif sous forme de vecteurs, et 1 sur le jeu de données quantitatif sous forme de scores.
+
+###3.2.1 Analyse des Correspondances Multiples
+
+La réalisation d'une ACM comme première approche sur le jeu de données a permis de mieux comprendre ce qui différencie les individus dans notre jeu de données et à la fois d'avoir un premier résultat sur la différence entre les deux pédagogies selon cette méthode.
+
+```{r include=TRUE, fig.cap="Graphe des modalités sur le plan principal"}
+plot.MCA(res.mca.globale,invisible = "ind",cex=0.7,selectMod =  "contrib 15")
+```
+
+Le graphe précédent représente les 15 modalités qui contribuent le plus au placement des individus sur le plan principal. On peut donc voir que la dimension 1 oppose des modalités qui concernent la réussite à une question (avec un "_1" à la fin), à droite, à des modalités qui concernent l'échec d'une question (avec un "_0"), à gauche. Plus un élève réussira le questionnaire, plus il se trouvera à droite sur le graphe des individus. Cette interprétation est confirmée par l'ajout de deux individus fictifs : ind_1 et ind_0, qui comporte respectivement des succès à toutes les questions et des échecs à toutes les questions. L'individu ayant réussi en totalité le questionnaire se trouve à droite alors que l'individu ayant raté en totalité le questionnaire se trouve à gauche.
+De plus nous pouvons voir que les questions qui discriminent le plus la réussite ou non de l'examen sont les questions 4 et 8 (de part leur forte contribution).
+Toutefois cette première analyse n’aura pas permis de différencier les deux pédagogies, la variable projetée en supplémentaire sur le plan principal n'est pas significativement liée à celui ci.
+
+Dans un second temps nous avons refait une ACM mais cette fois ci sur les données vectorielles. Cela afin de prendre en compte la succession de certaines questions qui se regroupent en "compétences". 
+
+```{r include=TRUE, fig.cap = "Graphe des modalités sur le plan principal"}
+plot.MCA(res.mca.vec,invisible = "ind",cex=0.7,selectMod =  "contrib 15")
+```
+
+A nouveau la première dimension oppose les individus ayant réussit les totalités (ou la majorité pour certaines) des question à droite à ceux qui n'en ont réussi aucune à gauche. Nous ne pouvons pas non plus observer de différence significative entre les 2 pédagogies. On peut voir cette fois ci avec plus de précision les questions qui discriminent la réussite au questionnaire. Ce sont Les question 4, 3, 8 et 5.
+
+Dans ces deux cas nous avons pu aussi observer un lien significatif entre les variables qualitatives, portant sur les réponses à la question 1 et l'âge de l'élève, et le placement des individus sur la première dimension. En conséquent on peut dire qu'il existe un lien entre la réussite à l'examen et le fait qu'un enfant sache compter "loin" et dans une moindre mesure, qu'il soit âgé.
+
+Enfin nous avons voulu voir si en classifiant les individus suite à l'ACM nous obtenions des groupes d'individus propre à une pédagogie ou non. Pour cela nous avons utilisé la classification ascendante hiérarchique (CAH).
+
+```{r include=TRUE,fig.cap = "Diagramme des gains d'inertie"}
+plot.HCPC(res.hcpcmca,choice = "bar")
+```
+
+Nous pouvons observer un "saut" à la troisième classe, donc nous faisons le choix de retenir trois classes pour la CAH. Mais leur composition ne montre aucune sureprésentation d'une pédagogie plus que l'autre. Le test de chi2 entre la variable concernant la pédagogie et celle concernant la classe n'est pas significatif. Une fois de plus cela ne permet donc pas de montrer une liaison entre la pédagogie et ce qui discrimine nos classe. Au final nous obtenions une classe d'individus qui a une majorité d'échecs, une d'individus qui échouent sur les questions 4.2, et une qui d'individus qui réussissent globalement.
+
+###3.2.2 Analyse en Composantes Principales
+
+La réalisation d'une ACP faisant suite à l'ACM a pour but d'étudier le jeu de données différemment. En effet nous avons étudié cette fois ci le jeu de données concernant les scores. Soit un jeu de données quantitatif. 
+Afin de ne pas perdre d'informations nous avons dans un premier temps observé la matrice des corrélations entre les variables de notre jeu de données. Car plus les variables seront corrélées entre elles, plus l'ACP ne montrera que celles ci.
+
+```{r include=TRUE,fig.cap = "Matrice des corrélations"}
+corrplot(m.cor,method = "circle")
+```
+
+Nous avons donc fait le choix de regrouper les questions 8 en 2 groupes, aux vues des résultats. Un groupe comprenant les questions 8.1, 8.2 et 8.3, et un comportant les autres questions 8.
+
+```{r include=TRUE, fig.cap = "Cercle des corrélations du plan principal"}
+plot.PCA(res.pca.nonindsup,choix = "var",select = "contrib 6")
+```
+
+La réalisation de l'ACP nous permet donc de voir que les individus se diffèrent sur la première dimension selon les question 2,3, et 8. Alors que la dimension 2 les différents selon les question 7.2 et 6.2. 
+A nouveau nous n'observons pas de lien significatif entre la pédagogie enseignée et le placement des individus sur les axes factoriels.
+
+##3.3 Classification Ascendante Hiérarchique des variables
+
+N'ayant au début de notre analyse, aucune information sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appellent aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables. La CAH est une méthode de classification qui permet de regrouper des individus sein d’une même classe et qu'ils soient le plus semblables possibles tandis que les classes soient elles ,le plus dissemblables possibles. 
+
+Nous allons appliquer cette méthode sur les jeux de données en isolant les pédagogies pour comparer les regroupements.
+
+Procédons d'abord à l'isolation de la Pédagogie 1.
+
+```{r, include=TRUE}
+# par(mfrow=c(1,2))
+plot(cahG.P1, main="Dendogramme des donnees generales \n de la pedagogie P1")
+rect.hclust(cahG.P1,6)
+
+
+```
+
+Ici X.quanti correspond a T1.
+Nous pouvons observer ici plusieurs regroupement redondant. Le regroupement des questions T81, T82 et T83 et celui des questions T84, T85, T86, T87, T88, T89.
+Les question T1, T2 et T3 sont aussi fortement attirées, on retrouve en parti la variable "Objet".
 
 
 
+
+
+
+Comparons maintenant avec les regroupements de la Pédagogie 2.
+
+```{r, include=TRUE}
+plot(cahG.P2, main="Dendogramme des donnees generales \n de la pedagogie P2")
+rect.hclust(cahG.P2,6)
+```
+
+<!-- Audela: 2.3, 3.2, 5.2, 6.2, 8.6, 8.7, 8.8, 4.a,b,c,d, -->
+<!-- Outil: 4, 5, 6 -->
+<!-- Objet: 1, 2, 3 et 8 -->
+
+
+Nous observons en regroupement des questions T82, T83, T84, T85, T86, T87, T88, T89. La T81 étant séparée du reste. On voit aussi apparaitre deux couples de questions, T61 et T62 ainsi que T51 et T52.
+Ici nous ne voyons aucunes variable prédéfinie ressortir véritablement.
+
+
+On retrouve plus de similarités entre les classification de la pédagogie 2 qu'entre celles de la Pédagogie 1. 
+Et on remarque que les regroupement qui sont stables entre les changements de jeu de données sont principalement ceux liés aux sous questions de la T8.
+Pour résumer, les groupes qui ressortent sont pour la Pédagogie 1: (T81, T82 , T83), (T84, T85, T86, T87, T88, T89) et (T1,T2, T3)
+Et pour la Pédagogie 2: (T82, T83, T84, T85, T86, T87, T88, T89), (T61, T62) et (T51, T52).
+
+Seul la variable 'Objet' est en parti retrouvée et seulement dans le cas de la Pédagogie 1.
+
+
+#4. Modélisation linéaire des résultats à chaque question.
+
+Nous avons voulu modéliser les résultats des élèves à chaque question en fonction de ses caractéristiques individuelles (y compris la pédagogie suivie bien-sûr) pour voir si la pédagogie a un effet sur la réussite au test. Les résultats de certaines questions sont binaires (1 pour réussite, 0 pour échec), la plupart sont concernées  (toutes sauf la question 1 qui consite à faire compter l'enfant le plus loin possible). Les résultats à l'autre question prennent des valeurs continues : la question 1 est dans ce cas mais aussi les résultats ques nous avons construits en regroupant des questions (au-delà, objet et outils qui sont expliqués en **1.5**).\newline
+
+Intuitivement, nous sommes d'abord tentés de modéliser les résultats binaires par une régression logistique et les résultats continus par une régression linéaire. Mais nous soupçonnons un effet aléatoire de la variable classe sur la réponse des élèves, c'est à dire que selon la classe (pas la pédgogie suivie) dans laquelle se trouve l'élève sa réponse sera différente. Cet effet semble être aléatoire (elle n'est pas modélisable linéairement). Il existe justement des méthodes satistiques spécialement faites pour ces cas : il s'agit des **modélisations mixtes**. Ces dernières prennent bien en compte les effets aléatoires tels la différence de résultats selon la classe de nos élèves.\newline
+
+Nous avons donc réalisé nos modélisations avec des **modèles linéaires mixtes** (pour les résultats continus) et des **regression logistique mixte** (pour les résultats binaires).
+
+
+##4.1 Modélisation des questions à résultat continu par modèle linéaire mixte
+
+L'analyse exploratoire nous laisse en effet bien penser que les scores des élèves sont répartis différemment selon la classe dans laquelle il étudie, sa promotion et son âge. Mais seule la classe a été retenue comme effet aléatoire. L'âge a lui un effet fixe, la promotion et la pédagogie de l'élève n'ont finalement pas d'effet significatif (il s'agirait d'un effet fixe s'il était significatif).
+
+Nous avons donc réalisé nos regressions linéaires mixtes sur les regroupents de variable en mettant l'a variable'effet de groupe (la classe) comme effet aléatoire. Et les variables sur la pédagogie, l'âge et la promotion et comme effets fixes.
+
+Pour la modélisation de chaque regroupement de questions (au-delà, objet, outils), nous obtenons bien la présence d'un effet aléatoire, mais seule l'âge a un effet fixe sur nos variables à expliquer.
+
+Enfin nous avons rajouté un dernier modèle sur la question concernant la capacité à compter loin. L'effet aléatoire est important, mais est justifié par l'ordre de grandeur de la variable en question.
+
+$$
+\begin{aligned}
+Au-delà = -6.19 + 2.493*age + 0.79 \ \ \ \ \ \ (effet \ groupe)\\
+Objet = -2.88 + 1.90*age + 0.0003 \ \ \ \ \ \  (effet \ groupe)\\
+Outils = -0.594 + 0.741*age + 0.16 \ \ \ \ \ \  (effet\ groupe)\\
+Q1 = -9.554 + 4.667*age + 1.433 \ \ \ \ \ \ (effet \ groupe)
+\end{aligned}
+$$
+
+Pour résumer, nous n'avons pas pu modéliser la réussite à certains regroupements de tâches en fonction de la pédagogie enseignée. Toutefois nous observons qu'il est possible de les modéliser en fonction de l'âge de l'élève en prenant l'éffet groupe en compte.
+
+
+##4.2 Modélisation des questions à résultat binaire par regression logistique mixte
+
+N'ayant pas eu de résultats concernant la pédagogie lors de la modélisation linéaire mixte précédente, nous avons affiné notre modélisation en réalisant une regression logistique mixte sur les questions à résultat binaire.
+
+Les principaux résultats coïncident en partie avec les résultats précédents. La pédagogie n'est significativement liée qu'à 2 questions, la question Q5.1 (création d'une collection équipotente), qui a un effet aléatoire **groupe** significatif, et la Q8.9 (reconnaissance d'un chifffre particulier. **Attention !** Les questions 8.1 à 8.8 portaient sur la même tématique mais avec un autre chiffre), en complément d'un effet fixe de l'âge. De plus à nouveau plusieurs variables sont modélisable à partir de l'âge de chaque individu (voir annexe chaque modèle). 
+
+$$
+\begin{aligned}
+Q51 : P(1|Montessori) = \frac{e^{-1.1884+-0.8875+0.3518}}{1+e^{-1.1884+-0.8875+0.3518}}\newline
+Q89 : P(1|Montessori) = \frac{e^{-6.358+0.6404+1.287*age+0.03508}}{1+e^{-6.358+0.6404+1.287*age+0.03508}}
+\end{aligned}
+$$
+
+Il y a donc une prédisposition à réussir la question T89 pour chez les élèves ayant suivant la pédagogie Montessorienne.
+Inversement pour la T51 qui est en faveur de la pédagogie Conventionnelle.
+
+Etant limité par les packages disponible de R, nous n'avons pas pu faire les courbe ROC de ces deux régressions logistiques mixtes
+
+<!--
+```{r,include=TRUE}
+plot.roc(reg.roc.t89,col="yellow", lwd=3)
+glm_simple_roc<- simple_roc(don.reg$T89==1, pred.t89)
+with(glm_simple_roc, points(1 - FPR, TPR, col=1 + labels, cex = 0.7))
+```
+-->
+
+
+#Conclusion
 
 

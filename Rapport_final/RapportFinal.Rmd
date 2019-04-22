@@ -262,7 +262,7 @@ Nous allons appliquer cette méthode sur les jeux de données en isolant les pé
 
 Procédons d'abord à l'isolation de la Pédagogie 1.
 
-```{r, include=TRUE}
+```{r, include=TRUE,fig.cap="Dendogramme des donnees generales de la pedagogie P2"}
 # par(mfrow=c(1,2))
 plot(cahG.P1, main="Dendogramme des donnees generales \n de la pedagogie P1")
 rect.hclust(cahG.P1,6)
@@ -281,7 +281,7 @@ Les question T1, T2 et T3 sont aussi fortement attirées, on retrouve en parti l
 
 Comparons maintenant avec les regroupements de la Pédagogie 2.
 
-```{r, include=TRUE}
+```{r, include=TRUE, fig.cap="Dendogramme des donnees generales de la pedagogie P2"}
 plot(cahG.P2, main="Dendogramme des donnees generales \n de la pedagogie P2")
 rect.hclust(cahG.P2,6)
 ```

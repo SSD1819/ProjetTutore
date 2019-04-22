@@ -184,7 +184,7 @@ ggplot(df, aes(x=Annee,y=score,fill=Pedagogie)) +
 
 En ne regardant que certaines années on peut voir clairement une différence entre la pédagogie montessorienne et la pédagogie conventionnelle vis à vis du nombre de bonnes réponses. Toutefois lorsqu'on regarde la vue d'ensemble, on peut voir que celon les années, une fois la pédagogie montessorienne est supérieur à la conventionnelle, parfois c'est l'inverse. On peut donc s'attendre à ce qu'on ne puisse pas prédire quelle pédagogie permet d'obtenir un meilleur score global.
 
-```{r include=TRUE}
+```{r include=TRUE, fig.cap="Score total par pédagogie par classe"}
 ggplot(df, aes(x=Pedagogie,y=score,fill=classe)) + 
   geom_boxplot() +
   scale_fill_manual(values=col)
@@ -194,7 +194,7 @@ De plus il semblerait que la classe dans laquelle se trouve l'individu agisse su
 Enfin, après réalisation d'un test de Chi2 entre chaque question et la variable concernant le groupe des élèves, on peut observer une dépendance entre leur réussite et le groupe associé.
 
 
-```{r include=TRUE}
+```{r include=TRUE, fig.cap="Score par question par âge"}
 ggplot(dp.age, aes(x=variable,y=AgeNum,fill=value)) + 
   geom_boxplot()
 ```

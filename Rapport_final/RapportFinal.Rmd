@@ -224,7 +224,7 @@ Dans un second temps nous avons refait une ACM mais cette fois ci sur les donné
 plot.MCA(res.mca.vec,invisible = "ind",cex=0.7,selectMod =  "contrib 15")
 ```
 
-A nouveau la première dimension oppose les individus ayant réussit les totalités (ou la majorité pour certaines) des question à droite à ceux qui n'en ont réussi aucune à gauche. Nous ne pouvons pas non plus observer de différence significative entre les 2 pédagogies. On peut voir cette fois ci avec plus de précision les questions qui discriminent la réussite au questionnaire. Ce sont Les question 4, 3, 8 et 5.
+A nouveau la première dimension oppose les individus ayant réussit les totalités (ou la majorité pour certaines) des question à droite à ceux qui n'en ont réussi aucune à gauche. Nous ne pouvons pas non plus observer de différence significative entre les 2 pédagogies. On peut voir cette fois ci avec plus de précision les questions qui discriminent la réussite au questionnaire. Ce sont Les question 4, 3, 8 et 5. Soit les taches sur la capacité à compter et decompter, la constitution d'une collection, la reconnaissance des chiffre et la création d'une collection équipotente.
 
 Dans ces deux cas nous avons pu aussi observer un lien significatif entre les variables qualitatives, portant sur les réponses à la question 1 et l'âge de l'élève, et le placement des individus sur la première dimension. En conséquent on peut dire qu'il existe un lien entre la réussite à l'examen et le fait qu'un enfant sache compter "loin" et dans une moindre mesure, qu'il soit âgé.
 
@@ -234,7 +234,7 @@ Enfin nous avons voulu voir si en classifiant les individus suite à l'ACM nous 
 plot.HCPC(res.hcpcmca,choice = "bar")
 ```
 
-Nous pouvons observer un "saut" à la troisième classe, donc nous faisons le choix de retenir trois classes pour la CAH. Mais leur composition ne montre aucune sureprésentation d'une pédagogie plus que l'autre. Le test de chi2 entre la variable concernant la pédagogie et celle concernant la classe n'est pas significatif. Une fois de plus cela ne permet donc pas de montrer une liaison entre la pédagogie et ce qui discrimine nos classe. Au final nous obtenions une classe d'individus qui a une majorité d'échecs, une d'individus qui échouent sur les questions 4.2, et une qui d'individus qui réussissent globalement.
+Nous pouvons observer un "saut" à la troisième classe, donc nous faisons le choix de retenir trois classes pour la CAH. Mais leur composition ne montre aucune sureprésentation d'une pédagogie plus que l'autre. Le test de chi2 entre la variable concernant la pédagogie et celle concernant la classe n'est pas significatif. Une fois de plus cela ne permet donc pas de montrer une liaison entre la pédagogie et ce qui discrimine nos classe. Au final nous obtenions une classe d'individus qui a une majorité d'échecs, une d'individus qui échouent sur les questions 4.2 (soit une incapacité à additionner ou soustraire au delà de 1), et une qui d'individus qui réussissent globalement.
 
 ###3.2.2 Analyse en Composantes Principales
 
@@ -245,13 +245,13 @@ Afin de ne pas perdre d'informations nous avons dans un premier temps observé l
 corrplot(m.cor,method = "circle")
 ```
 
-Nous avons donc fait le choix de regrouper les questions 8 en 2 groupes, aux vues des résultats. Un groupe comprenant les questions 8.1, 8.2 et 8.3, et un comportant les autres questions 8.
+Nous avons donc fait le choix de regrouper les questions 8 en 2 groupes, aux vues des résultats. Un groupe comprenant les questions 8.1, 8.2 et 8.3, et un comportant les autres questions 8. Reconnaitre les chiffres 1, 3 et 2 n'entrainerait donc pas la reconnaissance des auters chiffres jusqu'à 9 forcément.
 
 ```{r include=TRUE, fig.cap = "Cercle des corrélations du plan principal"}
 plot.PCA(res.pca.nonindsup,choix = "var",select = "contrib 6")
 ```
 
-La réalisation de l'ACP nous permet donc de voir que les individus se diffèrent sur la première dimension selon les question 2,3, et 8. Alors que la dimension 2 les différents selon les question 7.2 et 6.2. 
+La réalisation de l'ACP nous permet donc de voir que les individus se diffèrent sur la première dimension selon les questions sur le dénombrement d'une collection, la constitution d'une collection et la reconnaissance des chiffres (2,3, et 8). Alors que la dimension 2 les différents selon la corrélation négatives des questions sur la comparaison de deux collections et sur la réunion de deux collections (7.2 et 6.2). 
 A nouveau nous n'observons pas de lien significatif entre la pédagogie enseignée et le placement des individus sur les axes factoriels.
 
 ##3.3 Classification Ascendante Hiérarchique des variables
@@ -308,7 +308,7 @@ Seul la variable 'Objet' est en parti retrouvée et seulement dans le cas de la 
 
 Nous avons voulu modéliser les résultats des élèves à chaque question en fonction de ses caractéristiques individuelles (y compris la pédagogie suivie bien-sûr) pour voir si la pédagogie a un effet sur la réussite au test. Les résultats de certaines questions sont binaires (1 pour réussite, 0 pour échec), la plupart sont concernées  (toutes sauf la question 1 qui consite à faire compter l'enfant le plus loin possible). Les résultats à l'autre question prennent des valeurs continues : la question 1 est dans ce cas mais aussi les résultats ques nous avons construits en regroupant des questions (au-delà, objet et outils qui sont expliqués en **1.5**).\newline
 
-Intuitivement, nous sommes d'abord tentés de modéliser les résultats binaires par une régression logistique et les résultats continus par une régression linéaire. Mais nous soupçonnons un effet aléatoire de la variable classe sur la réponse des élèves, c'est à dire que selon la classe (pas la pédgogie suivie) dans laquelle se trouve l'élève sa réponse sera différente. Cet effet semble être aléatoire (elle n'est pas modélisable linéairement). Il existe justement des méthodes satistiques spécialement faites pour ces cas : il s'agit des **modélisations mixtes**. Ces dernières prennent bien en compte les effets aléatoires tels la différence de résultats selon la classe de nos élèves.\newline
+Intuitivement, nous sommes d'abord tentés de modéliser les résultats binaires par une régression logistique et les résultats continus par une régression linéaire. Mais, notamment grâce à l'analyse préliminaire faite précédemment, nous soupçonnons un effet aléatoire de la variable classe sur la réponse des élèves, c'est à dire que selon la classe (pas la pédgogie suivie) dans laquelle se trouve l'élève sa réponse sera différente. Cet effet semble être aléatoire (elle n'est pas modélisable linéairement). Il existe justement des méthodes satistiques spécialement faites pour ces cas : il s'agit des **modélisations mixtes**. Ces dernières prennent bien en compte les effets aléatoires tels la différence de résultats selon la classe de nos élèves.\newline
 
 Nous avons donc réalisé nos modélisations avec des **modèles linéaires mixtes** (pour les résultats continus) et des **regression logistique mixte** (pour les résultats binaires).
 
@@ -319,7 +319,7 @@ L'analyse exploratoire nous laisse en effet bien penser que les scores des élè
 
 Nous avons donc réalisé nos regressions linéaires mixtes sur les regroupents de variable en mettant l'a variable'effet de groupe (la classe) comme effet aléatoire. Et les variables sur la pédagogie, l'âge et la promotion et comme effets fixes.
 
-Pour la modélisation de chaque regroupement de questions (au-delà, objet, outils), nous obtenons bien la présence d'un effet aléatoire, mais seule l'âge a un effet fixe sur nos variables à expliquer.
+Pour la modélisation de chaque regroupement de questions (au-delà, objet, outils), nous obtenons bien la présence d'un effet aléatoire, mais apres selection de variables et tests statistique, seul l'age a une effet fixe significatif sur nos variables à expliquer.
 
 Enfin nous avons rajouté un dernier modèle sur la question concernant la capacité à compter loin. L'effet aléatoire est important, mais est justifié par l'ordre de grandeur de la variable en question.
 

@@ -243,7 +243,7 @@ table(dataPropre$newClasse,dataPropre$AnneeScolaire)
 
 
 ####Exportation des data pour l'app Shiny####
-save(list = c("dataPropre", "dataSum", "dataVec","dataSumOld","dataVecOld"), file = "export/importation.RData")
+save(list = c("dataPropre", "dataSum", "dataVec","dataSumOld","dataVecOld","score_T1"), file = "export/importation.RData")
 
 #Supression des variables qui ne servent à rien
 rm(list=setdiff(ls(), c("dataPropre", "dataSum", "dataVec", "don.groupe", "dataSumOld", "dataVecOld")))

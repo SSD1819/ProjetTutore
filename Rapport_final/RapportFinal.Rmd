@@ -430,9 +430,12 @@ Q89 : P(1|Montessori) = \frac{e^{-6.358+0.6404+1.287*age+\beta_k+\varepsilon_{ij
 k:k_{ieme}\ groupe  \ dans \ lequel \ est \ l'individu \ ; \ j:j_{ieme}\ variable
 \end{aligned}
 $$
-Avec un écart type des coefficients de l'effet aléatoire pour la Q51 de 0.1416281 et pour la Q89 de 0.1107895.
-Le coefficient de l'âge a une p.value de 0.00617 pour la Q89.
-Le coefficient de la Pédagogie a une p.value de 0.0376 pour la Q51 et de 0.02658 pour la Q89.
+Avec un écart type pour l'effet aléatoire groupe de la Q51 de 0.5931273 et pour la Q89 de 0.1872966
+
+- Le coefficient de l'âge a une p.value de 0.00617 pour la Q89.
+
+- Le coefficient de la Pédagogie a une p.value de 0.0376 pour la Q51 et de 0.02658 pour la Q89.
+
 
 Il y a donc une prédisposition à réussir la question T89 pour chez les élèves ayant suivant la pédagogie Montessorienne.
 Inversement pour la T51 qui est en faveur de la pédagogie Conventionnelle.

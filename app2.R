@@ -5,6 +5,7 @@ require(FactoMineR)
 require(arules)
 require(rpart)
 require(rpart.plot)
+require(randomForest)
 
 ############ Préparation des jeux de données dont nous aurons besoin ############
 
@@ -145,7 +146,8 @@ ui<-navbarPage(
       )
     )
   ),
-  #### Onglet de la cah ####-------------------------------------------------------#
+  
+  #### Onglet de l'arbre ####-------------------------------------------------------#
   tabPanel(
     "Arbre deci",
     

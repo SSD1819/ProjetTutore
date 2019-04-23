@@ -1,0 +1,28 @@
+---
+title: "Test d'équivalence"
+author: "Lucas Chabeau"
+date: "23 avril 2019"
+output: pdf_document
+---
+
+```{r, echo=FALSE}
+load("export/importation.RData")
+```
+
+
+Jusqu'à présent nous n'avons pas pu établir de lien entre la pédagogie suivie par les enfants de notre étude et l'avancement de leurs capacités cognitives liées aux mathématiques. Si nous n'avons pû établir de lien, nous allons maintenant voir si les deux pédagogies sont significativement équivalentes sur l'assimilation de notions mathématiques (pour les élèves de moyenne section).
+
+### 1. Calcul d'un score total pour chaque élève.
+
+Nous avons choisi de comparer nos deux échantillons sur le score total de chaque élève au test. Pour calculer ce score, nous avons simplement fait les somme des résultats de l'enfant à chaque question. (Rappelons qu'à part la Q1, les questions ont pour résultat 0 ou 1.)
+
+$$Score = \sum_{i=1}^{29} Q_i$$
+Où $Q_i$ est le résultat de l'élève à la question i (Donc bien-sûr dans cette formule, la question 4b par exemple ne correspond pas à $Q_{4b}$ mais $Q_5$).
+
+Nous devons vous préciser que nous avons utilisé le même traitement pour la question 1 qeu lors de la création de la variable **Objet** pour éviter qu'elle n'ait trop de poids par rapport aux autres. C'est à dire que la question 1 peut prendre les scores suivants : 0, 0.3, 0.6, 0.9 et 1.2 . ($0$ si $T1 \le 3$; $0.3$ si $T1 \epsilon [4;7]$; $0.6$ si $T1 \epsilon [8;10]$; $0.9$ si $T1 \epsilon [11;16]$; $1.2$ si $T1 \ge 17$ ).
+
+Le score d'un enfant peut donc aller de 0 à 29.2 . 
+```{r}
+
+```
+

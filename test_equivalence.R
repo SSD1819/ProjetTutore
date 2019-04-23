@@ -1,5 +1,74 @@
 require(effsize)
 require(TOSTER)
+require(ggplot2)
+
+
+
+#### Préparation du jeu de données pour le score global #------------------------------------------------------------------
+
+#La question score_T1 se trouve dans ce RData
+load("export/importation.RData")
+
+#Noms des variables de questions (sauf T1) + Pedagogie
+selectVar <- c("T21","T22","T23","T31","T32","T41a","T41b","T41c","T41d","T42a",
+               "T42b","T42c","T42d","T51","T52","T61",
+               "T62","T71","T72","T81","T82","T83","T84",
+               "T85","T86","T87","T88","T89","Pedagogie")
+
+#Création du dataFrame qui contient toutes nos questions + pedagogie (et T1 est tranformée en score T1 ici)
+dataEquiv <- data.frame(score_T1,dataPropre[,selectVar])
+
+#Renommage de T1 (pour que ça fasse plus propre)
+names(dataEquiv)[1] <- "T1"
+
+#Tansformation de nos questions (sans pédagogie) en une matrice NUMÉRIQUE
+QMatrix <- matrix(as.numeric(as.matrix(dataEquiv[,-length(names(dataEquiv))])), ncol=length(names(dataEquiv))-1)
+colnames(QMatrix) <- names(dataEquiv[,-length(names(dataEquiv))])
+
+
+
+#### Calcul du score total (somme des réponses à chaque quetsion) de chaque élève #------------------------------------------------------------------
+scoreTot <- apply(QMatrix,1,sum)
+
+
+
+#### Graphiques de répartition des scores #------------------------------------------------------------------
+
+#Histogramme de l'ensemble des scores
+ggplot(data.frame(scoreTot), aes(x = scoreTot)) +
+  geom_histogram(color = "steelblue", fill = "white", bins = 30) +
+  xlab("Score total") +
+  ylab("Compte")
+
+#Préparation des données pour l'histogramme des scores par pédagogie
+scorePedag <- data.frame(scoreTot,dataEquiv$Pedagogie)
+names(scorePedag)[2] <- "Pedagogie"
+
+#Histogramme des scores par pédagogie
+ggplot(scorePedag, aes(x = scoreTot, color = Pedagogie)) +
+  geom_histogram(fill = "white", position = "identity" ,bins = 30) +
+  xlab("Score total") +
+  ylab("Compte")
+
+#donnees graphique
+dataGraphScoreEns <- 
+scoreTot <- apply(QMatrix,1,sum)
+ggplo()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #### Pour les variables quali d'abord (TOST)
 

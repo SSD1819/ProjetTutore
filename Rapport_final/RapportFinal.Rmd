@@ -17,7 +17,8 @@ output:
 
     \newcommand{\HRule}{\rule{\linewidth}{1mm}}  
 
-\vspace*{4cm} 
+  \vspace*{1cm} 
+
 
 \begin{center} 
 
@@ -25,12 +26,13 @@ output:
 
 \end{center} 
 
-  
+  \vspace*{2cm} 
+
 
 \HRule\\ 
     \begin{center} 
     
-    {\huge\bfseries Etude comparative des pédagogies conventionnelle et Montessori en apprentissage des mathématiques de niveau moyenne section de maternelle}\\[0.4cm]  
+    {\LARGE\bfseries Etude comparative des pédagogies conventionnelle et Montessori en apprentissage des mathématiques de niveau moyenne section de maternelle}\\[0.4cm]  
 
     \end{center} 
 

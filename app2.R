@@ -162,6 +162,11 @@ ui<-navbarPage(
           inputId = "choix_arbre",
           label = "Arbre Decisionnelle",
           choices = ls()[which(substr(ls(),1,2)=="dt")]
+        ),
+        selectInput(
+          inputId = "choix_RF",
+          label = "RandomForest",
+          choices = ls()[which(substr(ls(),1,8)=="model.rf")]
         )
       ),
       
@@ -169,7 +174,8 @@ ui<-navbarPage(
       mainPanel(
         
         #Graphique qui sera affiché
-        plotOutput("arbre")
+        plotOutput("arbre"),
+        plotOutput("RF")
       )
     )
   )
@@ -244,7 +250,8 @@ server <- function(input, output) {
     
     #Affichage du dendogramme
     prp(get(input$choix_arbre), extra = 1+100,type = 2, under=TRUE, yesno=2)
-  })
+    varImpPlot(input$choix_RF)
+    })
   
   
 }

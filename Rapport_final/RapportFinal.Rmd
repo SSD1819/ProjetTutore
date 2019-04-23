@@ -1,17 +1,75 @@
 ---
-title: "Projet Cogmont"
-author: "Azat Aleksanyan, Lucas Chabeau, Matthieu François, Etienne Hamard"
-date: "March 13, 2019"
 header-includes: #allows you to add in your own Latex packages
 - \usepackage{float} #use the 'float' package
 - \usepackage{amsmath}
 - \usepackage{amssymb}
+- \usepackage[T1]{fontenc}
+- \usepackage{lmodern}
 - \floatplacement{figure}{H} #make every figure with caption = h
 output:
   pdf_document:
-    toc: true
     fig_caption: yes
 ---
+
+ 
+
+\begin{titlepage} 
+
+    \newcommand{\HRule}{\rule{\linewidth}{1mm}}  
+
+\vspace*{4cm} 
+
+\begin{center} 
+
+\textsc{\LARGE Université Grenoble-Alpes }\\[1.5cm] 
+
+\end{center} 
+
+  
+
+\HRule\\ 
+    \begin{center} 
+    
+    {\huge\bfseries Etude comparative des pédagogies conventionnelle et Montessori en apprentissage des mathématiques de niveau moyenne section de maternelle}\\[0.4cm]  
+
+    \end{center} 
+
+    \HRule\\[0.7cm] 
+
+     
+
+\begin{flushleft} 
+
+            \large 
+
+            \textbf{Auteurs}\\ 
+
+            Azat \textsc{Aleksanyan}\newline Lucas \textsc{Chabeau}\newline Matthieu \textsc{François}\newline Etienne \textsc{Hamard} 
+
+\end{flushleft} 
+
+         
+
+\begin{flushright} 
+
+            \large 
+
+            \textbf{Tuteurs}\\ 
+
+ Marie-Caroline \textsc{Croset}  \\ Adeline \textsc{Leclerc-Samson}
+
+\end{flushright} 
+\vspace*{3cm} 
+
+
+\begin{center}
+\textbf{\large 24 avril 2019} 
+\end{center}
+
+
+\end{titlepage} 
+
+ 
 
 \newpage
 #Remerciements
@@ -20,6 +78,10 @@ Nous tenons à remercier particulièrement Madame Adeline Leclercq-Samson et Mad
 Nous remercions aussi le CNRS pour la confiance qu'ils nous ont accordé avec ce projet.
 
 \newpage
+
+
+\renewcommand{\contentsname}{Table des Matières}
+\tableofcontents
 
 <!-- Options générales des chunks -->
 ```{r setup, include=FALSE}

@@ -36,71 +36,39 @@ scoreTot <- apply(QMatrix,1,sum)
 
 #Histogramme de l'ensemble des scores
 ggplot(data.frame(scoreTot), aes(x = scoreTot)) +
-  geom_histogram(color = "steelblue", fill = "white", bins = 30) +
+  geom_histogram(aes(y=..density..), color = "steelblue", fill = "white", binwidth = 1) +
+  geom_density(alpha=0.2, fill="#FF6666")+
   xlab("Score total") +
-  ylab("Compte")
+  ylab("Densité")
 
 #Préparation des données pour l'histogramme des scores par pédagogie
 scorePedag <- data.frame(scoreTot,dataEquiv$Pedagogie)
 names(scorePedag)[2] <- "Pedagogie"
 
 #Histogramme des scores par pédagogie
-ggplot(scorePedag, aes(x = scoreTot, color = Pedagogie)) +
-  geom_histogram(fill = "white", position = "identity" ,bins = 30) +
+ggplot(scorePedag, aes(x = scoreTot, color = Pedagogie, fill = Pedagogie)) +
+  geom_histogram(aes(y=..density..), position = "identity" ,binwidth = 1, alpha = 0.2) +
+  geom_density(alpha = 0.5)+
   xlab("Score total") +
   ylab("Compte")
 
-#donnees graphique
-dataGraphScoreEns <- 
-scoreTot <- apply(QMatrix,1,sum)
-ggplo()
+#### Test d'equivalence sur le score total #------------------------------------------------------------------
 
+#Echantillon pédagogie conventionnelle
+scoreTotConv <- scoreTot[dataEquiv$Pedagogie=="Conventionnelle"]
 
+#Echantillon pédagogie Montessori
+scoreTotMont <- scoreTot[dataEquiv$Pedagogie=="Montessori"]
 
+#dDown et dUp
+dUp <- (2/20)*29
+dDown <- 0-dUp
 
+#Test de comparaison de variances
+var.test(scoreTotConv,scoreTotMont) #Variance égale à priori
 
-
-
-
-
-
-
-
-
-
-
-
-#### Pour les variables quali d'abord (TOST)
-
-###T1
-
-#Echantillon global
-t1 <- dataPropre$T1
-
-#Ech pédagogie Conventionnelle
-t1C <- t1[dataPropre$Pedagogie=="Conventionnelle"]
-
-#Ech pédagogie Montessori
-t1M <- t1[dataPropre$Pedagogie=="Montessori"]
-
-#delta d de Cohen
-cohen.d(t1,dataPropre$Pedagogie)
-dDown <- as.numeric(cohen.d(t1,dataPropre$Pedagogie)$conf.int[1])
-dUp <- as.numeric(cohen.d(t1,dataPropre$Pedagogie)$conf.int[2])
-
-TOSTtwo.raw(m1=mean(t1C),m2=mean(t1M),sd1=sd(t1C),sd2=sd(t1M),n1=length(t1C),n2=length(t1M),low_eqbound=dDown, high_eqbound=dUp, alpha = 0.025, var.equal=TRUE)
-###Audela
-
-###Outils
-
-###Objet
-
-#deltaDown
-
-#deltaUp
-
-#delta d de Cohen
-
+#Le test
+TOSTtwo.raw(m1=mean(scoreTotConv),m2=mean(scoreTotMont),sd1=sd(scoreTotConv),sd2=sd(scoreTotMont),n1=length(scoreTotConv),n2=length(scoreTotMont),low_eqbound=dDown, high_eqbound=dUp, alpha = 0.025, var.equal=TRUE)
 
 
 ####Exportation des data pour l'app Shiny####

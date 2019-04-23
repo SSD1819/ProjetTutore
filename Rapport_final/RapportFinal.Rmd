@@ -241,8 +241,9 @@ $P_k(1|X)=\frac{e^{\beta_0+\beta_1x_1+...+\beta_jx_j+\beta_k+\varepsilon_{ij}}}{
 
 ```{r include=TRUE, fig.cap="Réussite à chaque question par pédagogie"}
 ggplot(md.dfpropre, aes(x = variable, fill = value)) + 
-  geom_bar(position = "fill") +
+  geom_bar(position = "fill",width = 0.7) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+  # scale_fill_manual(values=c(rep("#999999",28),rep("#E69F00",28)))
 ```
 
 Le graphique précédent montre la proportion de bonnes et de mauvaises réponses par question et par pédagogie. On peut voir que l'ecart entre les deux pédagogies est plus ou moins important selon les questions, mais ce n'étant pas toujours la même pédagogie qui est supérieure à l'autre, cela semble équilibré globalement. Excepté pour les dernières questions, à partir de la question 8.4, la pédagogie Montessorienne est toujours devant la Conventionnelle.

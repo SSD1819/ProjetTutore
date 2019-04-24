@@ -65,7 +65,7 @@ data3 = sort(sample(nrow(dataArbre3), nrow(dataArbre3)*.7))
 dataArbre3.train<-dataArbre3[data3,]
 dataArbre3.test<-dataArbre3[-data3,]
 
-param3<-rpart.control(minsplit = 30, minbucket = 10)
+param3<-rpart.control(minsplit = 50, minbucket = 20)
 dt3<-rpart(Pedagogie~., data=dataArbre3.train, control = param3)
 prp(dt3, extra = 1+100,type = 2, under=TRUE, yesno=2)
 plotcp(dt3)
@@ -86,7 +86,7 @@ dataArbre4.train<-dataArbre4[data4,]
 dataArbre4.test<-dataArbre4[-data4,]
 
 
-param4<-rpart.control(minsplit = 10, minbucket = 5)
+param4<-rpart.control(minsplit = 50, minbucket = 20)
 dt4<-rpart(Pedagogie~., data=dataArbre4.train, control = param4)
 prp(dt4, extra = 1+100,type = 2, under=TRUE, yesno=2)
 plotcp(dt4)

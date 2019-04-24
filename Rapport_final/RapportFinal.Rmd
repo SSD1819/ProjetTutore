@@ -106,6 +106,9 @@ require(rpart)
 require(rpart.plot)
 require(randomForest)
 # require(glmm)
+require(effsize)
+require(TOSTER)
+require(kableExtra)
 
 #### Importation des variables nécessaires ####
 # load("../export/glmm.RData")
@@ -121,6 +124,9 @@ load("../export/graphexplo.RData")
 load("../export/importation.RData")
 load("../export/rocglm.RData")
 load("../export/arbre_deci2.RData")
+load("../export/importation.RData")
+load("../export/test_equivalence.RData")
+
 ```
 
 # Introduction
@@ -453,21 +459,80 @@ Et pour prédire une variable qualitative on procède à une agrégation par le 
 
 Nous avons donc appliqué cet algorithme sur deux jeux de données, le jeu de données contenant les variables regroupées et le jeu de données de base contenant toutes les questions une à une.  
 
-Nous avons ici la matrice de confusion. Cette matrice nous donne en ligne les données observées et en colonnes les données prédites. Il y a 64 individus issus de la pédagogie Conventionnelle ayant été bien classés et 32 individus ayant été mal classés et considérés comme des Montessori. Ce qui nous donne un taux de bonne prédiction pour les individus de la pédagogie Conventionnelle de 33%. 
+Nous avons ici la matrice de confusion. Cette matrice nous donne en ligne les données observées et en colonnes les données prédites. Il y a 64 individus issus de la pédagogie Conventionnelle ayant été bien classés et 32 individus ayant été mal classés et considérés comme des Montessori. Ce qui nous donne un taux de mauvaise prédiction pour les individus de la pédagogie Conventionnelle de `r round(model.rf1$confusion[1,3], 2)*100`%. 
 
-Pour la pédagogie Montessori, 26 ont été bien classés et 41 ont été classés en Conventionnelle à tort. On a donc une minorité de bonne prédiction. Nous ne pouvons pas obtenir une prédiction efficace grâce à ce modèle.  
+Pour la pédagogie Montessori, 25 ont été bien classés et 42 ont été classés en Conventionnelle à tort. On obtient `r round(model.rf1$confusion[2,3], 2)*100`% de mauvaise classification, il y a donc une minorité de bonne prédiction. Nous ne pouvons pas obtenir une prédiction efficace grâce à ce modèle.  
 
 ```{r, include=TRUE} 
-model.rf1$confusion  
+kable(model.rf1$confusion,"latex")  
 ``` 
+
 
 Maintenant voyons pour le jeu de données avec les questions générales. 
-
-La matrice de confusion nous indique qu'il y a 24% de mauvaises prédictions pour la catégorie Conventionnelle et 76% de mauvaises prédictions pour la catégorie Montessori 
+La matrice de confusion nous indique qu'il y a `r round(model.rf$confusion[1,3],2)*100`% de mauvaise prédiction pour la catégorie Conventionnelle et `r round(model.rf$confusion[2,3],2)*100`% de mauvaise prédiction pour la catégorie Montessori.
 
 ````{r, include=TRUE} 
-model.rf$confusion  
+kable(model.rf$confusion,"latex")
 ``` 
+
+
+#6. Test d'équivalence
+
+Jusqu'à présent nous n'avons pas pu établir de lien entre la pédagogie suivie par les enfants de notre étude et l'avancement de leurs capacités cognitives liées aux mathématiques. Si nous n'avons pû établir de lien, nous allons maintenant voir si les deux pédagogies sont significativement équivalentes sur l'assimilation de notions mathématiques (pour les élèves de moyenne section).
+
+## 6.1 Calcul d'un score total pour chaque élève.
+
+Nous avons choisi de comparer nos deux échantillons sur le score total de chaque élève au test. Pour calculer ce score, nous avons simplement fait les somme des résultats de l'enfant à chaque question. (Rappelons qu'à part la Q1, les questions ont pour résultat 0 ou 1.)
+
+$$Score = \sum_{i=1}^{29} Q_i$$
+Où $Q_i$ est le résultat de l'élève à la question i (Donc bien-sûr dans cette formule, la question 4b par exemple ne correspond pas à $Q_{4b}$ mais $Q_5$).
+
+Nous devons vous préciser que nous avons utilisé le même traitement pour la question 1 qeu lors de la création de la variable **Objet** pour éviter qu'elle n'ait trop de poids par rapport aux autres. C'est à dire que la question 1 peut prendre les scores suivants : 0, 0.3, 0.6, 0.9 et 1.2 . ($0$ si $T1 \le 3$; $0.3$ si $T1 \epsilon [4;7]$; $0.6$ si $T1 \epsilon [8;10]$; $0.9$ si $T1 \epsilon [11;16]$; $1.2$ si $T1 \ge 17$ ).
+
+Le score d'un enfant peut donc aller de 0 à 29.2, leur répartition est représentée sur le graphique ci-dessous.
+\newpage
+
+```{r echo=FALSE, include= TRUE, fig.cap="Répartition des scores des élèves au test"}
+ggplot(data.frame(scoreTot), aes(x = scoreTot)) +
+  geom_histogram(aes(y=..density..), color = "black", fill = "white", binwidth = 1) +
+  geom_density(alpha=0.2, fill="#CC33CC")+
+  xlab("Score total") +
+  ylab("Densité")
+```
+
+Vous pouvez voir deux pics de concentration autours des scores de 7 et de 19. Les résultats de nos élèves ne suivent pas une distribution normale. En voyant ce graphique, ceux qui cherchent absolument une différence pourraient espérer que ces deux pics correspondent chacun à une pédagogie pour en voir une plus éfficace pour ce test. Ce n'est pas du tout le cas.
+
+En effet, le graphique juste en dessous montre qu'il y a bien une forte densité autours de 7 et 19 chez les élèves conventionnels et Montessoriens. La seule différence est que nous observons un petit creux de densité entre 7 et 19 chez les élèves conventionnels quand la densité augmente légèrement chez les Montessoriens.
+
+```{r echo=FALSE,include=TRUE, fig.cap="Répartition par pédagogie des scores des élèves au test"}
+ggplot(scorePedag, aes(x = scoreTot, color = Pedagogie, fill = Pedagogie)) +
+  geom_histogram(aes(y=..density..), position = "identity" ,binwidth = 1, alpha = 0.2) +
+  geom_density(alpha = 0.5)+
+  xlab("Score total") +
+  ylab("Compte")
+```
+
+
+## 6.2 Réalisation du test
+
+Notre test d'équivalence se base sur l'écart entre la moyenne des résultats des élèves conventionnels au test et celle des élèves suivants un enseignement Montessori.
+
+Pour réaliser ce test d'équivalence, nous avons besoin de définir deux bornes (une inférieure et une supérieure). Si l'intervalle de confiance (à 95%) de l'écart entre les deux moyennes franchit au moins l'une des deux bornes, alors nous ne pourrons pas conclue à l'équivalence des deux échantillons (donc l'équivalence de résultat entre les deux méthodes d'éducation). En revanche, nous pourrons conclure que les deux méthodes sont aussi efficace l'une que l'autre pour réussir le test cognitif qui a été soumis si l'intervalle ne franchit pas l'une des bornes.
+
+Pour choisir ces deux bornes, nous nous sommes fiés à une "règle" qui dirait que deux élèves ont à priori un niveau différent sur une notion particulière s'ils ont deux points sur 20 d'écart à un contrôle portant sur cette notion.
+
+Nous adaptons donc cet écart au test soumis aux élèves : avec la transformation réalisée sur la question 1, ce test peut donner une note maximale de 29. Un écart de 2.9 serait donc révélateur d'une différence de niveau sur les notions abordées.
+
+Une fois le test réalisé (résultats juste après), nous obtenonsune IC 95% de notre écart à égal à [-2.025;1.417] et une p-valeur < 0.2% c'est à dire que nous pouvons rejeter l'hypothèse de différence entre les deux échantillons. Nous concluons donc de ce test **que suivre la pédagogie Montessori ou la pédagogie conventionnelle n'aura pas d'effet en moyenne section de maternelle sur l'assimilation des thèmes abordés dans le test soumis par l'équipe du projet Cogmont**
+
+Les résultats du test statistique :
+
+```{r include=TRUE, fig.cap="Résultat du test d'équivalence des moyennes des scores au test soumis par l'équipe"}
+
+TOSTtwo.raw(m1=mean(scoreTotConv),m2=mean(scoreTotMont),sd1=sd(scoreTotConv),sd2=sd(scoreTotMont),n1=length(scoreTotConv),n2=length(scoreTotMont),low_eqbound=dDown, high_eqbound=dUp, alpha = 0.025, var.equal=TRUE)
+
+```
+
 
 #Conclusion
 

@@ -189,7 +189,7 @@ ui<-navbarPage(
   
   #### Onglet de l'arbre ####-------------------------------------------------------#
   tabPanel(
-    "Arbre deci",
+    "Arbre de décision",
     
     #Layout de l'onglet
     sidebarLayout(

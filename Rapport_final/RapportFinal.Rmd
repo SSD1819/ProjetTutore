@@ -215,7 +215,7 @@ Afin de répondre au mieux à notre problématique nous avons fait le choix d'ut
 
 Les méthodes d'analyse factorielle que nous avons utilisées ici sont l'analyse des correspondances multiples (ACM) et l'analyse en composantes principales (ACP), qui sont des méthodes de synthétisation du nombre de dimensions pour les données qualitatives et quantitatives. Cela nous permet d'appréhender plus rapidement le jeu de données, et avoir une première idée de ce qui différencie les individus entre eux (ou ce qui les rapproche).
 L'ACM permet dans un nuage à N dimensions, en cherchant les axes orthogonaux qui maximisent la variance entre les individus, de résumer ces N dimensions en 4 voire 5 dimensions.
-l'ACM a été réalisée sur les données vectorisées (regroupement des réponses aux sous-questions en un vecteur par question, question 1 exclue), celles ci ont été prises comme variables actives (celles qui définissent le placement des individus sur le graphe) et les variables portant sur la pédagogie, la question 1, et l'âge en illustratives (ajoutée après le placement des individus sur le graphe).
+l'ACM a été réalisée sur les données vectorisées (regroupement des réponses aux sous-questions en un vecteur par question, question 1 exclue), celles ci ont été prises comme variables actives (celles qui définissent le placement des individus sur le graphique) et les variables portant sur la pédagogie, la question 1, et l'âge en illustratives (ajoutée après le placement des individus sur le graphique).
 Le principe était le même pour l'ACP qui a été faite ensuite.
 
 ##2.2 Classification Ascendante Hiérachique
@@ -288,17 +288,17 @@ Afin de traiter l'information présente dans le jeu de données de la meilleure 
 
 La réalisation d'une ACM comme première approche sur le jeu de données a permis de mieux comprendre ce qui différencie les individus dans notre jeu de données et à la fois d'avoir un premier résultat sur la différence entre les deux pédagogies selon cette méthode.
 
-```{r include=TRUE, fig.cap="Graphe des modalités sur le plan principal"}
+```{r include=TRUE, fig.cap="Graphique des modalités sur le plan principal"}
 plot.MCA(res.mca.globale,invisible = "ind",cex=0.7,selectMod =  "contrib 15")
 ```
 
-Le graphe précédent représente les 15 modalités qui contribuent le plus au placement des individus sur le plan principal. On peut donc voir que la dimension 1 oppose des modalités qui concernent la réussite à une question (avec un "_1" à la fin), à droite, à des modalités qui concernent l'échec d'une question (avec un "_0"), à gauche. Plus un élève réussira le questionnaire, plus il se trouvera à droite sur le graphe des individus. Cette interprétation est confirmée par l'ajout de deux individus fictifs : ind_1 et ind_0, qui comportent respectivement des succès à toutes les questions et des échecs à toutes les questions. L'individu ayant réussi en totalité le questionnaire se trouve à droite alors que l'individu ayant raté en totalité le questionnaire se trouve à gauche.
+Le graphique précédent représente les 15 modalités qui contribuent le plus au placement des individus sur le plan principal. On peut donc voir que la dimension 1 oppose des modalités qui concernent la réussite à une question (avec un "_1" à la fin), à droite, à des modalités qui concernent l'échec d'une question (avec un "_0"), à gauche. Plus un élève réussira le questionnaire, plus il se trouvera à droite sur le graphique des individus. Cette interprétation est confirmée par l'ajout de deux individus fictifs : ind_1 et ind_0, qui comportent respectivement des succès à toutes les questions et des échecs à toutes les questions. L'individu ayant réussi en totalité le questionnaire se trouve à droite alors que l'individu ayant raté en totalité le questionnaire se trouve à gauche.
 De plus nous pouvons voir que les questions qui discriminent le plus la réussite ou non de l'examen sont les questions concernant l'addition, la soustration et la reconnaissance des chiffres (questions 4 et 8) (de part leur forte contribution). Les caractéristiques qui discriminent le plus les élèves de maternelle seraient donc ces trois capacités.
 Toutefois cette première analyse n’aura pas permis de différencier les deux pédagogies, la variable projetée en supplémentaire sur le plan principal n'est pas significativement liée à celui ci.
 
 Dans un second temps nous avons refait une ACM mais cette fois ci sur les données vectorielles. Cela afin de prendre en compte la succession de certaines questions qui se regroupent en "compétences". 
 
-```{r include=TRUE, fig.cap = "Graphe des modalités sur le plan principal"}
+```{r include=TRUE, fig.cap = "Graphique des modalités sur le plan principal"}
 plot.MCA(res.mca.vec,invisible = "ind",cex=0.7,selectMod =  "contrib 15")
 ```
 
@@ -544,19 +544,19 @@ Il serait intéressant de continuer cette étude avec un nombre d'individus plus
 ## Application Shiny
 
 ### Onglet des Classifactions ascendantes hiérarchiques des variables
-Cet onglet nous permet de voir les graphiques de CAH. Nous avons la possibilité de choisir la classification, cela nous permet également de choisir le nombre de classes.
+Cet onglet montre les dendogrammes de nos classifications hiérarchiques. Nous avons la possibilité de choisir la classification ainsi aue les regroupements de variables selon le nombre de clases que nous désirons.
 
 ### Onglet de l'Analyse en composantes principale
-Deuxième onglet nous montre l'analyse des principales composantes. Il comprend le graphique de l'inertie, le graphique de corrélation, ainsi que des graphiques de variables et d'individus. Ici, nous pouvons choisir les données sur lesquelles l'analyse est fait, ainsi que nous pouvons choisir les axes
+Affiche les ACP réalisées sur nos donnés. Il comprend le graphique de l'inertie, le graphique des corrélation, ainsi que la projection des individus et des variables sur le plan séléctionné. Ici, nous pouvons choisir les données sur lesquelles l'ACP est réalisée, ainsi que les axes représentés.
 
 ### Onglet de l'Analyse en composantes multiples
-Ici, on a l'analyse en composantes multiples. On a le droit à choisir les axes pour les graphs et en plus le numéro de modalités qui contribuent le plus.
+Ici, on a l'analyse en composantes multiples. Nous pouvons choisir les axes de représentation du graphiaue et le nombre de modalités qui vont contribuer à la construction de l'ACM..
 
 ### Onglet des règles d'association
-Voici, l'onglet des règles d'association concernant les variables de projet. Ici, nous avons la possibilté de choisir support, confidence, lift, la taille de longueur de règle et aussi les variables. 
+Cet onglet présente les règles d'association observées dans notre jeu de données. Ici, nous avons la possibilté de choisir support, confidence, le lift (force de la règle), la taille de longueur de la règle. Mous pouvons aussi choisir auelles variables sont prises en compte ou non.
 
 ### Onglet de forêt d'arbres décisionnels  
-Et dans le dernier onglet, nous pouvons voir les arbres décisionnels et 2 différents modèles de foret aléatoires. Pour arbre décisionnelle, on a le choix entre différents jeux de données. En ce qui concerne les modèles de foret, modèle Rf concerne tous les variables initials, et modèle Rf1 concerne les variables créées (audela, outil, objets, classe T1).
+Et dans le dernier onglet, nous pouvons voir les arbres décisionnels et deux différents modèles de forêts aléatoires. Pour les arbres décisionnels, on a le choix entre différents jeux de données. En ce qui concerne les modèles de forêt, modèle Rf concerne tous les variables initiales, et modèle Rf1 concerne les variables créées (audela, outil, objets, classe T1).
 
 <!-- #Annexes -->
 

@@ -131,25 +131,25 @@ load("../export/test_equivalence.RData")
 
 # Introduction
 
-Le programme de notre 1ère année de Master prévoit un projet tutoré faisant appel à nos compétences acquises en statistique et en sciences des données. C'est dans ce contexte que nous avons travaillé en collaboration avec Marie-Caroline Croset et Adeline Leclercq-Samson sur un sujet mêlant sciences cognitives, statistique et fouille de données.
+Le programme de notre première année de Master prévoit un projet tutoré faisant appel à nos compétences acquises en statistique et en sciences des données. C'est dans ce contexte que nous avons travaillé en collaboration avec Marie-Caroline Croset et Adeline Leclercq-Samson sur un sujet mêlant sciences cognitives, statistique et fouille de données.
 
-Depuis 4 ans, une equipe de chercheurs de l'institut des sciences cognitives (ISC) de Lyon a testé les capacités en mathématiques des élèves d'une école maternelle située dans une zone REP+ (Réseau d'éducation prioritaire) de l'agglomération Lyonnaise. Une partie de ces élèves ont suivi une méthode d'éducation conventionnelle et les autres ont suivi des enseignements suivant la méthode Montessori. Notre objectif est de voir s'il y a ou non une différence entre le niveau en mathématiques des élèves ayant suivi les enseignements conventionnels et ceux ayant suivi les enseignements Montessori.
+Depuis 4 ans, une equipe de chercheurs de l'institut des sciences cognitives (ISC) de Lyon a testé les capacités en mathématiques des élèves d'une école maternelle située dans une zone REP+ (Réseau d'éducation prioritaire) de l'agglomération Lyonnaise. Une partie de ces élèves a suivi une méthode d'éducation conventionnelle et les autres ont suivi des enseignements suivants la méthode Montessori. Notre objectif est de voir s'il y a ou non une différence entre le niveau en mathématiques des élèves ayant suivi les enseignements conventionnels et ceux ayant suivi les enseignements Montessori.
 
-Nous avons reçu les résultats des tests sous forme de tableurs que nous avons trié pour ne garder que les résultats des élèves de moyenne section. Nous avons ensuite néttoyé nos données et commencé l'étude sur cette population.
+Nous avons reçu les résultats des tests sous forme de tableurs que nous avons triés pour ne garder que les résultats des élèves de moyenne section. Nous avons ensuite nettoyé nos données et commencé l'étude sur cette population.
 
 #Problématique
 
-Nous allons donc chercher s'il existe ou non une différence de niveau en mathématiques entre des élèves d'écoles Montessoriennes et des élèves d'écoles Conventionnelles.
+Nous allons donc chercher s'il existe ou non une différence de niveau en mathématiques entre des élèves d'écoles Montessoriennes et ceux des élèves d'écoles Conventionnelles.
 
 \newpage
 
 #1. Contexte
 
-Ce projet nous a été proposé par l'Institut des sciences cognitives - Marc Jeannerod spécialisé en neurosciences. L’UMR (Unité Mixte de Recherche) 5304 créée en 2007 est l'un des deux laboratoires de l’Institut des Sciences Cognitives – Marc Jeannerod. L'UMR 5304 est un laboratoire interdisciplinaire qui intègre l'expertise de chercheurs des Sciences de la Vie (psychologie cognitive, neurosciences) et de médecine (pédo-psychiatrie, neuro-pédiatrie) avec celle de chercheurs des Sciences Humaines et Sociales (linguistique computationelle et théorique et philosophie) pour étudier la nature et la spécificité de l'esprit humain.
+Ce projet nous a été proposé par l'institut des sciences cognitives - Marc Jeannerod spécialisé en neurosciences. L’UMR (Unité Mixte de Recherche) 5304 créée en 2007 est l'un des deux laboratoires de l’institut des Sciences Cognitives – Marc Jeannerod. L'UMR 5304 est un laboratoire interdisciplinaire qui intègre l'expertise de chercheurs en sciences de la vie (psychologie cognitive, neurosciences) et en médecine (pédo-psychiatrie, neuro-pédiatrie) avec celle de chercheurs en sciences humaines et sociales (linguistique computationelle, théorique et philosophie) pour étudier la nature et la spécificité de l'esprit humain.
 
 ##1.1 Les besoins d'un changement éducatif
 
- Le député et mathématicien Cédric Villani a publié un rapport pour renforcer l'apprentissage des mathématiques à l'école. Les élèves français ont aujourd'hui un niveau insuiétant dans cette discipline. Pourtant, jusqu'en 1985, l'enseignement des mathématiques en France était reconnu comme l'un des meilleurs. L'étude internationale "Trends in International Mathematics and Science Study" (TIMSS) 2015 qui mesure les performances en mathématiques et en sciences des élèves en fin de CM1 classe la France dernière des pays de l'Union européenne. Elle obtient même un score en dessous de la moyenne internationnale. Pour mettre un terme à cette tendance inquiétante de la dégradation du niveau des élèves français en mathématiques, le gouvernement est maintenant ouvert à de nouvelles pédagogies pour l'enseignement des mathématiques.
+ Le député et mathématicien Cédric Villani a publié un rapport pour renforcer l'apprentissage des mathématiques à l'école. Les élèves français ont aujourd'hui un niveau inquiétant dans cette discipline. Pourtant, jusqu'en 1985, l'enseignement des mathématiques en France était reconnu comme l'un des meilleurs. L'étude internationale "Trends in International Mathematics and Science Study" (TIMSS) 2015 qui mesure les performances en mathématiques et en sciences des élèves en fin de CM1 classe la France dernière des pays de l'Union européenne. Elle obtient même un score en dessous de la moyenne internationnale. Pour mettre un terme à cette tendance inquiétante de la dégradation du niveau des élèves français en mathématiques, le gouvernement est maintenant ouvert à de nouvelles pédagogies pour l'enseignement des mathématiques.
  
 ##1.2 Les pedagogies étudiées
 
@@ -173,7 +173,7 @@ La pédagogie conventionnelle (celle que nous connaissons aujord'hui dans nos é
 
 \end{description}
 
-##1.3 Présentation des données de départd
+##1.3 Présentation des données de départ
 
 Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les résultats de chaque promotion au test cognitif mis en place par l'équipe de recherche de l'institut des sciences cognitives. Un quatrième fichier du même acabit pour l'année 2018/2019 nous est parvenu au milieu de l'étude.
     \begin{description}
@@ -182,7 +182,7 @@ Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les ré
     \item[MathsJetons\_2016-2017.xlsx :] Pour l'année 2017/2018.
     \item[Jetons2019.xlsx :] Pour l'année 2018/2019.
     \end{description}
-    Chaque jeu de données représente les résultats questions par questions (en comptant les sous-questions) des élèves  ainsi que leurs catégories pédagogiques et des informations telles que l'encadrant, le niveau scolaire, la langue natale, l'âge, le type de classe (mélangé entre plusieurs section ou pas), l'année de passage du test et leur école.
+    Chaque jeu de données représente les résultats question par question (en comptant les sous-questions) des élèves  ainsi que leur catégorie pédagogique et des informations telles que l'encadrant, le niveau scolaire, la langue natale, l'âge, le type de classe (mélangé entre plusieurs section ou pas), l'année de passage du test et leur école.
     Il y à 10 questions divisées en sous questions, ce qui fait un total de 34 réponses. Chaque question est indépendante et pour répondre à la sous question suivante il faut une bonne réponse à la sous-question précédente, sauf pour la question 4, toutes ses sous-questions sont indépendantes. Une bonne réponse correspond à un 1 et une mauvaise réponse à un 0, sauf pour la réponse à la question 1 qui est la valeur de comptage maximale de l'enfant.
 Ici les élèves viennent tous d'une ecole située en REP+. 
 
@@ -218,11 +218,11 @@ L'ACM permet dans un nuage à N dimensions, en cherchant les axes orthogonaux qu
 l'ACM a été réalisée sur les données vectorisées (regroupement des réponses aux sous-questions en un vecteur par question, question 1 exclue), celles ci ont été prises comme variables actives (celles qui définissent le placement des individus sur le graphique) et les variables portant sur la pédagogie, la question 1, et l'âge en illustratives (ajoutée après le placement des individus sur le graphique).
 Le principe était le même pour l'ACP qui a été faite ensuite.
 
-##2.2 Classification Ascendante Hiérachique
+##2.2 Classification Ascendante Hiérarchique
 
 N'ayant aucune information au préalable sur le thème des questions, leur regroupement...etc Mais sachant que certaines questions faisaient appelle aux mêmes compétences. Nous avons utilisé une variante de la classification ascendante hiérarchique (CAH) afin de partitionner nos variables. Nous avons aussi utilisé la CAH classique qui consiste à regrouper les individus selon leur points communs cela en partant d'une inertie interclasse maximale (inertie = somme des variances), pour arriver à une inertie interclasse de 0. Nous avons utilisé la CAH classique afin de partitionner nos individus dans un but descriptif.
 
-##2.3 Arbre de regression 
+##2.3 Arbre de régression 
 
 L'arbre de régression est une technique d'apprentissage supervisé, qui permet en analysant un grand nombre de données, de prédire une variable à expliquer. Ils sont beaucoup utilisés dans le domaine du marketing, et plus récemment dans le domaine du machine learning (apprentissage automatique).
 Dans un premier temps il s'agit d'exprimer la variable à expliquer en fonction d'un maximum de variables explicatives, puis d'élaguer l'arbre afin de minimiser l'erreur, soit l'écart entre la valeur prédite et la valeur réelle. Cela revient donc à faire une régression logistique sur les données, puis d'appliquer l'algorithme de construction d'arbre à partir des résultats.
@@ -424,7 +424,7 @@ avec les p.value suivantes pour le coefficient de l'âge :
 Pour résumer, nous n'avons pas pu modéliser la réussite à certains regroupements de tâches en fonction de la pédagogie enseignée. Toutefois nous observons qu'il est possible de les modéliser en fonction de l'âge de l'élève en prenant l'éffet groupe en compte.
 
 
-##4.2 Modélisation des questions à résultat binaire par regression logistique mixte
+##4.2 Modélisation des questions à résultat binaire par régression logistique mixte
 
 N'ayant pas eu de résultats concernant la pédagogie lors de la modélisation linéaire mixte précédente, nous avons affiné notre modélisation en réalisant une regression logistique mixte sur les questions à résultat binaire.
 

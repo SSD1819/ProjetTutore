@@ -410,10 +410,10 @@ k:k_{ieme}\ groupe \ dans \ lequel \ est \ l'individu \ ; \ j:j_{ieme}\ variable
 \end{aligned}
 $$
 avec les p.value suivantes pour le coefficient de l'âge :
-    - pour le modèle d'Au-dela : 0.0006 et un effet aléatoire avec un écart type de 0.7945316
-    - pour le modèle d'Objet : 0.0007 et un effet aléatoire avec un écart type de 0.0003150794
-    - pour le modèle d'Outils : 0.0257 et un effet aléatoire avec un écart type de 0.1629329
-    - pour la question 1 : 0.0436 et un effet aléatoire avec un écart type de 1.43292
+    - pour le modèle d'Au-dela : 0.0006 et les coefficients de l'effet aléatoire ont un écart type de 0.4741162
+    - pour le modèle d'Objet : 0.0007 et les coefficients de l'effet aléatoire ont un écart type de 2.433568e-07 (il ne semble pas que l'effet aléatoire soit nécessaire pour cette variable)
+    - pour le modèle d'Outils : 0.0257 et les coefficients de l'effet aléatoire ont un écart type de 0.05115118
+    - pour la question 1 : 0.0436 et les coefficients de l'effet aléatoire ont un écart type de 0.5511588
 
 Pour résumer, nous n'avons pas pu modéliser la réussite à certains regroupements de tâches en fonction de la pédagogie enseignée. Toutefois nous observons qu'il est possible de les modéliser en fonction de l'âge de l'élève en prenant l'éffet groupe en compte.
 
@@ -431,7 +431,7 @@ Q89 : P(1|Montessori) = \frac{e^{-6.358+0.6404+1.287*age+\beta_k+\varepsilon_{ij
 k:k_{ieme}\ groupe  \ dans \ lequel \ est \ l'individu \ ; \ j:j_{ieme}\ variable
 \end{aligned}
 $$
-Avec un écart type pour l'effet aléatoire groupe de la Q51 de 0.5931273 et pour la Q89 de 0.1872966
+Avec un écart type pour les coefficients de l'effet aléatoire groupe de la Q51 de 0.1416281 et pour la Q89 de 0.1107895
 
 - Le coefficient de l'âge a une p.value de 0.00617 pour la Q89.
 

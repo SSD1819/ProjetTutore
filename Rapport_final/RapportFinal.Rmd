@@ -105,13 +105,13 @@ require(ggplot2)
 require(rpart)
 require(rpart.plot)
 require(randomForest)
-# require(glmm)
+require(glmm)
 require(effsize)
 require(TOSTER)
-require(kableExtra)
+require(knitr)
 
 #### Importation des variables nécessaires ####
-# load("../export/glmm.RData")
+load("../export/glmm.RData")
 load("../export/ACP.RData")
 load("../export/ACM.RData")
 load("../export/ACM-datavec.RData")
@@ -133,7 +133,7 @@ load("../export/test_equivalence.RData")
 
 Le programme de notre première année de Master prévoit un projet tutoré faisant appel à nos compétences acquises en statistique et en sciences des données. C'est dans ce contexte que nous avons travaillé en collaboration avec Marie-Caroline Croset et Adeline Leclercq-Samson sur un sujet mêlant sciences cognitives, statistique et fouille de données.
 
-Depuis 4 ans, une equipe de chercheurs de l'institut des sciences cognitives (ISC) de Lyon a testé les capacités en mathématiques des élèves d'une école maternelle située dans une zone REP+ (Réseau d'éducation prioritaire) de l'agglomération Lyonnaise. Une partie de ces élèves a suivi une méthode d'éducation conventionnelle et les autres ont suivi des enseignements suivants la méthode Montessori. Notre objectif est de voir s'il y a ou non une différence entre le niveau en mathématiques des élèves ayant suivi les enseignements conventionnels et ceux ayant suivi les enseignements Montessori.
+Depuis 4 ans, une équipe de chercheurs de l'institut des sciences cognitives (ISC) de Lyon a testé les capacités en mathématiques des élèves d'une école maternelle située dans une zone REP+ (Réseau d'éducation prioritaire) de l'agglomération Lyonnaise. Une partie de ces élèves a suivi une méthode d'éducation conventionnelle et les autres ont suivi des enseignements suivants la méthode Montessori. Notre objectif est de voir s'il y a ou non une différence entre le niveau en mathématiques des élèves ayant suivi les enseignements conventionnels et ceux ayant suivi les enseignements Montessori.
 
 Nous avons reçu les résultats des tests sous forme de tableurs que nous avons triés pour ne garder que les résultats des élèves de moyenne section. Nous avons ensuite nettoyé nos données et commencé l'étude sur cette population.
 
@@ -149,7 +149,7 @@ Ce projet nous a été proposé par l'institut des sciences cognitives - Marc Je
 
 ##1.1 Les besoins d'un changement éducatif
 
- Le député et mathématicien Cédric Villani a publié un rapport pour renforcer l'apprentissage des mathématiques à l'école. Les élèves français ont aujourd'hui un niveau inquiétant dans cette discipline. Pourtant, jusqu'en 1985, l'enseignement des mathématiques en France était reconnu comme l'un des meilleurs. L'étude internationale "Trends in International Mathematics and Science Study" (TIMSS) 2015 qui mesure les performances en mathématiques et en sciences des élèves en fin de CM1 classe la France dernière des pays de l'Union européenne. Elle obtient même un score en dessous de la moyenne internationnale. Pour mettre un terme à cette tendance inquiétante de la dégradation du niveau des élèves français en mathématiques, le gouvernement est maintenant ouvert à de nouvelles pédagogies pour l'enseignement des mathématiques.
+ Le député et mathématicien Cédric Villani a publié un rapport pour renforcer l'apprentissage des mathématiques à l'école. Les élèves français ont aujourd'hui un niveau inquiétant dans cette discipline. Pourtant, jusqu'en 1985, l'enseignement des mathématiques en France était reconnu comme l'un des meilleurs. L'étude internationale "Trends in International Mathematics and Science Study" (TIMSS) 2015 qui mesure les performances en mathématiques et en sciences des élèves en fin de CM1 classe la France dernière des pays de l'Union européenne. Elle obtient même un score en dessous de la moyenne internationale. Pour mettre un terme à cette tendance inquiétante de la dégradation du niveau des élèves français en mathématiques, le gouvernement est maintenant ouvert à de nouvelles pédagogies pour l'enseignement des mathématiques.
  
 ##1.2 Les pedagogies étudiées
 
@@ -168,7 +168,7 @@ La pédagogie Montessori est une méthode d'éducation créée en 1907 par Maria
 
 \item[Pédagogie conventionnelle :]
 
-La pédagogie conventionnelle (celle que nous connaissons aujord'hui dans nos écoles publiques) est celle du modèle transmissif. Selon le triangle pédagogique de Jean Houssaye, cette pédagogie privilégie la relation entre l'enseignant et le savoir. Autrement dit, l'enseignant expose un savoir sous forme de cours magistral, généralement suivi d'exercices ou/et de leçons à apprendre. L'élève doit intégrer et appliquer le savoir exposé par l'enseignant.
+La pédagogie conventionnelle (celle que nous connaissons aujourd'hui dans nos écoles publiques) est celle du modèle transmissif. Selon le triangle pédagogique de Jean Houssaye, cette pédagogie privilégie la relation entre l'enseignant et le savoir. Autrement dit, l'enseignant expose un savoir sous forme de cours magistral, généralement suivi d'exercices ou/et de leçons à apprendre. L'élève doit intégrer et appliquer le savoir exposé par l'enseignant.
 
 
 \end{description}
@@ -183,13 +183,13 @@ Notre jeu de données est composé de trois fichiers Excel (.xlsx), avec les ré
     \item[Jetons2019.xlsx :] Pour l'année 2018/2019.
     \end{description}
     Chaque jeu de données représente les résultats question par question (en comptant les sous-questions) des élèves  ainsi que leur catégorie pédagogique et des informations telles que l'encadrant, le niveau scolaire, la langue natale, l'âge, le type de classe (mélangé entre plusieurs section ou pas), l'année de passage du test et leur école.
-    Il y à 10 questions divisées en sous questions, ce qui fait un total de 34 réponses. Chaque question est indépendante et pour répondre à la sous question suivante il faut une bonne réponse à la sous-question précédente, sauf pour la question 4, toutes ses sous-questions sont indépendantes. Une bonne réponse correspond à un 1 et une mauvaise réponse à un 0, sauf pour la réponse à la question 1 qui est la valeur de comptage maximale de l'enfant.
-Ici les élèves viennent tous d'une ecole située en REP+. 
+    Il y a 10 questions divisées en sous-questions, ce qui fait un total de 34 réponses. Chaque question est indépendante et pour répondre à la sous-question suivante il faut une bonne réponse à la sous-question précédente, sauf pour la question 4, toutes ses sous-questions sont indépendantes. Une bonne réponse correspond à un 1 et une mauvaise réponse à un 0, sauf pour la réponse à la question 1 qui est la valeur de comptage maximale de l'enfant.
+Ici les élèves viennent tous d'une école située en REP+. 
 
 ##1.4 Nettoyage des données 
 
 Les données ayant déjà été travaillées lors d'un précédent stage, le travail de nettoyage nécessaire n'a pas été excessif. Il nous a fallu tout de même renommer certaines variables pour les rendre plus lisibles et cohérentes entre elles, supprimer certaines questions car elles n'avaient été posées qu'à certaines classes... 
-Les questions étant posées de manière à ce qu'au sein d'une même tache, il faille réussir les questions dans l'ordre pour passer à celles plus dures nous avions beaucoup de valeurs manquantes dès qu'une question était un peu difficile. Nous avons donc décidé de changer ces valaurs manquantes et les considérer comme une question que l'élève n'aurait pas réussie (donc remplacer NA par 0). Et pour ne pas passer à coté de l'information : "n'a pu aller plus loin", nous avons créé deux jeux de données : un vectoriel (chaque question devient le regroupement des résultats au sous questions. ex : Q2.1 = 1; Q2.2 = 0 devient Q2 = 10), un composé de scores correspondant à la somme des questions au sein d'une même tâche (pour le même exemple que le jeu de données "vectoriel" nous aurions Q2 = 1+0 = 1).
+Les questions étant posées de manière à ce qu'au sein d'une même tache, il faille réussir les questions dans l'ordre pour passer à celles plus dures nous avions beaucoup de valeurs manquantes dès qu'une question était un peu difficile. Nous avons donc décidé de changer ces valeurs manquantes et les considérer comme une question que l'élève n'aurait pas réussie (donc remplacer NA par 0). Et pour ne pas passer à coté de l'information : "n'a pu aller plus loin", nous avons créé deux jeux de données : un vectoriel (chaque question devient le regroupement des résultats au sous questions. ex : Q2.1 = 1; Q2.2 = 0 devient Q2 = 10), un composé de scores correspondant à la somme des questions au sein d'une même tâche (pour le même exemple que le jeu de données "vectoriel" nous aurions Q2 = 1+0 = 1).
 
 ##1.5 Recodage des variables
 
@@ -201,7 +201,7 @@ Comme dit précédemment les questions sont divisées en sous questions, ces que
     $audela = 2.3 + 3.2 + 4.2a + 4.2b + 4.2c + 4.2d + 5.2 + 6.2 + 8.6 + 8.7 + 8.8 + 8.9 + \mathbb{1}_{T1>7}$\newline
     \item[Variable Outils :] est calculée en faisant la somme du nombre de bonnes réponses aux questions des taches 4, 5 et 6 soit les questions des taches sur le surcomptage, la création d'une collection et la comparaison de deux collections.
     $outils = 4.1a + 4.1b + 4.1c + 4.1d + 4.2a + 4.2b + 4.2c + 4.2d + 5.1 + 5.2 + 6.1 + 6.2$\newline
-    \item[Variable Objet :] est calculée en faisant la somme du nombre de bonnes réponses aux questions des taches 1, 2, 3 et 8 soit les questions des taches sur la capacité à savoir compter, à dénombrer une collection et à constituer une collection d'objets. La question 1 est gérée par paliés. Nous avons séparé les individus en 5 groupes : ceux qui savent compter jusqu'à 3, puis de 4 à 7, de 8 à 10, de 11 à 16, enfin ceux qui savent compter au delà de 16. Respéctivement pour chaque catégorie nous leur avons donné un score de 0, 0.3, 0.6, 0.9 et 1.2.
+    \item[Variable Objet :] est calculée en faisant la somme du nombre de bonnes réponses aux questions des taches 1, 2, 3 et 8 soit les questions des taches sur la capacité à savoir compter, à dénombrer une collection et à constituer une collection d'objets. La question 1 est gérée par palliés. Nous avons séparé les individus en 5 groupes : ceux qui savent compter jusqu'à 3, puis de 4 à 7, de 8 à 10, de 11 à 16, enfin ceux qui savent compter au delà de 16. Respectivement pour chaque catégorie nous leur avons donné un score de 0, 0.3, 0.6, 0.9 et 1.2.
     $objet = 1.1 + 1.2 + 2.1 + 2.2 + 3.1 + 3.2 + 8.1 + 8.2 + 8.3 + 8.4 + 8.5 + 8.6 + 8.7 + 8.8 + 8.9 + \mathbb{1}_{T1 \in [0;3]}*0 + \mathbb{1}_{T1 \in [4;7]}*0.3 + \mathbb{1}_{T1 \in [8;11]}*0.6 + \mathbb{1}_{T1 \in [12;16]}*0.9 + \mathbb{1}_{T1 >16}*1.2 $\newline\newline
 \end{description}
 
@@ -209,7 +209,7 @@ Comme dit précédemment les questions sont divisées en sous questions, ces que
 
 #2. Méthodologie
 
-Afin de répondre au mieux à notre problématique nous avons fait le choix d'utiliser plusieurs méthodes statistiques différentes pour analyser nos données. Nous avons dans un premier temps utilisés deux méthodes qui permettent de résumer l'information globale du jeu de données : l'analyse factorielle, et la classification ascendante hiérarchique (pour faire des regroupements de variables). Puis dans un but prédictif nous avons utilisé la régression logistique mixte, la régréssion linéaire mixte et les forêts aléatoires. Plusieurs tests statistiques ont été réalisés en parallèle.
+Afin de répondre au mieux à notre problématique nous avons fait le choix d'utiliser plusieurs méthodes statistiques différentes pour analyser nos données. Nous avons dans un premier temps utilisés deux méthodes qui permettent de résumer l'information globale du jeu de données : l'analyse factorielle, et la classification ascendante hiérarchique (pour faire des regroupements de variables). Puis dans un but prédictif nous avons utilisé la régression logistique mixte, la régression linéaire mixte et les forêts aléatoires. Plusieurs tests statistiques ont été réalisés en parallèle.
 
 ##2.1 Analyse factorielle
 
@@ -252,7 +252,7 @@ ggplot(md.dfpropre, aes(x = variable, fill = value)) +
   # scale_fill_manual(values=c(rep("#999999",28),rep("#E69F00",28)))
 ```
 
-Le graphique précédent montre la proportion de bonnes et de mauvaises réponses par question et par pédagogie. On peut voir que l'ecart entre les deux pédagogies est plus ou moins important selon les questions, mais ce n'étant pas toujours la même pédagogie qui est supérieure à l'autre, cela semble équilibré globalement. Excepté pour les dernières questions, à partir de la question 8.4, la pédagogie Montessorienne est toujours devant la Conventionnelle.
+Le graphique précédent montre la proportion de bonnes et de mauvaises réponses par question et par pédagogie. On peut voir que l’écart entre les deux pédagogies est plus ou moins important selon les questions, mais ce n'étant pas toujours la même pédagogie qui est supérieure à l'autre, cela semble équilibré globalement. Excepté pour les dernières questions, à partir de la question 8.4, la pédagogie Montessorienne est toujours devant la Conventionnelle.
 
 ```{r include=TRUE, fig.cap="Score total par année par pédagogie"}
 ggplot(df, aes(x=Annee,y=score,fill=Pedagogie)) + 
@@ -293,7 +293,7 @@ plot.MCA(res.mca.globale,invisible = "ind",cex=0.7,selectMod =  "contrib 15")
 ```
 
 Le graphique précédent représente les 15 modalités qui contribuent le plus au placement des individus sur le plan principal. On peut donc voir que la dimension 1 oppose des modalités qui concernent la réussite à une question (avec un "_1" à la fin), à droite, à des modalités qui concernent l'échec d'une question (avec un "_0"), à gauche. Plus un élève réussira le questionnaire, plus il se trouvera à droite sur le graphique des individus. Cette interprétation est confirmée par l'ajout de deux individus fictifs : ind_1 et ind_0, qui comportent respectivement des succès à toutes les questions et des échecs à toutes les questions. L'individu ayant réussi en totalité le questionnaire se trouve à droite alors que l'individu ayant raté en totalité le questionnaire se trouve à gauche.
-De plus nous pouvons voir que les questions qui discriminent le plus la réussite ou non de l'examen sont les questions concernant l'addition, la soustration et la reconnaissance des chiffres (questions 4 et 8) (de part leur forte contribution). Les caractéristiques qui discriminent le plus les élèves de maternelle seraient donc ces trois capacités.
+De plus nous pouvons voir que les questions qui discriminent le plus la réussite ou non de l'examen sont les questions concernant l'addition, la soustraction et la reconnaissance des chiffres (questions 4 et 8) (de part leur forte contribution). Les caractéristiques qui discriminent le plus les élèves de maternelle seraient donc ces trois capacités.
 Toutefois cette première analyse n’aura pas permis de différencier les deux pédagogies, la variable projetée en supplémentaire sur le plan principal n'est pas significativement liée à celui ci.
 
 Dans un second temps nous avons refait une ACM mais cette fois ci sur les données vectorielles. Cela afin de prendre en compte la succession de certaines questions qui se regroupent en "compétences". 
@@ -328,7 +328,7 @@ Afin de ne pas perdre d'informations nous avons dans un premier temps observé l
 corrplot(m.cor,method = "circle")
 ```
 
-Nous avons donc fait le choix de regrouper les questions 8 en 2 groupes, aux vues des résultats. Un groupe comprenant les questions 8.1, 8.2 et 8.3, et un comportant les autres questions 8. Reconnaitre les chiffres 1, 3 et 2 n'entrainerait donc pas la reconnaissance des autres chiffres jusqu'à 9 forcément.
+Nous avons donc fait le choix de regrouper les questions 8 en 2 groupes, aux vues des résultats. Un groupe comprenant les questions 8.1, 8.2 et 8.3, et un comportant les autres questions 8. Reconnaître les chiffres 1, 3 et 2 n’entraînerait donc pas la reconnaissance des autres chiffres jusqu'à 9 forcément.
 
 ```{r include=TRUE, fig.cap = "Cercle des corrélations du plan principal"}
 plot.PCA(res.pca.nonindsup,choix = "var",select = "contrib 6")
@@ -374,7 +374,7 @@ rect.hclust(cahG.P2,6)
 <!-- Objet: 1, 2, 3 et 8 -->
 
 
-Nous observons en regroupement des questions T82, T83, T84, T85, T86, T87, T88, T89. La T81 étant séparée du reste. On voit aussi apparaitre deux couples de questions, T61 et T62 ainsi que T51 et T52.
+Nous observons en regroupement des questions T82, T83, T84, T85, T86, T87, T88, T89. La T81 étant séparée du reste. On voit aussi apparaître deux couples de questions, T61 et T62 ainsi que T51 et T52.
 Ici nous ne voyons aucunes variable prédéfinie ressortir véritablement.
 
 
@@ -389,9 +389,9 @@ Seul la variable 'Objet' est en parti retrouvée et seulement dans le cas de la 
 
 #4. Modélisation linéaire des résultats à chaque question.
 
-Nous avons voulu modéliser les résultats des élèves à chaque question en fonction de ses caractéristiques individuelles (y compris la pédagogie suivie bien-sûr) pour voir si la pédagogie a un effet sur la réussite au test. Les résultats de certaines questions sont binaires (1 pour réussite, 0 pour échec), la plupart sont concernées  (toutes sauf la question 1 qui consiste à faire compter l'enfant le plus loin possible). Les résultats à l'autre question prennent des valeurs continues : la question 1 est dans ce cas mais aussi les résultats ques nous avons construit en regroupant des questions (au-delà, objet et outils qui sont expliqués en **1.5**).\newline
+Nous avons voulu modéliser les résultats des élèves à chaque question en fonction de ses caractéristiques individuelles (y compris la pédagogie suivie bien-sûr) pour voir si la pédagogie a un effet sur la réussite au test. Les résultats de certaines questions sont binaires (1 pour réussite, 0 pour échec), la plupart sont concernées  (toutes sauf la question 1 qui consiste à faire compter l'enfant le plus loin possible). Les résultats à l'autre question prennent des valeurs continues : la question 1 est dans ce cas mais aussi les résultats que nous avons construit en regroupant des questions (au-delà, objet et outils qui sont expliqués en **1.5**).\newline
 
-Intuitivement, nous sommes d'abord tentés de modéliser les résultats binaires par une régression logistique et les résultats continus par une régression linéaire. Mais, notamment grâce à l'analyse préliminaire faite précédemment, nous soupçonnons un effet aléatoire de la variable classe sur la réponse des élèves, c'est à dire que selon la classe (pas la pédgogie suivie) dans laquelle se trouve l'élève sa réponse sera différente. Cet effet semble être aléatoire (elle n'est pas modélisable linéairement). Il existe justement des méthodes satistiques spécialement faites pour ces cas : il s'agit des **modélisations mixtes**. Ces dernières prennent bien en compte les effets aléatoires tels la différence de résultats selon la classe de nos élèves.\newline
+Intuitivement, nous sommes d'abord tentés de modéliser les résultats binaires par une régression logistique et les résultats continus par une régression linéaire. Mais, notamment grâce à l'analyse préliminaire faite précédemment, nous soupçonnons un effet aléatoire de la variable classe sur la réponse des élèves, c'est à dire que selon la classe (pas la pédagogie suivie) dans laquelle se trouve l'élève sa réponse sera différente. Cet effet semble être aléatoire (elle n'est pas modélisable linéairement). Il existe justement des méthodes statistiques spécialement faites pour ces cas : il s'agit des **modélisations mixtes**. Ces dernières prennent bien en compte les effets aléatoires tels la différence de résultats selon la classe de nos élèves.\newline
 
 Nous avons donc réalisé nos modélisations avec des **modèles linéaires mixtes** (pour les résultats continus) et des **regression logistique mixte** (pour les résultats binaires).
 
@@ -400,9 +400,9 @@ Nous avons donc réalisé nos modélisations avec des **modèles linéaires mixt
 
 L'analyse exploratoire nous laisse en effet bien penser que les scores des élèves sont répartis différemment selon la classe dans laquelle il étudie, sa promotion et son âge. Mais seule la classe a été retenue comme effet aléatoire. L'âge a lui un effet fixe, la promotion et la pédagogie de l'élève n'ont finalement pas d'effet significatif (il s'agirait d'un effet fixe s'il était significatif).
 
-Nous avons donc réalisé nos regressions linéaires mixtes sur les regroupements de variable en mettant la variable sur le groupe (la classe) comme effet aléatoire. Et les variables sur la pédagogie, l'âge et la promotion et comme effets fixes.
+Nous avons donc réalisé nos régressions linéaires mixtes sur les regroupements de variable en mettant la variable sur le groupe (la classe) comme effet aléatoire. Et les variables sur la pédagogie, l'âge et la promotion et comme effets fixes.
 
-Pour la modélisation de chaque regroupement de questions (au-delà, objet, outils), nous obtenons bien la présence d'un effet aléatoire, mais apres selection de variables et tests statistique, seul l'âge a un effet fixe significatif sur nos variables à expliquer.
+Pour la modélisation de chaque regroupement de questions (au-delà, objet, outils), nous obtenons bien la présence d'un effet aléatoire, mais après sélection de variables et tests statistique, seul l'âge a un effet fixe significatif sur nos variables à expliquer.
 
 Enfin nous avons rajouté un dernier modèle sur la question concernant la capacité à compter loin. L'effet aléatoire est important, mais est justifié par l'ordre de grandeur de la variable en question.
 
@@ -421,14 +421,14 @@ avec les p.value suivantes pour le coefficient de l'âge :
     - pour le modèle d'Outils : 0.0257 et les coefficients de l'effet aléatoire ont un écart type de 0.05115118
     - pour la question 1 : 0.0436 et les coefficients de l'effet aléatoire ont un écart type de 0.5511588
 
-Pour résumer, nous n'avons pas pu modéliser la réussite à certains regroupements de tâches en fonction de la pédagogie enseignée. Toutefois nous observons qu'il est possible de les modéliser en fonction de l'âge de l'élève en prenant l'éffet groupe en compte.
+Pour résumer, nous n'avons pas pu modéliser la réussite à certains regroupements de tâches en fonction de la pédagogie enseignée. Toutefois nous observons qu'il est possible de les modéliser en fonction de l'âge de l'élève en prenant l’effet groupe en compte.
 
 
 ##4.2 Modélisation des questions à résultat binaire par régression logistique mixte
 
-N'ayant pas eu de résultats concernant la pédagogie lors de la modélisation linéaire mixte précédente, nous avons affiné notre modélisation en réalisant une regression logistique mixte sur les questions à résultat binaire.
+N'ayant pas eu de résultats concernant la pédagogie lors de la modélisation linéaire mixte précédente, nous avons affiné notre modélisation en réalisant une régression logistique mixte sur les questions à résultat binaire.
 
-Les principaux résultats coïncident en partie avec les résultats précédents. La pédagogie n'est significativement liée qu'à 2 questions, la question Q5.1 (création d'une collection équipotente), qui a un effet aléatoire **groupe** significatif, et la Q8.9 (reconnaissance d'un chifffre particulier. **Attention !** Les questions 8.1 à 8.8 portaient sur la même tématique mais avec un autre chiffre), en complément d'un effet fixe de l'âge. De plus à nouveau plusieurs variables sont modélisables à partir de l'âge de chaque individu (voir annexe chaque modèle). 
+Les principaux résultats coïncident en partie avec les résultats précédents. La pédagogie n'est significativement liée qu'à 2 questions, la question Q5.1 (création d'une collection équipotente), qui a un effet aléatoire **groupe** significatif, et la Q8.9 (reconnaissance d'un chiffre particulier. **Attention !** Les questions 8.1 à 8.8 portaient sur la même thématique mais avec un autre chiffre), en complément d'un effet fixe de l'âge. De plus à nouveau plusieurs variables sont modélisables à partir de l'âge de chaque individu (voir annexe chaque modèle). 
 
 $$
 \begin{aligned}
@@ -455,7 +455,7 @@ Les Forêt d'arbres décisionnels sont une méthode d'apprentissage automatique 
 
 Pour prédire une variable quantitative l'agrégation se fait par la moyenne : $\mathit{G(x)}=\frac{1}{m}\sum_{i=1}^{m} \mathit{G_{i}(x)}$ .
 
-Et pour prédire une variable qualitative on procède à une agrégation par le vote : $\mathit{G(x)}=$ Vote majoritaire $(\mathit{G_{1}(x)},..., \mathit{G_{m}(x)})$ où $\mathit{G_{1}(x)}$ représente un modèle entrainé sur un ensemble $\mathit{D_{i}}$. 
+Et pour prédire une variable qualitative on procède à une agrégation par le vote : $\mathit{G(x)}=$ Vote majoritaire $(\mathit{G_{1}(x)},..., \mathit{G_{m}(x)})$ où $\mathit{G_{1}(x)}$ représente un modèle entraîne sur un ensemble $\mathit{D_{i}}$. 
 
 Nous avons donc appliqué cet algorithme sur deux jeux de données, le jeu de données contenant les variables regroupées et le jeu de données de base contenant toutes les questions une à une.  
 
@@ -478,16 +478,16 @@ kable(model.rf$confusion,"latex")
 
 #6. Test d'équivalence
 
-Jusqu'à présent nous n'avons pas pu établir de lien entre la pédagogie suivie par les enfants de notre étude et l'avancement de leurs capacités cognitives liées aux mathématiques. Si nous n'avons pû établir de lien, nous allons maintenant voir si les deux pédagogies sont significativement équivalentes sur l'assimilation de notions mathématiques (pour les élèves de moyenne section).
+Jusqu'à présent nous n'avons pas pu établir de lien entre la pédagogie suivie par les enfants de notre étude et l'avancement de leurs capacités cognitives liées aux mathématiques. Si nous n'avons pu établir de lien, nous allons maintenant voir si les deux pédagogies sont significativement équivalentes sur l'assimilation de notions mathématiques (pour les élèves de moyenne section).
 
 ## 6.1 Calcul d'un score total pour chaque élève.
 
-Nous avons choisi de comparer nos deux échantillons sur le score total de chaque élève au test. Pour calculer ce score, nous avons simplement fait les somme des résultats de l'enfant à chaque question. (Rappelons qu'à part la Q1, les questions ont pour résultat 0 ou 1.)
+Nous avons choisi de comparer nos deux échantillons sur le score total de chaque élève au test. Pour calculer ce score, nous avons simplement fait la somme des résultats de l'enfant à chaque question. (Rappelons qu'à part la Q1, les questions ont pour résultat 0 ou 1.)
 
 $$Score = \sum_{i=1}^{29} Q_i$$
 Où $Q_i$ est le résultat de l'élève à la question i (Donc bien-sûr dans cette formule, la question 4b par exemple ne correspond pas à $Q_{4b}$ mais $Q_5$).
 
-Nous devons vous préciser que nous avons utilisé le même traitement pour la question 1 qeu lors de la création de la variable **Objet** pour éviter qu'elle n'ait trop de poids par rapport aux autres. C'est à dire que la question 1 peut prendre les scores suivants : 0, 0.3, 0.6, 0.9 et 1.2 . ($0$ si $T1 \le 3$; $0.3$ si $T1 \epsilon [4;7]$; $0.6$ si $T1 \epsilon [8;10]$; $0.9$ si $T1 \epsilon [11;16]$; $1.2$ si $T1 \ge 17$ ).
+Nous devons vous préciser que nous avons utilisé le même traitement pour la question 1 que lors de la création de la variable **Objet** pour éviter qu'elle n'ait trop de poids par rapport aux autres. C'est à dire que la question 1 peut prendre les scores suivants : 0, 0.3, 0.6, 0.9 et 1.2 . ($0$ si $T1 \le 3$; $0.3$ si $T1 \epsilon [4;7]$; $0.6$ si $T1 \epsilon [8;10]$; $0.9$ si $T1 \epsilon [11;16]$; $1.2$ si $T1 \ge 17$ ).
 
 Le score d'un enfant peut donc aller de 0 à 29.2, leur répartition est représentée sur le graphique ci-dessous.
 \newpage
@@ -500,7 +500,7 @@ ggplot(data.frame(scoreTot), aes(x = scoreTot)) +
   ylab("Densité")
 ```
 
-Vous pouvez voir deux pics de concentration autours des scores de 7 et de 19. Les résultats de nos élèves ne suivent pas une distribution normale. En voyant ce graphique, ceux qui cherchent absolument une différence pourraient espérer que ces deux pics correspondent chacun à une pédagogie pour en voir une plus éfficace pour ce test. Ce n'est pas du tout le cas.
+Vous pouvez voir deux pics de concentration autours des scores de 7 et de 19. Les résultats de nos élèves ne suivent pas une distribution normale. En voyant ce graphique, ceux qui cherchent absolument une différence pourraient espérer que ces deux pics correspondent chacun à une pédagogie pour en voir une plus efficace pour ce test. Ce n'est pas du tout le cas.
 
 En effet, le graphique juste en dessous montre qu'il y a bien une forte densité autours de 7 et 19 chez les élèves conventionnels et Montessoriens. La seule différence est que nous observons un petit creux de densité entre 7 et 19 chez les élèves conventionnels quand la densité augmente légèrement chez les Montessoriens.
 
@@ -523,7 +523,7 @@ Pour choisir ces deux bornes, nous nous sommes fiés à une "règle" qui dirait 
 
 Nous adaptons donc cet écart au test soumis aux élèves : avec la transformation réalisée sur la question 1, ce test peut donner une note maximale de 29. Un écart de 2.9 serait donc révélateur d'une différence de niveau sur les notions abordées.
 
-Une fois le test réalisé (résultats juste après), nous obtenonsune IC 95% de notre écart à égal à [-2.025;1.417] et une p-valeur < 0.2% c'est à dire que nous pouvons rejeter l'hypothèse de différence entre les deux échantillons. Nous concluons donc de ce test **que suivre la pédagogie Montessori ou la pédagogie conventionnelle n'aura pas d'effet en moyenne section de maternelle sur l'assimilation des thèmes abordés dans le test soumis par l'équipe du projet Cogmont**
+Une fois le test réalisé (résultats juste après), nous obtenons une IC 95% de notre écart à égal à [-2.025;1.417] et une p-valeur < 0.2% c'est à dire que nous pouvons rejeter l'hypothèse de différence entre les deux échantillons. Nous concluons donc de ce test **que suivre la pédagogie Montessori ou la pédagogie conventionnelle n'aura pas d'effet en moyenne section de maternelle sur l'assimilation des thèmes abordés dans le test soumis par l'équipe du projet Cogmont**
 
 Les résultats du test statistique :
 
@@ -536,7 +536,7 @@ TOSTtwo.raw(m1=mean(scoreTotConv),m2=mean(scoreTotMont),sd1=sd(scoreTotConv),sd2
 
 #Conclusion
 
-Afin de d'étudier les éventuelles différences ou non en mathématiques entre les élèves suivants une pédagogie Montessoriennes et et ceux suivants Conventionnelle, nous avons commencé par une brève étude exploratoire permettant de comprendre nos données et de repérer les possibles liens entre les variables. Par la suite une analyse prédictive sur les réponses aux questions en fonction de la pédagogie aurait pu permettre de différencier ces deux pédagogies. Toutefois, les résultats de cette analyse sont peu concluants. Seuls 2 modèles différencient les 2 pédagogies : la modélisation des réponses aux questions concernant la création d'une collection équipotente et la reconnaissance d'un chiffre particulier. 
+Afin d'étudier les éventuelles différences ou non en mathématiques entre les élèves suivants une pédagogie Montessorienne et ceux suivants Conventionnelle, nous avons commencé par une brève étude exploratoire permettant de comprendre nos données et de repérer les possibles liens entre les variables. Par la suite une analyse prédictive sur les réponses aux questions en fonction de la pédagogie aurait pu permettre de différencier ces deux pédagogies. Toutefois, les résultats de cette analyse sont peu concluants. Seuls 2 modèles différencient les 2 pédagogies : la modélisation des réponses aux questions concernant la création d'une collection équipotente et la reconnaissance d'un chiffre particulier. 
 Il serait intéressant de continuer cette étude avec un nombre d'individus plus important voir si de nouveaux liens apparaissent.
 
 #Annexes
@@ -544,514 +544,514 @@ Il serait intéressant de continuer cette étude avec un nombre d'individus plus
 ## Application Shiny
 
 ### Onglet des Classifactions ascendantes hiérarchiques des variables
-Cet onglet montre les dendogrammes de nos classifications hiérarchiques. Nous avons la possibilité de choisir la classification ainsi aue les regroupements de variables selon le nombre de clases que nous désirons.
+Cet onglet montre les dendrogrammes de nos classifications hiérarchiques. Nous avons la possibilité de choisir la classification ainsi que les regroupements de variables selon le nombre de classes que nous désirons.
 
 ### Onglet de l'Analyse en composantes principale
 Affiche les ACP réalisées sur nos donnés. Il comprend le graphique de l'inertie, le graphique des corrélation, ainsi que la projection des individus et des variables sur le plan séléctionné. Ici, nous pouvons choisir les données sur lesquelles l'ACP est réalisée, ainsi que les axes représentés.
 
 ### Onglet de l'Analyse en composantes multiples
-Ici, on a l'analyse en composantes multiples. Nous pouvons choisir les axes de représentation du graphiaue et le nombre de modalités qui vont contribuer à la construction de l'ACM..
+Ici, on a l'analyse en composantes multiples. Nous pouvons choisir les axes de représentation du graphique et le nombre de modalités qui vont contribuer à la construction de l'ACM..
 
 ### Onglet des règles d'association
-Cet onglet présente les règles d'association observées dans notre jeu de données. Ici, nous avons la possibilté de choisir support, confidence, le lift (force de la règle), la taille de longueur de la règle. Mous pouvons aussi choisir auelles variables sont prises en compte ou non.
+Cet onglet présente les règles d'association observées dans notre jeu de données. Ici, nous avons la possibilité de choisir support, confidence, le lift (force de la règle), la taille de longueur de la règle. Mous pouvons aussi choisir quelles variables sont prises en compte ou non.
 
 ### Onglet de forêt d'arbres décisionnels  
 Et dans le dernier onglet, nous pouvons voir les arbres décisionnels et deux différents modèles de forêts aléatoires. Pour les arbres décisionnels, on a le choix entre différents jeux de données. En ce qui concerne les modèles de forêt, modèle Rf concerne tous les variables initiales, et modèle Rf1 concerne les variables créées (audela, outil, objets, classe T1).
 
-<!-- #Annexes -->
-
-<!-- T21 : -->
-<!-- T21m <- glmm(T21 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T21mm) -->
-<!-- ``` -->
-
-<!-- T21mm <- glmm(T21 ~ age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T21mm) -->
-<!-- ``` -->
-<!-- L'âge est significatif -->
-
-<!-- T22 : -->
-<!-- T22m <- glmm(T22 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T22m) -->
-<!-- ``` -->
-
-<!-- T22mm <- glmm(T22 ~ age , -->
-<!--                     random = list(~ 0 + newClasse), -->
-<!--                     varcomps.names=c("newClasse"),data=don.reg, -->
-<!--                     family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T22mm) -->
-<!-- ``` -->
-<!-- L'âge est significatif -->
-
-<!-- T23 : -->
-<!-- T23m <- glmm(T23 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T23m) -->
-<!-- ``` -->
-
-<!-- T23mm <- glmm(T23 ~ age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T23mm) -->
-<!-- ``` -->
-<!-- L'âge est significatif -->
-
-<!-- T31 : -->
-<!-- T31m <- glmm(T31 ~ Pedagogie + age , -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T31m) -->
-<!-- ``` -->
-
-<!-- T31mm <- glmm(T31 ~ age, -->
-<!--                     random = list(~ 0 + newClasse), -->
-<!--                     varcomps.names=c("newClasse"),data=don.reg, -->
-<!--                     family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T31mm) -->
-<!-- ``` -->
-<!-- L'âge est significatif -->
-
-<!-- T32 : -->
-<!-- T32m <- glmm(T32 ~ Pedagogie+age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T32m) -->
-<!-- ``` -->
-
-<!-- T32mm <- glmm(T32 ~ age, -->
-<!--                     random = list(~ 0 + newClasse), -->
-<!--                     varcomps.names=c("newClasse"),data=don.reg, -->
-<!--                     family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T32mm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T41a : -->
-<!-- T41amm <- glmm(T41a ~ Pedagogie + age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-
-<!-- summary(T41amm) -->
-<!-- ``` -->
-
-<!-- T41amm <- glmm(T41a ~ age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-
-<!-- summary(T41amm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T41b : -->
-<!-- T41bm <- glmm(T41b ~ Pedagogie + age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T41bm) -->
-<!-- ``` -->
-
-<!-- T41bmm <- glmm(T41b ~ age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T41bmm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T41c : -->
-<!-- T41cm <- glmm(T41c ~ Pedagogie + age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T41cm) -->
-<!-- ``` -->
-
-<!-- T41cmm <- glmm(T41c ~ Pedagogie, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T41cmm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T41d : -->
-<!-- T41dm <- glmm(T41d ~ Pedagogie + age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T41dm) -->
-<!-- ``` -->
-
-<!-- T41dmm <- glmm(T41d ~ age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T41dmm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T42a : -->
-<!-- T42am <- glmm(T42a ~ Pedagogie + age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-
-<!-- summary(T42am) -->
-<!-- ``` -->
-
-<!-- T42amm <- glmm(T42a ~ age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-
-<!-- summary(T42amm) -->
-<!-- ``` -->
-<!-- L'âge est significatif -->
-
-<!-- T42b : -->
-<!-- T42bm <- glmm(T42b ~ Pedagogie + age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T42bm) -->
-<!-- ``` -->
-
-<!-- T42bmm <- glmm(T42b ~ age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T42bmm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T42c : -->
-<!-- T42cm <- glmm(T42c ~ Pedagogie + age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-
-<!-- summary(T42cm) -->
-<!-- ``` -->
-
-<!-- T42cmm <- glmm(T42c ~ age, -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T42cmm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T42d : -->
-<!-- T42dm<- glmm(T42d ~ Pedagogie + age , -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T42dm) -->
-<!-- ``` -->
-
-<!-- T42dmm <- glmm(T42d ~ age , -->
-<!--              random = list(~ 0 + newClasse), -->
-<!--              varcomps.names=c("newClasse"),data=don.reg, -->
-<!--              family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T42dmm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T51 : -->
-<!-- T51m <- glmm(T51 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T51m) -->
-<!-- ``` -->
-
-<!-- T51mm <- glmm(T51 ~ Pedagogie, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T51mm) -->
-<!-- ``` -->
-<!-- La Pedagogie est significative -->
-
-<!-- T52 : -->
-<!-- T52m<-glmm(T52 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T52m) -->
-<!-- ``` -->
-
-<!-- T52mm<-glmm(T52 ~ age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T52mm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T61 : -->
-<!-- T61m<-glmm(T61 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T61m) -->
-<!-- ``` -->
-
-<!-- T61mm<-glmm(T61 ~ Pedagogie, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T61mm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T62 : -->
-<!-- T62m<-glmm(T62 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-
-<!-- summary(T62m) -->
-<!-- ``` -->
-
-<!-- T62mm<-glmm(T62 ~ age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-
-<!-- summary(T62mm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T71 : -->
-<!-- T71m<-glmm(T71 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-
-<!-- summary(T71m) -->
-<!-- ``` -->
-
-<!-- T71mm<-glmm(T71 ~ Pedagogie, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-
-<!-- summary(T71mm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T72 : -->
-<!-- T72m<-glmm(T72 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-
-<!-- summary(T72m) -->
-<!-- ``` -->
-
-<!-- T72mm<-glmm(T72 ~ age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-
-<!-- summary(T72mm) -->
-<!-- ``` -->
-<!-- Aucune variable n'est significative. -->
-
-<!-- T81 : -->
-<!-- Impossible de lancer la T81 -->
-
-<!-- T82 : -->
-<!-- T82m<-glmm(T82 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T82m) -->
-<!-- ``` -->
-
-<!-- T82mm<-glmm(T82 ~ age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T82mm) -->
-<!-- ``` -->
-<!-- L'âge est significatif -->
-
-<!-- T83 : -->
-<!-- T83m<-glmm(T83 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-
-<!-- summary(T83m) -->
-<!-- ``` -->
-
-<!-- T83mm<-glmm(T83 ~ age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T83mm) -->
-<!-- ``` -->
-<!-- L'âge est significatif -->
-
-<!-- T84 : -->
-<!-- T84m<-glmm(T84 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T84m) -->
-<!-- ``` -->
-
-<!-- T84mm<-glmm(T84 ~ age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T84mm) -->
-<!-- ``` -->
-<!-- L'âge est significatif -->
-
-<!-- T85 : -->
-<!-- T85m<-glmm(T85 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T85m) -->
-<!-- ``` -->
-
-<!-- T85mm<-glmm(T85 ~ age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T85mm) -->
-<!-- ``` -->
-<!-- L'âge est significatif -->
-
-<!-- T86 : -->
-<!-- T86m<-glmm(T86 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T86m) -->
-<!-- ``` -->
-
-<!-- T86mm<-glmm(T86 ~ age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T86mm) -->
-<!-- ``` -->
-<!-- L'âge est significatif -->
-
-<!-- T87 : -->
-<!-- T87m<-glmm(T87 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T87m) -->
-<!-- ``` -->
-
-<!-- T87mm<-glmm(T87 ~ age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T87mm) -->
-<!-- ``` -->
-<!-- L'âge est significatif -->
-
-<!-- T88 : -->
-<!-- T88m<-glmm(T88 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T88m) -->
-<!-- ``` -->
-
-<!-- T88mm<-glmm(T88 ~ age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T88mm) -->
-<!-- ``` -->
-<!-- L'âge est significatif (age + pedagogie presque) -->
-
-<!-- T89 : -->
-<!-- T89m<-glmm(T89 ~ Pedagogie + age, -->
-<!--             random = list(~ 0 + newClasse), -->
-<!--             varcomps.names=c("newClasse"),data=don.reg, -->
-<!--             family.glmm = binomial.glmm, m=10^4, debug=TRUE) -->
-<!-- ```{r include=TRUE} -->
-<!-- summary(T89m) -->
-<!-- ``` -->
-<!-- L'âge + la pédagogie sont significatifs -->
+##Sorties régression logistique mixte
+
+T21 :
+T21m <- glmm(T21 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T21mm)
+```
+
+T21mm <- glmm(T21 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T21mm)
+```
+L'âge est significatif
+
+T22 :
+T22m <- glmm(T22 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T22m)
+```
+
+T22mm <- glmm(T22 ~ age ,
+                    random = list(~ 0 + newClasse),
+                    varcomps.names=c("newClasse"),data=don.reg,
+                    family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T22mm)
+```
+L'âge est significatif
+
+T23 :
+T23m <- glmm(T23 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T23m)
+```
+
+T23mm <- glmm(T23 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T23mm)
+```
+L'âge est significatif
+
+T31 :
+T31m <- glmm(T31 ~ Pedagogie + age ,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T31m)
+```
+
+T31mm <- glmm(T31 ~ age,
+                    random = list(~ 0 + newClasse),
+                    varcomps.names=c("newClasse"),data=don.reg,
+                    family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T31mm)
+```
+L'âge est significatif
+
+T32 :
+T32m <- glmm(T32 ~ Pedagogie+age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T32m)
+```
+
+T32mm <- glmm(T32 ~ age,
+                    random = list(~ 0 + newClasse),
+                    varcomps.names=c("newClasse"),data=don.reg,
+                    family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T32mm)
+```
+Aucune variable n'est significative.
+
+T41a :
+T41amm <- glmm(T41a ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+
+summary(T41amm)
+```
+
+T41amm <- glmm(T41a ~ age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+
+summary(T41amm)
+```
+Aucune variable n'est significative.
+
+T41b :
+T41bm <- glmm(T41b ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T41bm)
+```
+
+T41bmm <- glmm(T41b ~ age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T41bmm)
+```
+Aucune variable n'est significative.
+
+T41c :
+T41cm <- glmm(T41c ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T41cm)
+```
+
+T41cmm <- glmm(T41c ~ Pedagogie,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T41cmm)
+```
+Aucune variable n'est significative.
+
+T41d :
+T41dm <- glmm(T41d ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T41dm)
+```
+
+T41dmm <- glmm(T41d ~ age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T41dmm)
+```
+Aucune variable n'est significative.
+
+T42a :
+T42am <- glmm(T42a ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+
+summary(T42am)
+```
+
+T42amm <- glmm(T42a ~ age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+
+summary(T42amm)
+```
+L'âge est significatif
+
+T42b :
+T42bm <- glmm(T42b ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T42bm)
+```
+
+T42bmm <- glmm(T42b ~ age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T42bmm)
+```
+Aucune variable n'est significative.
+
+T42c :
+T42cm <- glmm(T42c ~ Pedagogie + age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+
+summary(T42cm)
+```
+
+T42cmm <- glmm(T42c ~ age,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T42cmm)
+```
+Aucune variable n'est significative.
+
+T42d :
+T42dm<- glmm(T42d ~ Pedagogie + age ,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T42dm)
+```
+
+T42dmm <- glmm(T42d ~ age ,
+             random = list(~ 0 + newClasse),
+             varcomps.names=c("newClasse"),data=don.reg,
+             family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T42dmm)
+```
+Aucune variable n'est significative.
+
+T51 :
+T51m <- glmm(T51 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T51m)
+```
+
+T51mm <- glmm(T51 ~ Pedagogie,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T51mm)
+```
+La Pedagogie est significative
+
+T52 :
+T52m<-glmm(T52 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T52m)
+```
+
+T52mm<-glmm(T52 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T52mm)
+```
+Aucune variable n'est significative.
+
+T61 :
+T61m<-glmm(T61 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T61m)
+```
+
+T61mm<-glmm(T61 ~ Pedagogie,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T61mm)
+```
+Aucune variable n'est significative.
+
+T62 :
+T62m<-glmm(T62 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+
+summary(T62m)
+```
+
+T62mm<-glmm(T62 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+
+summary(T62mm)
+```
+Aucune variable n'est significative.
+
+T71 :
+T71m<-glmm(T71 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+
+summary(T71m)
+```
+
+T71mm<-glmm(T71 ~ Pedagogie,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+
+summary(T71mm)
+```
+Aucune variable n'est significative.
+
+T72 :
+T72m<-glmm(T72 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+
+summary(T72m)
+```
+
+T72mm<-glmm(T72 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+
+summary(T72mm)
+```
+Aucune variable n'est significative.
+
+T81 :
+Impossible de lancer la T81
+
+T82 :
+T82m<-glmm(T82 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T82m)
+```
+
+T82mm<-glmm(T82 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T82mm)
+```
+L'âge est significatif
+
+T83 :
+T83m<-glmm(T83 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+
+summary(T83m)
+```
+
+T83mm<-glmm(T83 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T83mm)
+```
+L'âge est significatif
+
+T84 :
+T84m<-glmm(T84 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T84m)
+```
+
+T84mm<-glmm(T84 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T84mm)
+```
+L'âge est significatif
+
+T85 :
+T85m<-glmm(T85 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T85m)
+```
+
+T85mm<-glmm(T85 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T85mm)
+```
+L'âge est significatif
+
+T86 :
+T86m<-glmm(T86 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T86m)
+```
+
+T86mm<-glmm(T86 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T86mm)
+```
+L'âge est significatif
+
+T87 :
+T87m<-glmm(T87 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T87m)
+```
+
+T87mm<-glmm(T87 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T87mm)
+```
+L'âge est significatif
+
+T88 :
+T88m<-glmm(T88 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T88m)
+```
+
+T88mm<-glmm(T88 ~ age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T88mm)
+```
+L'âge est significatif (age + pedagogie presque)
+
+T89 :
+T89m<-glmm(T89 ~ Pedagogie + age,
+            random = list(~ 0 + newClasse),
+            varcomps.names=c("newClasse"),data=don.reg,
+            family.glmm = binomial.glmm, m=10^4, debug=TRUE)
+```{r include=TRUE}
+summary(T89m)
+```
+L'âge + la pédagogie sont significatifs
 
 
 

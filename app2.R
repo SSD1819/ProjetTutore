@@ -9,16 +9,22 @@ require(randomForest)
 
 ############ Préparation des jeux de données dont nous aurons besoin ############
 
+#### Importation ------------------------------#
+load("export/importation.RData")
+
 #### Classification ascendante hiérarchique des variables ------------------------------#
 load("export/classif_questions.RData")
 
 #### ACP ------------------------------#
 load("export/ACP.RData")
 
+#### ACM ------------------------------#
+load("export/ACM.RData")
+
 #### Règles d'association ------------------------------#
 load("export/ReglesAssociations.RData")
 
-#### Arbre decisione ------------------------------#
+#### Arbre decision ------------------------------#
 load("export/arbre_deci2.RData")
 #---------------------------------------------------------------------------------------------------------------------------------------#
 
@@ -79,7 +85,7 @@ ui<-navbarPage(
              selectInput(
                inputId = "choix_acp",
                label = "Séléction des données sur lesquelles faire l'ACP",
-               choices = ls()[which(substr(ls(),1,3)=="res")]
+               choices = ls()[which(substr(ls(),1,7)=="res.pca")]
              )
       ),
       
@@ -94,7 +100,7 @@ ui<-navbarPage(
       )
     ),
 
-    
+
     ###Ligne du dessous
     fluidRow(
 
@@ -116,6 +122,40 @@ ui<-navbarPage(
     )
   ),
 
+  #### Onglet de l'ACM ####-------------------------------------------------------#
+  tabPanel(
+    "Analyse des correspondances multiples",
+    
+    #Layout de l'onglet
+    sidebarLayout(
+      
+      #Partie gauche de la page
+      sidebarPanel(
+        
+        #Séléction des axes
+        numericInput("axe1M", "Axe1", 1, min = 1, max = 100),
+        numericInput("axe2M", "Axe2", 2, min = 1, max = 100),
+        
+        #Séléction du nombre de modalités
+        sliderInput(
+          inputId = "nbMod",
+          label = "n modalités qui contribuent le plus",
+          min = 1,
+          max = length(res.mca.globale$eig),
+          value = 15
+        )
+      ),
+      
+      #Partie centrale de la page
+      mainPanel(
+        
+        #Graphique qui sera affiché
+        plotOutput("MCA")
+      )
+    )
+  ),
+  
+  
   #### Onglet des règles d'association ####-------------------------------------------------------#
   tabPanel(
     "Règles d'association",
@@ -160,12 +200,13 @@ ui<-navbarPage(
         #Menu déroulant pour séléctionner le jeu de données
         selectInput(
           inputId = "choix_arbre",
-          label = "Arbre Decisionnelle",
+          label = "Choix arbre de décision",
           choices = ls()[which(substr(ls(),1,2)=="dt")]
         ),
+        
         selectInput(
           inputId = "choix_RF",
-          label = "RandomForest",
+          label = "Choix forêt aléatoire",
           choices = ls()[which(substr(ls(),1,8)=="model.rf")]
         )
       ),
@@ -231,6 +272,15 @@ server <- function(input, output) {
       ylab("% Variance expliquée")
   })   
   
+  #### ACM ####-------------------------------------------------------#
+  #l'élément displot que nous avons créé dans ui
+  output$MCA <- renderPlot({
+    
+    #Affichage de l'ACM
+    plot.MCA(res.mca.globale,invisible = "ind",cex=0.7, axes=c(input$axe1M, input$axe2M), selectMod =  paste("contrib",input$nbMod,""))
+  })
+  
+  
   #### Règles d'associations ####-------------------------------------------------------#
   
   #preparation des règles
@@ -245,15 +295,19 @@ server <- function(input, output) {
   })
   
   ### ARBRE ####-------------------------------------------------------#
-  #l'Rélément displot que nous avons créé dans ui
+  #l'élément displot que nous avons créé dans ui
   output$arbre <- renderPlot({
     
-    #Affichage du dendogramme
-    prp(get(input$choix_arbre), extra = 1+100,type = 2, under=TRUE, yesno=2)
-    varImpPlot(input$choix_RF)
+    #Fonction de création de l'arbre
+    prp(get(input$choix_arbre), extra = 1+100, type = 2, under=TRUE, yesno=2)
     })
   
-  
+  #Graphique arbre
+  output$RF <- renderPlot({
+    
+    #Affichage du dendogramme
+    varImpPlot(get(input$choix_RF))
+  })
 }
 
 

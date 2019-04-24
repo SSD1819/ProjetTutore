@@ -22,7 +22,7 @@ summary(valquali)
 res.mca.globale<-MCA(valquali,quali.sup = 1:2,ind.sup = (nrow(valquali)-1):nrow(valquali))
 dimdesc(res.mca.globale)
 summary(res.mca.globale)
-plot.MCA(res.mca.globale,invisible = "ind",cex=0.7,selectMod =  "contrib 15")
+plot.MCA(res.mca.globale,invisible = "ind",cex=0.7, selectMod =  "contrib 15")
 plot.MCA(res.mca.globale,invisible = "ind",cex=0.7)
 #Dim1 : mauvais - bons
 #Dim2 : T4 - T8

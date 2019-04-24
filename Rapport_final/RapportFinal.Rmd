@@ -539,6 +539,25 @@ TOSTtwo.raw(m1=mean(scoreTotConv),m2=mean(scoreTotMont),sd1=sd(scoreTotConv),sd2
 Afin de d'étudier les éventuelles différences ou non en mathématiques entre les élèves suivants une pédagogie Montessoriennes et et ceux suivants Conventionnelle, nous avons commencé par une brève étude exploratoire permettant de comprendre nos données et de repérer les possibles liens entre les variables. Par la suite une analyse prédictive sur les réponses aux questions en fonction de la pédagogie aurait pu permettre de différencier ces deux pédagogies. Toutefois, les résultats de cette analyse sont peu concluants. Seuls 2 modèles différencient les 2 pédagogies : la modélisation des réponses aux questions concernant la création d'une collection équipotente et la reconnaissance d'un chiffre particulier. 
 Il serait intéressant de continuer cette étude avec un nombre d'individus plus important voir si de nouveaux liens apparaissent.
 
+#Annexes
+
+## Application Shiny
+
+### Onglet des Classifactions ascendantes hiérarchiques des variables
+Cet onglet nous permet de voir les graphiques de CAH. Nous avons la possibilité de choisir la classification, cela nous permet également de choisir le nombre de classes.
+
+### Onglet de l'Analyse en composantes principale
+Deuxième onglet nous montre l'analyse des principales composantes. Il comprend le graphique de l'inertie, le graphique de corrélation, ainsi que des graphiques de variables et d'individus. Ici, nous pouvons choisir les données sur lesquelles l'analyse est fait, ainsi que nous pouvons choisir les axes
+
+### Onglet de l'Analyse en composantes multiples
+Ici, on a l'analyse en composantes multiples. On a le droit à choisir les axes pour les graphs et en plus le numéro de modalités qui contribuent le plus.
+
+### Onglet des règles d'association
+Voici, l'onglet des règles d'association concernant les variables de projet. Ici, nous avons la possibilté de choisir support, confidence, lift, la taille de longueur de règle et aussi les variables. 
+
+### Onglet de forêt d'arbres décisionnels  
+Et dans le dernier onglet, nous pouvons voir les arbres décisionnels et 2 différents modèles de foret aléatoires. Pour arbre décisionnelle, on a le choix entre différents jeux de données. En ce qui concerne les modèles de foret, modèle Rf concerne tous les variables initials, et modèle Rf1 concerne les variables créées (audela, outil, objets, classe T1).
+
 <!-- #Annexes -->
 
 <!-- T21 : -->

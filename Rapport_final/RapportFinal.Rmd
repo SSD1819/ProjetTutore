@@ -187,7 +187,7 @@ Les questions étant posées de manière à ce qu'au sein d'une même tache, il 
 
 ##1.5 Recodage des variables
 
-Afin de ne pas influencer notre jugement sur nos résultats, nous avons dans un premier temps décidé de rendre anonyme le pédagogie enseignée pour chaque classe. Chaque pédagogie fut donc renommée en "P1" et "P2". De ce fait nous n'avons pas pu privilégier une pédagogie plus qu'une autre subjectivement parlant. Aux 3 quarts du projet environ, nous avons reçu les données de nouveaux individus, une cinquantaine, et avons par la même occasion décidé d'enlever cet anonymat. Notre travail étant déjà réalisé, seul l'interprétation sur le jeu de données comportant les nouveaux individus en plus importe.
+Afin de ne pas influencer notre jugement sur nos résultats, il a été décidé de rendre anonyme les pédagogies enseignées pour chaque classe. Chaque pédagogie fut donc renommée en "P1" et "P2". De ce fait nous n'avons pas pu privilégier une pédagogie plus qu'une autre subjectivement parlant. Aux 3 quarts du projet environ, nous avons reçu les données de nouveaux individus, une cinquantaine, et avons par la même occasion décidé d'enlever cet anonymat. Notre travail étant déjà réalisé, seul l'interprétation sur le jeu de données comportant les nouveaux individus en plus importe.
 Comme dit précédemment les questions sont divisées en sous questions, ces questions sont regroupables en groupe : un groupe que nous appellerons "variable au-dela", un groupe "variable outils" puis un groupe "variable objet". Chacun de ces groupes fait appelle à une tache pédagogique en particulier.
 
 \begin{description}
